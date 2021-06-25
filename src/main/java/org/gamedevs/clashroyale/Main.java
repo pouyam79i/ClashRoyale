@@ -1,10 +1,13 @@
-package main.java.org.gamedevs.clashroyale;
+package org.gamedevs.clashroyale;
 
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.gamedevs.clashroyale.controller.loaders.PreloaderScreen;
 
 /**
  * This class contains main method of Clash Royale application!
@@ -21,9 +24,10 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../../../../resources/view/fxml/loading.fxml"));
-        primaryStage.setTitle("Clash Royale");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("view/fxml/loading.fxml"));
+//        primaryStage.setTitle("Clash Royale");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 
@@ -34,6 +38,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         // Launching main stage of this application!
         launch(args);
+//        LauncherImpl.launchApplication(Main.class, PreloaderScreen.class, args);
     }
 
 }
