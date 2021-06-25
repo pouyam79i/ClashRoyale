@@ -112,3 +112,6 @@ fabric.properties
 
 # Ignoring libs jar files!
 lib
+
+# Ignoring test package!
+src/test
