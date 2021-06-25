@@ -1,10 +1,14 @@
 package main.java.org.gamedevs.clashroyale.model.utils.multithreading;
 
+import main.java.org.gamedevs.clashroyale.MainConfig;
+import main.java.org.gamedevs.clashroyale.model.utils.console.Console;
+import main.java.org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
+
 /**
  * This class contains the structure of Runnable classes!
  * It can run a class as a new thread!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.4
+ * @version 1.4.1
  */
 public abstract class Runnable implements java.lang.Runnable{
 
@@ -16,6 +20,11 @@ public abstract class Runnable implements java.lang.Runnable{
      * Running state of thread
      */
     private boolean runningState;
+    /**
+     * Trace mode tells if you need to trace
+     * this thread in console.
+     */
+    private final boolean traceMode = MainConfig.DEBUG_MODE;
     /**
      * contains the state of thread loop.
      * if false, thread is still running.
@@ -66,6 +75,11 @@ public abstract class Runnable implements java.lang.Runnable{
         if(!runningState){
             thisThread = new Thread(this);
             runningState = true;
+            if(traceMode){
+                Console.getConsole().println(
+                        "[ " + ConsoleColor.GREEN_BOLD + threadName + ConsoleColor.RESET + " ]" + " Initialized!"
+                );
+            }
             thisThread.start();
         }
     }
@@ -80,10 +94,29 @@ public abstract class Runnable implements java.lang.Runnable{
         if (runningState){
             try {
                 thisThread.interrupt();
-                thisThread.stop();
                 thisThread = null;
                 runningState = false;
+                if(traceMode){
+                    Console.getConsole().println(
+                            "[ " + ConsoleColor.RED_BOLD + threadName + ConsoleColor.RESET + " ]" + " Killed!"
+                    );
+                }
             }catch (Exception ignored){}
+        }
+    }
+
+    /**
+     * This method helps to trace a thread in console,
+     * and also remember to set MainConfig.DEBUG_MODE to 'true'
+     * else you will not see the message!
+     * @param message will be printed in console!
+     */
+    protected void printTraceMessage(String message){
+        if(traceMode){
+            Console.getConsole().println(
+                    "[ " + ConsoleColor.YELLOW_BOLD + threadName + ConsoleColor.RESET + " ]"
+                            + " Tracing message: " + message
+            );
         }
     }
 
