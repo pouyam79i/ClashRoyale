@@ -1,13 +1,8 @@
 package org.gamedevs.clashroyale;
 
-import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.gamedevs.clashroyale.controller.loaders.PreloaderScreen;
+import org.gamedevs.clashroyale.model.preloaders.PreloaderSplashScreen;
 
 /**
  * This class contains main method of Clash Royale application!
@@ -18,17 +13,25 @@ import org.gamedevs.clashroyale.controller.loaders.PreloaderScreen;
 public class Main extends Application {
 
     /**
+     * Application initializer.
+     * @throws Exception if failed to process
+     */
+    @Override
+    public void init() throws Exception{
+        // Do heavy process here before loading!
+        if(MainConfig.DEBUG_MODE)
+            Thread.sleep(10000); // Just checking loading page in debug mode :)
+    }
+
+    /**
+     * Application starter.
      * Building main stage of this application
      * @param primaryStage is the main stage (set to loading)
-     * @throws Exception if failed to load 'loading.fxml' or faced any other problem!
+     * @throws Exception if failed to load 'main.fxml' or faced any other problem!
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("view/fxml/loading.fxml"));
-//        primaryStage.setTitle("Clash Royale");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.show();
+
     }
 
     /**
@@ -36,9 +39,9 @@ public class Main extends Application {
      * @param args passing application details and main stage to main thread!
      */
     public static void main(String[] args) {
-        // Launching main stage of this application!
+        // Setting the preloader
+        System.setProperty("javafx.preloader", PreloaderSplashScreen.class.getCanonicalName());
         launch(args);
-//        LauncherImpl.launchApplication(Main.class, PreloaderScreen.class, args);
     }
 
 }

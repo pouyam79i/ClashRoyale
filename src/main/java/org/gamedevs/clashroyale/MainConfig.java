@@ -1,4 +1,4 @@
-package main.java.org.gamedevs.clashroyale;
+package org.gamedevs.clashroyale;
 
 /**
  * This interface contains main configuration values
