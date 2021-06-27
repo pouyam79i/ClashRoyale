@@ -1,7 +1,12 @@
 package org.gamedevs.clashroyale;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.gamedevs.clashroyale.model.preloaders.PreloaderSplashScreen;
 
 /**
@@ -20,7 +25,7 @@ public class Main extends Application {
     public void init() throws Exception{
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
-            Thread.sleep(10000); // Just checking loading page in debug mode :)
+            Thread.sleep(2000); // Just checking loading page in debug mode :)
     }
 
     /**
@@ -31,7 +36,18 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        Parent mainRoot = FXMLLoader.load(getClass().getResource(
+                "./view/fxml/menu/main_root.fxml"
+        ));
+        Scene mainRootScene = new Scene(mainRoot);
+        primaryStage.setScene(mainRootScene);
+        primaryStage.setTitle("Clash Royale");
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("./view/img/icon/cr_icon.png")));
+        primaryStage.setHeight(MainConfig.MAIN_STAGE_HEIGHT);
+        primaryStage.setWidth(MainConfig.MAIN_STAGE_WIDTH);
+//        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     /**

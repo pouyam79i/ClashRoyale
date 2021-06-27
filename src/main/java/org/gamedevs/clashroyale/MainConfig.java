@@ -17,4 +17,19 @@ public interface MainConfig {
      */
     boolean DEBUG_MODE = true;
 
+    /**
+     * Main game aspect ratio
+     * 16 as height
+     * 9 as width
+     */
+    String STD_ASPECT_RATIO = "16:9";
+    /**
+     * Main stage height standard
+     */
+    int MAIN_STAGE_HEIGHT = 720;
+    /**
+     * Main stage width standard
+     */
+    int MAIN_STAGE_WIDTH = 405;
+
 }
