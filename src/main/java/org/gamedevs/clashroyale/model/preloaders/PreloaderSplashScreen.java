@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.gamedevs.clashroyale.Main;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
@@ -90,6 +91,8 @@ public class PreloaderSplashScreen extends Preloader {
             this.preloaderStage = stage;
             // Setting stage settings
             preloaderStage.setScene(scene);
+            preloaderStage.getIcons()
+                    .add(new Image(PreloaderSplashScreen.class.getResourceAsStream("../../view/img/icon/cr_icon.png")));
             preloaderStage.initStyle(StageStyle.UNDECORATED);
             preloaderStage.setTitle("Clash Royale");
             // Showing stage
