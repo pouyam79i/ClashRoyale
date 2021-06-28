@@ -48,18 +48,18 @@
             <Image url="@../img/signup/Clash_Royale_Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="loginButton" layoutX="105.0" layoutY="520.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="50.0" prefWidth="200.0" stylesheets="@../css/SignUp.css" text="Login" textFill="#3361b0">
+      <Button fx:id="loginButton" layoutX="105.0" layoutY="512.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="45.0" prefWidth="200.0" stylesheets="@../css/SignUp.css" text="Login" textFill="#3361b0">
          <font>
             <Font size="1.0" />
          </font>
       </Button>
       <PasswordField fx:id="passwordField" layoutX="115.0" layoutY="380.0" prefHeight="45.0" prefWidth="200.0" promptText="Password" />
-      <Label fx:id="wrongPassLabel" layoutX="52.5" layoutY="440.0" text="wrong password or user name! please try again" textAlignment="CENTER" textFill="#f5ff00">
+      <Label fx:id="wrongPassLabel" layoutX="52.5" layoutY="440.0" text="wrong password or username! please try again" textAlignment="CENTER" textFill="#f5ff00">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" layoutX="115.0" layoutY="315.0" prefHeight="45.0" prefWidth="200.0" promptText="Username" />
+      <TextField fx:id="usernameField" focusTraversable="false" layoutX="115.0" layoutY="315.0" prefHeight="45.0" prefWidth="200.0" promptText="Username" />
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/signup/username.png" />

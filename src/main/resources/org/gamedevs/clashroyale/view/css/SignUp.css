@@ -6,36 +6,38 @@
 }
 
 @font-face {
-    font-family : 'You Blockhead';
-    src: url("../fonts/You Blockhead.ttf");
-}
 
-#loginLabel{
-    -fx-font-family: "You Blockhead";
-    -fx-font-size:40 ;
-}
-
-.button:active {
-  -fx-box-shadow: 0px 5px #666;
-  -fx-transform: translateY(4px);
+    src: url('./../fonts/Clash-Regular.ttf');
 }
 
 
 .button:hover {
-    -fx-background-image: url("../img/signup/yellow_button02.png");
-    -fx-background-size:cover;
+    -fx-background-image: url("../img/signup/btn2.png");
+    -fx-background-size: 100% 100%;
     -fx-cursor:pointer;
 
 }
 
 .button {
-    -fx-background-image: url("../img/signup/yellow_button00.png");
-    -fx-background-size:cover;
+
+    -fx-background-image: url("../img/signup/btn1.png");
+    -fx-background-size: 100% 100%;
     -fx-border-radius: 20px;
     -fx-font-size: 20 ;
-    -fx-font-style: bold;
     -fx-color : #e9e9da;
     -fx-cursor:pointer;
-    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: 'Clash';
 
 }
+
+.text-field{
+
+    -fx-background: rgba(0, 0, 0, 0);
+    -fx-border: none;
+    -fx-outline: none;
+}
+
+.password-field{
+    -fx-background: transparent;
+}
+

@@ -34,18 +34,17 @@ public class SignUpController {
     @FXML
     private Label wrongPassLabel;
 
+//    SignUpModel signUpModel = new SignUpModel();
     public void initialize(){
         wrongPassLabel.setVisible(false);
-        Font font = Font.loadFont("C:\\Users\\RAI\\Desktop\\university\\term4\\ap\\FinalProject\\ClashRoyale\\ClashRoyale\\src\\main\\resources\\org\\gamedevs\\clashroyale\\view\\fonts\\You Blockhead.ttf", 30);
-        loginButton.setFont(font);
+
     }
     @FXML
     void loginHandling(ActionEvent event) {
         String pass = passwordField.getText();
         String username = usernameField.getText();
 //        if (pass != null && username != null)
-//            if (checkIfItAvailable(username, pass)) {
-//                loadInfoOfPlayer(username, pass);
+//            if (signUpModel.checkIfAvailable(username, pass)) {
 //                Stage stage;
 //                stage = (Stage) usernameField.getScene().getWindow();
 //                FXMLLoader loader = new FXMLLoader();
@@ -62,25 +61,11 @@ public class SignUpController {
 //                stage.show();
 //            } else
                 wrongPassLabel.setVisible(true);
+
+                passwordField.setText("");
+                usernameField.setText("");
     }
-//
-//    /**
-//     * check in the file if we have this user or not
-//     *
-//     * @return true if the user info is available
-//     * @param username username
-//     * @param pass pass
-//     */
-//    private boolean checkIfItAvailable(String username, String pass) {
-//    }
-//
-//    /**
-//     * read player info from file and make player
-//     * @param username username
-//     * @param pass pass
-//     */
-//    private void loadInfoOfPlayer(String username, String pass) {
-//    }
+
 }
 
 
