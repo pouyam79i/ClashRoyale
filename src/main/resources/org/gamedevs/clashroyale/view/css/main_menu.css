@@ -1,0 +1,94 @@
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.button{
+    -fx-background-image: url("../img/ui_icon/btn_yellow.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    /*-fx-max-width: 50px;*/
+    /*-fx-background-size: cover;*/
+    -fx-text-alignment: center;
+    -fx-background-color: rgba(0, 0, 0, 0);
+    /*-fx-background-radius: 20px;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-label-padding: 0;*/
+    -fx-text-overrun: clip;
+    -fx-font-family: 'Clash';
+    -fx-font-scale: Bold;
+
+}
+
+/*.xp-bar > .bar {*/
+/*    -fx-background-color: linear-gradient(*/
+/*            from 0px .75em to .75em 0px,*/
+/*            repeat,*/
+/*            -fx-accent 0%,*/
+/*            -fx-accent 49%*/
+/*            !*derive(-fx-accent, 30%) 50%,*!*/
+/*            !*derive(-fx-accent, 30%) 99%*!*/
+/*    );*/
+/*}*/
+
+/*.xp-bar {*/
+/*    -fx-box-border: goldenrod;*/
+/*    -fx-accent: green;*/
+/*}*/
+
+
+.text-field {
+    -fx-font-family: 'Clash';
+    -fx-pref-width: 120px;
+    -fx-pref-height: 20px;
+    -fx-font-size: 14pt;
+    -fx-text-alignment: right;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -jfx-focus-color: black;
+    -jfx-unfocus-color: #454545;
+    -fx-text-inner-color: #ffffff;
+    -fx-font-scale: Bold;
+}
+
+.label{
+    -fx-font-family: 'Clash';
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-scale: Bold;
+}
+
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}
+
+
+/*.progress-bar > .bar {*/
+/*    -fx-accent: green;*/
+/*    -fx-background-color: linear-gradient(*/
+/*            from 0px .75em to .75em 0px,*/
+/*            repeat,*/
+/*            -fx-accent 0%,*/
+/*            -fx-accent 49%,*/
+/*            derive(-fx-accent, 30%) 50%,*/
+/*            derive(-fx-accent, 30%) 99%*/
+/*    );*/
+/*}*/
+
+/*.progress-bar:indeterminate .dot_1 {*/
+/*    -fx-background-color: ACCENT_COLOR;*/
+/*}*/
+
+/*.progress-bar:indeterminate .dot_2 {*/
+/*    -fx-background-color: derive(ACCENT_COLOR, -15%);*/
+/*}*/
+
+/*.progress-bar:indeterminate .dot_3 {*/
+/*    -fx-background-color: derive(ACCENT_COLOR, -30%);*/
+/*}*/
+
+/*.progress-bar:indeterminate .dot_4 {*/
+/*    -fx-background-color: derive(ACCENT_COLOR, -45%);*/
+/*}*/
+
+/*.progress-bar:indeterminate .dot_5 {*/
+/*    -fx-background-color: derive(ACCENT_COLOR, -60%);*/
+/*}*/
