@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/main%20_menu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.MainBattle">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/main_menu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.main.MainBattle">
    <children>
       <ImageView fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,7 +23,7 @@
       </ImageView>
       <AnchorPane prefHeight="720.0" prefWidth="405.0">
          <children>
-            <Button fx:id="battle_btn" layoutX="120.0" layoutY="436.0" maxWidth="210.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="168.0" stylesheets="@../../css/main%20_menu.css" text="Battle" textAlignment="CENTER">
+            <Button fx:id="battle_btn" layoutX="120.0" layoutY="436.0" maxWidth="210.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="168.0" stylesheets="@../../css/main_menu.css" text="Battle" textAlignment="CENTER">
                <font>
                   <Font name="Clash Regular" size="28.0" />
                </font>

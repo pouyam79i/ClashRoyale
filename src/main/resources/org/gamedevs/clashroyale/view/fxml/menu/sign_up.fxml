@@ -41,14 +41,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../css/SignUp.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.signup.SignUpController">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/sign_up.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.signup.SignUpController">
    <children>
       <ImageView fitHeight="184.0" fitWidth="370.0" layoutX="20.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="19.73944091796875">
          <image>
-            <Image url="@../img/signup/Clash_Royale_Logo.png" />
+            <Image url="@../../img/menu/signup/Clash_Royale_Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="loginButton" layoutX="105.0" layoutY="512.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="45.0" prefWidth="200.0" stylesheets="@../css/SignUp.css" text="Login" textFill="#3361b0">
+      <Button fx:id="loginButton" layoutX="105.0" layoutY="512.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="45.0" prefWidth="200.0" stylesheets="@../../css/sign_up.css" text="Login" textFill="#3361b0">
          <font>
             <Font size="1.0" />
          </font>
@@ -62,17 +62,17 @@
       <TextField fx:id="usernameField" focusTraversable="false" layoutX="115.0" layoutY="315.0" prefHeight="45.0" prefWidth="200.0" promptText="Username" />
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/signup/username.png" />
+            <Image url="@../../img/menu/signup/username.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/signup/password.png" />
+            <Image url="@../../img/menu/signup/password.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="60.0" fitWidth="201.0" layoutX="90.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/signup/login1.png" />
+            <Image url="@../../img/menu/signup/login1.png" />
          </image>
       </ImageView>
    </children>

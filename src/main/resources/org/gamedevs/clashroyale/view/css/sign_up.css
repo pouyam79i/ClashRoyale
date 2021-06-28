@@ -1,6 +1,6 @@
 
 #mainAnchorPane {
-    -fx-background-image: url("../img/Background1.png");
+    -fx-background-image: url("../img/menu/signup/Background1.png");
     -fx-background-size:cover;
 
 }
@@ -12,7 +12,7 @@
 
 
 .button:hover {
-    -fx-background-image: url("../img/signup/btn2.png");
+    -fx-background-image: url("../img/menu/signup/btn_yellow_pushed.png");
     -fx-background-size: 100% 100%;
     -fx-cursor:pointer;
 
@@ -20,7 +20,7 @@
 
 .button {
 
-    -fx-background-image: url("../img/signup/btn1.png");
+    -fx-background-image: url("../img/menu/signup/btn_yellow.png");
     -fx-background-size: 100% 100%;
     -fx-border-radius: 20px;
     -fx-font-size: 20 ;
