@@ -1,8 +1,8 @@
-package main.java.org.gamedevs.clashroyale.model.utils.multithreading;
+package org.gamedevs.clashroyale.model.utils.multithreading;
 
-import main.java.org.gamedevs.clashroyale.MainConfig;
-import main.java.org.gamedevs.clashroyale.model.utils.console.Console;
-import main.java.org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
+import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 
 /**
  * This class contains the structure of Runnable classes!

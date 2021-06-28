@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.MainRoot">
+   <children>
+      <ImageView fitHeight="732.0" fitWidth="414.0" layoutX="-8.0" layoutY="-8.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/menu/main_background.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

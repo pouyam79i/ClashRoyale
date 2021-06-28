@@ -1,4 +1,6 @@
-package main.java.org.gamedevs.clashroyale.model.utils.console;
+package org.gamedevs.clashroyale.model.utils.console;
+
+import org.gamedevs.clashroyale.MainConfig;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +11,7 @@ import java.util.Scanner;
  * plus it uses singleton pattern and also must be used in a synchronized way.
  * Console is used to make a good way to interact with user.
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.1.1
+ * @version 1.1.2
  */
 public class Console{
 
@@ -21,6 +23,10 @@ public class Console{
      * scanner is used to read from console
      */
     private final Scanner scanner;
+    /**
+     * Tracer mode
+     */
+    private final boolean tracerMode = MainConfig.DEBUG_MODE;
 
     /**
      * Console Constructor
@@ -53,11 +59,22 @@ public class Console{
     }
 
     /**
+     * Use this method to print tracing message in console
+     * @param message will be printed in debug mode!
+     */
+    public synchronized void printTracingMessage(String message){
+        if(tracerMode){
+            println(ConsoleColor.YELLOW_BOLD + "Tracing message: "
+                    + ConsoleColor.RESET + message);
+        }
+    }
+
+    /**
      * This method use println method of System.out to print the input.
      * @param input will be printed
      */
     public synchronized void println(String input){
-        System.out.println(input + ConsoleColor.RESET);
+        print(input + ConsoleColor.RESET + "\n");
     }
 
     /**

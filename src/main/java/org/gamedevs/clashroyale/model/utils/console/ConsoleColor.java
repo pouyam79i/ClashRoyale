@@ -1,4 +1,4 @@
-package main.java.org.gamedevs.clashroyale.model.utils.console;
+package org.gamedevs.clashroyale.model.utils.console;
 
 /**
  * Color interface
