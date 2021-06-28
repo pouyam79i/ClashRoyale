@@ -26,14 +26,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../jmetro-11.6.15.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
