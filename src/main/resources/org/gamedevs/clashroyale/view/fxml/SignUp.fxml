@@ -43,31 +43,36 @@
 
 <AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../css/SignUp.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.signup.SignUpController">
    <children>
-      <ImageView fitHeight="184.0" fitWidth="370.0" layoutX="20.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="184.0" fitWidth="370.0" layoutX="20.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="19.73944091796875">
          <image>
             <Image url="@../img/signup/Clash_Royale_Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="loginButton" layoutX="105.0" layoutY="510.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="50.0" prefWidth="200.0" stylesheets="@../css/SignUp.css" text="Login" textFill="#3361b0">
+      <Button fx:id="loginButton" layoutX="105.0" layoutY="520.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="50.0" prefWidth="200.0" stylesheets="@../css/SignUp.css" text="Login" textFill="#3361b0">
          <font>
             <Font size="1.0" />
          </font>
       </Button>
-      <PasswordField fx:id="passwordField" layoutX="105.0" layoutY="369.0" prefHeight="45.0" prefWidth="200.0" promptText="Password" />
-      <Label fx:id="wrongPassLabel" layoutX="52.5" layoutY="430.0" text="wrong password or user name! please try again" textAlignment="CENTER" textFill="#f5ff00">
+      <PasswordField fx:id="passwordField" layoutX="115.0" layoutY="380.0" prefHeight="45.0" prefWidth="200.0" promptText="Password" />
+      <Label fx:id="wrongPassLabel" layoutX="52.5" layoutY="440.0" text="wrong password or user name! please try again" textAlignment="CENTER" textFill="#f5ff00">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" layoutX="115.0" layoutY="306.0" prefHeight="45.0" prefWidth="200.0" promptText="Username" />
-      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="usernameField" layoutX="115.0" layoutY="315.0" prefHeight="45.0" prefWidth="200.0" promptText="Username" />
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/signup/username.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="67.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/signup/password.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="201.0" layoutX="90.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/signup/login1.png" />
          </image>
       </ImageView>
    </children>

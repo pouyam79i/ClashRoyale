@@ -15,6 +15,12 @@
     -fx-font-size:40 ;
 }
 
+.button:active {
+  -fx-box-shadow: 0px 5px #666;
+  -fx-transform: translateY(4px);
+}
+
+
 .button:hover {
     -fx-background-image: url("../img/signup/yellow_button02.png");
     -fx-background-size:cover;
@@ -30,8 +36,6 @@
     -fx-font-style: bold;
     -fx-color : #e9e9da;
     -fx-cursor:pointer;
-    -fx-font-family: "Open Sans Extrabold";
-    -fx-font-family: "Open Sans Extrabold";
-    -fx-font-style: bold;
+    -fx-font-family: "Arial Rounded MT Bold";
 
 }
