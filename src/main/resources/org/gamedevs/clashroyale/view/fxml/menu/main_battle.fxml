@@ -23,7 +23,7 @@
       </ImageView>
       <AnchorPane prefHeight="720.0" prefWidth="405.0">
          <children>
-            <Button fx:id="battle_btn" layoutX="120.0" layoutY="436.0" maxWidth="210.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="168.0" stylesheets="@../../css/main_menu.css" text="Battle" textAlignment="CENTER">
+            <Button fx:id="battle_btn" alignment="CENTER" layoutX="120.0" layoutY="436.0" maxWidth="210.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="168.0" styleClass="battle_btn" stylesheets="@../../css/main_menu.css" text="Battle" textAlignment="CENTER">
                <font>
                   <Font name="Clash Regular" size="28.0" />
                </font>
@@ -33,15 +33,21 @@
                   <Image url="@../../img/arenas/ui_icon_barbarian.png" />
                </image>
             </ImageView>
-            <ProgressBar layoutX="46.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.5" style="-fx-background-color: #8f8f8f;" styleClass="dot_1" fx:id="xp_bar" />
-            <Button fx:id="profile_btn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" text="Profile" />
-            <Button fx:id="last_games_btn" layoutX="315.0" layoutY="71.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" text="Last games" />
+            <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xp_bar" />
+            <Button fx:id="profile_btn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile">
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
+            <Button fx:id="last_games_btn" layoutX="315.0" layoutY="71.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="normal_btn" text="Last games">
+               <font>
+                  <Font size="8.0" />
+               </font></Button>
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/xp/0.png" />
                </image>
             </ImageView>
-            <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" text="100000" />
+            <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="13.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/icon/gold-coin.png" />
