@@ -18,6 +18,8 @@ public class MainBattle {
     @FXML
     private Button battleBtn;
 
+
+
     private final ImageView backgroundCover = new ImageView(new Image(
             getClass().getResource("./../../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
 
@@ -25,6 +27,7 @@ public class MainBattle {
     private void bringBattlePopup(Event event){
         try{
             Group popupRoot = new Group();
+            BattlePopup.setPopupMenuGroup(popupRoot);
             AnchorPane popupMenu = FXMLLoader.load(getClass().getResource(
                     "./../../../view/fxml/menu/battle_menu_popup.fxml"
             ));
