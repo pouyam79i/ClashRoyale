@@ -7,7 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+/**
+ * Controller for login scene
+ * @author Pouya Mohammadi - Hosna Hoseini
+ *         9829039 -CE@AUT   9823010 -CE@AUT
+ * @version 1.0
+ */
 public class SignUpController {
 
     @FXML

@@ -6,18 +6,10 @@
 }
 
 #playCardGridPane{
-    -fx-display: inline-grid;
     -fx-background-color : #0864bb;
-    -fx-background-image: linear-gradient(#0c7ad1, #0864bb, #0c7ad1);
-    -fx-background-insets: 0, 0 1 1 0 ;
-    -fx-border-image-insets:
 }
 
 
-.image-view {
-    -fx-background-color: black, white ;
-    -fx-background-insets: 0, 0 1 1 0 ;
-}
 
 @font-face {
     src: url('../fonts/Clash-Regular.ttf');
@@ -28,7 +20,6 @@
     -fx-background-color: rgba(0, 0, 0, 0);
     -fx-font-scale: Bold;
     -fx-color : white;
-
 }
 
 .scroll-pane > .viewport {
@@ -37,4 +28,6 @@
 
 .scroll-pane {
    -fx-background-color: transparent;
+   -fx-border-color: black;
+   -fx-border-width: 1px;
 }

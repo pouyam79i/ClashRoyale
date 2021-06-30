@@ -22,16 +22,14 @@
 
     -fx-background-image: url("../img/menu/signup/btn_yellow.png");
     -fx-background-size: 100% 100%;
-    -fx-border-radius: 20px;
     -fx-font-size: 20 ;
-    -fx-color : #e9e9da;
+    -fx-color : white;
     -fx-cursor:pointer;
     -fx-font-family: 'Clash';
 
 }
 
 .text-field{
-
     -fx-background: rgba(0, 0, 0, 0);
     -fx-border: none;
     -fx-outline: none;
