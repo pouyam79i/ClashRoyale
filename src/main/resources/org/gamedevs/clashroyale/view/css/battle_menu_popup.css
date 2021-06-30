@@ -1,0 +1,44 @@
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.popup_background {
+    -fx-background-color: rgb(255, 255, 255);
+
+}
+
+.label{
+    -fx-font-family: 'Clash';
+    -fx-font-size: 16pt;
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-scale: Bold;
+}
+
+.button{
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    /*-fx-max-width: 50px;*/
+    /*-fx-background-size: cover;*/
+    -fx-text-alignment: center;
+    -fx-background-color: rgba(0, 0, 0, 0);
+    /*-fx-background-radius: 20px;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-label-padding: 0;*/
+    -fx-text-overrun: clip;
+    -fx-font-family: 'Clash';
+    -fx-font-size: 14pt;
+    -fx-font-scale: Bold;
+}
+
+.online_btn{
+    -fx-background-image: url("../img/ui/button/btn_yellow_e.png");
+}
+
+.offline_btn{
+    -fx-background-image: url("../img/ui/button/btn_blue_e.png");
+}
+
+.cancel_btn{
+    -fx-background-image: url("../img/ui/button/btn_red_e.png");
+}
