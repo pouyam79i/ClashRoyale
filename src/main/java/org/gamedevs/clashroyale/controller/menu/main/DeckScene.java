@@ -1,14 +1,18 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import org.gamedevs.clashroyale.model.CardImageView;
 import org.gamedevs.clashroyale.model.CardsImage;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -39,6 +43,9 @@ public class DeckScene {
     @FXML
     private Label cardCollectionLabel;
 
+    private ImageView source;
+
+
     public void initialize() {
 
         initPlayCards();
@@ -50,9 +57,15 @@ public class DeckScene {
      * put play card pic into scene
      */
     private void initPlayCards() {
-        int i = 0;
         ObservableList<Node> gridCells = playCardGridPane.getChildren();
 
+//        for(int j = 0; j < 12 ; j++) {
+//            CardImageView cardImageView = new CardImageView();
+//            cardImageView.
+//            choicesCardGridPane.getChildren().add();
+//
+//        }
+            int i = 0;
         ////////this part should be omitted when the card class has been made////////
         ArrayList<CardsImage> playCards = new ArrayList<>();
         playCards.add(CardsImage.ARROWS);
@@ -82,14 +95,7 @@ public class DeckScene {
         int i = 0;
         ObservableList<Node> gridCells;
         ArrayList<CardsImage> allCards = new ArrayList<>();
-        allCards.add(CardsImage.ARROWS);
-        allCards.add(CardsImage.ARCHERS);
-        allCards.add(CardsImage.BARBARIANS);
-        allCards.add(CardsImage.BABY_DRAGON);
-        allCards.add(CardsImage.FIREBALL);
-        allCards.add(CardsImage.GIANT);
-        allCards.add(CardsImage.INFERNO_TOWER);
-        allCards.add(CardsImage.CANNON);
+
         allCards.add(CardsImage.MINI_PEKKA);
         allCards.add(CardsImage.RAGE);
         allCards.add(CardsImage.VALKYRIE);
@@ -98,8 +104,9 @@ public class DeckScene {
         gridCells = choicesCardGridPane.getChildren();
         for (CardsImage cardsImage : allCards) {
             ((ImageView) gridCells.get(i)).setImage(new Image(cardsImage.getUrl()));
-//            if(isNotInAvailableCards(cardsImage))
-//                gridCells.get(i).setStyle("-fx-filter: grayscale(100%);");
+//            if(isNotInAvailableCards(cardsImage)){
+            ColorAdjust colorAdjust = new ColorAdjust(0,-50,0,0);
+            gridCells.get(i).setEffect(colorAdjust);
             i++;
         }
     }
@@ -113,44 +120,30 @@ public class DeckScene {
 //    }
 
     @FXML
-    void pickPlayCard(MouseEvent event) {
+    void pickCard(MouseEvent event) {
+        source = (ImageView) event.getSource();
         Image image = ((ImageView) event.getSource()).getImage();
-        Dragboard db = ((ImageView) event.getSource()).startDragAndDrop(TransferMode.COPY);
+        Dragboard db = ((ImageView) event.getSource()).startDragAndDrop(TransferMode.MOVE);
         ClipboardContent cc = new ClipboardContent();
         cc.putImage(image);
         db.setContent(cc);
-        event.consume();
-    }
-
-    @FXML
-    void pickAvailableCard(MouseEvent event) {
-        Image image = ((ImageView) event.getSource()).getImage();
-        Dragboard db = ((ImageView) event.getSource()).startDragAndDrop(TransferMode.COPY);
-        ClipboardContent cc = new ClipboardContent();
-        cc.putImage(image);
-        db.setContent(cc);
-        ((ImageView) event.getSource()).setImage(null);
         event.consume();
     }
 
     @FXML
     void dragOver(DragEvent event) {
-        event.acceptTransferModes(TransferMode.COPY);
+        event.acceptTransferModes(TransferMode.MOVE);
     }
 
     @FXML
     void putImage(DragEvent event) {
-        Image image = event.getDragboard().getImage();
-        ((ImageView) event.getSource()).setImage(image);
+        Image oldImage = ((ImageView) event.getSource()).getImage();
+        source.setImage(null);
+        if(oldImage != null)
+            source.setImage(oldImage);
+        Image newImage = event.getDragboard().getImage();
+        ((ImageView) event.getSource()).setImage(newImage);
 
-    }
-
-    private boolean isNotRepetitive(Image image) {
-        ObservableList<Node> gridCells = playCardGridPane.getChildren();
-        for (Node card : gridCells)
-            if (((ImageView) card).getImage().getUrl().equals(image.getUrl()))
-                return false;
-        return true;
     }
 
 //    /**

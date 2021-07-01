@@ -63,14 +63,14 @@
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
          </padding>
          <children>
-            <ImageView fx:id="availableCard0ImageView1" fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ImageView fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickAvailableCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ImageView fx:id="availableCard0ImageView1" fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          </children>
          <effect>
             <Lighting>
@@ -101,18 +101,18 @@
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
                <children>
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickPlayCard" onDragDropped="#putImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ImageView fitHeight="105.0" fitWidth="85.0" layoutX="14.0" layoutY="14.0" onDragDetected="#pickCard" onDragDropped="#putImage" onDragOver="#dragOver" onMouseDragOver="#putImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
