@@ -5,9 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.gamedevs.clashroyale.model.preloaders.PreloaderSplashScreen;
+import org.gamedevs.clashroyale.model.loader.OnWaitLoader;
+import org.gamedevs.clashroyale.model.loader.PreloaderSplashScreen;
 
 /**
  * This class contains main method of Clash Royale application!
@@ -36,7 +37,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent mainRoot = FXMLLoader.load(getClass().getResource(
+        AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
                 "./view/fxml/menu/main_root.fxml"
         ));
         Scene mainRootScene = new Scene(mainRoot);

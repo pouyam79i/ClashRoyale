@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.preloaders;
+package org.gamedevs.clashroyale.model.loader;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Preloader;
@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.gamedevs.clashroyale.Main;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
@@ -87,7 +86,7 @@ public class PreloaderSplashScreen extends Preloader {
     @Override
     public void start(Stage stage){
         try {
-            // Setteing preloaderStage to be able to hide it later!
+            // Setting preloaderStage to be able to hide it later!
             this.preloaderStage = stage;
             // Setting stage settings
             preloaderStage.setScene(scene);
