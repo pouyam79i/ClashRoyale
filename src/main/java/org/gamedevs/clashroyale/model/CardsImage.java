@@ -20,7 +20,8 @@ public enum CardsImage {
     MINI_PEKKA(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/mini-pekka.png").toURI().toString()),
     RAGE(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/rage.png").toURI().toString()),
     VALKYRIE(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/valkyrie.png").toURI().toString()),
-    WIZARD(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/wizard.png").toURI().toString());
+    WIZARD(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/wizard.png").toURI().toString()),
+    NULL(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/null.png").toURI().toString());
 
 
 
