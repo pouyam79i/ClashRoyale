@@ -18,17 +18,6 @@
 
 }
 
-.button {
-
-    -fx-background-image: url("../img/menu/signup/btn_yellow.png");
-    -fx-background-size: 100% 100%;
-    -fx-font-size: 20 ;
-    -fx-color : white;
-    -fx-cursor:pointer;
-    -fx-font-family: 'Clash';
-
-}
-
 .text-field{
     -fx-background: rgba(0, 0, 0, 0);
     -fx-border: none;
@@ -39,3 +28,23 @@
     -fx-background: transparent;
 }
 
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.button{
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    /*-fx-max-width: 50px;*/
+    /*-fx-background-size: cover;*/
+    -fx-text-alignment: center;
+    -fx-background-color: rgba(0, 0, 0, 0);
+    /*-fx-background-radius: 20px;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-label-padding: 0;*/
+    -fx-text-overrun: clip;
+    -fx-font-family: 'Clash';
+    -fx-font-size: 14pt;
+    -fx-font-scale: Bold;
+}

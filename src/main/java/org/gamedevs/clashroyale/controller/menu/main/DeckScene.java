@@ -2,47 +2,52 @@ package org.gamedevs.clashroyale.controller.menu.main;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.gamedevs.clashroyale.model.CardsImage;
+import javafx.stage.Stage;
+import org.gamedevs.clashroyale.model.Card.Card;
+import org.gamedevs.clashroyale.model.Card.Null;
+import org.gamedevs.clashroyale.model.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 /**
  * Controller for Deck scene in menu
  *
- * @author Pouya Mohammadi - Hosna Hoseini
- * 9829039 -CE@AUT   9823010 -CE@AUT
+ * @author Hosna Hoseini
+ * 9823010 -CE@AUT
  * @version 1.0
  */
 public class DeckScene {
-//    GameManager gameManager = new GameManager();
 
-
-    @FXML
-    private AnchorPane mainAnchorPane;
-
+    //top grid pane which show cards which player wants to play with them
     @FXML
     private GridPane playCardGridPane;
 
+    //bottom grid pane which show cards which player can choose to play which
     @FXML
-    private GridPane choicesCardGridPane;
+    private GridPane availableCardGridPane;
 
-    @FXML
-    private Label battleDeckLabel;
+    //player who uses this scene currently
+    private Player player;
 
-    @FXML
-    private Label cardCollectionLabel;
+    //previous card that player chose
+    private CardView source;
 
-    protected CardView source;
-
+    /**
+     * an event handler which called to pick a card by dragging it
+     */
     private EventHandler<MouseEvent> pickCard = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -56,33 +61,37 @@ public class DeckScene {
         }
     };
 
+    /**
+     * An event handler which called to drop a card and change it with the previous card
+     */
     private EventHandler<DragEvent> putCard = new EventHandler<DragEvent>() {
         @Override
         public void handle(DragEvent event) {
 
+            //change source image
             Image oldImage = ((CardView) event.getSource()).getImageView().getImage();
-            source.getImageView().setImage(null);
-            if (oldImage != null) {
-                source.getImageView().setImage(oldImage);
-            }
+            source.getImageView().setImage(oldImage);
+
+            //change destination image
             Image newImage = event.getDragboard().getImage();
             ((CardView) event.getSource()).getImageView().setImage(newImage);
+
+            //change progress bar
             double tempProgressBar = ((CardView) event.getSource()).getProgressBar();
             ((CardView) event.getSource()).setProgressBar(source.getProgressBar());
             source.setProgressBar(tempProgressBar);
 
-//            if (((CardView) event.getSource()).getID().equals(CardsImage.NULL.toString()))
-//                ((CardView) event.getSource()).visibleProgressBar(false);
-//            else
-//                ((CardView) event.getSource()).visibleProgressBar(true);
-//
-//            if (source.getID().equals(CardsImage.NULL.toString()))
-//                source.visibleProgressBar(false);
-//            else
-//                source.visibleProgressBar(true);
+            //change id
+            Card tempCard = ((CardView) event.getSource()).getCard();
+            ((CardView) event.getSource()).setCard(source.getCard());
+            source.setCard(tempCard);
+            System.out.println(((CardView) event.getSource()).getCard());
         }
     };
 
+    /**
+     * An event handler to make an image acceptable for drag
+     */
     private EventHandler<DragEvent> dragOver = new EventHandler<DragEvent>() {
         @Override
         public void handle(DragEvent event) {
@@ -90,100 +99,125 @@ public class DeckScene {
         }
     };
 
+    /**
+     * constructor
+     *
+     * @param player player who uses this scene currently
+     */
+    public DeckScene(Player player) {
+        this.player = player;
+    }
+
+    /**
+     * fill the grids by player cards
+     */
     public void initialize() {
         initPlayCards();
         initAvailableCards();
     }
 
+//    /**
+//     * exit from this stage
+//     */
+//    public void exit() {
+//        getPlayCardsToModel();
+//        Stage stage;
+//        stage = (Stage) playCardGridPane.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("../../resources/org/gamedevs/clashroyale/view/fxml/menu.fxml"));
+//        try {
+//            loader.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        MenuController menuController = loader.getController();
+//        Parent root = loader.getRoot();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+
     /**
-     * put play card pic into scene
+     * load and put play card pic into top grid
      */
     private void initPlayCards() {
         int i = 0;
 
-        ////////this part should be omitted when the card class has been made////////
-        ArrayList<CardsImage> playCards = new ArrayList<>();
-        playCards.add(CardsImage.ARROWS);
-        playCards.add(CardsImage.ARCHERS);
-        playCards.add(CardsImage.BARBARIANS);
-        playCards.add(CardsImage.BABY_DRAGON);
-        playCards.add(CardsImage.FIREBALL);
-        playCards.add(CardsImage.GIANT);
-        playCards.add(CardsImage.INFERNO_TOWER);
-        playCards.add(CardsImage.CANNON);
-        for (CardsImage cardsImage : playCards) {
-            CardView cardView = new CardView(new Image(cardsImage.getUrl()), true, cardsImage.toString());
-            playCardGridPane.add(cardView, i % 4, i / 4);
+        for (Card card : player.getPlayCards()) {
+            CardView cardImageView = new CardView(card);
+            playCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;
         }
-        ////////////////////////////////////////////////////////////////////////////
-
-//        for (Card card : playCards()) {
-//            CardImageView cardImageView = new CardImageView(new Image(card.getImage().getUrl()), true);
-//            playCardGridPane.add(cardImageView, i % 4, i / 4);
-//            i++;
-//        }
     }
 
     /**
-     * put available card pic into scene
+     * put available card image into bottom grid
      */
     private void initAvailableCards() {
 
         int i = 0;
-
-        ArrayList<CardsImage> allAvailableCards = new ArrayList<>();
-        allAvailableCards.add(CardsImage.MINI_PEKKA);
-        allAvailableCards.add(CardsImage.RAGE);
-        allAvailableCards.add(CardsImage.VALKYRIE);
-        allAvailableCards.add(CardsImage.WIZARD);
-
-        for (CardsImage cardsImage : allAvailableCards) {
-//            if(isNotInAvailableCards(cardsImage)){
-//              CardImageView cardImageView = new CardImageView(new Image(cardsImage.getUrl()), false);
-//          }else{
-            CardView cardView = new CardView(new Image(cardsImage.getUrl()), true, cardsImage.toString());
-//          }
-            choicesCardGridPane.add(cardView, i % 4, i / 4);
+        for (Card card : player.getAvailableCards()) {
+            CardView cardImageView = new CardView(card);
+            availableCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;
         }
 
+        //null places
         while (i < 12) {
-            CardView cardView = new CardView(new Image(CardsImage.NULL.getUrl()), true, CardsImage.NULL.toString());
+            CardView cardView = new CardView(new Null());
             cardView.setProgressBar(0);
-            choicesCardGridPane.add(cardView, i % 4, i / 4);
+            availableCardGridPane.add(cardView, i % 4, i / 4);
             i++;
         }
-//
 
     }
 
 //    /**
-//     * to check if the card is available for this player or not
-//     * @param cardsImage card
-//     * @return true if it is NOT available
+//     * update player new card
 //     */
-//    private boolean IsNotInAvailableCards(CardsImage cardsImage) {
+//    private void getPlayCardsToModel() {
+//        ArrayList<Card> playCard = new ArrayList<>();
+//        for(Node node : playCardGridPane.getChildren()){
+//            playCard.add(((CardView)node).getCard());
+//        }
+//        player.setPlayCards(playCard);
 //    }
 
-
+    /**
+     * A vbox to show card and progress bar in grid cell
+     *
+     * @author Hosna Hoseini
+     * 9823010 -CE@AUT
+     * @version 1.0
+     */
     class CardView extends VBox {
-        private String ID;
+        private Card card;
         private ImageView imageView = new ImageView();
         private ProgressBar progressBar;
 
-        public CardView(Image image, boolean active, String id) {
-            this.ID = id;
-            imageView.setImage(image);
-            progressBar = new ProgressBar(Math.random());
+        /**
+         * constructor to make a new VBox
+         *
+         * @param card the card which we want to show
+         */
+        public CardView(Card card) {
+            //init info of fields
+            this.card = card;
+            imageView.setImage(card.getImage());
+            progressBar = new ProgressBar(card.getUpdateProgress());
+
+            //set size
             imageView.setFitHeight(105);
             imageView.setFitWidth(85);
             progressBar.setPrefWidth(85);
             progressBar.setPrefHeight(15);
+
+            //add to vbox
             getChildren().add(imageView);
             getChildren().add(progressBar);
 
-            if (active) {
+            //set event handler if the card is unlock
+            if (card.isActive()) {
                 addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
                 addEventFilter(DragEvent.DRAG_DROPPED, putCard);
                 addEventFilter(DragEvent.DRAG_OVER, dragOver);
@@ -193,28 +227,29 @@ public class DeckScene {
             }
         }
 
-        public void visibleProgressBar(boolean visible) {
-            progressBar.setVisible(visible);
-        }
-
+        //Getter
         public ImageView getImageView() {
             return imageView;
         }
 
-        public void setImageView(ImageView imageView) {
-            this.imageView = imageView;
-        }
-
+        //Getter
         public double getProgressBar() {
             return progressBar.getProgress();
         }
 
+        //Setter
         public void setProgressBar(double value) {
             this.progressBar.setProgress(value);
         }
 
-        public String getID() {
-            return ID;
+        //Getter
+        public Card getCard() {
+            return card;
+        }
+
+        //Setter
+        public void setCard(Card card) {
+            this.card = card;
         }
     }
 }
