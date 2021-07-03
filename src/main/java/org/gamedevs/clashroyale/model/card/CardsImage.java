@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.Card;
+package org.gamedevs.clashroyale.model.card;
 
 import java.io.File;
 

@@ -2,10 +2,6 @@ package org.gamedevs.clashroyale.controller.menu.main;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -13,13 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import org.gamedevs.clashroyale.model.Card.Card;
-import org.gamedevs.clashroyale.model.Card.Null;
+import org.gamedevs.clashroyale.model.card.Card;
+import org.gamedevs.clashroyale.model.card.Null;
 import org.gamedevs.clashroyale.model.Player;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 /**
