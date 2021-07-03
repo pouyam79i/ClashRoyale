@@ -38,13 +38,13 @@
             <Button fx:id="last_games_btn" layoutX="315.0" layoutY="71.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" text="Last games" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/xp_level/0.png" />
+                  <Image url="@../../img/ui/xp/0.png" />
                </image>
             </ImageView>
             <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" text="100000" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="13.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/ui_icon/gold-coin.png" />
+                  <Image url="@../../img/ui/icon/gold-coin.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="24.0" prefHeight="18.0" prefWidth="90.0" text="0/0" />

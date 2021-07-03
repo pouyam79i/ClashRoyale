@@ -1,19 +1,11 @@
-
-#mainAnchorPane {
-    -fx-background-image: url("../img/menu/signup/Background1.png");
-    -fx-background-size:cover;
-
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
 }
 
 #playCardGridPane{
     -fx-background-color : #0864bb;
 }
 
-
-
-@font-face {
-    src: url('../fonts/Clash-Regular.ttf');
-}
 
 .label{
     -fx-font-family: 'Clash';
