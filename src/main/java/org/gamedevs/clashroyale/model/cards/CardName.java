@@ -26,4 +26,7 @@ public enum CardName {
     CANNON,
     INFERNO_TOWER,
 
+    // No card
+    EMPTY,
+
 }
