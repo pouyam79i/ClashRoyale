@@ -45,6 +45,9 @@ public class DeckScene {
     //previous card that player chose
     private CardView source;
 
+    //model of deck scene
+//    private DeckSceneModel model = new DeckSceneModel();
+
     /**
      * an event handler which called to pick a card by dragging it
      */
@@ -85,7 +88,6 @@ public class DeckScene {
             Card tempCard = ((CardView) event.getSource()).getCard();
             ((CardView) event.getSource()).setCard(source.getCard());
             source.setCard(tempCard);
-            System.out.println(((CardView) event.getSource()).getCard());
         }
     };
 
@@ -99,14 +101,13 @@ public class DeckScene {
         }
     };
 
-    /**
-     * constructor
-     *
-     * @param player player who uses this scene currently
-     */
-    public DeckScene(Player player) {
-        this.player = player;
-    }
+//    /**
+//     * constructor
+//     *
+//     */
+//    public DeckScene() {
+//        player = model.getPlayer();
+//    }
 
     /**
      * fill the grids by player cards
@@ -120,7 +121,7 @@ public class DeckScene {
 //     * exit from this stage
 //     */
 //    public void exit() {
-//        getPlayCardsToModel();
+//        givePlayCardsToModel();
 //        Stage stage;
 //        stage = (Stage) playCardGridPane.getScene().getWindow();
 //        FXMLLoader loader = new FXMLLoader();
@@ -175,12 +176,12 @@ public class DeckScene {
 //    /**
 //     * update player new card
 //     */
-//    private void getPlayCardsToModel() {
+//    private void givePlayCardsToModel() {
 //        ArrayList<Card> playCard = new ArrayList<>();
 //        for(Node node : playCardGridPane.getChildren()){
 //            playCard.add(((CardView)node).getCard());
 //        }
-//        player.setPlayCards(playCard);
+//        model.setPlayCards(playCard);
 //    }
 
     /**

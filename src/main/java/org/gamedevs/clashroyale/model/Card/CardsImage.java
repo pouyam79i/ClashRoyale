@@ -1,11 +1,12 @@
-package org.gamedevs.clashroyale.model;
+package org.gamedevs.clashroyale.model.Card;
 
 import java.io.File;
 
 /**
  * Enums for loading picture of cards in card deck scene
- * @author Pouya Mohammadi - Hosna Hoseini
- *         9829039 -CE@AUT   9823010 -CE@AUT
+ * Hosna Hoseini
+ * 9823010 -CE@AUT
+ *
  * @version 1.0
  */
 public enum CardsImage {
@@ -22,7 +23,6 @@ public enum CardsImage {
     VALKYRIE(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/valkyrie.png").toURI().toString()),
     WIZARD(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/wizard.png").toURI().toString()),
     NULL(new File("src/main/resources/org/gamedevs/clashroyale/view/img/cards/null.png").toURI().toString());
-
 
 
     private String url;
