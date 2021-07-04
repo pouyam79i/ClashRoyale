@@ -9,9 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.gamedevs.clashroyale.model.card.Card;
-import org.gamedevs.clashroyale.model.card.Null;
 import org.gamedevs.clashroyale.model.Player;
+import org.gamedevs.clashroyale.model.cards.Card;
 
 
 /**
@@ -136,7 +135,7 @@ public class DeckScene {
     private void initPlayCards() {
         int i = 0;
 
-        for (Card card : player.getPlayCards()) {
+        for (Card card : player.getPlayCards().getCards()) {
             CardView cardImageView = new CardView(card);
             playCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;
@@ -149,19 +148,19 @@ public class DeckScene {
     private void initAvailableCards() {
 
         int i = 0;
-        for (Card card : player.getAvailableCards()) {
+        for (Card card : player.getAvailableCards().getCards()) {
             CardView cardImageView = new CardView(card);
             availableCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;
         }
 
         //null places
-        while (i < 12) {
-            CardView cardView = new CardView(new Null());
-            cardView.setProgressBar(0);
-            availableCardGridPane.add(cardView, i % 4, i / 4);
-            i++;
-        }
+//        while (i < 12) {
+//            CardView cardView = new CardView(new Null());
+//            cardView.setProgressBar(0);
+//            availableCardGridPane.add(cardView, i % 4, i / 4);
+//            i++;
+//        }
 
     }
 
@@ -196,8 +195,8 @@ public class DeckScene {
         public CardView(Card card) {
             //init info of fields
             this.card = card;
-            imageView.setImage(card.getImage());
-            progressBar = new ProgressBar(card.getUpdateProgress());
+//            imageView.setImage(card.getImage());
+//            progressBar = new ProgressBar(card.getUpdateProgress());
 
             //set size
             imageView.setFitHeight(105);
@@ -210,14 +209,14 @@ public class DeckScene {
             getChildren().add(progressBar);
 
             //set event handler if the card is unlock
-            if (card.isActive()) {
-                addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
-                addEventFilter(DragEvent.DRAG_DROPPED, putCard);
-                addEventFilter(DragEvent.DRAG_OVER, dragOver);
-            } else {
-                ColorAdjust colorAdjust = new ColorAdjust(0, -50, 0, 0);
-                setEffect(colorAdjust);
-            }
+//            if (card.isActive()) {
+//                addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
+//                addEventFilter(DragEvent.DRAG_DROPPED, putCard);
+//                addEventFilter(DragEvent.DRAG_OVER, dragOver);
+//            } else {
+//                ColorAdjust colorAdjust = new ColorAdjust(0, -50, 0, 0);
+//                setEffect(colorAdjust);
+//            }
         }
 
         //Getter

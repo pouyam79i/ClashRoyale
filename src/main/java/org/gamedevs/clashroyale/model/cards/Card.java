@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.cards;
 
-public abstract class Card {
+import java.io.Serializable;
+
+public abstract class Card implements Serializable {
 
     protected CardName cardName;
 
