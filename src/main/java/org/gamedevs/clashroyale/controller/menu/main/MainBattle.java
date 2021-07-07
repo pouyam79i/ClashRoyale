@@ -1,49 +1,50 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
+import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
+
+/**
+ * Main battle menu controller
+ * @author Pouya Mohammadi - CE@AUT 9829039
+ * @version 1.0
+ */
 public class MainBattle {
 
+    /**
+     * Battle button,
+     * used to bring battle popup
+     */
     @FXML
     private Button battleBtn;
-
-
-
-    private final ImageView backgroundCover = new ImageView(new Image(
-            getClass().getResource("./../../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
-
+    /**
+     * Profile button,
+     * using to bring profile popup view
+     */
     @FXML
-    private void bringBattlePopup(Event event){
-        try{
-            Group popupRoot = new Group();
-            BattlePopup.setPopupMenuGroup(popupRoot);
-            AnchorPane popupMenu = FXMLLoader.load(getClass().getResource(
-                    "./../../../view/fxml/menu/battle_menu_popup.fxml"
-            ));
-            popupRoot.getChildren().add(backgroundCover);
-            popupMenu.setTranslateX(48.5);
-            popupMenu.setTranslateY(202.5);
-            popupRoot.getChildren().add(popupMenu);
-//            Scene scene = new Scene(popupMenu);
-//            Stage stage = new Stage();
-            Scene mainBattleMenuScene = battleBtn.getScene();
-            AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-            mainBattleMenu.getChildren().add(popupRoot);
+    private Button profileBtn;
 
-//            stage.setScene(scene);
-//            stage.show();
-        }catch (Exception e){
-            Console.getConsole().printTracingMessage("Failed to pop up battle menu");
-        }
+    /**
+     * Brings battle popup
+     */
+    @FXML
+    private void bringBattlePopup(){
+        Scene mainBattleMenuScene = battleBtn.getScene();
+        AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+        mainBattleMenu.getChildren().add(MainMenuSceneContainer.getMenuData().getBattlePopupMenu());
+    }
+
+    /**
+     * Brings profile view popup
+     */
+    @FXML
+    private void bringProfilePopup(){
+        Scene mainBattleMenuScene = profileBtn.getScene();
+        AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+        mainBattleMenu.getChildren().add(MainMenuSceneContainer.getMenuData().getProfilePopupMenu());
     }
 
 }

@@ -115,3 +115,6 @@ lib
 
 # Ignoring test package!
 src/test
+
+# Ignoring config property file!
+config
