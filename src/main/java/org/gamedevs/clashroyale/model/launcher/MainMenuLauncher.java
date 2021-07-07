@@ -1,7 +1,10 @@
 package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
@@ -9,9 +12,10 @@ import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
- * This class launches main menu.
+ * This class launches main menu scene.
+ * Loads all needed files and sets their properties!
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0
+ * @version 1.0.1
  */
 public class MainMenuLauncher{
 
@@ -22,6 +26,10 @@ public class MainMenuLauncher{
     public void launch() throws IOException{
         // menu container
         MainMenuSceneContainer menuData = MainMenuSceneContainer.getMenuData();
+        // Loading main menu stage icon
+        menuData.setGameIcon(new Image(
+                MainMenuLauncher.class.getResourceAsStream("../../view/img/icon/cr_icon.png"))
+        );
         // Loading root pane
         AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
                 "../../view/fxml/menu/main_root.fxml"
@@ -50,7 +58,32 @@ public class MainMenuLauncher{
         sliderBar.setLayoutX(0);
         sliderBar.setLayoutY(620);
         menuData.setSliderBar(sliderBar);
-        // Building a root scene
+        // Loading cover image
+        ImageView backgroundCoverForBattlePopup = new ImageView(new Image(
+                getClass().getResource("./../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
+        ImageView backgroundCoverForProfilePopup = new ImageView(new Image(
+                getClass().getResource("./../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
+        // Loading battle popup
+        Group battlePopupGroup = new Group();
+        AnchorPane battlePopupMenu = FXMLLoader.load(getClass().getResource(
+                "./../../view/fxml/menu/battle_menu_popup.fxml"
+        ));
+        battlePopupGroup.getChildren().add(backgroundCoverForBattlePopup);
+        battlePopupMenu.setTranslateX(48.5);
+        battlePopupMenu.setTranslateY(202.5);
+        battlePopupGroup.getChildren().add(battlePopupMenu);
+        menuData.setBattlePopupMenu(battlePopupGroup);
+        // Loading profile popup
+        Group profilePopupGroup = new Group();
+        AnchorPane profilePopupMenu = FXMLLoader.load(getClass().getResource(
+                "./../../view/fxml/menu/profile_view_popup.fxml"
+        ));
+        profilePopupGroup.getChildren().add(backgroundCoverForProfilePopup);
+        profilePopupMenu.setTranslateX(48.5);
+        profilePopupMenu.setTranslateY(202.5);
+        profilePopupGroup.getChildren().add(profilePopupMenu);
+        menuData.setProfilePopupMenu(profilePopupGroup);
+        // Building root scene
         mainRoot.getChildren().add(battleMenu);
         mainRoot.getChildren().add(deckMenu);
         mainRoot.getChildren().add(sliderBar);

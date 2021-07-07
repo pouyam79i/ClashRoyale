@@ -34,7 +34,7 @@
                </image>
             </ImageView>
             <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xp_bar" />
-            <Button fx:id="profile_btn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile">
+            <Button fx:id="profileBtn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" onAction="#bringProfilePopup" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile">
                <font>
                   <Font size="11.0" />
                </font></Button>
@@ -47,7 +47,7 @@
                   <Image url="@../../img/ui/xp/0.png" />
                </image>
             </ImageView>
-            <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" />
+            <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" styleClass="text-field" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="13.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/icon/gold-coin.png" />

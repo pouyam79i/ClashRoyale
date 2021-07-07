@@ -14,7 +14,8 @@
       <ImageView fitHeight="315.0" fitWidth="300.0" pickOnBounds="true">
          <image>
             <Image url="@../../img/menu/menu_background_cover.png" />
-         </image></ImageView>
+         </image>
+      </ImageView>
       <TextField alignment="CENTER_RIGHT" editable="false" layoutX="39.0" layoutY="176.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" promptText="cups" styleClass="cup_text_field" text="0" />
       <ProgressBar layoutX="47.0" layoutY="105.0" prefHeight="18.0" prefWidth="75.0" progress="0.5" />
       <ImageView fitHeight="40.0" fitWidth="53.0" layoutX="16.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
@@ -52,7 +53,8 @@
       <Label layoutX="166.0" layoutY="97.0" text="Arena name">
          <font>
             <Font size="14.0" />
-         </font></Label>
-      <Button layoutX="99.0" layoutY="261.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="92.0" styleClass="back_btn" text="Back" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="99.0" layoutY="261.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="92.0" styleClass="back_btn" text="Back" />
    </children>
 </AnchorPane>

@@ -9,6 +9,11 @@
    <children>
       <Button fx:id="deck" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringDeckMenu" prefHeight="65.0" prefWidth="202.5" styleClass="left_btn" />
       <Button fx:id="battle" layoutX="202.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringBattleMenu" prefHeight="65.0" prefWidth="202.5" styleClass="right_btn" />
+      <ImageView fx:id="btnCover" fitHeight="65.0" fitWidth="202.5" layoutX="203.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/ui/button/slider-bar_cover.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="65.0" fitWidth="52.0" layoutX="74.0" layoutY="5.0" onMouseClicked="#bringDeckMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/ui/icon/deck.png" />
@@ -17,11 +22,6 @@
       <ImageView fitHeight="65.0" fitWidth="52.0" layoutX="281.0" layoutY="6.0" onMouseClicked="#bringBattleMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/ui/icon/battle-ladder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="btnCover" fitHeight="65.0" fitWidth="202.5" layoutX="203.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../img/ui/button/slider-bar_cover.png" />
          </image>
       </ImageView>
    </children>
