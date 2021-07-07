@@ -38,7 +38,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
-                "./view/fxml/menu/sign_up.fxml"
+                "./view/fxml/menu/main_root.fxml"
         ));
         Scene mainRootScene = new Scene(mainRoot);
         primaryStage.setScene(mainRootScene);
@@ -57,7 +57,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         // Setting the preloader
-//        System.setProperty("javafx.preloader", PreloaderSplashScreen.class.getCanonicalName());
+        System.setProperty("javafx.preloader", PreloaderSplashScreen.class.getCanonicalName());
         launch(args);
     }
 

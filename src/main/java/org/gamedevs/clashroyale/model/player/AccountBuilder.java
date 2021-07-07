@@ -1,13 +1,11 @@
-package org.gamedevs.clashroyale.model;
+package org.gamedevs.clashroyale.model.player;
 
-import org.gamedevs.clashroyale.model.cards.Card;
-
-import java.util.ArrayList;
+import org.gamedevs.clashroyale.model.cards.CardDeck;
 
 public class AccountBuilder {
 
-    public static Player buildNewAccount(String username, String pass){
-        Player player = new Player(username, pass);
+    public static Human buildNewAccount(String username, String pass){
+        Human human = new Human(username, pass);
         CardDeck playCards = new CardDeck();
 
 //        playCards.addCard(new Arrows());
@@ -27,6 +25,6 @@ public class AccountBuilder {
 //        availableCards.addCard(new Cannon());
 //        player.setAvailableCards(availableCards);
 
-        return player;
+        return human;
     }
 }

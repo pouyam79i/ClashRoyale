@@ -3,13 +3,12 @@ package org.gamedevs.clashroyale.controller.menu.main;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.gamedevs.clashroyale.model.Player;
+import org.gamedevs.clashroyale.model.player.Human;
 import org.gamedevs.clashroyale.model.cards.Card;
 
 
@@ -31,7 +30,7 @@ public class DeckScene {
     private GridPane availableCardGridPane;
 
     //player who uses this scene currently
-    private Player player;
+    private Human human;
 
     //previous card that player chose
     private CardView source;
@@ -135,7 +134,7 @@ public class DeckScene {
     private void initPlayCards() {
         int i = 0;
 
-        for (Card card : player.getPlayCards().getCards()) {
+        for (Card card : human.getPlayCards().getCards()) {
             CardView cardImageView = new CardView(card);
             playCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;
@@ -148,7 +147,7 @@ public class DeckScene {
     private void initAvailableCards() {
 
         int i = 0;
-        for (Card card : player.getAvailableCards().getCards()) {
+        for (Card card : human.getAvailableCards().getCards()) {
             CardView cardImageView = new CardView(card);
             availableCardGridPane.add(cardImageView, i % 4, i / 4);
             i++;

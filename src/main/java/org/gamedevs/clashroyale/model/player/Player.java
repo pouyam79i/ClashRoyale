@@ -1,22 +1,17 @@
-package org.gamedevs.clashroyale.model;
+package org.gamedevs.clashroyale.model.player;
+
+import org.gamedevs.clashroyale.model.cards.CardDeck;
 
 import java.io.Serializable;
 
 public class Player implements Serializable {
+    protected String username;
+    protected CardDeck playCards;
+    protected CardDeck availableCards;
 
-    private String username;
-    private String password;
-    private CardDeck playCards;
-    private CardDeck availableCards;
-    private int xp;
-//    private Level level;
-
-    public Player(String username, String pass) {
+    public Player(String username) {
         this.username = username;
-        this.password = pass;
-
     }
-
 
     public CardDeck getPlayCards() {
         return playCards;
@@ -42,11 +37,10 @@ public class Player implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "Player{" +
+                "username='" + username + '\'' +
+                '}';
     }
 }

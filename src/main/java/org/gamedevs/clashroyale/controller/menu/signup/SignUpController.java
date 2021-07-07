@@ -12,11 +12,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
+import org.gamedevs.clashroyale.model.cards.CardDeck;
 import org.gamedevs.clashroyale.model.SignUpModel;
+import org.gamedevs.clashroyale.model.player.Human;
+import org.gamedevs.clashroyale.model.utils.FileIO.FileIO;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.IOException;
-import java.util.Stack;
 
 /**
  * Controller for login scene
@@ -45,22 +47,22 @@ public class SignUpController {
     @FXML
     private Label tryAgainLabel;
 
-    //    SignUpModel signUpModel = new SignUpModel();
+    SignUpModel signUpModel = new SignUpModel();
+
     public void initialize() {
         errorLabel.setVisible(false);
         tryAgainLabel.setVisible(false);
-
     }
 
     @FXML
     void loginHandling(ActionEvent event) throws IOException {
         String pass = passwordField.getText();
         String username = usernameField.getText();
-        SignUpModel signUpModel = new SignUpModel();
-        if (pass != null && username != null) {
-            if (signUpModel.login(username, pass))
+        if (!pass.equals("") && !username.equals("")) {
+            if (signUpModel.login(username, pass)) {
+                Console.getConsole().println(username + "logged in");
                 changeScene(event);
-            else {
+            }else {
                 errorLabel.setText("wrong username or password");
                 errorLabel.setVisible(true);
                 tryAgainLabel.setVisible(true);
@@ -75,11 +77,11 @@ public class SignUpController {
     void signUpHandling(ActionEvent event) throws IOException {
         String pass = passwordField.getText();
         String username = usernameField.getText();
-        SignUpModel signUpModel = new SignUpModel();
-        if (pass != null && username != null) {
-            if (signUpModel.signUp(username, pass))
+        if (!pass.equals("") && !username.equals("")) {
+            if (signUpModel.signUp(username, pass)) {
                 changeScene(event);
-            else {
+                Console.getConsole().println(username + "sign up");
+            }else {
                 errorLabel.setText("username is already taken");
                 errorLabel.setVisible(true);
                 tryAgainLabel.setVisible(true);
@@ -93,11 +95,12 @@ public class SignUpController {
     }
 
     private void changeScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("C:\\Users\\RAI\\Desktop\\university\\term4\\ap\\FinalProject\\ClashRoyale\\ClashRoyale\\src\\main\\resources\\org\\gamedevs\\clashroyale\\view\\fxml\\menu\\main_battle.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        //TODO:change scene
+//        Parent root = FXMLLoader.load(getClass().getResource("C:\\Users\\RAI\\Desktop\\university\\term4\\ap\\FinalProject\\ClashRoyale\\ClashRoyale\\src\\main\\resources\\org\\gamedevs\\clashroyale\\view\\fxml\\menu\\main_battle.fxml"));
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 }
 
