@@ -1,14 +1,15 @@
 package org.gamedevs.clashroyale;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.gamedevs.clashroyale.model.loader.OnWaitLoader;
+
+import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
+import org.gamedevs.clashroyale.model.launcher.MainMenuLauncher;
 import org.gamedevs.clashroyale.model.loader.PreloaderSplashScreen;
+import org.gamedevs.clashroyale.model.media.MusicPlayer;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
  * This class contains main method of Clash Royale application!
@@ -18,15 +19,23 @@ import org.gamedevs.clashroyale.model.loader.PreloaderSplashScreen;
  */
 public class Main extends Application {
 
+    private Scene mainRootScene;
+    private MusicPlayer musicPlayer;
+
     /**
      * Application initializer.
      * @throws Exception if failed to process
      */
     @Override
     public void init() throws Exception{
+        musicPlayer = MusicPlayer.getMusicPlayer();
+        musicPlayer.playMenuMusic();
+        MainMenuLauncher menuLauncher = new MainMenuLauncher();
+        menuLauncher.launch();
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
-            Thread.sleep(2000); // Just checking loading page in debug mode :)
+            Thread.sleep(1000); // Just checking loading page in debug mode :)
+        Console.getConsole().printTracingMessage("App init finished");
     }
 
     /**
@@ -37,18 +46,15 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
-                "./view/fxml/menu/main_root.fxml"
-        ));
-        Scene mainRootScene = new Scene(mainRoot);
+        mainRootScene = MainMenuSceneContainer.getMenuData().getRootScene();
         primaryStage.setScene(mainRootScene);
         primaryStage.setTitle("Clash Royale");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("./view/img/icon/cr_icon.png")));
         primaryStage.setHeight(MainConfig.MAIN_STAGE_HEIGHT);
         primaryStage.setWidth(MainConfig.MAIN_STAGE_WIDTH);
-//        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.show();
+        Console.getConsole().printTracingMessage("App start finished");
     }
 
     /**
