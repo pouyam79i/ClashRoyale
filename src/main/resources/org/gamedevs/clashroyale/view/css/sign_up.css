@@ -2,12 +2,6 @@
     src: url('../fonts/Clash-Regular.ttf');
 }
 
-/*.button:hover {*/
-/*    -fx-background-image: url("../img/menu/signup/btn_yellow_pushed.png");*/
-/*    -fx-background-size: 100% 100%;*/
-/*    -fx-cursor:pointer;*/
-
-/*}*/
 
 .text-field{
     -fx-font-family: 'Clash';
@@ -36,6 +30,16 @@
     -fx-font-scale: Bold;
 
 }
+/*.button:hover {
+        -fx-background-image: url("../img/ui/button/btn_yellow.png");
+}
+
+.button:active {
+  -fx-background-color: #3e8e41;
+  -fx-box-shadow: 0 5px #666;
+
+  -fx-transform: translateY(4px);
+}*/
 
 .login_btn{
     -fx-background-image: url("../img/ui/button/btn_yellow_e.png");

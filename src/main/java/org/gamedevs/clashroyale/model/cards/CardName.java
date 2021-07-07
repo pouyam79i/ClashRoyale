@@ -1,12 +1,14 @@
 package org.gamedevs.clashroyale.model.cards;
 
+import java.io.Serializable;
+
 /**
  * This class contains name of all cards,
  * which are designed for this game so far.
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
  * @version 1.0
  */
-public enum CardName {
+public enum CardName implements Serializable {
 
     // Soldiers
     BARBARIANS,
