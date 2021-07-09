@@ -1,24 +1,25 @@
 package org.gamedevs.clashroyale.controller.menu.signup;
 
+import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.gamedevs.clashroyale.model.cards.CardDeck;
+import javafx.util.Duration;
 import org.gamedevs.clashroyale.model.SignUpModel;
-import org.gamedevs.clashroyale.model.player.Human;
-import org.gamedevs.clashroyale.model.utils.FileIO.FileIO;
+import org.gamedevs.clashroyale.model.account.AccountLoader;
+import org.gamedevs.clashroyale.model.loader.OnWaitLoader;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Controller for login scene
@@ -27,81 +28,68 @@ import java.io.IOException;
  * 9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
-public class SignUpController {
-
-    @FXML
-    private AnchorPane mainAnchorPane;
+public class SignUpController implements Initializable {
 
     @FXML
     private Button loginButton;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private TextField usernameField;
-
     @FXML
     private Label errorLabel;
-
     @FXML
     private Label tryAgainLabel;
 
-    SignUpModel signUpModel = new SignUpModel();
+    private FadeTransition fadeOutErrorLabel = new FadeTransition(Duration.millis(5000), errorLabel);
+    private FadeTransition fadeOutTryAgainLabel = new FadeTransition(Duration.millis(5000), errorLabel);
 
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         errorLabel.setVisible(false);
         tryAgainLabel.setVisible(false);
+        fadeOutErrorLabel.setNode(errorLabel);
+        fadeOutErrorLabel.setFromValue(1.0);
+        fadeOutErrorLabel.setToValue(0);
+        fadeOutTryAgainLabel.setNode(tryAgainLabel);
+        fadeOutTryAgainLabel.setFromValue(1.0);
+        fadeOutTryAgainLabel.setToValue(0);
     }
 
     @FXML
     void loginHandling(ActionEvent event) throws IOException {
-        String pass = passwordField.getText();
-        String username = usernameField.getText();
-        if (!pass.equals("") && !username.equals("")) {
-            if (signUpModel.login(username, pass)) {
-                Console.getConsole().println(username + "logged in");
-                changeScene(event);
-            }else {
-                errorLabel.setText("wrong username or password");
-                errorLabel.setVisible(true);
-                tryAgainLabel.setVisible(true);
-                passwordField.setText("");
-                usernameField.setText("");
+        // Using account loader
+        OnWaitLoader onWaitLoader = new OnWaitLoader();
+        onWaitLoader.display(loginButton.getScene());
+        Thread thread = (new Thread(() -> {
+            AccountLoader.getAccountLoader().loader(usernameField.getText(), passwordField.getText());
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                onWaitLoader.disappear();
+            });
+            if(!AccountLoader.getAccountLoader().isAccountLoaded()){
+                Platform.runLater(() -> {
+                    errorLabel.setVisible(true);
+                    tryAgainLabel.setVisible(true);
+                    fadeOutErrorLabel.playFromStart();
+                    fadeOutTryAgainLabel.playFromStart();
+                });
             }
-        } else
-            tryAgainLabel.setVisible(true);
+            // Do loading process
+        }));
+        thread.setDaemon(true);
+        thread.start();
+
     }
 
     @FXML
-    void signUpHandling(ActionEvent event) throws IOException {
-        String pass = passwordField.getText();
-        String username = usernameField.getText();
-        if (!pass.equals("") && !username.equals("")) {
-            if (signUpModel.signUp(username, pass)) {
-                changeScene(event);
-                Console.getConsole().println(username + "sign up");
-            }else {
-                errorLabel.setText("username is already taken");
-                errorLabel.setVisible(true);
-                tryAgainLabel.setVisible(true);
-                passwordField.setText("");
-                usernameField.setText("");
-            }
-        } else
-            tryAgainLabel.setVisible(true);
-
+    void signupHandling(ActionEvent event) throws IOException {
+        // Using account builder
 
     }
 
-    private void changeScene(ActionEvent event) throws IOException {
-        //TODO:change scene
-//        Parent root = FXMLLoader.load(getClass().getResource("C:\\Users\\RAI\\Desktop\\university\\term4\\ap\\FinalProject\\ClashRoyale\\ClashRoyale\\src\\main\\resources\\org\\gamedevs\\clashroyale\\view\\fxml\\menu\\main_battle.fxml"));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-    }
 }
 
 

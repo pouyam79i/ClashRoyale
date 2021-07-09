@@ -1,12 +1,13 @@
-package org.gamedevs.clashroyale.model.player;
+package org.gamedevs.clashroyale.model.account;
 
-import org.gamedevs.clashroyale.model.cards.CardDeck;
+import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
+import org.gamedevs.clashroyale.model.player.Human;
 
 public class AccountBuilder {
 
     public static Human buildNewAccount(String username, String pass){
         Human human = new Human(username, pass);
-        CardDeck playCards = new CardDeck();
+        DeckContainer playCards = new DeckContainer();
 
 //        playCards.addCard(new Arrows());
 //        playCards.addCard(new Archers());

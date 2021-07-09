@@ -1,31 +1,31 @@
 package org.gamedevs.clashroyale.model.player;
 
-import org.gamedevs.clashroyale.model.cards.CardDeck;
+import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 
 import java.io.Serializable;
 
 public class Player implements Serializable {
     protected String username;
-    protected CardDeck playCards;
-    protected CardDeck availableCards;
+    protected DeckContainer playCards;
+    protected DeckContainer availableCards;
 
     public Player(String username) {
         this.username = username;
     }
 
-    public CardDeck getPlayCards() {
+    public DeckContainer getPlayCards() {
         return playCards;
     }
 
-    public void setPlayCards(CardDeck playCards) {
+    public void setPlayCards(DeckContainer playCards) {
         this.playCards = playCards;
     }
 
-    public CardDeck getAvailableCards() {
+    public DeckContainer getAvailableCards() {
         return availableCards;
     }
 
-    public void setAvailableCards(CardDeck availableCards) {
+    public void setAvailableCards(DeckContainer availableCards) {
         this.availableCards = availableCards;
     }
 

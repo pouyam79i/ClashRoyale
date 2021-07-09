@@ -23,7 +23,15 @@ public class FileConfig {
     /**
      * This value is set to current account property
      */
-    public final static String CURRENT_ACCOUNT = "CURRENT_ACCOUNT";
+    public final static String ACCOUNT_FILENAME = "CURRENT_ACCOUNT";
+    /**
+     * This value is set to current account password property
+     */
+    public final static String ACCOUNT_PASSWORD = "ACCOUNT_PASSWORD";
+    /**
+     * Account file directory
+     */
+    public final static String ACCOUNT_DIR = "ACCOUNT_PASSWORD";
 
     /**
      * Constructor
