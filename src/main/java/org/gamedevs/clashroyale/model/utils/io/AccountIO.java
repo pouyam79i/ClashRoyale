@@ -24,7 +24,7 @@ public class AccountIO {
     /**
      * Path of directory of config file.
      */
-    private final String DIR = "src/save/";
+    private final String DIR = "save/";
 
     /**
      * Only instance of account io api
@@ -167,7 +167,7 @@ public class AccountIO {
         final boolean[] result = new boolean[1];
         Thread thread = (new Thread(() -> {
             try {
-                Path path = Paths.get("src/save");
+                Path path = Paths.get("save");
                 DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
                 for (Path path1 : directoryStream) {
                     if (path1.endsWith(username + ".bin")) {
@@ -201,7 +201,7 @@ public class AccountIO {
         final Account[] finalAccount = new Account[1];
         Thread thread = (new Thread(() -> {
             try {
-                Path path = Paths.get("src/save");
+                Path path = Paths.get("save");
                 DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
                 for (Path path1 : directoryStream) {
                     if (path1.endsWith(username + ".bin")) {

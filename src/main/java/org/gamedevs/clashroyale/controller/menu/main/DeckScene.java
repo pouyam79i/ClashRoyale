@@ -42,7 +42,7 @@ public class DeckScene {
 
     private static DeckScene instance = null;
 
-    private DeckScene() { }
+    public DeckScene() { }
 
     /**
      * an event handler which called to pick a card by dragging it
