@@ -40,6 +40,9 @@ public class DeckScene {
     //new cardView that player want to put source in it
     private CardView destination;
 
+    private static DeckScene instance = null;
+
+    private DeckScene() { }
 
     /**
      * an event handler which called to pick a card by dragging it
@@ -166,16 +169,13 @@ public class DeckScene {
 
     }
 
-//    /**
-//     * update player new card
-//     */
-//    private void givePlayCardsToModel() {
-//        ArrayList<Card> playCard = new ArrayList<>();
-//        for(Node node : playCardGridPane.getChildren()){
-//            playCard.add(((CardView)node).getCard());
-//        }
-//        model.setPlayCards(playCard);
-//    }
+    public static DeckScene getInstance(){
+        if(instance == null){
+            instance = new DeckScene();
+        }
+        return instance;
+
+    }
 
     /**
      * A vbox to show card and progress bar in grid cell
