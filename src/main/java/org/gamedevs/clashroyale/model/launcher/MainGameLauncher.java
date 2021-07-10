@@ -29,11 +29,13 @@ public class MainGameLauncher extends Runnable {
      */
     @Override
     public void run() {
+        printTraceMessage("launcher sequence started");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ignored) {}
         // If we dont have any logged in account!
         if(UserAccountContainer.getUserAccountContainer().getAccount() == null){
+            printTraceMessage("No account detected! Loading signup menu!");
             Platform.runLater(() -> {
                 try {
                     OnWaitLoader.getOnWaitLoader().disappear();
@@ -48,6 +50,7 @@ public class MainGameLauncher extends Runnable {
                 Thread.sleep(100);
             } catch (InterruptedException e) {}
         }
+        printTraceMessage("Signed in account account detected! Loading main menu!");
         Platform.runLater(() -> {
             try {
                 OnWaitLoader.getOnWaitLoader().disappear();

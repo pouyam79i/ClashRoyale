@@ -82,6 +82,9 @@ public class SignUpController implements Initializable {
         onWaitLoader.display(loginButton.getScene());
         Thread thread = (new Thread(() -> {
             AccountLoader.getAccountLoader().loadAccount(usernameField.getText(), passwordField.getText());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
             Platform.runLater(() -> {
                 onWaitLoader.disappear();
             });
@@ -112,6 +115,9 @@ public class SignUpController implements Initializable {
         onWaitLoader.display(signUpButton.getScene());
         Thread thread = (new Thread(() -> {
             AccountBuilder.getAccountBuilder().buildNewAccount(usernameField.getText(), passwordField.getText());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
             Platform.runLater(() -> {
                 onWaitLoader.disappear();
             });
