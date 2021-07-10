@@ -134,6 +134,7 @@ public class DeckScene {
      * load and put play card pic into top grid
      */
     private void initPlayCards() {
+
         int i = 0;
 
         for (Card card : account.getDeckContainer().getDeck()) {

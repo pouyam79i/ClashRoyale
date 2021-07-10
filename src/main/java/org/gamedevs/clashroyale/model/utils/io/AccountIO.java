@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
+import javafx.application.Platform;
 import org.gamedevs.clashroyale.model.account.Account;
+import org.gamedevs.clashroyale.model.account.AccountBuilder;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.*;
@@ -11,6 +13,7 @@ import java.nio.file.Paths;
 
 /**
  * a class for reading and writing account info as object in to file
+ *
  * @author Hosna Hoseini
  * 9823010 -CE@AUT
  * refactored structure by Pouya Mohammadi.
@@ -39,9 +42,15 @@ public class AccountIO {
     private String password;
 
     /**
+     * Constructor
+     */
+    private AccountIO() {}
+
+    /**
      * write (append) new object in file
+     *
      * @param fileName fileName
-     * @param account account obj
+     * @param account  account obj
      */
     public void singleObjectFileWriter(String fileName, Account account) {
         ObjectOutputStream objectOutputStream = null;
@@ -100,7 +109,7 @@ public class AccountIO {
      */
     public Account searchInFile(String fileName, String username, String pass) {
         File file = new File(DIR + fileName);
-        if(file.length() == 0)
+        if (file.length() == 0)
             return null;
 
         Account account = null;
@@ -129,7 +138,7 @@ public class AccountIO {
     public boolean searchInFileByUsername(String fileName, String username) {
         Account account = null;
         File file = new File(DIR + fileName);
-        if(file.length() == 0)
+        if (file.length() == 0)
             return false;
 
         try (FileInputStream fileInputStream = new FileInputStream(DIR + fileName);
@@ -148,39 +157,75 @@ public class AccountIO {
         return false;
     }
 
-
-    public boolean searchInDirByUsername(String username){
-        try {
-            Path path = Paths.get("src/save");
-            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
-            for(Path path1 : directoryStream){
-                if(path1.endsWith(username + ".bin"))
-                    return true;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public Account searchInDirByUsernameAndPass(String username, String password){
-        try {
-            Path path = Paths.get("src/save");
-            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
-            for(Path path1 : directoryStream){
-                System.out.println(path1);
-                if(path1.endsWith(username + ".bin")){
-                    Account account = singleObjectFileReader(username + ".bin");
-                    if(account.getPassword().equals(password)) {
-                        return account;
+    /**
+     * search in "save" for a file which name equals to username
+     *
+     * @param username username
+     * @return account
+     */
+    public boolean searchInDirByUsername(String username) {
+        final boolean[] result = new boolean[1];
+        Thread thread = (new Thread(() -> {
+            try {
+                Path path = Paths.get("src/save");
+                DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
+                for (Path path1 : directoryStream) {
+                    if (path1.endsWith(username + ".bin")) {
+                        result[0] = true;
+                        return;
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
+            result[0] = false;
+        }));
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return null;
+        return result[0];
+
     }
+
+    /**
+     * search in "save" for a file which name equals to username and check password
+     *
+     * @param username username
+     * @param password password
+     * @return account
+     */
+    public Account searchInDirByUsernameAndPass(String username, String password) {
+        final Account[] finalAccount = new Account[1];
+        Thread thread = (new Thread(() -> {
+            try {
+                Path path = Paths.get("src/save");
+                DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
+                for (Path path1 : directoryStream) {
+                    if (path1.endsWith(username + ".bin")) {
+                        Account account = singleObjectFileReader(username + ".bin");
+                        if (account.getPassword().equals(password)) {
+                            finalAccount[0] = account;
+                            return;
+                        }
+                    }
+                }
+                finalAccount[0] = null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return finalAccount[0];
+    }
+
     /**
      * a class to handle appending a new object to a file which previously contains some object of same type
      */
@@ -199,6 +244,7 @@ public class AccountIO {
     public void setAccountAddress(String accountAddress) {
         this.accountAddress = accountAddress;
     }
+
     // Setting password of saved account!
     public void setPassword(String password) {
         this.password = password;
@@ -206,10 +252,11 @@ public class AccountIO {
 
     /**
      * get instance of AccountIO
+     *
      * @return instance of AccountIO
      */
     public static AccountIO getAccountIO() {
-        if(instance == null)
+        if (instance == null)
             instance = new AccountIO();
         return instance;
     }

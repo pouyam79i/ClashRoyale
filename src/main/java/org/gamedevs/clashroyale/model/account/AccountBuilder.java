@@ -1,9 +1,13 @@
 package org.gamedevs.clashroyale.model.account;
 
+import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 import org.gamedevs.clashroyale.model.utils.io.FileConfig;
+
+import java.util.ArrayList;
 
 /**
  * This class builds a new account! (Applies the algorithm of building new account)
@@ -47,6 +51,24 @@ public class AccountBuilder {
                 Console.getConsole().printTracingMessage("Failed to build account: " + e.getMessage());
                 return;
             }
+
+            DeckContainer availableContainer = new DeckContainer();
+//            availableContainer.addCard(new Archor());
+//            availableContainer.addCard(new Barbarians());
+//            availableContainer.addCard(new BabyDragon());
+//            availableContainer.addCard(new Wizard());
+//            availableContainer.addCard(new MiniPeka());
+//            availableContainer.addCard(new Giant());
+//            availableContainer.addCard(new Valkyrie());
+//            availableContainer.addCard(new Rage());
+//            availableContainer.addCard(new FireBall());
+//            availableContainer.addCard(new Arrows());
+//            availableContainer.addCard(new Cannon());
+//            availableContainer.addCard(new InfernoTower());
+//
+            account.setDeckAvailable(availableContainer);
+            account.setDeckContainer(new DeckContainer());
+
             userAccountContainer.setAccount(account);
             accountBuilt = true;
             FileConfig fileConfig = new FileConfig();
