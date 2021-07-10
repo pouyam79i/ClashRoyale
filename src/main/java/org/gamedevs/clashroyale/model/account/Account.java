@@ -24,6 +24,10 @@ public class Account implements Serializable {
      */
     private DeckContainer deckContainer;
     /**
+     * Current available deck of user
+     */
+    private DeckContainer deckAvailable;
+    /**
      * total XP of user
      */
     private int totalXP;
@@ -66,6 +70,10 @@ public class Account implements Serializable {
     public DeckContainer getDeckContainer() {
         return deckContainer;
     }
+    public DeckContainer getDeckAvailable() {
+        return deckAvailable;
+    }
+
     public int getTotalXP() {
         return totalXP;
     }
@@ -80,5 +88,7 @@ public class Account implements Serializable {
     public void setDeckContainer(DeckContainer deckContainer) {
         this.deckContainer = deckContainer;
     }
-
+    public void setDeckAvailable(DeckContainer deckAvailable) {
+        this.deckAvailable = deckAvailable;
+    }
 }
