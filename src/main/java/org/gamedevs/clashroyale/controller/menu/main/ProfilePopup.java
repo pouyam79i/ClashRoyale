@@ -58,47 +58,40 @@ public class ProfilePopup implements Initializable {
 
     private void setLevel(){
         int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
-        String labelText = "";
         if(xp < 1000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(0));
-            labelText = xp + "/" + 1000;
             xpBarUpdatable.setProgress((xp)/1000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
         }
         else if(xp < 6000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(1));
-            labelText = (xp - 1000) + "/" + 5000;
             xpBarUpdatable.setProgress((xp - 1000)/5000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
         }
         else if(xp < 16000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(2));
-            labelText = (xp - 6000) + "/" + 10000;
             xpBarUpdatable.setProgress((xp - 6000)/10000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
         }
         else if(xp < 36000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(3));
-            labelText = (xp - 16000) + "/" + 20000;
             xpBarUpdatable.setProgress((xp - 16000)/20000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
         }
         else if(xp < 66000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(4));
-            labelText = (xp - 36000) + "/" + 30000;
             xpBarUpdatable.setProgress((xp - 36000)/30000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(2));
         }
         else if(xp < 106000){
             leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(5));
-            labelText = (xp - 66000) + "/" + 40000;
             xpBarUpdatable.setProgress((xp - 66000)/40000.0);
             arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(3));
         }
-        nameTFUpdatable.setText(labelText);
+        nameTFUpdatable.setText(UserAccountContainer.getUserAccountContainer().getAccount().getUsername());
     }
 
-    public void update(){
+    public void init(){
         setLevel();
     }
 

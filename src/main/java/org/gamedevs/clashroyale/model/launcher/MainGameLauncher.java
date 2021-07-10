@@ -54,8 +54,8 @@ public class MainGameLauncher extends Runnable {
         }
         printTraceMessage("Signed in account account detected! Loading main menu!");
         Platform.runLater(() -> {
-            ProfilePopup.getProfilePopup().update();
-            MainBattle.getMainBattle().update();
+            ProfilePopup.getProfilePopup().init();
+            MainBattle.getMainBattle().init();
             try {
                 OnWaitLoader.getOnWaitLoader().disappear();
             } catch (IOException ignored) {}
