@@ -9,15 +9,15 @@ import javafx.scene.layout.AnchorPane;
  * This class contains property of main menu.
  * It can be easy accessed in other class when needed.
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0.1
+ * @version 1.0.2
  */
-public class MenuSceneContainer {
+public class MenuDataContainer {
 
     /**
      * Only instance of this class,
      * singleton pattern.
      */
-    private static MenuSceneContainer Instance = null;
+    private static MenuDataContainer menuDataContainer = null;
 
     /**
      * Root scene of main menu container.
@@ -59,8 +59,10 @@ public class MenuSceneContainer {
     /**
      * Sets default values.
      */
-    private MenuSceneContainer(){
+    private MenuDataContainer(){
         rootScene = null;
+        rootPane = null;
+        signupMenu = null;
         battleMenu = null;
         deckMenu = null;
         sliderBar = null;
@@ -140,16 +142,18 @@ public class MenuSceneContainer {
         this.gameIcon = gameIcon;
     }
     public void setSignupMenu(AnchorPane signupMenu) {
+        if(this.signupMenu != null)
+            return;
         this.signupMenu = signupMenu;
     }
 
     /**
-     * @return MenuSceneContainer (if not build before. Instantiates one)
+     * @return MenuDataContainer (if not build before. Instantiates one)
      */
-    public static MenuSceneContainer getMenuData(){
-        if(Instance == null)
-            Instance = new MenuSceneContainer();
-        return Instance;
+    public static MenuDataContainer getMenuDataContainer(){
+        if(menuDataContainer == null)
+            menuDataContainer = new MenuDataContainer();
+        return menuDataContainer;
     }
 
 }

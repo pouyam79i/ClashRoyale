@@ -10,30 +10,56 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
+/**
+ * On Wait loader builds and add a loading
+ * group to the scene.
+ * @author Pouya Mohammadi CE@AUT - UniID: 9829039
+ * @version 1.1
+ */
 public class OnWaitLoader {
 
-    private boolean loadingState;
-
-    private final AnchorPane loadingScreen;
+    /**
+     * Only instance of this class!
+     */
+    private static OnWaitLoader onWaitLoader = null;
 
     /**
-     * Loading circle of preloader
+     * on loading state will be true,
+     * when loading group is running on the screen!
+     */
+    private boolean loadingState;
+    /**
+     * Loading screen pane
+     */
+    private final AnchorPane loadingScreen;
+    /**
+     * Loading circle of loader.
      */
     private final ImageView loadingCircle;
-
-    private AnchorPane sceneRoot;
+    /**
+     * root pane
+     */
+    private AnchorPane rootPane;
+    /**
+     * group of loading screen node!
+     */
     private Group currentLoadingScreen;
     /**
      * Loading circle animation maker
      */
     private AnimationTimer animationTimer;
 
-    public OnWaitLoader() throws IOException {
+    /**
+     * Constructor of OnWaitLoader,
+     * sets the requirements loading screen!
+     * @throws IOException if failed to load files.
+     */
+    private OnWaitLoader() throws IOException {
         loadingScreen = FXMLLoader.load(getClass().getResource(
-                "./../../view/fxml/loading/loading_cover.fxml"
+                "./../../../view/fxml/loading/loading_cover.fxml"
         ));
         loadingCircle = new ImageView(new Image(
-                getClass().getResource("./../../view/img/loading/loading_circle.png").toExternalForm()));
+                getClass().getResource("./../../../view/img/loading/loading_circle.png").toExternalForm()));
         currentLoadingScreen = new Group();
         currentLoadingScreen.getChildren().add(loadingScreen);
         loadingCircle.setPreserveRatio(true);
@@ -45,22 +71,47 @@ public class OnWaitLoader {
         loadingState = false;
     }
 
+    /**
+     * Displaying a loading screen by passing current scene.
+     * @param currentScene current scene
+     */
     public void display(Scene currentScene){
+        if(loadingState)
+            return;
         if(currentScene == null)
             return;
-        this.sceneRoot = (AnchorPane) currentScene.getRoot();
-        if(sceneRoot == null)
+        this.rootPane = (AnchorPane) currentScene.getRoot();
+        if(rootPane == null)
             return;
         animationTimer.start();
-        sceneRoot.getChildren().add(currentLoadingScreen);
+        rootPane.getChildren().add(currentLoadingScreen);
         loadingState = true;
     }
 
+    /**
+     * Displaying a loading screen by passing root pane
+     * @param rootPane root pane (STD pane is anchor pane)
+     */
+    public void display(AnchorPane rootPane){
+        if(loadingState)
+            return;
+        if(rootPane == null)
+            return;
+        this.rootPane = rootPane;
+        animationTimer.start();
+        rootPane.getChildren().add(currentLoadingScreen);
+        loadingState = true;
+    }
+
+    /**
+     * Removes and disappear the loading screen node!
+     */
     public void disappear(){
         if(!loadingState)
             return;
         animationTimer.stop();
-        sceneRoot.getChildren().remove(currentLoadingScreen);
+        rootPane.getChildren().remove(currentLoadingScreen);
+        rootPane = null;
         loadingState = false;
     }
 
@@ -76,6 +127,16 @@ public class OnWaitLoader {
                 loadingCircle.setRotate(loadingCircle.getRotate() + 7);
             }
         };
+    }
+
+    /**
+     * @return only instance onWaitLoader!
+     * If it is null it builds one!
+     */
+    public static OnWaitLoader getOnWaitLoader() throws IOException {
+        if(onWaitLoader == null)
+            onWaitLoader = new OnWaitLoader();
+        return onWaitLoader;
     }
 
 }

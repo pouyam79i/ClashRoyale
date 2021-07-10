@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.util.Duration;
 
-import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 
 /**
  * Slider bar controller.
@@ -60,8 +60,8 @@ public class SliderBar {
             return;
         turnRight = true;
         turnLeft = false;
-        battleKV = new KeyValue(MenuSceneContainer.getMenuData().getBattleMenu().translateXProperty(), 0, Interpolator.EASE_IN);
-        deckKV = new KeyValue(MenuSceneContainer.getMenuData().getDeckMenu().translateXProperty(), 0, Interpolator.EASE_IN);
+        battleKV = new KeyValue(MenuDataContainer.getMenuDataContainer().getBattleMenu().translateXProperty(), 0, Interpolator.EASE_IN);
+        deckKV = new KeyValue(MenuDataContainer.getMenuDataContainer().getDeckMenu().translateXProperty(), 0, Interpolator.EASE_IN);
         coverKV = new KeyValue(btnCover.translateXProperty(), 0, Interpolator.EASE_IN);
         animate();
     }
@@ -75,8 +75,8 @@ public class SliderBar {
             return;
         turnRight = false;
         turnLeft = true;
-        battleKV = new KeyValue(MenuSceneContainer.getMenuData().getBattleMenu().translateXProperty(), 405, Interpolator.EASE_IN);
-        deckKV = new KeyValue(MenuSceneContainer.getMenuData().getDeckMenu().translateXProperty(), 405, Interpolator.EASE_IN);
+        battleKV = new KeyValue(MenuDataContainer.getMenuDataContainer().getBattleMenu().translateXProperty(), 405, Interpolator.EASE_IN);
+        deckKV = new KeyValue(MenuDataContainer.getMenuDataContainer().getDeckMenu().translateXProperty(), 405, Interpolator.EASE_IN);
         coverKV = new KeyValue(btnCover.translateXProperty(), -203, Interpolator.EASE_IN);
         animate();
     }

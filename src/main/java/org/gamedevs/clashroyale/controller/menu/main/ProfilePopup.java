@@ -3,7 +3,7 @@ package org.gamedevs.clashroyale.controller.menu.main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 
 /**
  * Profile view popup handler
@@ -25,7 +25,7 @@ public class ProfilePopup {
     @FXML
     public void backToMain(){
         AnchorPane battleMainRoot = (AnchorPane) backBtn.getScene().getRoot();
-        battleMainRoot.getChildren().remove(MenuSceneContainer.getMenuData().getProfilePopupMenu());
+        battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
     }
 
 }

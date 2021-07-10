@@ -44,7 +44,7 @@ public class Account implements Serializable {
             throw new Exception("Empty password");
         this.username = username;
         this.password = password;
-        deckContainer = new DeckContainer();
+        deckContainer = new DeckContainer();        // Setting new player deck as an empty deck!
         totalXP = 0;
     }
 

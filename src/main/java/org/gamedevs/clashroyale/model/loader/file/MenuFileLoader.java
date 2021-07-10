@@ -8,14 +8,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
-import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
  * This class loads all menu and builds root scene.
  * Loads all needed files and sets their properties!
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class MenuFileLoader {
 
@@ -26,7 +27,9 @@ public class MenuFileLoader {
     public void load() throws IOException{
         Console.getConsole().printTracingMessage("Loading menu fxml files started!");
         // menu container
-        MenuSceneContainer menuData = MenuSceneContainer.getMenuData();
+        MenuDataContainer menuData = MenuDataContainer.getMenuDataContainer();
+        // loading on wait loader
+        OnWaitLoader.getOnWaitLoader();
         // Loading main menu stage icon
         menuData.setGameIcon(new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/icon/cr_icon.png"))
@@ -93,7 +96,7 @@ public class MenuFileLoader {
         menuData.setProfilePopupMenu(profilePopupGroup);
         // Building root scene
         Scene rootScene = new Scene(mainRoot);
-        MenuSceneContainer.getMenuData().setRootScene(rootScene);
+        MenuDataContainer.getMenuDataContainer().setRootScene(rootScene);
         // Displaying message
         Console.getConsole().printTracingMessage("Loading menu fxml files is done!");
     }

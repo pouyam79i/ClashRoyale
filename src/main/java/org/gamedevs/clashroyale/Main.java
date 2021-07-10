@@ -3,9 +3,9 @@ package org.gamedevs.clashroyale;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
-import org.gamedevs.clashroyale.model.launcher.AccountLauncher;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
+import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
@@ -33,9 +33,7 @@ public class Main extends Application {
     public void init() throws Exception{
         musicPlayer = MusicPlayer.getMusicPlayer();
         musicPlayer.playMenuMusic();
-        AccountLauncher accountLauncher = new AccountLauncher();
         MenuFileLoader menuLauncher = new MenuFileLoader();
-        accountLauncher.launch();
         menuLauncher.load();
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
@@ -51,13 +49,14 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setScene(MenuSceneContainer.getMenuData().getRootScene());
+        primaryStage.setScene(MenuDataContainer.getMenuDataContainer().getRootScene());
         primaryStage.setTitle("Clash Royale");
-        primaryStage.getIcons().add(MenuSceneContainer.getMenuData().getGameIcon());
+        primaryStage.getIcons().add(MenuDataContainer.getMenuDataContainer().getGameIcon());
         primaryStage.setHeight(MainConfig.MAIN_STAGE_HEIGHT);
         primaryStage.setWidth(MainConfig.MAIN_STAGE_WIDTH);
         primaryStage.setResizable(false);
         primaryStage.show();
+        OnWaitLoader.getOnWaitLoader().display(primaryStage.getScene());
         Console.getConsole().printTracingMessage("Application started!");
     }
 

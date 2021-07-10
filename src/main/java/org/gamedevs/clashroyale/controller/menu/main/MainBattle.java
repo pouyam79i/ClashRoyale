@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 
 /**
  * Main battle menu controller
@@ -34,7 +34,7 @@ public class MainBattle {
     private void bringBattlePopup(){
         Scene mainBattleMenuScene = battleBtn.getScene();
         AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-        mainBattleMenu.getChildren().add(MenuSceneContainer.getMenuData().getBattlePopupMenu());
+        mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
     }
 
     /**
@@ -44,7 +44,7 @@ public class MainBattle {
     private void bringProfilePopup(){
         Scene mainBattleMenuScene = profileBtn.getScene();
         AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-        mainBattleMenu.getChildren().add(MenuSceneContainer.getMenuData().getProfilePopupMenu());
+        mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
     }
 
 }

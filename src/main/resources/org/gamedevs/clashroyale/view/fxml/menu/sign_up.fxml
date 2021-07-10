@@ -25,11 +25,6 @@
          <font>
             <Font size="15.0" />
          </font></PasswordField>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="69.0" layoutY="434.0" prefHeight="38.0" prefWidth="292.0" text="wrong password or username! " textAlignment="CENTER" textFill="#f5ff00" visible="false">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
       <TextField fx:id="usernameField" focusTraversable="false" layoutX="115.0" layoutY="312.0" prefHeight="45.0" prefWidth="200.0" promptText="Username">
          <font>
             <Font size="15.0" />
@@ -48,15 +43,25 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Label fx:id="tryAgainLabel" alignment="CENTER" layoutX="56.0" layoutY="462.0" prefHeight="38.0" prefWidth="292.0" text="please try again" textAlignment="CENTER" textFill="#f5ff00" visible="false">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
       <Button fx:id="signUpButton" layoutX="225.0" layoutY="553.0" mnemonicParsing="false" onAction="#signupHandling" prefHeight="58.0" prefWidth="126.0" styleClass="signup_btn" text="Sign up">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <Label fx:id="errorLabelLogin" alignment="CENTER" layoutX="69.0" layoutY="434.0" prefHeight="38.0" prefWidth="292.0" text="Wrong password or username! " textAlignment="CENTER" textFill="#f5ff00" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorLabelSignup" alignment="CENTER" layoutX="57.0" layoutY="443.0" prefHeight="38.0" prefWidth="292.0" text="Invalid username or password!" textAlignment="CENTER" textFill="#f5ff00" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="tryAgainLabel" alignment="CENTER" layoutX="56.0" layoutY="462.0" prefHeight="38.0" prefWidth="292.0" text="Please try again" textAlignment="CENTER" textFill="#f5ff00" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
