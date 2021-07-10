@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
  * This class contains property of main menu.
  * It can be easy accessed in other class when needed.
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0.2
+ * @version 1.0.3
  */
 public class MenuDataContainer {
 
@@ -43,6 +43,10 @@ public class MenuDataContainer {
      * Slide bar anchor pane container.
      */
     private AnchorPane sliderBar;
+    /**
+     * Battle popup group container.
+     */
+    private Group mainMenuRootGroup;
     /**
      * Battle popup group container.
      */
@@ -93,6 +97,9 @@ public class MenuDataContainer {
     public Group getProfilePopupMenu() {
         return profilePopupMenu;
     }
+    public Group getMainMenuRootGroup() {
+        return mainMenuRootGroup;
+    }
     public Image getGameIcon() {
         return gameIcon;
     }
@@ -125,6 +132,11 @@ public class MenuDataContainer {
         if(this.rootPane != null)
             return;
         this.rootPane = rootPane;
+    }
+    public void setMainMenuRootGroup(Group mainMenuRootGroup) {
+        if(this.mainMenuRootGroup != null)
+            return;
+        this.mainMenuRootGroup = mainMenuRootGroup;
     }
     public void setBattlePopupMenu(Group battlePopupMenu) {
         if(this.battlePopupMenu != null)

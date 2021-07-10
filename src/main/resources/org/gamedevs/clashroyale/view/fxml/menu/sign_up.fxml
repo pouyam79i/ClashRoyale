@@ -29,7 +29,7 @@
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="68.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/menu/signup/username.png" />
          </image>
@@ -48,12 +48,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorLabelLogin" alignment="CENTER" layoutX="69.0" layoutY="434.0" prefHeight="38.0" prefWidth="292.0" text="Wrong password or username! " textAlignment="CENTER" textFill="#f5ff00" visible="false">
+      <Label fx:id="errorLabelLogin" alignment="CENTER" layoutX="65.0" layoutY="434.0" prefHeight="38.0" prefWidth="292.0" text="Wrong username or password! " textAlignment="CENTER" textFill="#f5ff00" visible="false">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="errorLabelSignup" alignment="CENTER" layoutX="57.0" layoutY="443.0" prefHeight="38.0" prefWidth="292.0" text="Invalid username or password!" textAlignment="CENTER" textFill="#f5ff00" visible="false">
+      <Label fx:id="errorLabelSignup" alignment="CENTER" layoutX="61.0" layoutY="434.0" prefHeight="38.0" prefWidth="292.0" text="Invalid username or password!" textAlignment="CENTER" textFill="#f5ff00" visible="false">
          <font>
             <Font size="15.0" />
          </font>

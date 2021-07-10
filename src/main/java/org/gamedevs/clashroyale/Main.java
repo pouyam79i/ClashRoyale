@@ -3,7 +3,9 @@ package org.gamedevs.clashroyale;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import org.gamedevs.clashroyale.model.account.AccountLoader;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.launcher.MainGameLauncher;
 import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
@@ -31,10 +33,14 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception{
+        // loading music player
         musicPlayer = MusicPlayer.getMusicPlayer();
         musicPlayer.playMenuMusic();
+        // Loading all files used in main menu
         MenuFileLoader menuLauncher = new MenuFileLoader();
         menuLauncher.load();
+        // Checking if we have already logged in an account!
+        AccountLoader.getAccountLoader().init();
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
             Thread.sleep(1000); // Just checking loading page in debug mode :)
@@ -57,6 +63,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         OnWaitLoader.getOnWaitLoader().display(primaryStage.getScene());
+        new MainGameLauncher().start();
         Console.getConsole().printTracingMessage("Application started!");
     }
 

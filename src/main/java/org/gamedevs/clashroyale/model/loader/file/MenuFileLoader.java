@@ -16,7 +16,7 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
  * This class loads all menu and builds root scene.
  * Loads all needed files and sets their properties!
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0.2
+ * @version 1.0.3
  */
 public class MenuFileLoader {
 
@@ -94,6 +94,12 @@ public class MenuFileLoader {
         profilePopupMenu.setTranslateY(202.5);
         profilePopupGroup.getChildren().add(profilePopupMenu);
         menuData.setProfilePopupMenu(profilePopupGroup);
+        // Building main menu group root
+        Group mainMenuRootGroup = new Group();
+        mainMenuRootGroup.getChildren().add(battleMenu);
+        mainMenuRootGroup.getChildren().add(deckMenu);
+        mainMenuRootGroup.getChildren().add(sliderBar);
+        menuData.setMainMenuRootGroup(mainMenuRootGroup);
         // Building root scene
         Scene rootScene = new Scene(mainRoot);
         MenuDataContainer.getMenuDataContainer().setRootScene(rootScene);
