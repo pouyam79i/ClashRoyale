@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.controller.menu.main.DeckScene;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.controller.menu.main.ProfilePopup;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.io.IOException;
@@ -54,8 +56,14 @@ public class MainGameLauncher extends Runnable {
         }
         printTraceMessage("Signed in account account detected! Loading main menu!");
         Platform.runLater(() -> {
-            ProfilePopup.getProfilePopup().update();
-            MainBattle.getMainBattle().update();
+            try {
+                ProfilePopup.getProfilePopup().init();
+                MainBattle.getMainBattle().init();
+                DeckScene.getInstance().init();
+            }catch (Exception e){
+                Console.getConsole().printTracingMessage("Failed to initialize main menus: " + e.getMessage());
+            }
+
             try {
                 OnWaitLoader.getOnWaitLoader().disappear();
             } catch (IOException ignored) {}

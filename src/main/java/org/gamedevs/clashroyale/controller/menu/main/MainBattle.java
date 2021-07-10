@@ -116,7 +116,7 @@ public class MainBattle implements Initializable {
         xpLabelUpdatable.setText(labelText);
     }
 
-    public void update(){
+    public void init(){
         setLevel();
     }
 
