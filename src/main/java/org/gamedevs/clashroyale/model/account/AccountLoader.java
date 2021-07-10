@@ -53,14 +53,14 @@ public class AccountLoader {
      * @param password password of account
      */
     public void loadAccount(String username, String password) {
-        Account account = AccountIO.getAccountIO().searchInFile("Accounts.bin", username, password);
+        Account account = AccountIO.getAccountIO().searchInDirByUsernameAndPass(username, password);
         if (account != null) {
             userAccountContainer.setAccount(account);
             accountLoaded = true;
             FileConfig fileConfig = new FileConfig();
             fileConfig.write(FileConfig.ACCOUNT_FILENAME, username);
             fileConfig.write(FileConfig.ACCOUNT_PASSWORD, password);
-            Console.getConsole().printTracingMessage("New account" + username + " login!");
+            Console.getConsole().printTracingMessage("New account " + username + " login!");
         }
     }
 

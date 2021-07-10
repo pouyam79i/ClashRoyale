@@ -1,8 +1,13 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
 import org.gamedevs.clashroyale.model.account.Account;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * a class for reading and writing account info as object in to file
@@ -12,6 +17,11 @@ import java.io.*;
  * @version 1.1
  */
 public class AccountIO {
+
+    /**
+     * Path of directory of config file.
+     */
+    private final String DIR = "src/save/";
 
     /**
      * Only instance of account io api
@@ -35,7 +45,7 @@ public class AccountIO {
      */
     public void singleObjectFileWriter(String fileName, Account account) {
         ObjectOutputStream objectOutputStream = null;
-        File file = new File(fileName);
+        File file = new File(DIR + fileName);
         try (FileOutputStream fileOutputStream = new FileOutputStream(file, false);
              BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
             if (bufferedInputStream.read() != -1) {             //check if its empty or not
@@ -45,9 +55,9 @@ public class AccountIO {
             }
             objectOutputStream.writeObject(account);
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while writing in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while writing in " + fileName);
         } finally {
             try {
                 if (objectOutputStream != null)
@@ -66,16 +76,16 @@ public class AccountIO {
      */
     public Account singleObjectFileReader(String fileName) {
         Account account;
-        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+        try (FileInputStream fileInputStream = new FileInputStream(DIR + fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
             account = (Account) objectInputStream.readObject();
             return account;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
@@ -89,18 +99,22 @@ public class AccountIO {
      * @return account
      */
     public Account searchInFile(String fileName, String username, String pass) {
+        File file = new File(DIR + fileName);
+        if(file.length() == 0)
+            return null;
+
         Account account = null;
-        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+        try (FileInputStream fileInputStream = new FileInputStream(DIR + fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
             account = (Account) objectInputStream.readObject();
             if (account.getUsername().equals(username) && account.getPassword().equals(pass))
                 return account;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
@@ -112,29 +126,61 @@ public class AccountIO {
      * @param fileName fileName
      * @return account
      */
-    public static boolean searchInFileByUsername(String fileName, String username) {
+    public boolean searchInFileByUsername(String fileName, String username) {
         Account account = null;
-        File file = new File(fileName);
+        File file = new File(DIR + fileName);
         if(file.length() == 0)
             return false;
 
-        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+        try (FileInputStream fileInputStream = new FileInputStream(DIR + fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
             account = (Account) objectInputStream.readObject();
             if (account.getUsername().equals(username))
                 return true;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
 
         return false;
     }
 
 
+    public boolean searchInDirByUsername(String username){
+        try {
+            Path path = Paths.get("src/save");
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
+            for(Path path1 : directoryStream){
+                if(path1.endsWith(username + ".bin"))
+                    return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Account searchInDirByUsernameAndPass(String username, String password){
+        try {
+            Path path = Paths.get("src/save");
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
+            for(Path path1 : directoryStream){
+                System.out.println(path1);
+                if(path1.endsWith(username + ".bin")){
+                    Account account = singleObjectFileReader(username + ".bin");
+                    if(account.getPassword().equals(password)) {
+                        return account;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * a class to handle appending a new object to a file which previously contains some object of same type
      */

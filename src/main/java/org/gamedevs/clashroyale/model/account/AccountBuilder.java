@@ -39,7 +39,7 @@ public class AccountBuilder {
      * @param password password of account!
      */
     public void buildNewAccount(String username, String password){
-        if(!AccountIO.searchInFileByUsername("Accounts.bin", username)) {
+        if(!AccountIO.getAccountIO().searchInDirByUsername(username)) {
             Account account = null;
             try {
                 account = new Account(username, password);
@@ -52,7 +52,7 @@ public class AccountBuilder {
             FileConfig fileConfig = new FileConfig();
             fileConfig.write(FileConfig.ACCOUNT_FILENAME, username);
             fileConfig.write(FileConfig.ACCOUNT_PASSWORD, password);
-            AccountIO.getAccountIO().singleObjectFileWriter("Accounts.bin", account);
+            AccountIO.getAccountIO().singleObjectFileWriter(username + ".bin", account);
             Console.getConsole().printTracingMessage("New account " + username + " sign up!");
         }
     }
