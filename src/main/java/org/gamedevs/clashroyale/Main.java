@@ -3,9 +3,12 @@ package org.gamedevs.clashroyale;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
-import org.gamedevs.clashroyale.model.launcher.MainMenuLauncher;
-import org.gamedevs.clashroyale.model.loader.PreloaderSplashScreen;
+import org.gamedevs.clashroyale.model.account.AccountLoader;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.launcher.MainGameLauncher;
+import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
+import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
+import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -30,10 +33,14 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception{
+        // loading music player
         musicPlayer = MusicPlayer.getMusicPlayer();
         musicPlayer.playMenuMusic();
-        MainMenuLauncher menuLauncher = new MainMenuLauncher();
-        menuLauncher.launch();
+        // Loading all files used in main menu
+        MenuFileLoader menuLauncher = new MenuFileLoader();
+        menuLauncher.load();
+        // Checking if we have already logged in an account!
+        AccountLoader.getAccountLoader().init();
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
             Thread.sleep(1000); // Just checking loading page in debug mode :)
@@ -48,13 +55,15 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setScene(MainMenuSceneContainer.getMenuData().getRootScene());
+        primaryStage.setScene(MenuDataContainer.getMenuDataContainer().getRootScene());
         primaryStage.setTitle("Clash Royale");
-        primaryStage.getIcons().add(MainMenuSceneContainer.getMenuData().getGameIcon());
+        primaryStage.getIcons().add(MenuDataContainer.getMenuDataContainer().getGameIcon());
         primaryStage.setHeight(MainConfig.MAIN_STAGE_HEIGHT);
         primaryStage.setWidth(MainConfig.MAIN_STAGE_WIDTH);
         primaryStage.setResizable(false);
         primaryStage.show();
+        OnWaitLoader.getOnWaitLoader().display(primaryStage.getScene());
+        new MainGameLauncher().start();
         Console.getConsole().printTracingMessage("Application started!");
     }
 

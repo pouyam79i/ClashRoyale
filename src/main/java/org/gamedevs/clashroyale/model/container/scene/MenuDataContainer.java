@@ -9,15 +9,15 @@ import javafx.scene.layout.AnchorPane;
  * This class contains property of main menu.
  * It can be easy accessed in other class when needed.
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0.1
+ * @version 1.0.3
  */
-public class MainMenuSceneContainer {
+public class MenuDataContainer {
 
     /**
      * Only instance of this class,
      * singleton pattern.
      */
-    private static MainMenuSceneContainer Instance = null;
+    private static MenuDataContainer menuDataContainer = null;
 
     /**
      * Root scene of main menu container.
@@ -27,6 +27,10 @@ public class MainMenuSceneContainer {
      * Root anchor pane container.
      */
     private AnchorPane rootPane;
+    /**
+     * signup menu anchor pane container
+     */
+    private AnchorPane signupMenu;
     /**
      * Battle menu anchor pane container.
      */
@@ -39,6 +43,10 @@ public class MainMenuSceneContainer {
      * Slide bar anchor pane container.
      */
     private AnchorPane sliderBar;
+    /**
+     * Battle popup group container.
+     */
+    private Group mainMenuRootGroup;
     /**
      * Battle popup group container.
      */
@@ -55,8 +63,10 @@ public class MainMenuSceneContainer {
     /**
      * Sets default values.
      */
-    private MainMenuSceneContainer(){
+    private MenuDataContainer(){
         rootScene = null;
+        rootPane = null;
+        signupMenu = null;
         battleMenu = null;
         deckMenu = null;
         sliderBar = null;
@@ -87,8 +97,14 @@ public class MainMenuSceneContainer {
     public Group getProfilePopupMenu() {
         return profilePopupMenu;
     }
+    public Group getMainMenuRootGroup() {
+        return mainMenuRootGroup;
+    }
     public Image getGameIcon() {
         return gameIcon;
+    }
+    public AnchorPane getSignupMenu() {
+        return signupMenu;
     }
 
     // Setter
@@ -117,6 +133,11 @@ public class MainMenuSceneContainer {
             return;
         this.rootPane = rootPane;
     }
+    public void setMainMenuRootGroup(Group mainMenuRootGroup) {
+        if(this.mainMenuRootGroup != null)
+            return;
+        this.mainMenuRootGroup = mainMenuRootGroup;
+    }
     public void setBattlePopupMenu(Group battlePopupMenu) {
         if(this.battlePopupMenu != null)
             return;
@@ -132,14 +153,19 @@ public class MainMenuSceneContainer {
             return;
         this.gameIcon = gameIcon;
     }
+    public void setSignupMenu(AnchorPane signupMenu) {
+        if(this.signupMenu != null)
+            return;
+        this.signupMenu = signupMenu;
+    }
 
     /**
-     * @return MainMenuSceneContainer (if not build before. Instantiates one)
+     * @return MenuDataContainer (if not build before. Instantiates one)
      */
-    public static MainMenuSceneContainer getMenuData(){
-        if(Instance == null)
-            Instance = new MainMenuSceneContainer();
-        return Instance;
+    public static MenuDataContainer getMenuDataContainer(){
+        if(menuDataContainer == null)
+            menuDataContainer = new MenuDataContainer();
+        return menuDataContainer;
     }
 
 }

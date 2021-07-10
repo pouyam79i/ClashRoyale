@@ -28,12 +28,12 @@
                   <Font name="Clash Regular" size="28.0" />
                </font>
             </Button>
-            <ImageView id="arena" fitHeight="301.0" fitWidth="300.0" layoutX="44.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="arena" fx:id="arenaImg" fitHeight="301.0" fitWidth="300.0" layoutX="44.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/arenas/ui_icon_barbarian.png" />
                </image>
             </ImageView>
-            <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xp_bar" />
+            <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xpBar" />
             <Button fx:id="profileBtn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" onAction="#bringProfilePopup" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile">
                <font>
                   <Font size="11.0" />
@@ -47,13 +47,13 @@
                   <Image url="@../../img/ui/xp/0.png" />
                </image>
             </ImageView>
-            <TextField alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" styleClass="text-field" />
+            <TextField fx:id="coins" alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="30.0" prefWidth="126.0" promptText="0" styleClass="text-field" text="0" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="13.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/icon/gold-coin.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="24.0" prefHeight="18.0" prefWidth="90.0" text="0/0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="24.0" prefHeight="18.0" prefWidth="90.0" text="0/0" fx:id="xpLabel" />
          </children>
       </AnchorPane>
    </children>

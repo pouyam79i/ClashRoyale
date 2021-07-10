@@ -1,36 +1,49 @@
-package org.gamedevs.clashroyale.model.utils.FileIO;
+package org.gamedevs.clashroyale.model.utils.io;
 
-import org.gamedevs.clashroyale.model.player.Human;
+import org.gamedevs.clashroyale.model.account.Account;
 
 import java.io.*;
 
 /**
- * a class for reading and writing human info as object in to file
- *
+ * a class for reading and writing account info as object in to file
  * @author Hosna Hoseini
  * 9823010 -CE@AUT
- * @version 1.0
+ * refactored structure by Pouya Mohammadi.
+ * @version 1.1
  */
-public class FileIO {
+public class AccountIO {
+
+    /**
+     * Only instance of account io api
+     */
+    private static AccountIO instance = null;
+
+    /**
+     * Address of currecnt account in files,
+     * this class will 'write over'/'read from' it.
+     */
+    private String accountAddress;
+    /**
+     * Password is needed to communicate with account!
+     */
+    private String password;
 
     /**
      * write (append) new object in file
-     *
      * @param fileName fileName
-     * @param human    human obj
+     * @param account account obj
      */
-    public static void singleObjectFileWriter(String fileName, Human human) {
+    public void singleObjectFileWriter(String fileName, Account account) {
         ObjectOutputStream objectOutputStream = null;
         File file = new File(fileName);
         try (FileOutputStream fileOutputStream = new FileOutputStream(file, false);
              BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
-
             if (bufferedInputStream.read() != -1) {             //check if its empty or not
                 objectOutputStream = new MyObjectOutputStream(fileOutputStream);
             } else {
                 objectOutputStream = new ObjectOutputStream(fileOutputStream);
             }
-            objectOutputStream.writeObject(human);
+            objectOutputStream.writeObject(account);
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
@@ -46,72 +59,76 @@ public class FileIO {
     }
 
     /**
-     * read an object (Human type) from file
+     * read an object (Account type) from file
      *
      * @param fileName fileName
-     * @return human
+     * @return account
      */
-    public static Human singleObjectFileReader(String fileName) {
-        Human human;
+    public Account singleObjectFileReader(String fileName) {
+        Account account;
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
-            human = (Human) objectInputStream.readObject();
-            return human;
+            account = (Account) objectInputStream.readObject();
+            return account;
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
 
     /**
-     * search in a file for a human with specific username and pass
+     * search in a file for a account with specific username and pass
      *
      * @param username username
      * @param fileName fileName
      * @param pass     password
-     * @return human
+     * @return account
      */
-    public static Human searchInFile(String fileName, String username, String pass) {
-        Human human = null;
+    public Account searchInFile(String fileName, String username, String pass) {
+        Account account = null;
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
-            human = (Human) objectInputStream.readObject();
-            if (human.getUsername().equals(username) && ((Human) human).getPassword().equals(pass))
-                return human;
+            account = (Account) objectInputStream.readObject();
+            if (account.getUsername().equals(username) && account.getPassword().equals(pass))
+                return account;
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
 
     /**
-     * search in a file for a human with specific username
+     * search in a file for a account with specific username
      *
      * @param username username
      * @param fileName fileName
-     * @return human
+     * @return account
      */
     public static boolean searchInFileByUsername(String fileName, String username) {
-        Human human = null;
+        Account account = null;
+        File file = new File(fileName);
+        if(file.length() == 0)
+            return false;
+
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
-            human = (Human) objectInputStream.readObject();
-            if (((Human) human).getUsername().equals(username))
+            account = (Account) objectInputStream.readObject();
+            if (account.getUsername().equals(username))
                 return true;
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
 
         return false;
@@ -131,4 +148,24 @@ public class FileIO {
         }
         // This overrides the method in the parent class, so that he does not write to the file header when calling writeObject()
     }
+
+    // Setting save account path.
+    public void setAccountAddress(String accountAddress) {
+        this.accountAddress = accountAddress;
+    }
+    // Setting password of saved account!
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * get instance of AccountIO
+     * @return instance of AccountIO
+     */
+    public static AccountIO getAccountIO() {
+        if(instance == null)
+            instance = new AccountIO();
+        return instance;
+    }
+
 }

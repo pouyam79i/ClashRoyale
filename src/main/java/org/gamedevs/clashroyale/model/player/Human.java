@@ -1,7 +1,5 @@
 package org.gamedevs.clashroyale.model.player;
 
-import org.gamedevs.clashroyale.model.cards.CardDeck;
-
 import java.io.Serializable;
 
 public class Human extends Player implements Serializable {
