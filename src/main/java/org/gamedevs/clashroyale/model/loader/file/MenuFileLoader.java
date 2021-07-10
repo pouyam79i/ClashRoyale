@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
+import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.utils.console.Console;
@@ -34,6 +35,44 @@ public class MenuFileLoader {
         menuData.setGameIcon(new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/icon/cr_icon.png"))
         );
+        // Loading level images
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/1.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/2.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/3.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/4.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/5.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/6.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/7.png")
+        ));
+        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/8.png")
+        ));
+        // Loading arena images
+        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_training.png")
+        ));
+        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_barbarian.png")
+        ));
+        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_bone.png")
+        ));
+        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_pekka.png")
+        ));
         // Loading root pane
         AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
                 "../../../view/fxml/menu/main_root.fxml"

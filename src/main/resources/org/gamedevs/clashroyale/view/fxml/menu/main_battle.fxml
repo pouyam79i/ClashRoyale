@@ -42,7 +42,7 @@
                <font>
                   <Font size="8.0" />
                </font></Button>
-            <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="levelImg" fitHeight="51.0" fitWidth="51.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/xp/0.png" />
                </image>
