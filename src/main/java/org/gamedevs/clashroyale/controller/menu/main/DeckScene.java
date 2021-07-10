@@ -40,7 +40,7 @@ public class DeckScene {
     //new cardView that player want to put source in it
     private CardView destination;
 
-    private DeckScene instance = null;
+    private static DeckScene instance = null;
 
     private DeckScene() { }
 
@@ -169,7 +169,7 @@ public class DeckScene {
 
     }
 
-    public DeckScene getInstance(){
+    public static DeckScene getInstance(){
         if(instance == null){
             instance = new DeckScene();
         }
