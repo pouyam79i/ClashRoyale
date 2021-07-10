@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * a class to hold a set of card as card deck for players
+ *
  * @author Pouya Mohammadi - Hosna Hoseini
  * 9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.1
@@ -27,25 +28,26 @@ public class DeckContainer implements Serializable {
      * DeckContainer constructor,
      * initial requirements.
      */
-    public DeckContainer(){
+    public DeckContainer() {
         deck = new ArrayList<Card>();
         limit = 8;
-        for(int i = 0; i < limit; i++){
+        for (int i = 0; i < limit; i++) {
             deck.add(i, null);
         }
     }
 
     /**
      * adds a new card
+     *
      * @param index of card
-     * @param card card of player will be added (or replaced with another card in deck)
+     * @param card  card of player will be added (or replaced with another card in deck)
      * @return a card if it is replaced by another card in the deck, else will be null!
      */
-    public Card addCard(int index, Card card){
-        if(card == null)
+    public Card addCard(int index, Card card) {
+        if (card == null)
             return null;
         Card temp = null;
-        if(index >= 0 && index < limit){
+        if (index >= 0 && index < limit) {
             temp = deck.get(index);
             deck.add(index, card);
         }
@@ -53,12 +55,27 @@ public class DeckContainer implements Serializable {
     }
 
     /**
+     * adds a new card
+     *
+     * @param card  card of player will be added (or replaced with another card in deck)
+     * @return a card if it is replaced by another card in the deck, else will be null!
+     */
+    public Card addCard(Card card) {
+        if (card == null)
+            return null;
+        Card temp = null;
+        deck.add(card);
+        return temp;
+    }
+
+    /**
      * removes card from deck
+     *
      * @param card of player
      */
-    public Card removeCard(Card card){
+    public Card removeCard(Card card) {
         Card temp = null;
-        if(deck.contains(card)){
+        if (deck.contains(card)) {
             deck.remove(card);
             temp = card;
         }
@@ -67,11 +84,12 @@ public class DeckContainer implements Serializable {
 
     /**
      * removes card from deck
+     *
      * @param index of card
      */
-    public Card removeCard(int index){
+    public Card removeCard(int index) {
         Card temp = null;
-        if(index >= 0 && index < limit){
+        if (index >= 0 && index < limit) {
             temp = deck.get(index);
             deck.add(index, null);
         }
