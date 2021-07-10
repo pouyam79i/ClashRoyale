@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.controller.menu.main.DeckScene;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.controller.menu.main.ProfilePopup;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
@@ -56,6 +57,7 @@ public class MainGameLauncher extends Runnable {
         Platform.runLater(() -> {
             ProfilePopup.getProfilePopup().init();
             MainBattle.getMainBattle().init();
+            DeckScene.getInstance().init();
             try {
                 OnWaitLoader.getOnWaitLoader().disappear();
             } catch (IOException ignored) {}
