@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.loader;
+package org.gamedevs.clashroyale.model.loader.view;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Preloader;
@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
@@ -44,12 +45,12 @@ public class PreloaderSplashScreen extends Preloader {
      * Background image of preloader
      */
     private final ImageView backGroundImage = new ImageView(new Image(
-            getClass().getResource("./../../view/img/loading/preloader_image1.png").toExternalForm()));
+            getClass().getResource("./../../../view/img/loading/preloader_image1.png").toExternalForm()));
     /**
      * Loading circle of preloader
      */
     private final ImageView loadingCircle = new ImageView(new Image(
-            getClass().getResource("./../../view/img/loading/loading_circle.png").toExternalForm()));
+            getClass().getResource("./../../../view/img/loading/loading_circle.png").toExternalForm()));
 
     /**
      * Constructor of PreloaderSplashScreen
@@ -91,7 +92,7 @@ public class PreloaderSplashScreen extends Preloader {
             // Setting stage settings
             preloaderStage.setScene(scene);
             preloaderStage.getIcons()
-                    .add(new Image(PreloaderSplashScreen.class.getResourceAsStream("../../view/img/icon/cr_icon.png")));
+                    .add(new Image(PreloaderSplashScreen.class.getResourceAsStream("../../../view/img/icon/cr_icon.png")));
             preloaderStage.initStyle(StageStyle.UNDECORATED);
             preloaderStage.setTitle("Clash Royale");
             // Showing stage

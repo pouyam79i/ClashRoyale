@@ -37,13 +37,9 @@
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    /*-fx-max-width: 50px;*/
-    /*-fx-background-size: cover;*/
     -fx-text-alignment: center;
     -fx-background-color: rgba(0, 0, 0, 0);
-    /*-fx-background-radius: 20px;*/
     -fx-text-fill: #ffffff;
-    /*-fx-label-padding: 0;*/
     -fx-text-overrun: clip;
     -fx-font-family: 'Clash';
     -fx-font-scale: Bold;
@@ -54,9 +50,5 @@
 }
 
 .progress-bar > .bar, .progress-bar > .track {
-    /*-fx-color-label-visible: 5px;*/
     -fx-background-insets: 0;
-    /*-fx-border-radius: 10px;*/
-    /*-fx-background-color: derive(rgba(0, 0, 0, 1), -45%);*/
-    /*-fx-background-color: red;*/
 }

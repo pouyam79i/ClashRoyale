@@ -7,13 +7,13 @@ import org.gamedevs.clashroyale.model.account.Account;
  * @author Pouya Mohammadi - CE@AUT Uni ID:9829039
  * @version 1.0
  */
-public class UserDataContainer {
+public class UserAccountContainer {
 
     /**
      * Only instance of this class,
      * singleton pattern.
      */
-    private static UserDataContainer instance = null;
+    private static UserAccountContainer userAccountContainer = null;
 
     /**
      * Account container
@@ -21,9 +21,9 @@ public class UserDataContainer {
     private Account account;
 
     /**
-     * Constructor of UserDataContainer
+     * Constructor of UserAccountContainer
      */
-    private UserDataContainer(){
+    private UserAccountContainer(){
         account = null;
     }
 
@@ -38,12 +38,12 @@ public class UserDataContainer {
     }
 
     /**
-     * @return UserDataContainer obj
+     * @return UserAccountContainer obj
      */
-    public static UserDataContainer getInstance() {
-        if(instance == null)
-            return new UserDataContainer();
-        return instance;
+    public static UserAccountContainer getUserAccountContainer() {
+        if(userAccountContainer == null)
+            userAccountContainer = new UserAccountContainer();
+        return userAccountContainer;
     }
 
 }

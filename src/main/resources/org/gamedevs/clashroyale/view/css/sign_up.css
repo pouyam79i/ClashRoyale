@@ -18,28 +18,14 @@
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    /*-fx-max-width: 50px;*/
-    /*-fx-background-size: cover;*/
     -fx-text-alignment: center;
     -fx-background-color: rgba(0, 0, 0, 0);
-    /*-fx-background-radius: 20px;*/
     -fx-text-fill: #ffffff;
-    /*-fx-label-padding: 0;*/
     -fx-text-overrun: clip;
     -fx-font-family: 'Clash';
     -fx-font-scale: Bold;
 
 }
-/*.button:hover {
-        -fx-background-image: url("../img/ui/button/btn_yellow.png");
-}
-
-.button:active {
-  -fx-background-color: #3e8e41;
-  -fx-box-shadow: 0 5px #666;
-
-  -fx-transform: translateY(4px);
-}*/
 
 .login_btn{
     -fx-background-image: url("../img/ui/button/btn_yellow_e.png");

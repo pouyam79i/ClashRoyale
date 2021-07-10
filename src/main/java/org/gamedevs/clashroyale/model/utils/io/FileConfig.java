@@ -7,7 +7,7 @@ import java.util.Properties;
  * This class reads and writes on config file!
  * Used to save game property!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.0
+ * @version 1.0.1
  */
 public class FileConfig {
 
@@ -21,9 +21,13 @@ public class FileConfig {
     private final String CONFIG_FILE_NAME = "config.properties";
 
     /**
+     * This value is set to current account username property
+     */
+    public final static String ACCOUNT_USERNAME = "ACCOUNT_USERNAME";
+    /**
      * This value is set to current account property
      */
-    public final static String ACCOUNT_FILENAME = "CURRENT_ACCOUNT";
+    public final static String ACCOUNT_FILENAME = "ACCOUNT_FILENAME";
     /**
      * This value is set to current account password property
      */
@@ -31,7 +35,7 @@ public class FileConfig {
     /**
      * Account file directory
      */
-    public final static String ACCOUNT_DIR = "ACCOUNT_PASSWORD";
+    public final static String ACCOUNT_DIR = "ACCOUNT_DIR";
 
     /**
      * Constructor

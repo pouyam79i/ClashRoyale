@@ -47,7 +47,7 @@
                   <Image url="@../../img/ui/xp/0.png" />
                </image>
             </ImageView>
-            <TextField fx:id="coins" alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="37.0" prefWidth="122.0" promptText="0" styleClass="text-field" />
+            <TextField fx:id="coins" alignment="CENTER_RIGHT" editable="false" layoutX="47.0" layoutY="71.0" prefHeight="30.0" prefWidth="126.0" promptText="0" styleClass="text-field" text="0" />
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="13.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/ui/icon/gold-coin.png" />

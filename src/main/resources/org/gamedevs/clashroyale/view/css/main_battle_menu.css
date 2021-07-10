@@ -6,13 +6,9 @@
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    /*-fx-max-width: 50px;*/
-    /*-fx-background-size: cover;*/
     -fx-text-alignment: center;
     -fx-background-color: rgba(0, 0, 0, 0);
-    /*-fx-background-radius: 20px;*/
     -fx-text-fill: #ffffff;
-    /*-fx-label-padding: 0;*/
     -fx-text-overrun: clip;
     -fx-font-family: 'Clash';
     -fx-font-scale: Bold;
@@ -32,23 +28,6 @@
     -fx-background-image: url("../img/ui/button/btn_green_e.png");
 }
 
-/*.xp-bar > .bar {*/
-/*    -fx-background-color: linear-gradient(*/
-/*            from 0px .75em to .75em 0px,*/
-/*            repeat,*/
-/*            -fx-accent 0%,*/
-/*            -fx-accent 49%*/
-/*            !*derive(-fx-accent, 30%) 50%,*!*/
-/*            !*derive(-fx-accent, 30%) 99%*!*/
-/*    );*/
-/*}*/
-
-/*.xp-bar {*/
-/*    -fx-box-border: goldenrod;*/
-/*    -fx-accent: green;*/
-/*}*/
-
-
 .text-field {
     -fx-font-family: 'Clash';
     -fx-pref-width: 120px;
@@ -58,7 +37,7 @@
     -fx-background-color: rgba(0, 0, 0, 0.5);
     -jfx-focus-color: black;
     -jfx-unfocus-color: #454545;
-    -fx-text-inner-color: #ffffff;
+    -fx-text-inner-color: #ffdc00;
     -fx-font-scale: Bold;
 }
 
@@ -69,58 +48,5 @@
 }
 
 .progress-bar > .bar, .progress-bar > .track {
-    /*-fx-color-label-visible: 5px;*/
     -fx-background-insets: 0;
-    /*-fx-border-radius: 10px;*/
-    /*-fx-background-color: derive(rgba(0, 0, 0, 1), -45%);*/
-    /*-fx-background-color: red;*/
 }
-
-/*.super-fx-qntm-progress-bar {*/
-
-/*    -bar-color: #0057e7;*/
-/*    !* existing code ... *!*/
-/*}*/
-
-/*.super-fx-qntm-progress-bar .bar {*/
-/*    -fx-color-label-visible: red;*/
-/*    -fx-background-color: rgba(0, 0, 0, 1) ;*/
-/*    -fx-background-insets: 0;*/
-/*    -fx-border-radius:10;*/
-/*    -fx-background-radius:20;*/
-
-
-/*}*/
-
-
-/*.progress-bar > .bar {*/
-/*    -fx-accent: green;*/
-/*    -fx-background-color: linear-gradient(*/
-/*            from 0px .75em to .75em 0px,*/
-/*            repeat,*/
-/*            -fx-accent 0%,*/
-/*            -fx-accent 49%,*/
-/*            derive(-fx-accent, 30%) 50%,*/
-/*            derive(-fx-accent, 30%) 99%*/
-/*    );*/
-/*}*/
-
-/*.progress-bar:indeterminate .dot_1 {*/
-/*    -fx-background-color: ACCENT_COLOR;*/
-/*}*/
-
-/*.progress-bar:indeterminate .dot_2 {*/
-/*    -fx-background-color: derive(ACCENT_COLOR, -15%);*/
-/*}*/
-
-/*.progress-bar:indeterminate .dot_3 {*/
-/*    -fx-background-color: derive(ACCENT_COLOR, -30%);*/
-/*}*/
-
-/*.progress-bar:indeterminate .dot_4 {*/
-/*    -fx-background-color: derive(ACCENT_COLOR, -45%);*/
-/*}*/
-
-/*.progress-bar:indeterminate .dot_5 {*/
-/*    -fx-background-color: derive(ACCENT_COLOR, -60%);*/
-/*}*/
