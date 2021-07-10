@@ -42,7 +42,7 @@ public class UserDataContainer {
      */
     public static UserDataContainer getInstance() {
         if(instance == null)
-            return instance;
+            return new UserDataContainer();
         return instance;
     }
 

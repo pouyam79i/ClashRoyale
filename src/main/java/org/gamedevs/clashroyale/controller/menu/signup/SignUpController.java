@@ -13,10 +13,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.gamedevs.clashroyale.model.SignUpModel;
+import org.gamedevs.clashroyale.model.account.Account;
+import org.gamedevs.clashroyale.model.account.AccountBuilder;
 import org.gamedevs.clashroyale.model.account.AccountLoader;
+import org.gamedevs.clashroyale.model.container.gamedata.UserDataContainer;
 import org.gamedevs.clashroyale.model.loader.OnWaitLoader;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +37,8 @@ public class SignUpController implements Initializable {
 
     @FXML
     private Button loginButton;
+    @FXML
+    private Button signUpButton;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -54,6 +61,7 @@ public class SignUpController implements Initializable {
         fadeOutTryAgainLabel.setNode(tryAgainLabel);
         fadeOutTryAgainLabel.setFromValue(1.0);
         fadeOutTryAgainLabel.setToValue(0);
+        File file = new File("Accounts.bin");
     }
 
     @FXML
@@ -65,11 +73,12 @@ public class SignUpController implements Initializable {
             AccountLoader.getAccountLoader().loader(usernameField.getText(), passwordField.getText());
             try {
                 Thread.sleep(3000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
             Platform.runLater(() -> {
                 onWaitLoader.disappear();
             });
-            if(!AccountLoader.getAccountLoader().isAccountLoaded()){
+            if (!AccountLoader.getAccountLoader().isAccountLoaded()) {
                 Platform.runLater(() -> {
                     errorLabel.setVisible(true);
                     tryAgainLabel.setVisible(true);
@@ -87,6 +96,28 @@ public class SignUpController implements Initializable {
     @FXML
     void signupHandling(ActionEvent event) throws IOException {
         // Using account builder
+        OnWaitLoader onWaitLoader = new OnWaitLoader();
+        onWaitLoader.display(signUpButton.getScene());
+        Thread thread = (new Thread(() -> {
+            try {
+                AccountBuilder.getAccountBuilder().buildNewAccount(usernameField.getText(), passwordField.getText());
+                Thread.sleep(3000);
+            } catch (Exception ignored) {
+            }
+            Platform.runLater(() -> {
+                onWaitLoader.disappear();
+            });
+            if (!AccountBuilder.getAccountBuilder().isAccountBuilt()) {
+                Platform.runLater(() -> {
+                    errorLabel.setVisible(true);
+                    tryAgainLabel.setVisible(true);
+                    fadeOutErrorLabel.playFromStart();
+                    fadeOutTryAgainLabel.playFromStart();
+                });
+            }
+        }));
+        thread.setDaemon(true);
+        thread.start();
 
     }
 

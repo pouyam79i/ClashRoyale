@@ -1,7 +1,6 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
 import org.gamedevs.clashroyale.model.account.Account;
-import org.gamedevs.clashroyale.model.player.Human;
 
 import java.io.*;
 
@@ -60,10 +59,10 @@ public class AccountIO {
     }
 
     /**
-     * read an object (Human type) from file
+     * read an object (Account type) from file
      *
      * @param fileName fileName
-     * @return human
+     * @return account
      */
     public Account singleObjectFileReader(String fileName) {
         Account account;
@@ -76,56 +75,60 @@ public class AccountIO {
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
 
     /**
-     * search in a file for a human with specific username and pass
+     * search in a file for a account with specific username and pass
      *
      * @param username username
      * @param fileName fileName
      * @param pass     password
-     * @return human
+     * @return account
      */
     public Account searchInFile(String fileName, String username, String pass) {
         Account account = null;
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
             account = (Account) objectInputStream.readObject();
-            if (account.getUsername().equals(username) && ((Account) account).getPassword().equals(pass))
+            if (account.getUsername().equals(username) && account.getPassword().equals(pass))
                 return account;
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
 
     /**
-     * search in a file for a human with specific username
+     * search in a file for a account with specific username
      *
      * @param username username
      * @param fileName fileName
-     * @return human
+     * @return account
      */
     public static boolean searchInFileByUsername(String fileName, String username) {
-        Human human = null;
+        Account account = null;
+        File file = new File(fileName);
+        if(file.length() == 0)
+            return false;
+
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
-            human = (Human) objectInputStream.readObject();
-            if (((Human) human).getUsername().equals(username))
+            account = (Account) objectInputStream.readObject();
+            if (account.getUsername().equals(username))
                 return true;
         } catch (FileNotFoundException e) {
             System.err.println("can't find " + fileName);
         } catch (IOException e) {
             System.err.println("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Human");
+            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
         }
 
         return false;
@@ -155,7 +158,7 @@ public class AccountIO {
         this.password = password;
     }
 
-    public static AccountIO getFileIO() {
+    public static AccountIO getAccountIO() {
         if(instance == null)
             instance = new AccountIO();
         return instance;
