@@ -158,6 +158,10 @@ public class AccountIO {
         this.password = password;
     }
 
+    /**
+     * get instance of AccountIO
+     * @return instance of AccountIO
+     */
     public static AccountIO getAccountIO() {
         if(instance == null)
             instance = new AccountIO();

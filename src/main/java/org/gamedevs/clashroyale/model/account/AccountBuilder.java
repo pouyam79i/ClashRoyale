@@ -5,14 +5,36 @@ import org.gamedevs.clashroyale.model.player.Human;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 import org.gamedevs.clashroyale.model.utils.io.FileConfig;
-
+/**
+ * a class to make a new account when you want to signup
+ * @author Hosna Hoseini - CE@AUT - Uni ID:9823010
+ * @version 1.0
+ */
 public class AccountBuilder {
 
+    /**
+     * obj of AccountBuilder
+     */
     private static AccountBuilder accountBuilder = null;
 
-    private boolean accountBuilt = false;
-    private AccountBuilder(){};
+    /**
+     * check if account built or not
+     */
+    private boolean accountBuilt;
 
+    /**
+     * Constructor
+     */
+    private AccountBuilder(){
+        accountBuilt = false;
+    };
+
+    /**
+     * build a new account if there is no previous account with this username before
+     * @param username username
+     * @param pass password
+     * @throws Exception when username or password are empty
+     */
     public void buildNewAccount(String username, String pass) throws Exception {
 
         if(!AccountIO.searchInFileByUsername("Accounts.bin", username)) {
@@ -44,11 +66,16 @@ public class AccountBuilder {
             Console.getConsole().printTracingMessage("New account" + username + " sign up!");
         }
     }
-
+    /**
+     * check if any account built
+     * @return true if any account built
+     */
     public boolean isAccountBuilt() {
         return accountBuilt;
     }
-
+    /**
+     * @return AccountBuilder obj
+     */
     public static AccountBuilder getAccountBuilder() {
         if(accountBuilder == null)
             accountBuilder = new AccountBuilder();

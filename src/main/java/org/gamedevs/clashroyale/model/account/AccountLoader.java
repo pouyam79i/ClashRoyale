@@ -10,12 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * a class to load an account when you want to login
+ * @author Hosna Hoseini - CE@AUT - Uni ID:9823010
+ * @version 1.0
+ */
 public class AccountLoader {
 
+    /**
+     * obj of AccountLoader
+     */
     private static AccountLoader accountLoader = null;
 
+    /**
+     * check if account loaded
+     */
     private boolean accountLoaded;
 
+    /**
+     * constructor
+     */
     private AccountLoader(){
         accountLoaded = false;
     }
@@ -48,10 +62,18 @@ public class AccountLoader {
 
     }
 
+    /**
+     * check if any account loaded
+     * @return true if any account loaded
+     */
     public boolean isAccountLoaded() {
         return accountLoaded;
     }
 
+    /**
+     * get instance of account loader
+     * @return instance of account loader
+     */
     public static AccountLoader getAccountLoader() {
         if(accountLoader == null)
             accountLoader = new AccountLoader();
