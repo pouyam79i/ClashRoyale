@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
 
 /**
  * Battle popup handler
@@ -26,7 +26,7 @@ public class BattlePopup {
     @FXML
     public void cancel(){
         AnchorPane battleMainRoot = (AnchorPane) cancelBtn.getScene().getRoot();
-        battleMainRoot.getChildren().remove(MainMenuSceneContainer.getMenuData().getBattlePopupMenu());
+        battleMainRoot.getChildren().remove(MenuSceneContainer.getMenuData().getBattlePopupMenu());
     }
 
 }

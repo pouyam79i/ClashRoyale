@@ -3,11 +3,10 @@ package org.gamedevs.clashroyale;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import org.gamedevs.clashroyale.model.container.scene.MainMenuSceneContainer;
-import org.gamedevs.clashroyale.model.container.scene.SignupMenuContainer;
+import org.gamedevs.clashroyale.model.container.scene.MenuSceneContainer;
 import org.gamedevs.clashroyale.model.launcher.AccountLauncher;
-import org.gamedevs.clashroyale.model.launcher.MainMenuLauncher;
-import org.gamedevs.clashroyale.model.loader.PreloaderSplashScreen;
+import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
+import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -35,9 +34,9 @@ public class Main extends Application {
         musicPlayer = MusicPlayer.getMusicPlayer();
         musicPlayer.playMenuMusic();
         AccountLauncher accountLauncher = new AccountLauncher();
-        MainMenuLauncher menuLauncher = new MainMenuLauncher();
+        MenuFileLoader menuLauncher = new MenuFileLoader();
         accountLauncher.launch();
-        menuLauncher.launch();
+        menuLauncher.load();
         // Do heavy process here before loading!
         if(MainConfig.DEBUG_MODE)
             Thread.sleep(1000); // Just checking loading page in debug mode :)
@@ -52,9 +51,9 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setScene(SignupMenuContainer.getMenuData().getRootScene());
+        primaryStage.setScene(MenuSceneContainer.getMenuData().getRootScene());
         primaryStage.setTitle("Clash Royale");
-        primaryStage.getIcons().add(MainMenuSceneContainer.getMenuData().getGameIcon());
+        primaryStage.getIcons().add(MenuSceneContainer.getMenuData().getGameIcon());
         primaryStage.setHeight(MainConfig.MAIN_STAGE_HEIGHT);
         primaryStage.setWidth(MainConfig.MAIN_STAGE_WIDTH);
         primaryStage.setResizable(false);

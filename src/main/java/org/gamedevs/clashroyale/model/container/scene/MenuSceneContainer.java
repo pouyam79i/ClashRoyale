@@ -11,13 +11,13 @@ import javafx.scene.layout.AnchorPane;
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0.1
  */
-public class MainMenuSceneContainer {
+public class MenuSceneContainer {
 
     /**
      * Only instance of this class,
      * singleton pattern.
      */
-    private static MainMenuSceneContainer Instance = null;
+    private static MenuSceneContainer Instance = null;
 
     /**
      * Root scene of main menu container.
@@ -27,6 +27,10 @@ public class MainMenuSceneContainer {
      * Root anchor pane container.
      */
     private AnchorPane rootPane;
+    /**
+     * signup menu anchor pane container
+     */
+    private AnchorPane signupMenu;
     /**
      * Battle menu anchor pane container.
      */
@@ -55,7 +59,7 @@ public class MainMenuSceneContainer {
     /**
      * Sets default values.
      */
-    private MainMenuSceneContainer(){
+    private MenuSceneContainer(){
         rootScene = null;
         battleMenu = null;
         deckMenu = null;
@@ -89,6 +93,9 @@ public class MainMenuSceneContainer {
     }
     public Image getGameIcon() {
         return gameIcon;
+    }
+    public AnchorPane getSignupMenu() {
+        return signupMenu;
     }
 
     // Setter
@@ -132,13 +139,16 @@ public class MainMenuSceneContainer {
             return;
         this.gameIcon = gameIcon;
     }
+    public void setSignupMenu(AnchorPane signupMenu) {
+        this.signupMenu = signupMenu;
+    }
 
     /**
-     * @return MainMenuSceneContainer (if not build before. Instantiates one)
+     * @return MenuSceneContainer (if not build before. Instantiates one)
      */
-    public static MainMenuSceneContainer getMenuData(){
+    public static MenuSceneContainer getMenuData(){
         if(Instance == null)
-            Instance = new MainMenuSceneContainer();
+            Instance = new MenuSceneContainer();
         return Instance;
     }
 

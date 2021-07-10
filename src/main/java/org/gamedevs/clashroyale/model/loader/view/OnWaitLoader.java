@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.loader;
+package org.gamedevs.clashroyale.model.loader.view;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
