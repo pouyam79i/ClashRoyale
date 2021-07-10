@@ -8,7 +8,7 @@ import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
  * This class contains the structure of Runnable classes!
  * It can run a class as a new thread!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.4.1
+ * @version 1.4.2
  */
 public abstract class Runnable implements java.lang.Runnable{
 
@@ -77,9 +77,10 @@ public abstract class Runnable implements java.lang.Runnable{
             runningState = true;
             if(traceMode){
                 Console.getConsole().println(
-                        "[ " + ConsoleColor.GREEN_BOLD + threadName + ConsoleColor.RESET + " ]" + " Initialized!"
+                        "[" + ConsoleColor.GREEN_BOLD + threadName + ConsoleColor.RESET + "]" + " Initialized!"
                 );
             }
+            thisThread.setDaemon(true);
             thisThread.start();
         }
     }
@@ -98,7 +99,7 @@ public abstract class Runnable implements java.lang.Runnable{
                 runningState = false;
                 if(traceMode){
                     Console.getConsole().println(
-                            "[ " + ConsoleColor.RED_BOLD + threadName + ConsoleColor.RESET + " ]" + " Killed!"
+                            "[" + ConsoleColor.RED_BOLD + threadName + ConsoleColor.RESET + "]" + " Killed!"
                     );
                 }
             }catch (Exception ignored){}
@@ -114,7 +115,7 @@ public abstract class Runnable implements java.lang.Runnable{
     protected void printTraceMessage(String message){
         if(traceMode){
             Console.getConsole().println(
-                    "[ " + ConsoleColor.YELLOW_BOLD + threadName + ConsoleColor.RESET + " ]"
+                    "[" + ConsoleColor.YELLOW_BOLD + threadName + ConsoleColor.RESET + "]"
                             + " Tracing message: " + message
             );
         }
@@ -125,6 +126,13 @@ public abstract class Runnable implements java.lang.Runnable{
      */
     public boolean isRunning() {
         return runningState;
+    }
+
+    /**
+     * @return thread of this object!
+     */
+    protected Thread getThisThread() {
+        return thisThread;
     }
 
 }
