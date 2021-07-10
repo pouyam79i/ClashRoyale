@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
 import org.gamedevs.clashroyale.model.account.Account;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.*;
 
@@ -45,9 +46,9 @@ public class AccountIO {
             }
             objectOutputStream.writeObject(account);
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while writing in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while writing in " + fileName);
         } finally {
             try {
                 if (objectOutputStream != null)
@@ -71,11 +72,11 @@ public class AccountIO {
             account = (Account) objectInputStream.readObject();
             return account;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
@@ -96,11 +97,11 @@ public class AccountIO {
             if (account.getUsername().equals(username) && account.getPassword().equals(pass))
                 return account;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
         return null;
     }
@@ -124,11 +125,11 @@ public class AccountIO {
             if (account.getUsername().equals(username))
                 return true;
         } catch (FileNotFoundException e) {
-            System.err.println("can't find " + fileName);
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
-            System.err.println("some thing went wrong while reading in " + fileName);
+            Console.getConsole().printTracingMessage("some thing went wrong while reading in " + fileName);
         } catch (ClassNotFoundException e) {
-            System.err.println("can't convert obj that has been written in " + fileName + "to Account");
+            Console.getConsole().printTracingMessage("can't convert obj that has been written in " + fileName + "to Account");
         }
 
         return false;

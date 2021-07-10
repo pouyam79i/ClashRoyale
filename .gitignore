@@ -118,3 +118,6 @@ src/test
 
 # Ignoring config property file!
 config
+
+# Ignoring saved accounts
+saved
