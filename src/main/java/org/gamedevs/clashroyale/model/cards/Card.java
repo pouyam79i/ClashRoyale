@@ -10,7 +10,7 @@ import java.io.Serializable;
  *         9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
-public abstract class Card implements Serializable {
+public class Card implements Serializable {
 
     /**
      * Name of card
@@ -39,7 +39,7 @@ public abstract class Card implements Serializable {
      * @param cardName name of card
      * @param cost cost of card (elixir)
      */
-    protected Card(CardName cardName, int cost) {
+    public Card(CardName cardName, int cost) {
         this.cardName = cardName;
         this.cost = cost;
         xp = 0;

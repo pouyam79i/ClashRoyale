@@ -9,7 +9,7 @@ import org.gamedevs.clashroyale.model.cards.CardName;
  *         9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
-public abstract class Soldier extends Card {
+public class Soldier extends Card {
 
     public Soldier(CardName cardName, int cost) {
         super(cardName, cost);

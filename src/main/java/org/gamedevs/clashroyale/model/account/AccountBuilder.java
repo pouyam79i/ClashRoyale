@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.account;
 
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.cards.soldier.Soldier;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
@@ -53,21 +55,25 @@ public class AccountBuilder {
             }
 
             DeckContainer availableContainer = new DeckContainer();
-//            availableContainer.addCard(new Archor());
-//            availableContainer.addCard(new Barbarians());
-//            availableContainer.addCard(new BabyDragon());
-//            availableContainer.addCard(new Wizard());
-//            availableContainer.addCard(new MiniPeka());
-//            availableContainer.addCard(new Giant());
-//            availableContainer.addCard(new Valkyrie());
-//            availableContainer.addCard(new Rage());
-//            availableContainer.addCard(new FireBall());
-//            availableContainer.addCard(new Arrows());
-//            availableContainer.addCard(new Cannon());
-//            availableContainer.addCard(new InfernoTower());
-//
+            availableContainer.addCard(new Soldier(CardName.BARBARIANS, 5));
+            availableContainer.addCard(new Soldier(CardName.ARCHERS, 3));
+            availableContainer.addCard(new Soldier(CardName.BABY_DRAGON, 4));
+            availableContainer.addCard(new Soldier(CardName.WIZARD, 5));
+            availableContainer.addCard(new Soldier(CardName.MINI_PEKKA, 4));
+            availableContainer.addCard(new Soldier(CardName.GIANT, 5));
+            availableContainer.addCard(new Soldier(CardName.VALKYRIE, 4));
+            availableContainer.addCard(new Soldier(CardName.RAGE, 3));
+            availableContainer.addCard(new Soldier(CardName.FIREBALL, 4));
+            availableContainer.addCard(new Soldier(CardName.ARROWS, 3));
+            availableContainer.addCard(new Soldier(CardName.CANNON, 6));
+            availableContainer.addCard(new Soldier(CardName.INFERNO_TOWER, 5));
+
+
+            DeckContainer deckContainer = new DeckContainer();
+            for(int i = 0; i < 8; i++)
+                deckContainer.addCard(new Card(CardName.EMPTY,0));
             account.setDeckAvailable(availableContainer);
-            account.setDeckContainer(new DeckContainer());
+            account.setDeckContainer(deckContainer);
 
             userAccountContainer.setAccount(account);
             accountBuilt = true;

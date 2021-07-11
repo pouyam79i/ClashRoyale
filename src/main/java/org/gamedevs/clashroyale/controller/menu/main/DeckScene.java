@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.controller.menu.main;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -11,7 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.cards.soldier.Soldier;
+import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
+import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 
 
 /**
@@ -31,6 +36,10 @@ public class DeckScene {
     @FXML
     private GridPane availableCardGridPane;
 
+    private static GridPane playCardGridPaneUpdatable = new GridPane();
+
+    private static GridPane availableCardGridPaneUpdatable = new GridPane();
+
     //player who uses this scene currently
     private Account account;
 
@@ -42,7 +51,8 @@ public class DeckScene {
 
     private static DeckScene instance = null;
 
-    public DeckScene() { }
+    public DeckScene() {
+    }
 
     /**
      * an event handler which called to pick a card by dragging it
@@ -70,6 +80,11 @@ public class DeckScene {
             destination = ((CardView) event.getSource());
             updateAccountDeck(((CardView) event.getSource()).getParent());
             updateGrids(event);
+            for(Card card:account.getDeckContainer().getDeck())
+                System.out.println(card.getCardName());
+            for(Card card:account.getDeckAvailable().getDeck())
+                System.out.println(card.getCardName());
+
 
         }
     };
@@ -101,7 +116,7 @@ public class DeckScene {
             account.getDeckContainer().addCard(destination.getCard());
             account.getDeckAvailable().addCard(source.getCard());
             account.getDeckAvailable().removeCard(destination.getCard());
-        }else {
+        } else {
             account.getDeckAvailable().removeCard(source.getCard());
             account.getDeckAvailable().addCard(destination.getCard());
             account.getDeckContainer().addCard(source.getCard());
@@ -120,6 +135,11 @@ public class DeckScene {
         }
     };
 
+    public void initialize(){
+        setAvailableCardGridPaneUpdatable(availableCardGridPane);
+        setPlayCardGridPaneUpdatable(playCardGridPane);
+//        playCardGridPaneUpdatable.add(new CardView(new Soldier(CardName.ARCHERS,5)),1,1);
+    }
     /**
      * fill the grids by player cards
      */
@@ -127,6 +147,7 @@ public class DeckScene {
         initAccount();
         initPlayCards();
         initAvailableCards();
+
     }
 
     private void initAccount() {
@@ -139,12 +160,12 @@ public class DeckScene {
     private void initPlayCards() {
 
         int i = 0;
-
         for (Card card : account.getDeckContainer().getDeck()) {
             CardView cardImageView = new CardView(card);
-            playCardGridPane.add(cardImageView, i % 4, i / 4);
+            playCardGridPaneUpdatable.add(cardImageView, i % 4, i / 4);
             i++;
         }
+
     }
 
     /**
@@ -153,28 +174,39 @@ public class DeckScene {
     private void initAvailableCards() {
 
         int i = 0;
+
         for (Card card : account.getDeckAvailable().getDeck()) {
             CardView cardImageView = new CardView(card);
-            availableCardGridPane.add(cardImageView, i % 4, i / 4);
+            availableCardGridPaneUpdatable.add(cardImageView, i % 4, i / 4);
             i++;
         }
+
+
 
         //null places
 //        while (i < 12) {
 //            CardView cardView = new CardView(new Null());
 //            cardView.setProgressBar(0);
-//            availableCardGridPane.add(cardView, i % 4, i / 4);
+//            availableCardGridPaneUpdatable.add(cardView, i % 4, i / 4);
 //            i++;
 //        }
 
     }
 
-    public static DeckScene getInstance(){
-        if(instance == null){
+    public static DeckScene getInstance() {
+        if (instance == null) {
             instance = new DeckScene();
         }
         return instance;
 
+    }
+
+    public void setPlayCardGridPaneUpdatable(GridPane playCardGridPaneUpdatable) {
+        this.playCardGridPaneUpdatable = playCardGridPaneUpdatable;
+    }
+
+    public void setAvailableCardGridPaneUpdatable(GridPane availableCardGridPaneUpdatable) {
+        this.availableCardGridPaneUpdatable = availableCardGridPaneUpdatable;
     }
 
     /**
@@ -197,8 +229,8 @@ public class DeckScene {
         public CardView(Card card) {
             //init info of fields
             this.card = card;
-//            imageView.setImage(card.getImage());
-//            progressBar = new ProgressBar(card.getUpdateProgress());
+            imageView.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
+            progressBar = new ProgressBar(10);
 
             //set size
             imageView.setFitHeight(105);

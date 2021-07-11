@@ -31,9 +31,9 @@ public class DeckContainer implements Serializable {
     public DeckContainer() {
         deck = new ArrayList<Card>();
         limit = 8;
-        for (int i = 0; i < limit; i++) {
-            deck.add(i, null);
-        }
+//        for (int i = 0; i < limit; i++) {
+//            deck.add(i, null);
+//        }
     }
 
     /**
@@ -60,12 +60,9 @@ public class DeckContainer implements Serializable {
      * @param card  card of player will be added (or replaced with another card in deck)
      * @return a card if it is replaced by another card in the deck, else will be null!
      */
-    public Card addCard(Card card) {
-        if (card == null)
-            return null;
-        Card temp = null;
+    public void addCard(Card card) {
+
         deck.add(card);
-        return temp;
     }
 
     /**
