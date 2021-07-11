@@ -78,12 +78,16 @@ public class DeckScene {
         public void handle(DragEvent event) {
 
             destination = ((CardView) event.getSource());
+            System.out.println(((CardView) event.getSource()).getParent());
             updateAccountDeck(((CardView) event.getSource()).getParent());
             updateGrids(event);
+
             for(Card card:account.getDeckContainer().getDeck())
                 System.out.println(card.getCardName());
+            System.out.println("------------------------");
             for(Card card:account.getDeckAvailable().getDeck())
                 System.out.println(card.getCardName());
+            System.out.println("------------------------");
 
 
         }
@@ -111,16 +115,17 @@ public class DeckScene {
 
     private void updateAccountDeck(Parent sourceGrid) {
 
-        if (sourceGrid == playCardGridPane) {
-            account.getDeckContainer().removeCard(source.getCard());
-            account.getDeckContainer().addCard(destination.getCard());
-            account.getDeckAvailable().addCard(source.getCard());
-            account.getDeckAvailable().removeCard(destination.getCard());
-        } else {
-            account.getDeckAvailable().removeCard(source.getCard());
-            account.getDeckAvailable().addCard(destination.getCard());
-            account.getDeckContainer().addCard(source.getCard());
+        if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
+            System.out.println("here");
             account.getDeckContainer().removeCard(destination.getCard());
+            account.getDeckContainer().addCard(source.getCard());
+            account.getDeckAvailable().addCard(destination.getCard());
+            account.getDeckAvailable().removeCard(source.getCard());
+        } else {
+            account.getDeckAvailable().removeCard(destination.getCard());
+            account.getDeckAvailable().addCard(source.getCard());
+            account.getDeckContainer().addCard(destination.getCard());
+            account.getDeckContainer().removeCard(source.getCard());
         }
 
     }
@@ -230,7 +235,7 @@ public class DeckScene {
             //init info of fields
             this.card = card;
             imageView.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-            progressBar = new ProgressBar(10);
+            progressBar = new ProgressBar(0.5);
 
             //set size
             imageView.setFitHeight(105);
