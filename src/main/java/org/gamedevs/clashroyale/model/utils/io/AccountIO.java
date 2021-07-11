@@ -44,7 +44,8 @@ public class AccountIO {
     /**
      * Constructor
      */
-    private AccountIO() {}
+    private AccountIO() {
+    }
 
     /**
      * write (append) new object in file
@@ -176,7 +177,7 @@ public class AccountIO {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Console.getConsole().printTracingMessage("some thing went wrong while reading in " + username);
             }
             result[0] = false;
         }));
@@ -214,7 +215,7 @@ public class AccountIO {
                 }
                 finalAccount[0] = null;
             } catch (IOException e) {
-                e.printStackTrace();
+                Console.getConsole().printTracingMessage("some thing went wrong while reading in " + username);
             }
         }));
         try {
@@ -261,13 +262,18 @@ public class AccountIO {
         return instance;
     }
 
-    public void removeFileInfo(String filename){
+    /**
+     * remove file content
+     *
+     * @param fileName fileName
+     */
+    public void removeFileInfo(String fileName) {
         PrintWriter pw = null;
         try {
-            pw = new PrintWriter(DIR + filename);
+            pw = new PrintWriter(DIR + fileName);
             pw.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Console.getConsole().printTracingMessage("can't find " + fileName);
         }
     }
 }

@@ -37,8 +37,10 @@ public class DeckScene {
     @FXML
     private GridPane availableCardGridPane;
 
+    //updatable grid pane
     private static GridPane playCardGridPaneUpdatable = new GridPane();
 
+    //updatable grid pane
     private static GridPane availableCardGridPaneUpdatable = new GridPane();
 
     //player who uses this scene currently
@@ -50,8 +52,12 @@ public class DeckScene {
     //new cardView that player want to put source in it
     private CardView destination;
 
+    //instance of deck scene
     private static DeckScene instance = null;
 
+    /**
+     * Constructor
+     */
     public DeckScene() {
     }
 
@@ -82,11 +88,13 @@ public class DeckScene {
             updateAccountDeck(((CardView) event.getSource()).getParent());
             updateGrids(event);
 
-
-
         }
     };
 
+    /**
+     * update grid panes info in GUI
+     * @param event put card event
+     */
     private void updateGrids(DragEvent event) {
         //change source image
         Image oldImage = ((CardView) event.getSource()).getImageView().getImage();
@@ -107,6 +115,10 @@ public class DeckScene {
         source.setCard(tempCard);
     }
 
+    /**
+     * update deck in account
+     * @param sourceGrid sourceGridPane
+     */
     private void updateAccountDeck(Parent sourceGrid) {
 
         if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
@@ -125,10 +137,13 @@ public class DeckScene {
 
     }
 
+    /**
+     * update deck in file
+     */
     private void writeNewInfoInFile() {
-        Thread thread = new Thread(){
+        Thread thread = new Thread() {
             @Override
-            public void start(){
+            public void start() {
                 AccountIO.getAccountIO().removeFileInfo(account.getUsername() + ".bin");
                 AccountIO.getAccountIO().singleObjectFileWriter(account.getUsername() + ".bin", account);
             }
@@ -146,11 +161,11 @@ public class DeckScene {
         }
     };
 
-    public void initialize(){
+    public void initialize() {
         setAvailableCardGridPaneUpdatable(availableCardGridPane);
         setPlayCardGridPaneUpdatable(playCardGridPane);
-//        playCardGridPaneUpdatable.add(new CardView(new Soldier(CardName.ARCHERS,5)),1,1);
     }
+
     /**
      * fill the grids by player cards
      */
@@ -161,6 +176,9 @@ public class DeckScene {
 
     }
 
+    /**
+     * initialize account
+     */
     private void initAccount() {
         account = UserAccountContainer.getUserAccountContainer().getAccount();
     }
@@ -193,17 +211,12 @@ public class DeckScene {
         }
 
 
-
-        //null places
-//        while (i < 12) {
-//            CardView cardView = new CardView(new Null());
-//            cardView.setProgressBar(0);
-//            availableCardGridPaneUpdatable.add(cardView, i % 4, i / 4);
-//            i++;
-//        }
-
     }
 
+    /**
+     * get instance of deck scene
+     * @return DeckScene
+     */
     public static DeckScene getInstance() {
         if (instance == null) {
             instance = new DeckScene();
@@ -212,10 +225,10 @@ public class DeckScene {
 
     }
 
+    //setter
     public void setPlayCardGridPaneUpdatable(GridPane playCardGridPaneUpdatable) {
         this.playCardGridPaneUpdatable = playCardGridPaneUpdatable;
     }
-
     public void setAvailableCardGridPaneUpdatable(GridPane availableCardGridPaneUpdatable) {
         this.availableCardGridPaneUpdatable = availableCardGridPaneUpdatable;
     }
