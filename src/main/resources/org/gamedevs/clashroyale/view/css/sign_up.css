@@ -15,6 +15,7 @@
 }
 
 .button{
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -28,10 +29,12 @@
 }
 
 .login_btn{
+    -fx-font-size: 21px;
     -fx-background-image: url("../img/ui/button/btn_yellow_e.png");
 }
 
 .signup_btn{
+    -fx-font-size: 21px;
     -fx-background-image: url("../img/ui/button/btn_green_e.png");
 }
 

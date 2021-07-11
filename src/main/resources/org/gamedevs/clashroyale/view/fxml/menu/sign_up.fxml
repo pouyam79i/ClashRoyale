@@ -39,7 +39,7 @@
             <Image url="@../../img/menu/signup/password.png" />
          </image>
       </ImageView>
-      <Button fx:id="loginButton" layoutX="52.0" layoutY="553.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="58.0" prefWidth="126.0" styleClass="login_btn" text="Login">
+      <Button fx:id="loginButton" layoutX="52.0" layoutY="553.0" mnemonicParsing="false" onAction="#loginHandling" prefHeight="58.0" prefWidth="126.0" styleClass="login_btn" text="Log in">
          <font>
             <Font size="20.0" />
          </font></Button>

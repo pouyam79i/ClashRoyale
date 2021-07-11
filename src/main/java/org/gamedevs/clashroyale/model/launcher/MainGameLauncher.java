@@ -73,6 +73,9 @@ public class MainGameLauncher extends Runnable {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                     MenuDataContainer.getMenuDataContainer().getMainMenuRootGroup()
             );
+            Platform.runLater(() -> {
+                MainBattle.getMainBattle().updateCoins(3000);
+            });
         });
         this.shutdown();
     }

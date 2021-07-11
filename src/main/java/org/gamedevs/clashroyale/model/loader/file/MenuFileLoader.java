@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
@@ -72,6 +74,46 @@ public class MenuFileLoader {
         ));
         GameIconContainer.getGameIconContainer().addArenaImage(new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_pekka.png")
+        ));
+        // Loading card images
+        CardImageContainer.getCardImageContainer().addImage(CardName.ARCHERS , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/archers.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.ARROWS , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/arrows.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.BABY_DRAGON , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/baby-dragon.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.BARBARIANS , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/barbarians.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.CANNON , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/cannon.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.FIREBALL , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/fireball.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.GIANT , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/giant.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.INFERNO_TOWER , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/inferno-tower.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.MINI_PEKKA , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/mini-pekka.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.RAGE , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/rage.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.VALKYRIE , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/valkyrie.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.WIZARD , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/wizard.png")
+        ));
+        CardImageContainer.getCardImageContainer().addImage(CardName.EMPTY , new Image(
+                MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/null.png")
         ));
         // Loading root pane
         AnchorPane mainRoot = FXMLLoader.load(getClass().getResource(
