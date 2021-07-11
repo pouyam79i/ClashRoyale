@@ -82,12 +82,6 @@ public class DeckScene {
             updateAccountDeck(((CardView) event.getSource()).getParent());
             updateGrids(event);
 
-            for(Card card:account.getDeckContainer().getDeck())
-                System.out.println(card.getCardName());
-            System.out.println("------------------------");
-            for(Card card:account.getDeckAvailable().getDeck())
-                System.out.println(card.getCardName());
-            System.out.println("------------------------");
 
 
         }
@@ -116,7 +110,6 @@ public class DeckScene {
     private void updateAccountDeck(Parent sourceGrid) {
 
         if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
-            System.out.println("here");
             account.getDeckContainer().removeCard(destination.getCard());
             account.getDeckContainer().addCard(source.getCard());
             account.getDeckAvailable().addCard(destination.getCard());
