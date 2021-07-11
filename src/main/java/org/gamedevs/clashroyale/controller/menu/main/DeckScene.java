@@ -2,7 +2,6 @@ package org.gamedevs.clashroyale.controller.menu.main;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -13,10 +12,8 @@ import javafx.scene.layout.VBox;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.cards.soldier.Soldier;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
-import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 
 
@@ -49,8 +46,11 @@ public class DeckScene {
     //previous cardView that player chose
     private CardView source;
 
-    private Parent sourceGrid;
-    private Parent destGrid;
+    //previous grid pane(pick)
+    private Parent destinationGridPane;
+
+    //current grid pane(put)
+    private Parent sourceGridPane;
 
     //new cardView that player want to put source in it
     private CardView destination;
@@ -71,7 +71,7 @@ public class DeckScene {
         @Override
         public void handle(MouseEvent event) {
             source = (CardView) event.getSource();
-            destGrid = source.getParent();
+            sourceGridPane = source.getParent();
             Image image = source.getImageView().getImage();
             Dragboard db = (source.getImageView()).startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
@@ -89,7 +89,7 @@ public class DeckScene {
         public void handle(DragEvent event) {
 
             destination = ((CardView) event.getSource());
-            sourceGrid = ((CardView) event.getSource()).getParent();
+            destinationGridPane = ((CardView) event.getSource()).getParent();
 
             updateAccountDeck();
             updateGrids(event);
@@ -127,8 +127,8 @@ public class DeckScene {
      */
     private void updateAccountDeck() {
 
-        if(sourceGrid != destGrid) {
-            if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
+        if(destinationGridPane != sourceGridPane) {
+            if (destinationGridPane == playCardGridPane || destinationGridPane == playCardGridPaneUpdatable) {
                 account.getDeckContainer().removeCard(destination.getCard());
                 account.getDeckContainer().addCard(source.getCard());
                 account.getDeckAvailable().addCard(destination.getCard());
