@@ -261,4 +261,13 @@ public class AccountIO {
         return instance;
     }
 
+    public void removeFileInfo(String filename){
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(DIR + filename);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

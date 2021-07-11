@@ -17,6 +17,7 @@ import org.gamedevs.clashroyale.model.cards.soldier.Soldier;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
+import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 
 
 /**
@@ -78,7 +79,6 @@ public class DeckScene {
         public void handle(DragEvent event) {
 
             destination = ((CardView) event.getSource());
-            System.out.println(((CardView) event.getSource()).getParent());
             updateAccountDeck(((CardView) event.getSource()).getParent());
             updateGrids(event);
 
@@ -121,6 +121,19 @@ public class DeckScene {
             account.getDeckContainer().removeCard(source.getCard());
         }
 
+        writeNewInfoInFile();
+
+    }
+
+    private void writeNewInfoInFile() {
+        Thread thread = new Thread(){
+            @Override
+            public void start(){
+                AccountIO.getAccountIO().removeFileInfo(account.getUsername() + ".bin");
+                AccountIO.getAccountIO().singleObjectFileWriter(account.getUsername() + ".bin", account);
+            }
+        };
+        thread.start();
     }
 
     /**
