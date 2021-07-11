@@ -23,3 +23,6 @@
    -fx-border-color: black;
    -fx-border-width: 1px;
 }
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}

@@ -142,12 +142,7 @@ public class DeckScene {
 
             writeNewInfoInFile();
         }
-        for(Card card:account.getDeckContainer().getDeck())
-            System.out.println(card.getCardName());
-        System.out.println("---------------------------");
-        for(Card card:account.getDeckAvailable().getDeck())
-            System.out.println(card.getCardName());
-        System.out.println("---------------------------");
+
     }
 
     /**

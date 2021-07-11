@@ -21,17 +21,10 @@ public class Card implements Serializable {
      */
     private final int cost;
     /**
-     * Current xp of card
-     */
-    protected int xp;
-    /**
      * Current leve of card
      */
     protected int leve;
-    /**
-     * Xp needed to upgrade card!
-     */
-    protected int levelUpXPScale;
+
 
     /**
      * Constructor of Card
@@ -42,7 +35,6 @@ public class Card implements Serializable {
     public Card(CardName cardName, int cost) {
         this.cardName = cardName;
         this.cost = cost;
-        xp = 0;
         leve = 1;
     }
 
