@@ -93,6 +93,7 @@ public class DeckScene {
 
     /**
      * update grid panes info in GUI
+     *
      * @param event put card event
      */
     private void updateGrids(DragEvent event) {
@@ -117,6 +118,7 @@ public class DeckScene {
 
     /**
      * update deck in account
+     *
      * @param sourceGrid sourceGridPane
      */
     private void updateAccountDeck(Parent sourceGrid) {
@@ -215,6 +217,7 @@ public class DeckScene {
 
     /**
      * get instance of deck scene
+     *
      * @return DeckScene
      */
     public static DeckScene getInstance() {
@@ -229,6 +232,7 @@ public class DeckScene {
     public void setPlayCardGridPaneUpdatable(GridPane playCardGridPaneUpdatable) {
         this.playCardGridPaneUpdatable = playCardGridPaneUpdatable;
     }
+
     public void setAvailableCardGridPaneUpdatable(GridPane availableCardGridPaneUpdatable) {
         this.availableCardGridPaneUpdatable = availableCardGridPaneUpdatable;
     }
@@ -254,7 +258,11 @@ public class DeckScene {
             //init info of fields
             this.card = card;
             imageView.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-            progressBar = new ProgressBar(0.5);
+            if (card.getCardName().equals(CardName.EMPTY))
+                progressBar = new ProgressBar(0);
+            else
+                progressBar = new ProgressBar(0.5);
+
 
             //set size
             imageView.setFitHeight(105);
