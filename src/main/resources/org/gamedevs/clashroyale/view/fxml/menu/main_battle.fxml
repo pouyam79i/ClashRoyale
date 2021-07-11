@@ -23,9 +23,9 @@
       </ImageView>
       <AnchorPane prefHeight="720.0" prefWidth="405.0">
          <children>
-            <Button fx:id="battleBtn" alignment="CENTER" layoutX="120.0" layoutY="436.0" maxWidth="210.0" mnemonicParsing="false" onAction="#bringBattlePopup" prefHeight="84.0" prefWidth="168.0" styleClass="battle_btn" stylesheets="@../../css/main_battle_menu.css" text="Battle" textAlignment="CENTER">
+            <Button fx:id="battleBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="120.0" layoutY="436.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringBattlePopup" prefHeight="84.0" prefWidth="168.0" styleClass="battle_btn" stylesheets="@../../css/main_battle_menu.css" text="Battle" textAlignment="CENTER" textOverrun="CLIP">
                <font>
-                  <Font name="Clash Regular" size="28.0" />
+                  <Font name="Clash Regular" size="32.0" />
                </font>
             </Button>
             <ImageView id="arena" fx:id="arenaImg" fitHeight="301.0" fitWidth="300.0" layoutX="44.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
@@ -34,13 +34,13 @@
                </image>
             </ImageView>
             <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xpBar" />
-            <Button fx:id="profileBtn" layoutX="315.0" layoutY="23.0" mnemonicParsing="false" onAction="#bringProfilePopup" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile">
+            <Button fx:id="profileBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="315.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringProfilePopup" prefHeight="38.0" prefWidth="66.0" styleClass="profile_btn" text="Profile" textAlignment="CENTER" textOverrun="CLIP">
                <font>
-                  <Font size="11.0" />
+                  <Font size="11.5" />
                </font></Button>
-            <Button fx:id="last_games_btn" layoutX="315.0" layoutY="71.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="normal_btn" text="Last games">
+            <Button fx:id="last_games_btn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="315.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="normal_btn" text="Last games" textAlignment="CENTER" textOverrun="CLIP">
                <font>
-                  <Font size="8.0" />
+                  <Font size="8.5" />
                </font></Button>
             <ImageView fx:id="levelImg" fitHeight="51.0" fitWidth="51.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>

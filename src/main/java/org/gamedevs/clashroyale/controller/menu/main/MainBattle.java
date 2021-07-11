@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +26,9 @@ import java.util.ResourceBundle;
  */
 public class MainBattle implements Initializable {
 
+    /**
+     * only instance of this class
+     */
     private static MainBattle mainBattle = null;
 
     /**
@@ -49,10 +54,73 @@ public class MainBattle implements Initializable {
     @FXML
     private ProgressBar xpBar;
 
+    // Updatable properties
+    private TextField coinsUpdatable;
     private Label xpLabelUpdatable;
     private ProgressBar xpBarUpdatable;
     private ImageView leveImgUpdatable;
     private ImageView arenaImgUpdatable;
+
+
+    /**
+     * Initializes the basic values,
+     * in view properties!
+     */
+    public void init(){
+        setLevel();
+    }
+
+    /**
+     * updates xp
+     * this method does not effect account information!
+     * @param additionalXP will be added to xp
+     * @param currentXP is the amount of current xp
+     */
+    public void updateXP(int additionalXP, int currentXP){
+
+    }
+
+    /**
+     * updates number of coins
+     * this method does not effect account information!
+     * @param additionalCoins will be added to coins text field
+     */
+    public void updateCoins(int additionalCoins){
+        int currentCoins;
+        try {
+            currentCoins = Integer.parseInt(coinsUpdatable.getText());
+        }catch (Exception e){
+            Console.getConsole().printTracingMessage("Failed to get current number of coins! failed to update coins");
+            return;
+        }
+        Thread coinThread = (new Thread(() -> {
+            for(int i = currentCoins; i <= (currentCoins + additionalCoins); i++){
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ignored) {}
+                int finalI = i;
+                Platform.runLater(() -> {
+                    coinsUpdatable.setText(finalI + "");
+                });
+            }
+        }));
+        coinThread.setDaemon(true);
+        coinThread.start();
+    }
+
+    /**
+     * Initialize the requirements
+     * @param url 'not used'
+     * @param resourceBundle 'not used'
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        getMainBattle().setCoinsUpdatable(coins);
+        getMainBattle().setXpLabelUpdatable(xpLabel);
+        getMainBattle().setLeveImgUpdatable(levelImg);
+        getMainBattle().setArenaImgUpdatable(arenaImg);
+        getMainBattle().setXpBarUpdatable(xpBar);
+    }
 
     /**
      * Brings battle popup
@@ -74,6 +142,10 @@ public class MainBattle implements Initializable {
         mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
     }
 
+    /**
+     * Sets level xp and images
+     * this method does not effect account information!
+     */
     private void setLevel(){
         int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
         String labelText = "";
@@ -116,16 +188,10 @@ public class MainBattle implements Initializable {
         xpLabelUpdatable.setText(labelText);
     }
 
-    public void init(){
-        setLevel();
+    // Setters
+    private void setCoinsUpdatable(TextField coinsUpdatable) {
+        this.coinsUpdatable = coinsUpdatable;
     }
-
-    public static MainBattle getMainBattle(){
-        if(mainBattle == null)
-            mainBattle = new MainBattle();
-        return mainBattle;
-    }
-
     private void setXpLabelUpdatable(Label xpLabelUpdatable) {
         this.xpLabelUpdatable = xpLabelUpdatable;
     }
@@ -139,11 +205,13 @@ public class MainBattle implements Initializable {
         this.xpBarUpdatable = xpBarUpdatable;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        getMainBattle().setXpLabelUpdatable(xpLabel);
-        getMainBattle().setLeveImgUpdatable(levelImg);
-        getMainBattle().setArenaImgUpdatable(arenaImg);
-        getMainBattle().setXpBarUpdatable(xpBar);
+    /**
+     * @return only instance of this class
+     */
+    public static MainBattle getMainBattle(){
+        if(mainBattle == null)
+            mainBattle = new MainBattle();
+        return mainBattle;
     }
+
 }
