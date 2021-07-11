@@ -49,6 +49,9 @@ public class DeckScene {
     //previous cardView that player chose
     private CardView source;
 
+    private Parent sourceGrid;
+    private Parent destGrid;
+
     //new cardView that player want to put source in it
     private CardView destination;
 
@@ -68,6 +71,7 @@ public class DeckScene {
         @Override
         public void handle(MouseEvent event) {
             source = (CardView) event.getSource();
+            destGrid = source.getParent();
             Image image = source.getImageView().getImage();
             Dragboard db = (source.getImageView()).startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
@@ -85,7 +89,9 @@ public class DeckScene {
         public void handle(DragEvent event) {
 
             destination = ((CardView) event.getSource());
-            updateAccountDeck(((CardView) event.getSource()).getParent());
+            sourceGrid = ((CardView) event.getSource()).getParent();
+
+            updateAccountDeck();
             updateGrids(event);
 
         }
@@ -118,25 +124,30 @@ public class DeckScene {
 
     /**
      * update deck in account
-     *
-     * @param sourceGrid sourceGridPane
      */
-    private void updateAccountDeck(Parent sourceGrid) {
+    private void updateAccountDeck() {
 
-        if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
-            account.getDeckContainer().removeCard(destination.getCard());
-            account.getDeckContainer().addCard(source.getCard());
-            account.getDeckAvailable().addCard(destination.getCard());
-            account.getDeckAvailable().removeCard(source.getCard());
-        } else {
-            account.getDeckAvailable().removeCard(destination.getCard());
-            account.getDeckAvailable().addCard(source.getCard());
-            account.getDeckContainer().addCard(destination.getCard());
-            account.getDeckContainer().removeCard(source.getCard());
+        if(sourceGrid != destGrid) {
+            if (sourceGrid == playCardGridPane || sourceGrid == playCardGridPaneUpdatable) {
+                account.getDeckContainer().removeCard(destination.getCard());
+                account.getDeckContainer().addCard(source.getCard());
+                account.getDeckAvailable().addCard(destination.getCard());
+                account.getDeckAvailable().removeCard(source.getCard());
+            } else {
+                account.getDeckAvailable().removeCard(destination.getCard());
+                account.getDeckAvailable().addCard(source.getCard());
+                account.getDeckContainer().addCard(destination.getCard());
+                account.getDeckContainer().removeCard(source.getCard());
+            }
+
+            writeNewInfoInFile();
         }
-
-        writeNewInfoInFile();
-
+        for(Card card:account.getDeckContainer().getDeck())
+            System.out.println(card.getCardName());
+        System.out.println("---------------------------");
+        for(Card card:account.getDeckAvailable().getDeck())
+            System.out.println(card.getCardName());
+        System.out.println("---------------------------");
     }
 
     /**
