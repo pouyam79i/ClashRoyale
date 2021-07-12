@@ -26,11 +26,22 @@ public class Clock extends Runnable {
     private int minute = 0;
 
     /**
+     * instance of clock
+     */
+    private static Clock clock = null;
+
+    /**
+     * constructor
+     */
+    private Clock() {
+    }
+
+    /**
      * start clock from 0 to 3 min
      */
     @Override
     public void run() {
-        while (value < 3*60){
+        while (value < 10){
             try {
                 Thread.sleep(1000);
                 value ++;
@@ -40,6 +51,7 @@ public class Clock extends Runnable {
                 Console.getConsole().printTracingMessage("clock sleep interrupted");
             }
         }
+
     }
 
     /**
@@ -64,4 +76,9 @@ public class Clock extends Runnable {
         return value;
     }
 
+    public static Clock getClock(){
+        if(clock == null)
+            clock = new Clock();
+        return clock;
+    }
 }
