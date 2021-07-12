@@ -269,6 +269,8 @@ public class DeckScene {
             else
                 progressBar = new ProgressBar(0.5);
 
+            progressBar.setVisible(false);
+
 
             //set size
             imageView.setFitHeight(105);

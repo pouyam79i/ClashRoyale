@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.cards;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.Serializable;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
  *         9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
-public class Card implements Serializable {
+public class Card extends ImageView implements Serializable {
 
     /**
      * Name of card

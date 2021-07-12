@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="130.0" prefWidth="405.0" style="-fx-background-color: transparent;" stylesheets="@../css/game_card_deck.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="130.0" prefWidth="405.0" style="-fx-background-color: transparent;" stylesheets="@../../css/game_card_deck.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="4.0" layoutY="7.0" prefHeight="120.0" prefWidth="304.0">
          <children>
@@ -52,7 +52,7 @@
                   </ProgressBar>
                   <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/ui/icon/cost.png" />
+                        <Image url="@../../img/ui/icon/cost.png" />
                      </image>
                   </ImageView>
                </children>
