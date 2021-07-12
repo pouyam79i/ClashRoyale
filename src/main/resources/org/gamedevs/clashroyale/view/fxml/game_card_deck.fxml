@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="130.0" prefWidth="405.0" style="-fx-background-color: transparent;" stylesheets="@../css/game_card_deck.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="4.0" layoutY="7.0" prefHeight="120.0" prefWidth="304.0">
+         <children>
+            <GridPane fx:id="cardGridPane" alignment="CENTER" hgap="5.0" maxWidth="95.0" prefHeight="95.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="72.0" prefWidth="72.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="72.0" prefWidth="72.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="72.0" prefWidth="72.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="72.0" prefWidth="72.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </GridPane>
+            <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" prefWidth="200.0">
+               <children>
+                  <ProgressBar layoutX="9.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="315.0" progress="0.28">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                  </ProgressBar>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/ui/icon/cost.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Label layoutX="359.0" layoutY="38.0" text="Next:" textFill="WHITE" />
+      <ImageView fitHeight="55.0" fitWidth="44.0" layoutX="343.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="35.0" fitWidth="28.0" layoutX="243.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,29 @@
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+#cardGridPane{
+    -fx-background-color : #0864bb;
+}
+
+
+.label{
+    -fx-font-family: 'Clash';
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-scale: Bold;
+    -fx-color : white;
+}
+
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}
+
+.anchor-pane{
+    -fx-background-color: transparent;
+}
+
+.progress-bar{
+    -fx-accent: #E01CD8;
+}
+
+

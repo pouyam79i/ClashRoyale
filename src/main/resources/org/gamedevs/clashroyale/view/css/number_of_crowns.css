@@ -1,0 +1,25 @@
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.label{
+    -fx-font-family: 'Clash';
+    -fx-background-color: rgba(158, 158, 158, 0.5);
+    -fx-font-scale: Bold;
+    -fx-boarder-radius : 3px;
+}
+
+#redLabel{
+    -fx-color : red;
+}
+
+#blueLabel{
+    -fx-color : blue;
+}
+
+.anchor-pane{
+    -fx-background-color: transparent;
+}
+
+
+
