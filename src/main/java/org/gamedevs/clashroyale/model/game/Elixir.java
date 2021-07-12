@@ -30,9 +30,9 @@ public class Elixir extends Runnable {
     public void run() {
         clock.start();
         do {
-            if (clock.getCurrentSecond() < 2 * 2)
+            if (clock.getCurrentSecond() < 60 * 2)
                 value += 0.05;
-            else if (clock.getCurrentSecond() < 10 * 1) {
+            else if (clock.getCurrentSecond() < 60 * 3) {
                 value += 0.1;
             } else
                 break;
@@ -49,7 +49,6 @@ public class Elixir extends Runnable {
      * check if the elixir is more than 10 stop producing it
      */
     private void stopProducingElixirIfNeeded() {
-        long timePassed;
         if (value >= 10) {
             do {
                 if (value < 10)

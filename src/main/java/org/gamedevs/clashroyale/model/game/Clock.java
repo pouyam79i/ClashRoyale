@@ -41,7 +41,7 @@ public class Clock extends Runnable {
      */
     @Override
     public void run() {
-        while (value < 10){
+        while (value < 3 * 60){
             try {
                 Thread.sleep(1000);
                 value ++;
