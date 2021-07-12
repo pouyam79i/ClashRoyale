@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
+import animatefx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
@@ -22,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Main battle menu controller
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0
+ * @version 1.1
  */
 public class MainBattle implements Initializable {
 
@@ -31,18 +33,13 @@ public class MainBattle implements Initializable {
      */
     private static MainBattle mainBattle = null;
 
-    /**
-     * Battle button,
-     * used to bring battle popup
-     */
+    // fx:id
     @FXML
     private Button battleBtn;
-    /**
-     * Profile button,
-     * using to bring profile popup view
-     */
     @FXML
     private Button profileBtn;
+    @FXML
+    private Button lastGamesBtn;
     @FXML
     private ImageView arenaImg;
     @FXML
@@ -61,6 +58,19 @@ public class MainBattle implements Initializable {
     private ImageView leveImgUpdatable;
     private ImageView arenaImgUpdatable;
 
+    /**
+     * Initialize the requirements
+     * @param url 'not used'
+     * @param resourceBundle 'not used'
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        getMainBattle().setCoinsUpdatable(coins);
+        getMainBattle().setXpLabelUpdatable(xpLabel);
+        getMainBattle().setLeveImgUpdatable(levelImg);
+        getMainBattle().setArenaImgUpdatable(arenaImg);
+        getMainBattle().setXpBarUpdatable(xpBar);
+    }
 
     /**
      * Initializes the basic values,
@@ -109,27 +119,23 @@ public class MainBattle implements Initializable {
     }
 
     /**
-     * Initialize the requirements
-     * @param url 'not used'
-     * @param resourceBundle 'not used'
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        getMainBattle().setCoinsUpdatable(coins);
-        getMainBattle().setXpLabelUpdatable(xpLabel);
-        getMainBattle().setLeveImgUpdatable(levelImg);
-        getMainBattle().setArenaImgUpdatable(arenaImg);
-        getMainBattle().setXpBarUpdatable(xpBar);
-    }
-
-    /**
      * Brings battle popup
      */
     @FXML
     private void bringBattlePopup(){
-        Scene mainBattleMenuScene = battleBtn.getScene();
-        AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-        mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+        Thread thread = (new Thread(() -> {
+            new BounceIn(battleBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                Scene mainBattleMenuScene = battleBtn.getScene();
+                AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+                mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -137,9 +143,18 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringProfilePopup(){
+        new BounceIn(profileBtn).play();
         Scene mainBattleMenuScene = profileBtn.getScene();
         AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
         mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+    }
+
+    /**
+     * Brings last game popup
+     */
+    @FXML
+    private void bringLastGamesPopup(){
+        new BounceIn(lastGamesBtn).play();
     }
 
     /**

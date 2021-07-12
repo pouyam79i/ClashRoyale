@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.menu.main.DeckScene;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.controller.menu.main.ProfilePopup;
@@ -55,6 +56,9 @@ public class MainGameLauncher extends Runnable {
             } catch (InterruptedException e) {}
         }
         printTraceMessage("Signed in account account detected! Loading main menu!");
+        try {
+            Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+        } catch (InterruptedException ignored) {}
         Platform.runLater(() -> {
             try {
                 ProfilePopup.getProfilePopup().init();

@@ -38,7 +38,7 @@
                <font>
                   <Font size="11.5" />
                </font></Button>
-            <Button fx:id="last_games_btn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="315.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="38.0" prefWidth="66.0" styleClass="normal_btn" text="Last games" textAlignment="CENTER" textOverrun="CLIP">
+            <Button fx:id="lastGamesBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="315.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringLastGamesPopup" prefHeight="38.0" prefWidth="66.0" styleClass="normal_btn" text="Last games" textAlignment="CENTER" textOverrun="CLIP">
                <font>
                   <Font size="8.5" />
                </font></Button>

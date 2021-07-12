@@ -2,7 +2,6 @@ package org.gamedevs.clashroyale.model.account;
 
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.cards.soldier.Soldier;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
@@ -55,18 +54,18 @@ public class AccountBuilder {
             }
 
             DeckContainer availableContainer = new DeckContainer();
-            availableContainer.addCard(new Soldier(CardName.BARBARIANS, 5));
-            availableContainer.addCard(new Soldier(CardName.ARCHERS, 3));
-            availableContainer.addCard(new Soldier(CardName.BABY_DRAGON, 4));
-            availableContainer.addCard(new Soldier(CardName.WIZARD, 5));
-            availableContainer.addCard(new Soldier(CardName.MINI_PEKKA, 4));
-            availableContainer.addCard(new Soldier(CardName.GIANT, 5));
-            availableContainer.addCard(new Soldier(CardName.VALKYRIE, 4));
-            availableContainer.addCard(new Soldier(CardName.RAGE, 3));
-            availableContainer.addCard(new Soldier(CardName.FIREBALL, 4));
-            availableContainer.addCard(new Soldier(CardName.ARROWS, 3));
-            availableContainer.addCard(new Soldier(CardName.CANNON, 6));
-            availableContainer.addCard(new Soldier(CardName.INFERNO_TOWER, 5));
+            availableContainer.addCard(new Card(CardName.BARBARIANS, 5));
+            availableContainer.addCard(new Card(CardName.ARCHERS, 3));
+            availableContainer.addCard(new Card(CardName.BABY_DRAGON, 4));
+            availableContainer.addCard(new Card(CardName.WIZARD, 5));
+            availableContainer.addCard(new Card(CardName.MINI_PEKKA, 4));
+            availableContainer.addCard(new Card(CardName.GIANT, 5));
+            availableContainer.addCard(new Card(CardName.VALKYRIE, 4));
+            availableContainer.addCard(new Card(CardName.RAGE, 3));
+            availableContainer.addCard(new Card(CardName.FIREBALL, 4));
+            availableContainer.addCard(new Card(CardName.ARROWS, 3));
+            availableContainer.addCard(new Card(CardName.CANNON, 6));
+            availableContainer.addCard(new Card(CardName.INFERNO_TOWER, 5));
 
 
             DeckContainer deckContainer = new DeckContainer();

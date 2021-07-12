@@ -27,5 +27,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="AnimateFX-1.2.0" level="project" />
   </component>
 </module>

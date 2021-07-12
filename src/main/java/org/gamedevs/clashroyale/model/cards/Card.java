@@ -1,7 +1,5 @@
 package org.gamedevs.clashroyale.model.cards;
 
-import javafx.scene.image.Image;
-
 import java.io.Serializable;
 
 /**
