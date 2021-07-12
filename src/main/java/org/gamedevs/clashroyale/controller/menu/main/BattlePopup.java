@@ -1,15 +1,18 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
+import animatefx.animation.BounceIn;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 
 /**
  * Battle popup handler
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0
+ * @version 1.1
  */
 public class BattlePopup {
 
@@ -25,8 +28,18 @@ public class BattlePopup {
      */
     @FXML
     public void cancel(){
-        AnchorPane battleMainRoot = (AnchorPane) cancelBtn.getScene().getRoot();
-        battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+        Thread thread = (new Thread(() -> {
+            new BounceIn(cancelBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                AnchorPane battleMainRoot = (AnchorPane) cancelBtn.getScene().getRoot();
+                battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
 }

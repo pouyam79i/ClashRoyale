@@ -32,4 +32,9 @@ public interface MainConfig {
      */
     int MAIN_STAGE_WIDTH = 405;
 
+    /**
+     * Standard latency needed to show btn animation!
+     */
+    int STD_BUTTON_ANIMATION_LATENCY = 200;
+
 }
