@@ -1,8 +1,5 @@
 package org.gamedevs.clashroyale.model.cards;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.Serializable;
 
 /**
@@ -11,7 +8,7 @@ import java.io.Serializable;
  *         9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
-public class Card extends ImageView implements Serializable {
+public class Card implements Serializable {
 
     /**
      * Name of card
@@ -21,11 +18,6 @@ public class Card extends ImageView implements Serializable {
      * Cost of card (elixir)
      */
     private final int cost;
-    /**
-     * Current leve of card
-     */
-    protected int leve;
-
 
     /**
      * Constructor of Card
@@ -36,7 +28,6 @@ public class Card extends ImageView implements Serializable {
     public Card(CardName cardName, int cost) {
         this.cardName = cardName;
         this.cost = cost;
-        leve = 1;
     }
 
     // Getters
