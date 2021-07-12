@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="35.0" stylesheets="@../../css/number_of_crowns.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="redLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.5" layoutY="4.0" prefHeight="55.0" prefWidth="30.0" text="1" textAlignment="CENTER" textFill="#dd2b52" />
+      <Label fx:id="blueLabel" alignment="CENTER" layoutX="2.5" layoutY="102.0" prefHeight="55.0" prefWidth="30.0" style="-fx-background-radius: 5 px;" text="2" textFill="#334187" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="5.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/ui/icon/red-crown.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="5.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/ui/icon/blue-crown.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
