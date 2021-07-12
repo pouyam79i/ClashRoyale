@@ -5,16 +5,16 @@ import org.gamedevs.clashroyale.model.account.Account;
 public class GameResult {
     private String gameType;
     private Account account;
-    private Bot bot;
+//    private Bot bot;
     private String winner;
     private int playerScore;
     private int BotScore;
 //    private GameResult gameResult = null;
 
-    public GameResult(String gameType, Account account, Bot bot, String winner, int playerScore, int botScore) {
+    public GameResult(String gameType, Account account/*, Bot bot*/, String winner, int playerScore, int botScore) {
         this.gameType = gameType;
         this.account = account;
-        this.bot = bot;
+//        this.bot = bot;
         this.winner = winner;
         this.playerScore = playerScore;
         BotScore = botScore;
@@ -37,9 +37,9 @@ public class GameResult {
         return account;
     }
 
-    public Bot getBot() {
-        return bot;
-    }
+//    public Bot getBot() {
+//        return bot;
+//    }
 
     public String getWinner() {
         return winner;
@@ -62,10 +62,10 @@ public class GameResult {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-    public void setBot(Bot bot) {
-        this.bot = bot;
-    }
+//
+//    public void setBot(Bot bot) {
+//        this.bot = bot;
+//    }
 
     public void setWinner(String winner) {
         this.winner = winner;
