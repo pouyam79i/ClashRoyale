@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.controller.menu.signup;
 
+import animatefx.animation.*;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -77,6 +78,7 @@ public class SignUpController implements Initializable {
      */
     @FXML
     void loginHandling(ActionEvent event) throws IOException {
+        new BounceIn(loginButton).play();
         // Using account loader
         OnWaitLoader onWaitLoader = OnWaitLoader.getOnWaitLoader();
         onWaitLoader.display(loginButton.getScene());
@@ -110,6 +112,7 @@ public class SignUpController implements Initializable {
      */
     @FXML
     void signupHandling(ActionEvent event) throws IOException {
+        new BounceIn(signUpButton).play();
         // Using account builder
         OnWaitLoader onWaitLoader = OnWaitLoader.getOnWaitLoader();
         onWaitLoader.display(signUpButton.getScene());
