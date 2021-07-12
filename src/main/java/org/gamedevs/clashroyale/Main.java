@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import org.gamedevs.clashroyale.model.account.AccountLoader;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.launcher.MainGameLauncher;
+import org.gamedevs.clashroyale.model.loader.file.BattleFieldLoader;
 import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
@@ -37,8 +38,9 @@ public class Main extends Application {
         musicPlayer = MusicPlayer.getMusicPlayer();
         musicPlayer.playMenuMusic();
         // Loading all files used in main menu
-        MenuFileLoader menuLauncher = new MenuFileLoader();
-        menuLauncher.load();
+        new MenuFileLoader().load();
+        // Loading all files used in Battle field
+        new BattleFieldLoader().load();
         // Checking if we have already logged in an account!
         AccountLoader.getAccountLoader().init();
         // Do heavy process here before loading!
