@@ -1,0 +1,15 @@
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.anchor-pane{
+     -fx-background: rgba(0, 0, 0, 0);
+}
+
+
+.label {
+    -fx-font-family: 'Clash';
+    -fx-color: white;
+    -fx-font-size: 21px;
+    -fx-font-scale: Bold;
+}

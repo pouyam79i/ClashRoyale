@@ -5,13 +5,29 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * A class to represent and handle clock (timer) in game
+ * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * @version 1.0
+ */
 public class Clock extends Runnable {
 
+    /**
+     * seconds passed from beginning of game
+     */
     private int value = 0;
+    /**
+     * current second
+     */
     private int second = 0;
+    /**
+     * current minute
+     */
     private int minute = 0;
 
+    /**
+     * start clock from 0 to 3 min
+     */
     @Override
     public void run() {
         while (value < 3*60){
@@ -26,6 +42,10 @@ public class Clock extends Runnable {
         }
     }
 
+    /**
+     * get current time in mm:ss format
+     * @return current time
+     */
     public String getTimeAsString(){
         String res;
         res = "0" + minute + ":";
@@ -36,6 +56,10 @@ public class Clock extends Runnable {
         return res;
     }
 
+    /**
+     * get seconds passed from the beginning of game
+     * @return second
+     */
     public int getCurrentSecond(){
         return value;
     }
