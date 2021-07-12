@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
 //import animatefx.animation.*;
+import animatefx.animation.BounceIn;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -153,9 +154,9 @@ public class MainBattle implements Initializable {
      * Brings last game popup
      */
     @FXML
-//    private void bringLastGamesPopup(){
-//        new BounceIn(lastGamesBtn).play();
-//    }
+    private void bringLastGamesPopup(){
+        new BounceIn(lastGamesBtn).play();
+    }
 
     /**
      * Sets level xp and images

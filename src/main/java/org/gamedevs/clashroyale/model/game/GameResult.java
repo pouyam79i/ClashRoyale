@@ -10,19 +10,19 @@ import org.gamedevs.clashroyale.model.account.Account;
 public class GameResult {
 
     /**
-     * type of game (easy/hard bot - human)
+     * type of game (easy/hard bot - human) (human - human) (group - group)
      */
     private String gameType;
 
-    /**
-     * human player in this game
-     */
-//    private Human human;
-
-    /**
-     * bot player in this game
-     */
-//    private Bot bot;
+//    /**
+//     * first player in this game
+//     */
+//    private Player player1;
+//
+//    /**
+//     * second player in this game
+//     */
+//    private Player player2;
 
     /**
      * winner name
@@ -31,13 +31,13 @@ public class GameResult {
 
 //    private GameResult gameResult = null;
 
-    public GameResult(String gameType/*, Human human, Bot bot*/, String winner, int playerScore, int botScore) {
-        this.gameType = gameType;
-//        this.human = human;
-//        this.bot = bot;
-        this.winner = winner;
+//    public GameResult(String gameType, Player player1, Player player2, String winner) {
+//        this.gameType = gameType;
+//        this.player1 = player1;
+//        this.player2 = player2;
+//        this.winner = winner;
+//    }
 
-    }
 
 //    public GameResult getGameResult(){
 //        if(gameResult == null)
@@ -52,8 +52,12 @@ public class GameResult {
         return gameType;
     }
 
-//    public Bot getBot() {
-//        return bot;
+//    public Player getPlayer1() {
+//        return player1;
+//    }
+//
+//    public Player getPlayer2() {
+//        return player2;
 //    }
 
     public String getWinner() {
@@ -67,18 +71,12 @@ public class GameResult {
         this.gameType = gameType;
     }
 
-//
-//    public void setBot(Bot bot) {
-//        this.bot = bot;
-//    }
-
-
-//    public Human getHuman() {
-//        return human;
+//    public void setPlayer1(Player player1) {
+//        this.player1 = player1;
 //    }
 //
-//    public void setHuman(Human human) {
-//        this.human = human;
+//    public void setPlayer2(Player player2) {
+//        this.player2 = player2;
 //    }
 
     public void setWinner(String winner) {

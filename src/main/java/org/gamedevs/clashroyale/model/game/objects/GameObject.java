@@ -23,12 +23,19 @@ public abstract class GameObject extends Runnable {
      * speed of attacking
      * (giving damage to the enemy)
      */
-    protected int hitSpeed;
+    protected double hitSpeed;
     /**
      * attack range defines
      * the max attacking radius!
      */
-    protected int range;
+    protected double range;
+
+    /**
+     * attack target
+     * the max attacking radius!
+     */
+    protected TargetType target;
+
     /**
      * z value says if the object
      * is on the ground or in the air!
@@ -48,6 +55,13 @@ public abstract class GameObject extends Runnable {
      */
     protected GameObject(){
 
+    }
+
+    public GameObject(int hp, int damage, int hitSpeed, int range) {
+        this.hp = hp;
+        this.damage = damage;
+        this.hitSpeed = hitSpeed;
+        this.range = range;
     }
 
     /**
