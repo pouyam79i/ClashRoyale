@@ -1,12 +1,7 @@
 package org.gamedevs.clashroyale.model.game;
 
-import org.gamedevs.clashroyale.model.utils.console.Console;
-import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
-
-import java.time.LocalTime;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * A class to represent and handle Elixir in game
@@ -14,33 +9,35 @@ import java.util.TimerTask;
  * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
  * @version 1.0
  */
-public class Elixir extends Runnable {
+public class Elixir implements Runnable {
 
     /**
      * elixir value
      */
     private boolean running = true;
     Clock clock = Clock.getClock();
-    private float value = 4;
+    private DoubleProperty value = new SimpleDoubleProperty(4);
     private static Elixir player1Elixir = null;
 
     private Elixir() {
     }
 
     public void run() {
-        clock.start();
+        Thread thread = new Thread(clock);
+        thread.start();
         do {
             if (clock.getCurrentSecond() < 60 * 2)
-                value += 0.05;
+                value.setValue(value.add(0.05).getValue());
+
             else if (clock.getCurrentSecond() < 60 * 3) {
-                value += 0.1;
+                value.setValue(value.add(0.1).getValue());
+
             } else
                 break;
             stopProducingElixirIfNeeded();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                Console.getConsole().printTracingMessage("elixir thread interrupted");
             }
         } while (true);
     }
@@ -49,27 +46,24 @@ public class Elixir extends Runnable {
      * check if the elixir is more than 10 stop producing it
      */
     private void stopProducingElixirIfNeeded() {
-        if (value >= 10) {
+        if (value.getValue() >= 10) {
             do {
-                if (value < 10)
+                if (value.getValue() < 10)
                     break;
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    Console.getConsole().printTracingMessage("elixir thread interrupted while not producing");
                 }
             } while (clock.getCurrentSecond() < 10);
         }
 
     }
 
+    public double getValue() {
+        return value.get();
+    }
 
-    /**
-     * get current elixir value
-     *
-     * @return elixir value
-     */
-    public float getCurrentElixir() {
+    public DoubleProperty valueProperty() {
         return value;
     }
 
@@ -79,7 +73,8 @@ public class Elixir extends Runnable {
      * @param reduction amount of used elixir
      */
     public void reduceElixir(float reduction) {
-        value -= reduction;
+        value.setValue(value.subtract(reduction).getValue());
+
     }
 
     public static Elixir getPlayer1Elixir() {
@@ -88,4 +83,5 @@ public class Elixir extends Runnable {
 
         return player1Elixir;
     }
+
 }
