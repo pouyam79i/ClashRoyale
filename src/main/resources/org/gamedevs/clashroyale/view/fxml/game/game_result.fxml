@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.gameadditon.GameResultController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameResultController">
    <children>
       <ImageView fitHeight="726.0" fitWidth="495.0" layoutX="-45.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>

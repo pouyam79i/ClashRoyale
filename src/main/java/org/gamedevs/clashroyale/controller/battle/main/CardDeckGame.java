@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.controller.battle;
+package org.gamedevs.clashroyale.controller.battle.main;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import org.gamedevs.clashroyale.model.game.Elixir;
+import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 
 public class CardDeckGame {
 

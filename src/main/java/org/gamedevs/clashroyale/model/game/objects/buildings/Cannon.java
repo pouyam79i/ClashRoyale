@@ -8,6 +8,7 @@ public class Cannon extends Building{
         target = TargetType.GROUND;
         range = 5.5;
         lifeTime = 30;
+        effectiveLifeTime = true;
 
         switch (level){
             case 1 :

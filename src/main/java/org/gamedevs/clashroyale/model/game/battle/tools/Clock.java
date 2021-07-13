@@ -1,10 +1,8 @@
-package org.gamedevs.clashroyale.model.game;
+package org.gamedevs.clashroyale.model.game.battle.tools;
 
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
-import java.util.Timer;
-import java.util.TimerTask;
 /**
  * A class to represent and handle clock (timer) in game
  * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010

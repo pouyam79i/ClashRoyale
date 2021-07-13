@@ -1,13 +1,8 @@
 package org.gamedevs.clashroyale.model.cards;
 
-import org.gamedevs.clashroyale.model.game.objects.GameObject;
-import org.gamedevs.clashroyale.model.game.objects.Spell.Arrows;
-import org.gamedevs.clashroyale.model.game.objects.Spell.FireBall;
-import org.gamedevs.clashroyale.model.game.objects.Spell.Rage;
 import org.gamedevs.clashroyale.model.game.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.objects.soldiers.*;
-import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 public class CardFactory {
 
@@ -21,7 +16,7 @@ public class CardFactory {
             }
             case BARBARIANS ->  {
                 for (int i = 0; i < 4; i++)
-                    new Barbarians(level).run();
+                    new Barbarian(level).run();
             }
             case WIZARD -> new Wizard(level).run();
             case BABY_DRAGON -> new BabyDragon(level).run();

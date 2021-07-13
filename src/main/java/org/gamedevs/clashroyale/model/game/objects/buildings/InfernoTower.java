@@ -11,6 +11,7 @@ public class InfernoTower extends Building {
         target = TargetType.AIR_GROUND;
         range = 6;
         lifeTime = 40;
+        effectiveLifeTime = true;
 
         switch (level) {
             case 1:
