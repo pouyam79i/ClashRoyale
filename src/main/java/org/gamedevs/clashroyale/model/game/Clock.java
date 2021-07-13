@@ -18,6 +18,7 @@ public class Clock extends Runnable {
      * seconds passed from beginning of game
      */
     private IntegerProperty clockValue = new SimpleIntegerProperty(0);
+    
     /**
      * current second
      */
@@ -27,11 +28,11 @@ public class Clock extends Runnable {
      */
     private IntegerProperty minute = new SimpleIntegerProperty(0);
 
+    private boolean Isend = false;
     /**
      * instance of clock
      */
     private static Clock clock = null;
-
     /**
      * instance
      */
@@ -57,7 +58,7 @@ public class Clock extends Runnable {
             } catch (InterruptedException e) {
             }
         }
-
+        Isend = true;
     }
 
     /**
@@ -132,5 +133,9 @@ public class Clock extends Runnable {
 
     public StringProperty clockStringProperty() {
         return clockString;
+    }
+
+    public boolean isIsend() {
+        return Isend;
     }
 }
