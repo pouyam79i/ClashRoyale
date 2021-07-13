@@ -10,9 +10,21 @@ public enum Side {
     TOP(0),     // Player playing in top side of map (near 0)
     DOWN(1);    // Player playing in down side of map (near last pixel)
 
+    // Value of side
+    private final int value;
+
     /**
      * @param value of side
      */
-    Side(int value) {}
+    Side(int value) {
+        this.value = value;
+    }
+
+    /**
+     * @return value of side
+     */
+    public int getValue(){
+        return this.value;
+    }
 
 }

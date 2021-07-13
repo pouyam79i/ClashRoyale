@@ -11,6 +11,7 @@ import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.loader.view.PreloaderSplashScreen;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
+import org.gamedevs.clashroyale.model.media.Musics;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
@@ -22,21 +23,14 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 public class Main extends Application {
 
     /**
-     * Application music player!
-     * Not needed here! (edit and simplify code)
-     * Make it singleton
-     */
-    private MusicPlayer musicPlayer;
-
-    /**
      * Application initializer.
      * @throws Exception if failed to process
      */
     @Override
     public void init() throws Exception{
         // loading music player
-        musicPlayer = MusicPlayer.getMusicPlayer();
-        musicPlayer.playMenuMusic();
+        MusicPlayer.getMusicPlayer().load();
+        MusicPlayer.getMusicPlayer().play(Musics.BEFORE_MAIN_MENU);
         // Loading all files used in main menu
         new MenuFileLoader().load();
         // Loading all files used in Battle field

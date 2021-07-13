@@ -8,13 +8,15 @@ import org.gamedevs.clashroyale.controller.menu.main.ProfilePopup;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
+import org.gamedevs.clashroyale.model.media.MusicPlayer;
+import org.gamedevs.clashroyale.model.media.Musics;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.io.IOException;
 
 /**
- * This class is the main game sequence,
+ * This class launches the main game sequence,
  * which brings the game until main menu!
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0
@@ -23,7 +25,7 @@ public class MainGameLauncher extends Runnable {
 
     /**
      * Constructor of MainGameLauncher
-     * Setting requirements!
+     * Sets requirements!
      */
     public MainGameLauncher(){
         threadName = "MainGameLauncher";
@@ -50,6 +52,7 @@ public class MainGameLauncher extends Runnable {
                 );
             });
         }
+        // Waiting to log an account
         while (UserAccountContainer.getUserAccountContainer().getAccount() == null){
             try {
                 Thread.sleep(100);
@@ -59,6 +62,7 @@ public class MainGameLauncher extends Runnable {
         try {
             Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
         } catch (InterruptedException ignored) {}
+        // Initializing main view of game
         Platform.runLater(() -> {
             try {
                 ProfilePopup.getProfilePopup().init();
@@ -68,7 +72,8 @@ public class MainGameLauncher extends Runnable {
                 Console.getConsole().printTracingMessage("Failed to initialize main menus: " + e.getMessage());
                 e.printStackTrace();
             }
-
+            // Going to main menu
+            MusicPlayer.getMusicPlayer().play(Musics.MAIN_MENU);
             try {
                 OnWaitLoader.getOnWaitLoader().disappear();
             } catch (IOException ignored) {}
@@ -78,9 +83,6 @@ public class MainGameLauncher extends Runnable {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                     MenuDataContainer.getMenuDataContainer().getMainMenuRootGroup()
             );
-            Platform.runLater(() -> {
-                MainBattle.getMainBattle().updateCoins(3000);
-            });
         });
         this.shutdown();
     }

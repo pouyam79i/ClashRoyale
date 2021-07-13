@@ -15,9 +15,21 @@ public enum TargetType {
     // Object Type related
     BUILDING(3);
 
+    // Value of target type
+    private final int value;
+
     /**
      * @param value of target type
      */
-    TargetType(int value) {}
+    TargetType(int value) {
+        this.value = value;
+    }
+
+    /**
+     * @return value of target type
+     */
+    public int getValue() {
+        return value;
+    }
 
 }

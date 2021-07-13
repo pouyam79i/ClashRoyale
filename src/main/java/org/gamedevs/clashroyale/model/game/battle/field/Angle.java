@@ -7,7 +7,8 @@ package org.gamedevs.clashroyale.model.game.battle.field;
  */
 public enum Angle {
 
-    STEP(45),           // Amount of Step needed to go to next or previous angle is '45' degree
+    // Amount of Step needed to go to next or previous angle. step is '45' degree
+    STEP(45),
 
     // Possible angles in game
     NORTH(0),
@@ -20,9 +21,16 @@ public enum Angle {
     NORTH_WEST(315);
 
     /**
+     * angel of direction
+     */
+    private final int angle;
+
+    /**
      * @param angle of enumerated type
      */
-    Angle(int angle) {}
+    Angle(int angle) {
+        this.angle = angle;
+    }
 
     /**
      * @param angle of direction (degree)
@@ -47,6 +55,13 @@ public enum Angle {
             case 315 -> Angle.NORTH_WEST;
             default -> null;
         };
+    }
+
+    /**
+     * @return angle of direction
+     */
+    public int getAngle() {
+        return angle;
     }
 
 }

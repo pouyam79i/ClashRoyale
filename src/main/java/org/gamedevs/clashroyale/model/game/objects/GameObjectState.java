@@ -12,9 +12,16 @@ public enum GameObjectState {
     ATTACK(2);     // Attacking state (not moving!)
 
     /**
+     * Value of state
+     */
+    private final int value;
+
+    /**
      * @param value of game state
      */
-    GameObjectState(int value) {}
+    GameObjectState(int value) {
+        this.value = value;
+    }
 
     /**
      * Returns related value of state
@@ -28,6 +35,13 @@ public enum GameObjectState {
             case 2 -> GameObjectState.ATTACK;
             default -> null;
         };
+    }
+
+    /**
+     * @return value of state
+     */
+    public int getValue() {
+        return value;
     }
 
 }
