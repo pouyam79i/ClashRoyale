@@ -63,13 +63,6 @@ public class Elixir extends Runnable {
 
 
     /**
-     * satrt producing elixir
-     */
-    public void startProducing() {
-        this.run();
-    }
-
-    /**
      * stop Producing elixir
      */
     public void stopProducing(){

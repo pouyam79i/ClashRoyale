@@ -26,6 +26,6 @@ public class CardDeckGame {
 
     public void initialize(){
         elixirProgressBar.progressProperty().bind(value.divide(10));
-//        elixirLabel.textProperty().bind(value.asString("%.0f"));
+        elixirLabel.textProperty().bind(value.asString("%.0f"));
     }
 }

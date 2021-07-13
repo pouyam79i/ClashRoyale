@@ -1,7 +1,10 @@
 package org.gamedevs.clashroyale.model.game;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -29,6 +32,7 @@ public class Clock extends Runnable {
      */
     private static Clock clock = null;
 
+    private StringProperty clockString = new SimpleStringProperty();
     /**
      * constructor
      */
@@ -46,33 +50,36 @@ public class Clock extends Runnable {
                 clockValue.setValue(clockValue.add(1).getValue());
                 minute.setValue(clockValue.divide(60).getValue());
                 second.setValue((clockValue.subtract(minute.multiply(60))).getValue());
-                System.out.println(getTimeAsString());
+                timeToString();
             } catch (InterruptedException e) {
             }
         }
 
     }
 
-    public void start(){
-        this.run();
-    }
-
     public void stop(){
-        this.shutdown();
+        super.shutdown();
     }
 
     /**
      * get current time in mm:ss format
      * @return current time
      */
-    public String getTimeAsString(){
+    public void timeToString(){
         String res;
         res = "0" + minute.get() + ":";
         if(second.get() < 10)
             res += "0" + second.get();
         else
             res += second.get();
-        return res;
+
+        String finalRes = res;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clockString.setValue(finalRes);
+            }
+        });
     }
 
     public int getClockValue() {
@@ -103,5 +110,13 @@ public class Clock extends Runnable {
         if(clock == null)
             clock = new Clock();
         return clock;
+    }
+
+    public String getClockString() {
+        return clockString.get();
+    }
+
+    public StringProperty clockStringProperty() {
+        return clockString;
     }
 }
