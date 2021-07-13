@@ -1,10 +1,9 @@
 package org.gamedevs.clashroyale.model.game;
 
-import org.gamedevs.clashroyale.model.utils.console.Console;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
-import java.util.Timer;
-import java.util.TimerTask;
 /**
  * A class to represent and handle clock (timer) in game
  * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
@@ -15,15 +14,15 @@ public class Clock extends Runnable {
     /**
      * seconds passed from beginning of game
      */
-    private int value = 0;
+    private IntegerProperty clockValue = new SimpleIntegerProperty(0);
     /**
      * current second
      */
-    private int second = 0;
+    private IntegerProperty second = new SimpleIntegerProperty(0);
     /**
      * current minute
      */
-    private int minute = 0;
+    private IntegerProperty minute = new SimpleIntegerProperty(0);
 
     /**
      * instance of clock
@@ -41,17 +40,25 @@ public class Clock extends Runnable {
      */
     @Override
     public void run() {
-        while (value < 3 * 60){
+        while (clockValue.getValue() < 3 * 60){
             try {
                 Thread.sleep(1000);
-                value ++;
-                minute = value / 60;
-                second = value % 60;
+                clockValue.setValue(clockValue.add(1).getValue());
+                minute.setValue(clockValue.divide(60).getValue());
+                second.setValue((clockValue.subtract(minute.multiply(60))).getValue());
+                System.out.println(getTimeAsString());
             } catch (InterruptedException e) {
-                Console.getConsole().printTracingMessage("clock sleep interrupted");
             }
         }
 
+    }
+
+    public void start(){
+        this.run();
+    }
+
+    public void stop(){
+        this.shutdown();
     }
 
     /**
@@ -60,20 +67,36 @@ public class Clock extends Runnable {
      */
     public String getTimeAsString(){
         String res;
-        res = "0" + minute + ":";
-        if(second < 10)
-            res += "0" + second;
+        res = "0" + minute.get() + ":";
+        if(second.get() < 10)
+            res += "0" + second.get();
         else
-            res += second;
+            res += second.get();
         return res;
     }
 
-    /**
-     * get seconds passed from the beginning of game
-     * @return second
-     */
-    public int getCurrentSecond(){
-        return value;
+    public int getClockValue() {
+        return clockValue.get();
+    }
+
+    public IntegerProperty clockValueProperty() {
+        return clockValue;
+    }
+
+    public int getSecond() {
+        return second.get();
+    }
+
+    public IntegerProperty secondProperty() {
+        return second;
+    }
+
+    public int getMinute() {
+        return minute.get();
+    }
+
+    public IntegerProperty minuteProperty() {
+        return minute;
     }
 
     public static Clock getClock(){

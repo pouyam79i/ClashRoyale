@@ -1,7 +1,10 @@
 package org.gamedevs.clashroyale.model.game;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
  * A class to represent and handle Elixir in game
@@ -9,62 +12,76 @@ import javafx.beans.property.SimpleDoubleProperty;
  * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
  * @version 1.0
  */
-public class Elixir implements Runnable {
+public class Elixir extends Runnable {
 
     /**
      * elixir value
      */
-    private boolean running = true;
+    private DoubleProperty elixirValue = new SimpleDoubleProperty(4);
+    /**
+     * clock which elixir work regarding to it
+     */
     Clock clock = Clock.getClock();
-    private DoubleProperty value = new SimpleDoubleProperty(4);
+
+    /**
+     * time (in seconds) that elixir has to produce slowly
+     */
+    private static final int SLOW_PRODUCTION_DURATION = 60 * 2;
+    /**
+     * whole time (in seconds) that elixir has to produce
+     */
+    private static final int PRODUCTION_DURATION = 60 * 3;
+    /**
+     * maximum elixir that can be produce;
+     */
+    private static final int MAXIMUM_ELIXIR = 10;
+
     private static Elixir player1Elixir = null;
 
     private Elixir() {
     }
 
     public void run() {
-        Thread thread = new Thread(clock);
-        thread.start();
+
         do {
-            if (clock.getCurrentSecond() < 60 * 2)
-                value.setValue(value.add(0.05).getValue());
 
-            else if (clock.getCurrentSecond() < 60 * 3) {
-                value.setValue(value.add(0.1).getValue());
+            if (elixirValue.get() < MAXIMUM_ELIXIR) {
+                if (clock.getClockValue() < SLOW_PRODUCTION_DURATION)
+                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
+                else
+                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
+            }
 
-            } else
-                break;
-            stopProducingElixirIfNeeded();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
+                Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
             }
-        } while (true);
+
+        } while (clock.getClockValue() < PRODUCTION_DURATION);
+    }
+
+
+    /**
+     * satrt producing elixir
+     */
+    public void startProducing() {
+        this.run();
     }
 
     /**
-     * check if the elixir is more than 10 stop producing it
+     * stop Producing elixir
      */
-    private void stopProducingElixirIfNeeded() {
-        if (value.getValue() >= 10) {
-            do {
-                if (value.getValue() < 10)
-                    break;
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                }
-            } while (clock.getCurrentSecond() < 10);
-        }
-
+    public void stopProducing(){
+        this.shutdown();
     }
 
-    public double getValue() {
-        return value.get();
+    //Getter
+    public double getElixirValue() {
+        return elixirValue.get();
     }
-
-    public DoubleProperty valueProperty() {
-        return value;
+    public DoubleProperty elixirValueProperty() {
+        return elixirValue;
     }
 
     /**
@@ -73,8 +90,7 @@ public class Elixir implements Runnable {
      * @param reduction amount of used elixir
      */
     public void reduceElixir(float reduction) {
-        value.setValue(value.subtract(reduction).getValue());
-
+        Platform.runLater(() -> elixirValue.setValue(elixirValue.subtract(reduction).getValue()));
     }
 
     public static Elixir getPlayer1Elixir() {
