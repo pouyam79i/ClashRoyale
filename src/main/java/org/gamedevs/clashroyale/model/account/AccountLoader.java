@@ -43,7 +43,12 @@ public class AccountLoader {
         FileConfig fileConfig = new FileConfig();
         String accountFileName = fileConfig.read(FileConfig.ACCOUNT_FILENAME);
         String accountPassword = fileConfig.read(FileConfig.ACCOUNT_PASSWORD);
-        // Develop it here ******************** Develop *********************
+        Account account = AccountIO.getAccountIO().searchInDirByUsernameAndPass(accountFileName, accountPassword);
+        if (account != null) {
+            userAccountContainer.setAccount(account);
+            accountLoaded = true;
+            Console.getConsole().printTracingMessage("found '" + accountFileName + "' and logged in it!");
+        }
     }
 
     /**
@@ -60,7 +65,7 @@ public class AccountLoader {
             FileConfig fileConfig = new FileConfig();
             fileConfig.write(FileConfig.ACCOUNT_FILENAME, username);
             fileConfig.write(FileConfig.ACCOUNT_PASSWORD, password);
-            Console.getConsole().printTracingMessage("New account " + username + " login!");
+            Console.getConsole().printTracingMessage("found '" + username + "' and logged in it!");
         }
     }
 

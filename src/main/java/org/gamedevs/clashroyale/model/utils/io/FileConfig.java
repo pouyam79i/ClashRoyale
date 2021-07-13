@@ -7,7 +7,7 @@ import java.util.Properties;
  * This class reads and writes on config file!
  * Used to save game property!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class FileConfig {
 
@@ -54,8 +54,13 @@ public class FileConfig {
         if(value == null)
             value = "";
         try {
-            OutputStream outputStream = new FileOutputStream(DIR + CONFIG_FILE_NAME);
+            // loading previous properties!
+            InputStream inputStream = new FileInputStream(DIR + CONFIG_FILE_NAME);
             Properties properties = new Properties();
+            properties.load(inputStream);
+            inputStream.close();
+            // adding new properties
+            OutputStream outputStream = new FileOutputStream(DIR + CONFIG_FILE_NAME);
             // set the properties value
             properties.setProperty(propertyName, value);
             // save properties to project root folder
@@ -76,8 +81,8 @@ public class FileConfig {
         if(propertyName == null)
             return null;
         try {
+            // loading properties file
             InputStream inputStream = new FileInputStream(DIR + CONFIG_FILE_NAME);
-            // load a properties file
             Properties properties = new Properties();
             properties.load(inputStream);
             return properties.getProperty(propertyName);
