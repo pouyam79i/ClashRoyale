@@ -10,11 +10,6 @@ import org.gamedevs.clashroyale.model.account.Account;
 public class GameResult {
 
     /**
-     * type of game (easy/hard bot - human) (human - human) (group - group)
-     */
-    private String gameType;
-
-    /**
      * first player in this game
      */
     private String player1Name;
@@ -28,7 +23,7 @@ public class GameResult {
      * winner name
      */
     private String winner;
-    
+
     /**
      * constructor
      * @param gameType gameType
@@ -37,7 +32,6 @@ public class GameResult {
      * @param winner winner name
      */
     public GameResult(String gameType, String player1Name, String player2Name, String winner) {
-        this.gameType = gameType;
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.winner = winner;
@@ -45,14 +39,6 @@ public class GameResult {
 
 
     //Getter and setters
-    public String getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
-
     public String getPlayer1Name() {
         return player1Name;
     }
