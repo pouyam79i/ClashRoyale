@@ -17,7 +17,8 @@ public class CardFactory {
 
 
     /**
-     * make and start new game object regarding to card name
+     * make and start
+     * new game object regarding to card name
      * @param cardName cardName
      * @param level level
      */
