@@ -32,6 +32,9 @@ public class Clock extends Runnable {
      */
     private static Clock clock = null;
 
+    /**
+     * instance
+     */
     private StringProperty clockString = new SimpleStringProperty();
     /**
      * constructor
@@ -57,8 +60,18 @@ public class Clock extends Runnable {
 
     }
 
+    /**
+     * stop clock
+     */
     public void stop(){
         super.shutdown();
+    }
+
+    /**
+     * start clock
+     */
+    public void startClock(){
+        super.start();
     }
 
     /**
@@ -82,6 +95,7 @@ public class Clock extends Runnable {
         });
     }
 
+    //Getter
     public int getClockValue() {
         return clockValue.get();
     }

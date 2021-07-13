@@ -36,11 +36,21 @@ public class Elixir extends Runnable {
      */
     private static final int MAXIMUM_ELIXIR = 10;
 
+    /**
+     * Elixir instance
+     */
     private static Elixir player1Elixir = null;
 
+    /**
+     * constructor
+     */
     private Elixir() {
     }
 
+    /**
+     * produce elixir considering speed for 3 minute
+     * stop when it reaches 3 min
+     */
     public void run() {
 
         do {
@@ -65,16 +75,16 @@ public class Elixir extends Runnable {
     /**
      * stop Producing elixir
      */
-    public void stopProducing(){
-        this.shutdown();
+    public void stopProducing() {
+        super.shutdown();
     }
 
-    //Getter
-    public double getElixirValue() {
-        return elixirValue.get();
-    }
-    public DoubleProperty elixirValueProperty() {
-        return elixirValue;
+
+    /**
+     * start elixir
+     */
+    public void startElixir() {
+        super.start();
     }
 
     /**
@@ -84,6 +94,15 @@ public class Elixir extends Runnable {
      */
     public void reduceElixir(float reduction) {
         Platform.runLater(() -> elixirValue.setValue(elixirValue.subtract(reduction).getValue()));
+    }
+
+    //Getter
+    public double getElixirValue() {
+        return elixirValue.get();
+    }
+
+    public DoubleProperty elixirValueProperty() {
+        return elixirValue;
     }
 
     public static Elixir getPlayer1Elixir() {

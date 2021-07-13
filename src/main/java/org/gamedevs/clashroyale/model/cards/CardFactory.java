@@ -8,10 +8,19 @@ import org.gamedevs.clashroyale.model.game.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.objects.soldiers.*;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
-
+/**
+ * A class to make ans start new game object regarding to card name
+ * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * @version 1.0
+ */
 public class CardFactory {
 
 
+    /**
+     * make and start new game object regarding to card name
+     * @param cardName cardName
+     * @param level level
+     */
     public void getGameObject(CardName cardName, int level) {
         switch (cardName) {
 
