@@ -33,6 +33,15 @@ public interface MainConfig {
     int MAIN_STAGE_WIDTH = 405;
 
     /**
+     * Standard battle field height
+     */
+    int STD_BATTLE_FIELD_HEIGHT = 100;
+    /**
+     * Standard battle field width
+     */
+    int STD_BATTLE_FIELD_WIDTH = 100;
+
+    /**
      * Standard latency needed to show btn animation in 'milliseconds'.
      */
     int STD_BUTTON_ANIMATION_LATENCY = 200;
