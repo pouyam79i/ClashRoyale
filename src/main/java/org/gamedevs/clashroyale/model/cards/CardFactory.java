@@ -1,9 +1,10 @@
 package org.gamedevs.clashroyale.model.cards;
 
 import org.gamedevs.clashroyale.model.game.objects.GameObject;
-import org.gamedevs.clashroyale.model.game.objects.Spell.Arrows;
-import org.gamedevs.clashroyale.model.game.objects.Spell.FireBall;
-import org.gamedevs.clashroyale.model.game.objects.Spell.Rage;
+// TODO: uncomment this
+//import org.gamedevs.clashroyale.model.game.objects.Spell.Arrows;
+//import org.gamedevs.clashroyale.model.game.objects.Spell.FireBall;
+//import org.gamedevs.clashroyale.model.game.objects.Spell.Rage;
 import org.gamedevs.clashroyale.model.game.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.objects.soldiers.*;
@@ -30,8 +31,10 @@ public class CardFactory {
                     new Archer(level).run();
             }
             case BARBARIANS ->  {
-                for (int i = 0; i < 4; i++)
-                    new Barbarians(level).run();
+                for (int i = 0; i < 4; i++){
+                    // TODO: uncomment this
+//                    new Barbarians(level).run();
+                }
             }
             case WIZARD -> new Wizard(level).run();
             case BABY_DRAGON -> new BabyDragon(level).run();
