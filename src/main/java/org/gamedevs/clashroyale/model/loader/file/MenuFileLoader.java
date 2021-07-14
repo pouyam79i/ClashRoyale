@@ -32,7 +32,7 @@ public class MenuFileLoader {
         // menu container
         MenuDataContainer menuData = MenuDataContainer.getMenuDataContainer();
         // loading on wait loader
-        OnWaitLoader.getOnWaitLoader();
+        OnWaitLoader.getOnWaitLoader().load();
         // Loading main menu stage icon
         menuData.setGameIcon(new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/icon/cr_icon.png"))

@@ -16,6 +16,11 @@
             <Image url="@../../img/menu/menu_background_cover.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="317.0" fitWidth="302.0" layoutX="-2.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/menu/frame1.png" />
+         </image>
+      </ImageView>
       <TextField fx:id="cupsTF" alignment="CENTER_RIGHT" editable="false" layoutX="39.0" layoutY="176.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" promptText="cups" styleClass="cup_text_field" text="0" />
       <ProgressBar layoutX="47.0" layoutY="105.0" prefHeight="18.0" prefWidth="75.0" progress="0.31" fx:id="xpBar" />
       <ImageView fx:id="levelImg" fitHeight="40.0" fitWidth="53.0" layoutX="16.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">

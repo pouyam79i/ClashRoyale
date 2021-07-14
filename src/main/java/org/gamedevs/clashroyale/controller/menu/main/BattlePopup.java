@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 
 import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.launcher.OfflineBattleLauncher;
 
 /**
  * Battle popup handler
@@ -16,18 +17,54 @@ import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
  */
 public class BattlePopup {
 
-    /**
-     * With this button we return to main menu,
-     */
+    // fx:id
+    @FXML
+    private Button singleOnlineBtn;
+    @FXML
+    private Button doubleOnlineBtn;
+    @FXML
+    private Button singleOfflineBtn;
+    @FXML
+    private Button doubleOfflineBtn;
     @FXML
     private Button cancelBtn;
+
+
+    @FXML
+    private void bringSingleOnlineBattle(){
+        new BounceIn(singleOnlineBtn).play();
+    }
+    @FXML
+    private void bringDoubleOnlineBattle(){
+        new BounceIn(doubleOnlineBtn).play();
+    }
+    @FXML
+    private void bringSingleOfflineBattle(){
+        Thread thread = (new Thread(() -> {
+            new BounceIn(singleOfflineBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                AnchorPane battleMainRoot = (AnchorPane) singleOfflineBtn.getScene().getRoot();
+                battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+            });
+            new OfflineBattleLauncher(false).start();
+        }));
+        thread.setDaemon(true);
+        thread.start();
+    }
+    @FXML
+    private void bringDoubleOfflineBattle(){
+        new BounceIn(doubleOfflineBtn).play();
+    }
 
     /**
      * Returns back to battle menu,
      * also removes the popup menu from root scene.
      */
     @FXML
-    public void cancel(){
+    private void cancel(){
         Thread thread = (new Thread(() -> {
             new BounceIn(cancelBtn).play();
             try {

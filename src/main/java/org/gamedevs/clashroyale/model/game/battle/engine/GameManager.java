@@ -21,7 +21,7 @@ public class GameManager {
     /**
      * Clock of game (reverse timer)
      */
-    private final Clock clock;
+//    private final Clock clock;
     // Players:
     /**
      * Top side player
@@ -46,7 +46,7 @@ public class GameManager {
      */
     public GameManager() {
         map = new Map(MainConfig.STD_BATTLE_FIELD_WIDTH, MainConfig.STD_BATTLE_FIELD_HEIGHT);
-        clock = new Clock();
+//        clock = new Clock();
     }
 
     /**

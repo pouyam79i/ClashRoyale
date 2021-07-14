@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.container.scene;
 
+import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -18,6 +19,10 @@ public class BattleFieldContainer {
      * Anchor pane of battle field
      */
     private AnchorPane battleField;
+    private AnchorPane cardDeck;
+    private AnchorPane gameStarter;
+    private AnchorPane gameResult;
+    private Group mainBattleGroup;
 
     /**
      * Constructor of BattleFieldContainer.
@@ -25,17 +30,49 @@ public class BattleFieldContainer {
      */
     private BattleFieldContainer(){
         battleField = null;
+        cardDeck = null;
+        gameStarter = null;
+        gameResult = null;
+        mainBattleGroup = null;
     }
 
     // Getters
     public AnchorPane getBattleField() {
         return battleField;
     }
+    public AnchorPane getCardDeck() {
+        return cardDeck;
+    }
+    public AnchorPane getGameStarter() {
+        return gameStarter;
+    }
+    public AnchorPane getGameResult() {
+        return gameResult;
+    }
+    public Group getMainBattleGroup() {
+        return mainBattleGroup;
+    }
 
     // Setters
     public void setBattleField(AnchorPane battleField) {
         if(this.battleField == null)
             this.battleField = battleField;
+    }
+    public void setCardDeck(AnchorPane cardDeck) {
+        if(this.cardDeck == null)
+            this.cardDeck = cardDeck;
+    }
+    public void setGameStarter(AnchorPane gameStarter) {
+        if(this.gameStarter == null)
+            this.gameStarter = gameStarter;
+    }
+    public void setGameResult(AnchorPane result) {
+        if(this.gameResult == null)
+            this.gameResult = result;
+    }
+    public void setMainBattleGroup(Group mainBattleGroup) {
+        if(this.mainBattleGroup == null)
+            this.mainBattleGroup = mainBattleGroup;
     }
 
     /**

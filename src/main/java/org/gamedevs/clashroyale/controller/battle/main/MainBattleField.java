@@ -1,8 +1,11 @@
 package org.gamedevs.clashroyale.controller.battle.main;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +26,10 @@ public class MainBattleField implements Initializable {
     private ImageView lava;
     @FXML
     private ImageView background;
+    @FXML
+    private GridPane firstPass;
+    @FXML
+    private GridPane secondPass;
 
     /**
      * Initializes requirements of battle field view
@@ -31,6 +38,18 @@ public class MainBattleField implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    @FXML
+    private void updatePosition(Event event){
+
+        if(event.getSource() == firstPass){
+            Thread thread = (new Thread(() -> {
+                Console.getConsole().printTracingMessage("Mose move detected");
+            }));
+            thread.setDaemon(true);
+            thread.start();
+        }
     }
 
 }

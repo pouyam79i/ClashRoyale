@@ -13,8 +13,6 @@ import org.gamedevs.clashroyale.model.media.Musics;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
-import java.io.IOException;
-
 /**
  * This class launches the main game sequence,
  * which brings the game until main menu!
@@ -44,9 +42,7 @@ public class MainGameLauncher extends Runnable {
         if(UserAccountContainer.getUserAccountContainer().getAccount() == null){
             printTraceMessage("No account detected! Loading signup menu!");
             Platform.runLater(() -> {
-                try {
-                    OnWaitLoader.getOnWaitLoader().disappear();
-                } catch (IOException ignored) {}
+                OnWaitLoader.getOnWaitLoader().disappear();
                 MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                         MenuDataContainer.getMenuDataContainer().getSignupMenu()
                 );
@@ -74,9 +70,7 @@ public class MainGameLauncher extends Runnable {
             }
             // Going to main menu
             MusicPlayer.getMusicPlayer().play(Musics.MAIN_MENU);
-            try {
-                OnWaitLoader.getOnWaitLoader().disappear();
-            } catch (IOException ignored) {}
+            OnWaitLoader.getOnWaitLoader().disappear();
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().remove(
                     MenuDataContainer.getMenuDataContainer().getSignupMenu()
             );
