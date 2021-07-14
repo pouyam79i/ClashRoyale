@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.controller.menu.gameadditon;
+package org.gamedevs.clashroyale.controller.battle.effects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.controller.battle;
+package org.gamedevs.clashroyale.controller.battle.main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

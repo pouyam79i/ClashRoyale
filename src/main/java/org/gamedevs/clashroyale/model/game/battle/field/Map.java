@@ -15,11 +15,11 @@ public class Map {
     /**
      * Max number of X
      */
-    private final int length;
+    private final int width;
     /**
      * Max number of Y
      */
-    private final int width;
+    private final int height;
     /**
      * Graph of pixels
      */
@@ -28,13 +28,13 @@ public class Map {
     /**
      * Constructor of map.
      * Build a map with giving length and width.
-     * @param length of map (max X)
-     * @param width of map (max Y)
+     * @param width of map (max X)
+     * @param height of map (max Y)
      */
-    public Map(int length, int width){
-        this.length = length;
+    public Map(int width, int height){
         this.width = width;
-        pixels = new Pixel[length][width];
+        this.height = height;
+        pixels = new Pixel[width][height];
         buildMap();
         matchGraph();
         lock();
@@ -60,7 +60,7 @@ public class Map {
      * @return pixel of found (else null)
      */
     public Pixel getPixel(int x, int y){
-        if(x < 0 || y < 0 || x >= length || y >= width)
+        if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return pixels[x][y];
     }
@@ -86,11 +86,12 @@ public class Map {
 
     }
 
-    public int getLength() {
-        return length;
-    }
+    // Getters
     public int getWidth() {
         return width;
+    }
+    public int getHeight() {
+        return height;
     }
 
 }

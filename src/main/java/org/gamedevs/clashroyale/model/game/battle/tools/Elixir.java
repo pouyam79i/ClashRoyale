@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.game;
+package org.gamedevs.clashroyale.model.game.battle.tools;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;

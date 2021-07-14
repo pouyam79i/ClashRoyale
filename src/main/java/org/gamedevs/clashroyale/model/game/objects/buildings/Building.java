@@ -11,6 +11,11 @@ public abstract class Building extends GameObject {
     protected int lifeTime;
 
     /**
+     * If life time matchers for building,
+     */
+    protected boolean effectiveLifeTime;
+
+    /**
      * Setting default values for building object
      */
     protected Building(){

@@ -2,8 +2,8 @@ package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
 
-public class Barbarians extends Soldier{
-    public Barbarians(int level) {
+public class Barbarian extends Soldier{
+    public Barbarian(int level) {
         hitSpeed = 1.5;
         target = TargetType.GROUND;
         range = 3;//TODO

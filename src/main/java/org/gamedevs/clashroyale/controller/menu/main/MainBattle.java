@@ -1,6 +1,5 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
-//import animatefx.animation.*;
 import animatefx.animation.BounceIn;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -125,7 +124,7 @@ public class MainBattle implements Initializable {
     @FXML
     private void bringBattlePopup(){
         Thread thread = (new Thread(() -> {
-//            new BounceIn(battleBtn).play();
+            new BounceIn(battleBtn).play();
             try {
                 Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
             } catch (InterruptedException ignored) {}
@@ -144,7 +143,7 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringProfilePopup(){
-//        new BounceIn(profileBtn).play();
+        new BounceIn(profileBtn).play();
         Scene mainBattleMenuScene = profileBtn.getScene();
         AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
         mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
