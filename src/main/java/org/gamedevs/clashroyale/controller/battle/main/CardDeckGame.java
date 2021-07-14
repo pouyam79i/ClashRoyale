@@ -22,10 +22,10 @@ public class CardDeckGame {
     @FXML
     private ProgressBar elixirProgressBar;
 
-    private DoubleProperty value = Elixir.getPlayer1Elixir().valueProperty();
+    private DoubleProperty value = Elixir.getPlayer1Elixir().elixirValueProperty();
 
     public void initialize(){
         elixirProgressBar.progressProperty().bind(value.divide(10));
-//        elixirLabel.textProperty().bind(value.asString("%.0f"));
+        elixirLabel.textProperty().bind(value.asString("%.0f"));
     }
 }

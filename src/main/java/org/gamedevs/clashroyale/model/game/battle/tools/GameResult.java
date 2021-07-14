@@ -10,77 +10,56 @@ import org.gamedevs.clashroyale.model.account.Account;
 public class GameResult {
 
     /**
-     * type of game (easy/hard bot - human) (human - human) (group - group)
+     * first player in this game
      */
-    private String gameType;
+    private String player1Name;
 
-//    /**
-//     * first player in this game
-//     */
-//    private Player player1;
-//
-//    /**
-//     * second player in this game
-//     */
-//    private Player player2;
+    /**
+     * second player in this game
+     */
+    private String player2Name;
 
     /**
      * winner name
      */
     private String winner;
 
-//    private GameResult gameResult = null;
-
-//    public GameResult(String gameType, Player player1, Player player2, String winner) {
-//        this.gameType = gameType;
-//        this.player1 = player1;
-//        this.player2 = player2;
-//        this.winner = winner;
-//    }
-
-
-//    public GameResult getGameResult(){
-//        if(gameResult == null)
-//            gameResult = new GameResult();
-//        return gameResult;
-//    }
-//
-
-
-    //Getter
-    public String getGameType() {
-        return gameType;
+    /**
+     * constructor
+     * @param gameType gameType
+     * @param player1Name player1Name
+     * @param player2Name player2Name
+     * @param winner winner name
+     */
+    public GameResult(String gameType, String player1Name, String player2Name, String winner) {
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
+        this.winner = winner;
     }
 
-//    public Player getPlayer1() {
-//        return player1;
-//    }
-//
-//    public Player getPlayer2() {
-//        return player2;
-//    }
+
+    //Getter and setters
+    public String getPlayer1Name() {
+        return player1Name;
+    }
+
+    public void setPlayer1Name(String player1Name) {
+        this.player1Name = player1Name;
+    }
+
+    public String getPlayer2Name() {
+        return player2Name;
+    }
+
+    public void setPlayer2Name(String player2Name) {
+        this.player2Name = player2Name;
+    }
 
     public String getWinner() {
         return winner;
     }
 
-
-    //Setter
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
-
-//    public void setPlayer1(Player player1) {
-//        this.player1 = player1;
-//    }
-//
-//    public void setPlayer2(Player player2) {
-//        this.player2 = player2;
-//    }
-
     public void setWinner(String winner) {
         this.winner = winner;
     }
-
 }

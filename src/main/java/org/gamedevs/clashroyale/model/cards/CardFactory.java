@@ -1,12 +1,27 @@
 package org.gamedevs.clashroyale.model.cards;
 
+import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.objects.Spell.Arrows;
+import org.gamedevs.clashroyale.model.game.objects.Spell.FireBall;
+import org.gamedevs.clashroyale.model.game.objects.Spell.Rage;
 import org.gamedevs.clashroyale.model.game.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.objects.soldiers.*;
-
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+/**
+ * A class to make ans start new game object regarding to card name
+ * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * @version 1.0
+ */
 public class CardFactory {
 
 
+    /**
+     * make and start
+     * new game object regarding to card name
+     * @param cardName cardName
+     * @param level level
+     */
     public void getGameObject(CardName cardName, int level) {
         switch (cardName) {
 
@@ -16,7 +31,7 @@ public class CardFactory {
             }
             case BARBARIANS ->  {
                 for (int i = 0; i < 4; i++)
-                    new Barbarian(level).run();
+                    new Barbarians(level).run();
             }
             case WIZARD -> new Wizard(level).run();
             case BABY_DRAGON -> new BabyDragon(level).run();
