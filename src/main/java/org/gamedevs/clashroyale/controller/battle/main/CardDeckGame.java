@@ -39,10 +39,6 @@ public class CardDeckGame {
     @FXML
     private ProgressBar elixirProgressBar;
 
-    private Elixir elixir;
-
-    private CardGenerator cardGenerator;
-
     private Player player;
 
     /**
@@ -60,20 +56,20 @@ public class CardDeckGame {
 
 //            if(player.drop(,,source.getCard())) {
                 //reduce elixir
-                elixir.reduceElixir(source.getCard().getCost());
+                player.getElixir().reduceElixir(source.getCard().getCost());
 
                 //remove previous card
                 cardGridPane.getChildren().remove(source);
 
                 //get a new card from card generator and add it to deck
-                CardView cardImageView = new CardView(cardGenerator.getANewCard(), source.getCol());
+                CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
                 cardGridPane.add(cardImageView, cardImageView.getCol(), 0);
 
                 //change Next card
-                next.setImage(CardImageContainer.getCardImageContainer().getCardImage(cardGenerator.getNextCard().getCardName()));
+                next.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
 
                 //add previous card to player possible deck
-                cardGenerator.getCompleteDeck().addCard(source.getCard());
+                player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
 //            }
 
             event.consume();
@@ -85,17 +81,8 @@ public class CardDeckGame {
      */
     public void init() {
         player = PlayerContainer.getPlayerContainer().getPlayer();
-
-        ////////These line should be replaced later////////
-        cardGenerator = new CardGenerator(UserAccountContainer.getUserAccountContainer().getAccount().getDeckContainer(), Elixir.getPlayer1Elixir());
-        elixir = cardGenerator.getElixir();
-        ////////These line should be omitted later////////
-//        Clock.getClock().startClock();
-        elixir.startElixir();
-        //////////////////////////////////////////////////////
-
-        elixirProgressBar.progressProperty().bind(elixir.elixirValueProperty().divide(10));
-        elixirLabel.textProperty().bind(elixir.elixirValueProperty().asString("%.0f"));
+        elixirProgressBar.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
+        elixirLabel.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
         initPlayCards();
     }
 
@@ -110,13 +97,13 @@ public class CardDeckGame {
      */
     private void initPlayCards() {
         int i = 0;
-        for (Card card:cardGenerator.getInitialCards()) {
+        for (Card card:player.getCardGenerator().getInitialCards()) {
             CardView cardImageView = new CardView(card , i%4);
             cardGridPane.add(cardImageView, i % 4, 0);
             i++;
         }
 
-        next.setImage(CardImageContainer.getCardImageContainer().getCardImage(cardGenerator.getNextCard().getCardName()));
+        next.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
 
     }
 
@@ -164,7 +151,7 @@ public class CardDeckGame {
             getChildren().add(cost);
             getChildren().add(ElixirImage);
 
-            elixir.elixirValueProperty().addListener((observableValue, oldValue, newValue) -> {
+            player.getElixir().elixirValueProperty().addListener((observableValue, oldValue, newValue) -> {
                 if (newValue.doubleValue() < card.getCost()) {
                     removeEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
                     Effect lockEffect = new ColorAdjust(0, -100, 0, 0);

@@ -19,14 +19,9 @@ public class Elixir extends Runnable {
      */
     private DoubleProperty elixirValue = new SimpleDoubleProperty(4);
     /**
-     * clock which elixir work regarding to it
-     */
-//    Clock clock = Clock.getClock();
-
-    /**
      * time (in seconds) that elixir has to produce slowly
      */
-    private static final int SLOW_PRODUCTION_DURATION = 60 * 2;
+    private static final int SLOW_PRODUCTION_DURATION = 60 * 1;
     /**
      * whole time (in seconds) that elixir has to produce
      */
@@ -37,14 +32,15 @@ public class Elixir extends Runnable {
     private static final int MAXIMUM_ELIXIR = 10;
 
     /**
-     * Elixir instance
+     * game clock
      */
-    private static Elixir player1Elixir = null;
+    private Clock clock;
 
     /**
      * constructor
      */
-    public Elixir() {
+    public Elixir(Clock clock) {
+        this.clock = clock;
     }
 
     /**
@@ -52,22 +48,21 @@ public class Elixir extends Runnable {
      * stop when it reaches 3 min
      */
     public void run() {
-        // TODO: fix this part
-//        do {
-//            if (elixirValue.get() < MAXIMUM_ELIXIR) {
-//                if (clock.getClockValue() < SLOW_PRODUCTION_DURATION)
-//                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
-//                else
-//                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
-//            }
-//
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
-//            }
-//
-//        } while (clock.getClockValue() < PRODUCTION_DURATION);
+        do {
+            if (elixirValue.get() < MAXIMUM_ELIXIR) {
+                if (clock.getTotalSeconds() > SLOW_PRODUCTION_DURATION)
+                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
+                else
+                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
+            }
+
+        } while (clock.getTotalSeconds() < PRODUCTION_DURATION);
     }
 
 
@@ -99,16 +94,7 @@ public class Elixir extends Runnable {
     public double getElixirValue() {
         return elixirValue.get();
     }
-
     public DoubleProperty elixirValueProperty() {
         return elixirValue;
     }
-
-    public static Elixir getPlayer1Elixir() {
-        if (player1Elixir == null)
-            player1Elixir = new Elixir();
-
-        return player1Elixir;
-    }
-
 }
