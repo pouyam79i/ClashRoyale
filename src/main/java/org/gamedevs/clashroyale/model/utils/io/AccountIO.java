@@ -68,6 +68,7 @@ public class AccountIO {
             Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
             Console.getConsole().printTracingMessage("some thing went wrong while writing in " + fileName);
+            e.printStackTrace();
         } finally {
             try {
                 if (objectOutputStream != null)

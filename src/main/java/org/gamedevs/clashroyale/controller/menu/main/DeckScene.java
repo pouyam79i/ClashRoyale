@@ -9,7 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
@@ -253,7 +256,7 @@ public class DeckScene {
      * 9823010 -CE@AUT
      * @version 1.0
      */
-    class CardView extends GridPane {
+    class CardView extends AnchorPane {
         private Card card;
         private ImageView cardImage = new ImageView();
         private ImageView ElixirImage = new ImageView();
@@ -261,7 +264,7 @@ public class DeckScene {
 
 
         /**
-         * constructor to make a new VBox
+         * constructor to make a new AnchorPane
          *
          * @param card the card which we want to show
          */
@@ -269,17 +272,23 @@ public class DeckScene {
             //init info of fields
             this.card = card;
             cardImage.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-//            ElixirImage.setImage(new Image(DeckScene.class.getResourceAsStream("org/gamedevs/clashroyale/view/img/ui/icon/cost.png")));
+//            ElixirImage.setImage(new Image())); //TODO
             this.cost.setText(String.valueOf(card.getCost()));
 
             //set size
-            cardImage.setFitHeight(105);
+            cardImage.setFitHeight(100);
             cardImage.setFitWidth(85);
-            cost.setLayoutX(42.5);
-            ElixirImage.setLayoutX(42.5);
+            cost.setLayoutX(42);
+            cost.setLayoutY(97);
+            cost.setTextFill(Color.WHITE);
+            ElixirImage.setFitHeight(5);
+            ElixirImage.setFitWidth(5);
+            ElixirImage.setLayoutX(42);
+            ElixirImage.setLayoutY(100);
 
 
-            //add to vbox
+
+            //add to AnchorPane
             getChildren().add(cardImage);
             getChildren().add(cost);
             getChildren().add(ElixirImage);
