@@ -112,7 +112,7 @@
             <Image url="@../../../img/battlefield/dark_arena/selected_tile.png" />
          </image>
       </ImageView>
-      <Label fx:id="clockLabel" layoutX="309.0" layoutY="49.0" text="Label" textFill="WHITE">
+      <Label fx:id="clockLabel" layoutX="311.0" layoutY="54.0" style="-fx-background-color: rgb(1,1,1,0.3);" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

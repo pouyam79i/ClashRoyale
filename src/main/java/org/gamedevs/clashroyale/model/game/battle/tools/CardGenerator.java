@@ -98,11 +98,8 @@ public class CardGenerator {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 if (elixir.elixirValueProperty().get() < card.getCost() && !card.isLock()) {
                     card.setLock(true);
-                    Console.getConsole().printTracingMessage(card.getCardName() + "is locked");
                 } else if (elixir.elixirValueProperty().get() >= card.getCost() && card.isLock()) {
                     card.setLock(false);
-                    Console.getConsole().printTracingMessage(card.getCardName() + "is unlocked");
-
                 }
             }
         });

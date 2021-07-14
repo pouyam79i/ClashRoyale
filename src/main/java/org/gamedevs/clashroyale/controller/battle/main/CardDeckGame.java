@@ -52,10 +52,10 @@ public class CardDeckGame {
         @Override
         public void handle(MouseEvent event) {
             CardView source = (CardView) event.getSource();
-//            Image image = source.getCardImage().getImage();
+            Image image = source.getCardImage().getImage();
             Dragboard db = (source.getCardImage()).startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
-            cc.putImage(CardImageContainer.getCardImageContainer().getCardImage(CardName.ARCHERS));
+            cc.putImage(image);
             db.setContent(cc);
 
 //            if(player.drop(,,source.getCard())) {
