@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * This class contains (x,y) of mouse drop in game!
- * easily get(x,y) of droup in game by getting property of this call!
+ * easily get(x,y) of drop in game by getting property of this call!
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0
  */
