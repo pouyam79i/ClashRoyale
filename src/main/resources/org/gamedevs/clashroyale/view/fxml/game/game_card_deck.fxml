@@ -49,8 +49,8 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="nextLabel" layoutX="359.0" layoutY="32.0" onDragDetected="#start" text="Next:" textFill="WHITE" />
+      <Label fx:id="nextLabel" layoutX="359.0" layoutY="38.0" onDragDetected="#init" text="Next:" textFill="WHITE" />
+      <ImageView fx:id="nextCardImageView" fitHeight="55.0" fitWidth="44.0" layoutX="343.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="35.0" fitWidth="28.0" layoutX="243.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="next" fitHeight="64.0" fitWidth="50.0" layoutX="330.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
