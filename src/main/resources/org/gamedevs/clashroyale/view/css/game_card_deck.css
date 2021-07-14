@@ -2,8 +2,9 @@
     src: url('../fonts/Clash-Regular.ttf');
 }
 
-#cardGridPane{
-    -fx-background-color : #0864bb;
+#vbox{
+    -fx-background-image : url("../img/gamedeck/wooden1.jpg");
+    -fx-background-size : cover;
 }
 
 
@@ -26,4 +27,6 @@
     -fx-accent: #E01CD8;
 }
 
-
+.progress-bar > .track {
+  -fx-control-inner-background: transparent;
+}

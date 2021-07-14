@@ -18,11 +18,6 @@ public class DeckContainer implements Serializable {
      * deck contains cards.
      */
     private ArrayList<Card> deck;
-    /**
-     * limit of deck,
-     * std is 8.
-     */
-    private final int limit;
 
     /**
      * DeckContainer constructor,
@@ -30,10 +25,6 @@ public class DeckContainer implements Serializable {
      */
     public DeckContainer() {
         deck = new ArrayList<Card>();
-        limit = 8;
-//        for (int i = 0; i < limit; i++) {
-//            deck.add(i, null);
-//        }
     }
 
     /**
@@ -43,21 +34,16 @@ public class DeckContainer implements Serializable {
      * @param card  card of player will be added (or replaced with another card in deck)
      * @return a card if it is replaced by another card in the deck, else will be null!
      */
-    public Card addCard(int index, Card card) {
-        if (card == null)
-            return null;
-        Card temp = null;
-        if (index >= 0 && index < limit) {
-            temp = deck.get(index);
-            deck.add(index, card);
-        }
-        return temp;
+    public void addCard(int index, Card card) {
+
+        deck.add(index, card);
+
     }
 
     /**
      * adds a new card
      *
-     * @param card  card of player will be added (or replaced with another card in deck)
+     * @param card card of player will be added (or replaced with another card in deck)
      * @return a card if it is replaced by another card in the deck, else will be null!
      */
     public void addCard(Card card) {
@@ -84,13 +70,15 @@ public class DeckContainer implements Serializable {
      *
      * @param index of card
      */
-    public Card removeCard(int index) {
-        Card temp = null;
-        if (index >= 0 && index < limit) {
-            temp = deck.get(index);
-            deck.add(index, null);
-        }
-        return temp;
+    public void removeCard(int index) {
+
+        deck.add(index, null);
+
+    }
+
+
+    public Card getRandomCard() {
+        return deck.get(deck.size() - 1);
     }
 
     // Getter

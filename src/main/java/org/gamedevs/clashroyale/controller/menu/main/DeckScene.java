@@ -1,20 +1,23 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
+import com.sun.scenario.effect.Effect;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.ProgressBar;
+//import javafx.scene.control.Cost;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.cards.Card;
-import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
+import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
+
+import java.net.URL;
 
 
 /**
@@ -72,8 +75,8 @@ public class DeckScene {
         public void handle(MouseEvent event) {
             source = (CardView) event.getSource();
             sourceGridPane = source.getParent();
-            Image image = source.getImageView().getImage();
-            Dragboard db = (source.getImageView()).startDragAndDrop(TransferMode.MOVE);
+            Image image = source.getCardImage().getImage();
+            Dragboard db = (source.getCardImage()).startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
             cc.putImage(image);
             db.setContent(cc);
@@ -104,17 +107,17 @@ public class DeckScene {
      */
     private void updateGrids(DragEvent event) {
         //change source image
-        Image oldImage = ((CardView) event.getSource()).getImageView().getImage();
-        source.getImageView().setImage(oldImage);
+        Image oldImage = ((CardView) event.getSource()).getCardImage().getImage();
+        source.getCardImage().setImage(oldImage);
 
         //change destination image
         Image newImage = event.getDragboard().getImage();
-        ((CardView) event.getSource()).getImageView().setImage(newImage);
+        ((CardView) event.getSource()).getCardImage().setImage(newImage);
 
-        //change progress bar
-        double tempProgressBar = ((CardView) event.getSource()).getProgressBar();
-        ((CardView) event.getSource()).setProgressBar(source.getProgressBar());
-        source.setProgressBar(tempProgressBar);
+        //change cost label
+        String tempCost = (((CardView) event.getSource()).getCost()).getText();
+        ((CardView) event.getSource()).getCost().setText(source.getCost().getText());
+        source.getCost().setText(tempCost);
 
         //change id
         Card tempCard = destination.getCard();
@@ -244,16 +247,18 @@ public class DeckScene {
     }
 
     /**
-     * A vbox to show card and progress bar in grid cell
+     * A GridPane to show card and progress bar in grid cell
      *
      * @author Hosna Hoseini
      * 9823010 -CE@AUT
      * @version 1.0
      */
-    class CardView extends VBox {
+    class CardView extends GridPane {
         private Card card;
-        private ImageView imageView = new ImageView();
-        private ProgressBar progressBar;
+        private ImageView cardImage = new ImageView();
+        private ImageView ElixirImage = new ImageView();
+        private Label cost = new Label();
+
 
         /**
          * constructor to make a new VBox
@@ -263,24 +268,21 @@ public class DeckScene {
         public CardView(Card card) {
             //init info of fields
             this.card = card;
-            imageView.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-            if (card.getCardName().equals(CardName.EMPTY))
-                progressBar = new ProgressBar(0);
-            else
-                progressBar = new ProgressBar(0.5);
-
-            progressBar.setVisible(false);
-
+            cardImage.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
+//            ElixirImage.setImage(new Image(DeckScene.class.getResourceAsStream("org/gamedevs/clashroyale/view/img/ui/icon/cost.png")));
+            this.cost.setText(String.valueOf(card.getCost()));
 
             //set size
-            imageView.setFitHeight(105);
-            imageView.setFitWidth(85);
-            progressBar.setPrefWidth(85);
-            progressBar.setPrefHeight(15);
+            cardImage.setFitHeight(105);
+            cardImage.setFitWidth(85);
+            cost.setLayoutX(42.5);
+            ElixirImage.setLayoutX(42.5);
+
 
             //add to vbox
-            getChildren().add(imageView);
-            getChildren().add(progressBar);
+            getChildren().add(cardImage);
+            getChildren().add(cost);
+            getChildren().add(ElixirImage);
 
             addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
             addEventFilter(DragEvent.DRAG_DROPPED, putCard);
@@ -289,18 +291,8 @@ public class DeckScene {
         }
 
         //Getter
-        public ImageView getImageView() {
-            return imageView;
-        }
-
-        //Getter
-        public double getProgressBar() {
-            return progressBar.getProgress();
-        }
-
-        //Setter
-        public void setProgressBar(double value) {
-            this.progressBar.setProgress(value);
+        public ImageView getCardImage() {
+            return cardImage;
         }
 
         //Getter
@@ -311,6 +303,14 @@ public class DeckScene {
         //Setter
         public void setCard(Card card) {
             this.card = card;
+        }
+
+        public Label getCost() {
+            return cost;
+        }
+
+        public void setCost(Label cost) {
+            this.cost = cost;
         }
     }
 }
