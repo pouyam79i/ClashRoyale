@@ -44,8 +44,8 @@ public abstract class Player extends Runnable {
      * Also no need to translate x and y for bot,
      * Because it knows all the map by reading it!
      */
-    public void drop(int x, int y, Card card){
-
+    public boolean drop(int x, int y, Card card){
+        return false; // TODO: change when code is completed
     }
 
 }
