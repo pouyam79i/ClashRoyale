@@ -41,6 +41,8 @@ public class Elixir extends Runnable {
      */
     public Elixir(Clock clock) {
         this.clock = clock;
+        threadName = "Elixir";
+
     }
 
     /**

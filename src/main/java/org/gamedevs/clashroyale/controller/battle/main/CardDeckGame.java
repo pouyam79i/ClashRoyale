@@ -26,19 +26,25 @@ import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
+import java.util.ArrayList;
+
 public class CardDeckGame {
 
     @FXML
     private GridPane cardGridPane;
+    private static GridPane cardGridPaneUpdatable = new GridPane();
 
     @FXML
     private Label elixirLabel;
+    private static Label elixirLabelUpdatable = new Label();
 
     @FXML
     private ImageView next;
+    private static ImageView nextUpdatable = new ImageView();
 
     @FXML
     private ProgressBar elixirProgressBar;
+    private static ProgressBar elixirProgressBarUpdatable = new ProgressBar();
 
     private Player player;
 
@@ -56,43 +62,44 @@ public class CardDeckGame {
             db.setContent(cc);
 
 //            if(player.drop(,,source.getCard())) {
-                //reduce elixir
-                player.getElixir().reduceElixir(source.getCard().getCost());
+            //reduce elixir
+            player.getElixir().reduceElixir(source.getCard().getCost());
 
-                //remove previous card
-                cardGridPane.getChildren().remove(source);
+            //remove previous card
+            cardGridPaneUpdatable.getChildren().remove(source);
 
-                //get a new card from card generator and add it to deck
-                CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
-                cardGridPane.add(cardImageView, cardImageView.getCol(), 0);
+            //get a new card from card generator and add it to deck
+            CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
+            cardGridPaneUpdatable.add(cardImageView, cardImageView.getCol(), 0);
 
-                //change Next card
-                next.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
+            //change Next card
+            nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
 
-                //add previous card to player possible deck
-                player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
+            //add previous card to player possible deck
+            player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
 //            }
 
             event.consume();
         }
     };
 
+    public void initialize() {
+        setCardGridPaneUpdatable(cardGridPane);
+        setElixirLabelUpdatable(elixirLabel);
+        setElixirProgressBarUpdatable(elixirProgressBar);
+        setNextUpdatable(next);
+    }
+
     /**
      * initialize deck and bind elixir
      */
     public void init() {
         player = PlayerContainer.getPlayerContainer().getPlayer();
-        Platform.runLater(() -> {
-            elixirProgressBar.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
-            elixirLabel.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
-            initPlayCards();
-        });
-    }
+        System.out.println(player);
+        elixirProgressBarUpdatable.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
+        elixirLabelUpdatable.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
+        initPlayCards();
 
-
-    @FXML
-    void start(MouseEvent event) {
-        init();
     }
 
     /**
@@ -100,13 +107,29 @@ public class CardDeckGame {
      */
     private void initPlayCards() {
         int i = 0;
-        for (Card card:player.getCardGenerator().getInitialCards()) {
-            CardView cardImageView = new CardView(card , i%4);
-            cardGridPane.add(cardImageView, i % 4, 0);
+        ArrayList<Card> cards = player.getCardGenerator().getInitialCards();
+        for (Card card : cards) {
+            CardView cardImageView = new CardView(card, i % 4);
+            cardGridPaneUpdatable.add(cardImageView, i % 4, 0);
             i++;
         }
-        next.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
+        nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
+    }
 
+    public void setCardGridPaneUpdatable(GridPane cardGridPaneUpdatable) {
+        this.cardGridPaneUpdatable = cardGridPaneUpdatable;
+    }
+
+    public void setElixirLabelUpdatable(Label elixirLabelUpdatable) {
+        this.elixirLabelUpdatable = elixirLabelUpdatable;
+    }
+
+    public void setElixirProgressBarUpdatable(ProgressBar elixirProgressBarUpdatable) {
+        this.elixirProgressBarUpdatable = elixirProgressBarUpdatable;
+    }
+
+    public void setNextUpdatable(ImageView nextUpdatable) {
+        this.nextUpdatable = nextUpdatable;
     }
 
     /**

@@ -5,6 +5,7 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * a class to hold a set of card as card deck for players
@@ -80,9 +81,10 @@ public class DeckContainer implements Serializable {
 
     public Card getRandomCard() {
         Card card;
+        Random random = new Random();
         do{
-            card = deck.get(deck.size() - 1);
-        }while (card.getCardName() != CardName.EMPTY);
+            card = deck.get(random.nextInt(deck.size() - 1));
+        }while (card.getCardName() == CardName.EMPTY);
         return card;
     }
 
