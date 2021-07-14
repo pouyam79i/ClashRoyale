@@ -40,16 +40,6 @@
          <padding>
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
          </padding>
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
       </GridPane>
       <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="400.0" prefHeight="193.0" prefWidth="373.0">
          <content>
@@ -68,6 +58,16 @@
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
             </GridPane>
          </content>
          <padding>

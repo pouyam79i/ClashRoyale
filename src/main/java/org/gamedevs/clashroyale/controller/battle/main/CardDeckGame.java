@@ -117,8 +117,6 @@ public class CardDeckGame {
     class CardView extends AnchorPane {
         private Card card;
         private ImageView cardImage = new ImageView();
-        private ImageView ElixirImage = new ImageView();
-        private Label cost = new Label();
         private int col;
 
 
@@ -131,25 +129,17 @@ public class CardDeckGame {
             //init info of fields
             this.card = card;
             cardImage.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-//            ElixirImage.setImage(new Image())); //TODO
-            this.cost.setText(String.valueOf(card.getCost()));
+
             this.col = col;
 
             //set size
             cardImage.setFitHeight(80);
             cardImage.setFitWidth(68);
-            cost.setLayoutX(33);
-            cost.setLayoutY(75);
-            cost.setTextFill(Color.WHITE);
-            ElixirImage.setFitHeight(5);
-            ElixirImage.setFitWidth(5);
-            ElixirImage.setLayoutX(33);
-            ElixirImage.setLayoutY(73);
+
 
             //add to AnchorPane
             getChildren().add(cardImage);
-            getChildren().add(cost);
-            getChildren().add(ElixirImage);
+
 
             player.getElixir().elixirValueProperty().addListener((observableValue, oldValue, newValue) -> {
                 if (newValue.doubleValue() < card.getCost()) {
@@ -174,10 +164,6 @@ public class CardDeckGame {
             return card;
         }
 
-        public Label getCost() {
-            return cost;
-        }
-
         public int getCol() {
             return col;
         }
@@ -186,10 +172,6 @@ public class CardDeckGame {
 
         public void setCard(Card card) {
             this.card = card;
-        }
-
-        public void setCost(Label cost) {
-            this.cost = cost;
         }
 
         public void setCol(int col) {

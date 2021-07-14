@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.container.deck;
 
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.cards.CardName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -78,7 +79,11 @@ public class DeckContainer implements Serializable {
 
 
     public Card getRandomCard() {
-        return deck.get(deck.size() - 1);
+        Card card;
+        do{
+            card = deck.get(deck.size() - 1);
+        }while (card.getCardName() != CardName.EMPTY);
+        return card;
     }
 
     // Getter

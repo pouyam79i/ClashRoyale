@@ -117,11 +117,6 @@ public class DeckScene {
         Image newImage = event.getDragboard().getImage();
         ((CardView) event.getSource()).getCardImage().setImage(newImage);
 
-        //change cost label
-        String tempCost = (((CardView) event.getSource()).getCost()).getText();
-        ((CardView) event.getSource()).getCost().setText(source.getCost().getText());
-        source.getCost().setText(tempCost);
-
         //change id
         Card tempCard = destination.getCard();
         ((CardView) event.getSource()).setCard(source.getCard());
@@ -259,8 +254,6 @@ public class DeckScene {
     class CardView extends AnchorPane {
         private Card card;
         private ImageView cardImage = new ImageView();
-        private ImageView ElixirImage = new ImageView();
-        private Label cost = new Label();
 
 
         /**
@@ -272,26 +265,15 @@ public class DeckScene {
             //init info of fields
             this.card = card;
             cardImage.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-//            ElixirImage.setImage(new Image())); //TODO
-            this.cost.setText(String.valueOf(card.getCost()));
 
             //set size
-            cardImage.setFitHeight(100);
+            cardImage.setFitHeight(105);
             cardImage.setFitWidth(85);
-            cost.setLayoutX(42);
-            cost.setLayoutY(97);
-            cost.setTextFill(Color.WHITE);
-            ElixirImage.setFitHeight(5);
-            ElixirImage.setFitWidth(5);
-            ElixirImage.setLayoutX(42);
-            ElixirImage.setLayoutY(100);
-
 
 
             //add to AnchorPane
             getChildren().add(cardImage);
-            getChildren().add(cost);
-            getChildren().add(ElixirImage);
+
 
             addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
             addEventFilter(DragEvent.DRAG_DROPPED, putCard);
@@ -314,12 +296,5 @@ public class DeckScene {
             this.card = card;
         }
 
-        public Label getCost() {
-            return cost;
-        }
-
-        public void setCost(Label cost) {
-            this.cost = cost;
-        }
     }
 }
