@@ -12,6 +12,9 @@ import org.gamedevs.clashroyale.model.cards.Card;
  */
 public class SelectedCardContainer {
 
+    /**
+     * only instance of this class
+     */
     private static SelectedCardContainer selectedCardContainer = null;
 
     /**
@@ -22,6 +25,10 @@ public class SelectedCardContainer {
      * Tells if the current selected card is dropped
      */
     private SimpleBooleanProperty selectedCardIsDropped;
+    /**
+     * Tells if the current selected card is dropped
+     */
+    private SimpleBooleanProperty selectedCardFailedToDrop;
     /**
      * Tells if selected card exists!
      */
@@ -34,6 +41,8 @@ public class SelectedCardContainer {
     private SelectedCardContainer(){
         selectedCard = null;
         selectedCardIsDropped = new SimpleBooleanProperty();
+        selectedCardFailedToDrop = new SimpleBooleanProperty();
+        selectedCardFailedToDrop.setValue(false);
         selectedCardIsDropped.setValue(false);
         selectedCardExist = new SimpleBooleanProperty();
         selectedCardExist.setValue(false);
@@ -48,6 +57,7 @@ public class SelectedCardContainer {
         Platform.runLater(() -> {
             selectedCardExist.setValue(true);
             selectedCardIsDropped.setValue(false);
+            selectedCardFailedToDrop.setValue(false);
         });
         Card temp = selectedCard;   // If there is any selected card from before
         selectedCard = newCard;
@@ -61,6 +71,7 @@ public class SelectedCardContainer {
         Platform.runLater(() -> {
             selectedCardIsDropped.setValue(false);
             selectedCardExist.setValue(false);
+            selectedCardFailedToDrop.setValue(false);
         });
         Card temp = selectedCard;
         selectedCard = null;
@@ -68,10 +79,9 @@ public class SelectedCardContainer {
     }
 
     /**
-     * read selected card object
      * @return card if there is selected card
      */
-    public Card readSelectedCard(){
+    public Card getSelectedCard(){
         return selectedCard;
     }
 
@@ -82,6 +92,18 @@ public class SelectedCardContainer {
         Platform.runLater(() -> {
             selectedCardExist.setValue(false);
             selectedCardIsDropped.setValue(true);
+            selectedCardFailedToDrop.setValue(false);
+        });
+    }
+
+    /**
+     * if dropping process failed
+     */
+    public void droppingFailed(){
+        Platform.runLater(() -> {
+            selectedCardExist.setValue(false);
+            selectedCardIsDropped.setValue(false);
+            selectedCardFailedToDrop.setValue(true);
         });
     }
 
@@ -97,6 +119,12 @@ public class SelectedCardContainer {
     }
     public SimpleBooleanProperty selectedCardExistProperty() {
         return selectedCardExist;
+    }
+    public boolean isSelectedCardFailedToDrop() {
+        return selectedCardFailedToDrop.get();
+    }
+    public SimpleBooleanProperty selectedCardFailedToDropProperty() {
+        return selectedCardFailedToDrop;
     }
 
     /**
