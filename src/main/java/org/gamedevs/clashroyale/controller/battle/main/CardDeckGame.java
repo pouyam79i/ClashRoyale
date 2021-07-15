@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.controller.battle.main;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
@@ -81,9 +82,11 @@ public class CardDeckGame {
      */
     public void init() {
         player = PlayerContainer.getPlayerContainer().getPlayer();
-        elixirProgressBar.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
-        elixirLabel.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
-        initPlayCards();
+        Platform.runLater(() -> {
+            elixirProgressBar.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
+            elixirLabel.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
+            initPlayCards();
+        });
     }
 
 
@@ -102,7 +105,6 @@ public class CardDeckGame {
             cardGridPane.add(cardImageView, i % 4, 0);
             i++;
         }
-
         next.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
 
     }

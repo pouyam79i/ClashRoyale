@@ -32,7 +32,8 @@ public abstract class Bot extends Player {
      */
     @Override
     public void run() {
-
+        elixir.start();
+        algorithm();
     }
 
     /**

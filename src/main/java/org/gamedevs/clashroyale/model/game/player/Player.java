@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.player;
 
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
@@ -56,8 +57,24 @@ public abstract class Player extends Runnable {
      * Tells the map engine to drop player card on that!
      * Also no need to translate x and y for bot,
      * Because it knows all the map by reading it!
+     * @param x of drop
+     * @param y of drop
+     * @param card of drop
      */
     public boolean drop(int x, int y, Card card){
+        return false; // TODO: change when code is completed
+    }
+
+    /**
+     * Translate x and y according to player side!
+     * Tells the map engine to drop player card on that!
+     * Also no need to translate x and y for bot,
+     * Because it knows all the map by reading it!
+     * @param x of drop
+     * @param y of drop
+     * @param cardName of drop
+     */
+    public boolean drop(int x, int y, CardName cardName){
         return false; // TODO: change when code is completed
     }
 

@@ -2,6 +2,9 @@ package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.application.Platform;
 import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
+import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
+import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameManager;
@@ -46,18 +49,27 @@ public class OfflineBattleLauncher extends Runnable {
                     MenuDataContainer.getMenuDataContainer().getMainMenuRootGroup()
             );
         });
+        // Initializing game engines
         GameManager gameManager = new GameManager();
+        gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), false);
+        // Setting player to player container
+        PlayerContainer.getPlayerContainer().setPlayer(gameManager.getTopPlayer());
+        // Binding game timer to view
         GameTimer.getGameTimer().bindTimerLabel(gameManager.getClock().clockStringProperty());
+        // Initializing card deck of player
+        new CardDeckGame().init();
+        // Playing battle music
+        MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
+        // Adding battle field group to root pane!
         Platform.runLater(() -> {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                     BattleFieldContainer.getBattleFieldContainer().getMainBattleGroup()
             );
-        });
-        gameManager.start();
-        MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
-        Platform.runLater(() -> {
             OnWaitLoader.getOnWaitLoader().disappear();
         });
+        // Starting the game!
+        gameManager.start();
+        // TODO: replace this code with end of game checker()!
         try {
             Thread.sleep(30000); //TODO: Just testing :)
         } catch (InterruptedException ignored) {}
