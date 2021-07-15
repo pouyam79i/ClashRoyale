@@ -1,51 +1,56 @@
 package org.gamedevs.clashroyale.model.cards;
 
-import org.gamedevs.clashroyale.model.game.objects.GameObject;
-// TODO: uncomment this
-//import org.gamedevs.clashroyale.model.game.objects.Spell.Arrows;
-//import org.gamedevs.clashroyale.model.game.objects.Spell.FireBall;
-//import org.gamedevs.clashroyale.model.game.objects.Spell.Rage;
+import org.gamedevs.clashroyale.model.game.battle.field.Droppable;
 import org.gamedevs.clashroyale.model.game.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.objects.soldiers.*;
-import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.game.spell.Arrows;
+import org.gamedevs.clashroyale.model.game.spell.FireBall;
+import org.gamedevs.clashroyale.model.game.spell.Rage;
+
+import java.util.ArrayList;
+
 /**
  * A class to make ans start new game object regarding to card name
- * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
  * @version 1.0
  */
 public class CardFactory {
 
-
     /**
-     * make and start
-     * new game object regarding to card name
-     * @param cardName cardName
-     * @param level level
+     * This method builds droppable items accoring to name of card
+     * @param cardName name of card
+     * @param level level of card
+     * @param cardSide side of card
+     * @return droppable items in an arry list
      */
-    public void getGameObject(CardName cardName, int level) {
+    public static ArrayList<Droppable> buildDroppableItems(CardName cardName, int level, Side cardSide){
+        ArrayList<Droppable> droppableItems = new ArrayList<Droppable>();
         switch (cardName) {
-
             case ARCHERS -> {
-                for (int i = 0; i < 2; i++)
-                    new Archer(level).run();
+                droppableItems.add(new Archer(level, cardSide));
+                droppableItems.add(new Archer(level, cardSide));
             }
-            case BARBARIANS ->  {
-                for (int i = 0; i < 4; i++){
-                    // TODO: uncomment this
-//                    new Barbarians(level).run();
-                }
+            case BARBARIANS -> {
+                droppableItems.add(new Barbarian(level, cardSide));
+                droppableItems.add(new Barbarian(level, cardSide));
+                droppableItems.add(new Barbarian(level, cardSide));
+                droppableItems.add(new Barbarian(level, cardSide));
+                droppableItems.add(new Barbarian(level, cardSide));
             }
-            case WIZARD -> new Wizard(level).run();
-            case BABY_DRAGON -> new BabyDragon(level).run();
-            case VALKYRIE -> new Valkyrie(level).run();
-            case MINI_PEKKA -> new MiniPeka(level).run();
-            case GIANT -> new Giant(level).run();
-            case CANNON -> new Cannon(level).run();
-            case INFERNO_TOWER -> new InfernoTower(level).run();
-//            case ARROWS -> new Arrows(level).run();
-//            case FIREBALL -> new FireBall(level).run();
-//            case RAGE -> new Rage(level).run();
+            case BABY_DRAGON -> droppableItems.add(new BabyDragon(level, cardSide));
+            case WIZARD -> droppableItems.add(new Wizard(level, cardSide));
+            case MINI_PEKKA -> droppableItems.add(new MiniPeka(level, cardSide));
+            case VALKYRIE -> droppableItems.add(new Valkyrie(level, cardSide));
+            case GIANT -> droppableItems.add(new Giant(level, cardSide));
+            case CANNON -> droppableItems.add(new Cannon(level, cardSide));
+            case INFERNO_TOWER -> droppableItems.add(new InfernoTower(level, cardSide));
+            case RAGE -> droppableItems.add(new Rage(level, cardSide));
+            case FIREBALL -> droppableItems.add(new FireBall(level, cardSide));
+            case ARROWS -> droppableItems.add(new Arrows(level, cardSide));
         }
+        return droppableItems;
     }
+
 }
