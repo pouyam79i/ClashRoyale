@@ -1,12 +1,14 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Archer extends Soldier{
 
-    public Archer(int level) {
+    public Archer(int level, Side side) {
+        super(side);
         hitSpeed = 1.2;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         range = 5;
         areaSplash = false;
 

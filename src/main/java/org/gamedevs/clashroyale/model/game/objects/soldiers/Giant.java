@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Giant extends Soldier{
-    public Giant(int level) {
+    public Giant(int level, Side side) {
+        super(side);
         hitSpeed = 1.5;
-        target = TargetType.BUILDING;
+        attackTargetType = TargetType.BUILDING;
         range = 3;//TODO
         areaSplash = false;
 

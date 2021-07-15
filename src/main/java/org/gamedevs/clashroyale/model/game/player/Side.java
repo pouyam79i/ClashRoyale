@@ -7,6 +7,8 @@ package org.gamedevs.clashroyale.model.game.player;
  */
 public enum Side {
 
+    EMPTY(-1),  // Game immortal blocks has no sides!
+
     TOP(0),     // Player playing in top side of map (near 0)
     DOWN(1);    // Player playing in down side of map (near last pixel)
 

@@ -1,13 +1,15 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class PrincessTower extends Building{
 
-    public PrincessTower(int level){
+    public PrincessTower(int level, Side side){
+        super(side);
         hitSpeed = 0.8;
         range = 7.5;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         lifeTime = 1000;
         effectiveLifeTime = false;
 

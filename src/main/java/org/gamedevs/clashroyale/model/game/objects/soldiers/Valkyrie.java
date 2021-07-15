@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Valkyrie extends Soldier{
-    public Valkyrie(int level) {
+    public Valkyrie(int level, Side side) {
+        super(side);
         hitSpeed = 1.5;
-        target = TargetType.GROUND;
+        attackTargetType = TargetType.GROUND;
         range = 3;//TODO
         areaSplash = true;
 

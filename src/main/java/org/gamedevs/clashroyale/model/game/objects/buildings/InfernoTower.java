@@ -1,14 +1,16 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class InfernoTower extends Building {
 
     int maxDamage;
 
-    public InfernoTower(int level) {
+    public InfernoTower(int level, Side side){
+        super(side);
         hitSpeed = 0.4;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         range = 6;
         lifeTime = 40;
         effectiveLifeTime = true;

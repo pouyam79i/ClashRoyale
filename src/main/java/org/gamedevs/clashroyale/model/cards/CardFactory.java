@@ -46,7 +46,6 @@ public class CardFactory {
 //            case ARROWS -> new Arrows(level).run();
 //            case FIREBALL -> new FireBall(level).run();
 //            case RAGE -> new Rage(level).run();
-
         }
     }
 }
