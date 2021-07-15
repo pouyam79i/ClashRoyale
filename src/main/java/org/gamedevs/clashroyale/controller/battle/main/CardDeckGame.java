@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.controller.battle.main;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -57,40 +60,86 @@ public class CardDeckGame {
                 selectCard(source);
             }
 
-////            if(player.drop(,,source.getCard())) {
-//            //reduce elixir
-//            player.getElixir().reduceElixir(source.getCard().getCost());
-//
-//            //remove previous card
-//            cardGridPaneUpdatable.getChildren().remove(source);
-//
-//            //get a new card from card generator and add it to deck
-//            CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
-//            cardGridPaneUpdatable.add(cardImageView, cardImageView.getCol(), 0);
-//
-//            //change Next card
-//            nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
-//
-//            //add previous card to player possible deck
-//            player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
-////            }
-
-            event.consume();
+            putCard(source);
         }
     };
 
-    private void selectCard(CardView source) {
-        source.getCardImage().setFitHeight(85);
-        source.getCardImage().setFitWidth(72);
-        Console.getConsole().printTracingMessage("select " + source.getCard().getCardName());
+    /**
+     * check if its possible to put card remove it from deck and produce new one
+     * @param source card to put
+     */
+    private void putCard(CardView source) {
+
+        /**
+         * listener which calls when a card put in game
+         */
+        ChangeListener put = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
+                if (newValue) {
+                    //reduce Elixir
+                    player.getElixir().reduceElixir(source.getCard().getCost());
+
+                    //remove previous card
+                    cardGridPaneUpdatable.getChildren().remove(source);
+
+                    //get a new card from card generator and add it to deck
+                    CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
+                    cardGridPaneUpdatable.add(cardImageView, cardImageView.getCol(), 0);
+
+                    //change Next card
+                    nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
+
+                    //add previous card to player possible deck
+                    player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
+
+                }
+
+            }
+        };
+
+        ChangeListener skip = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
+                if (!newValue) {
+                    deselectCard(source);
+                    SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().removeListener(put);
+                    SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().removeListener(this);
+                }
+            }
+        };
+
+        SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().addListener(put);
+        SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().addListener(skip);
+
     }
 
+    /**
+     * select card
+     * @param source card to be selected
+     */
+    private void selectCard(CardView source) {
+        source.getCardImage().setFitHeight(88);
+        source.getCardImage().setFitWidth(75);
+        SelectedCardContainer.getSelectedCardContainer().put(source.getCard());
+        Console.getConsole().printTracingMessage("select " + source.getCard().getCardName());
+
+    }
+
+    /**
+     * deselect card
+     * @param source card to be deselected
+     */
     private void deselectCard(CardView source) {
         source.getCardImage().setFitHeight(80);
         source.getCardImage().setFitWidth(68);
+        SelectedCardContainer.getSelectedCardContainer().takeOut();
         Console.getConsole().printTracingMessage("deselect " + source.getCard().getCardName());
     }
 
+    /**
+     * initialize FXML objects
+     */
     public void initialize() {
         setCardGridPaneUpdatable(cardGridPane);
         setElixirLabelUpdatable(elixirLabel);
@@ -110,6 +159,7 @@ public class CardDeckGame {
 
     }
 
+
     /**
      * load and put play card pic into top grid
      */
@@ -124,6 +174,7 @@ public class CardDeckGame {
         nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
     }
 
+    //Setters
     public void setCardGridPaneUpdatable(GridPane cardGridPaneUpdatable) {
         this.cardGridPaneUpdatable = cardGridPaneUpdatable;
     }
@@ -162,7 +213,6 @@ public class CardDeckGame {
             //init info of fields
             this.card = card;
             cardImage.setImage(CardImageContainer.getCardImageContainer().getCardImage(card.getCardName()));
-
             this.col = col;
 
             //set size
