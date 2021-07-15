@@ -70,7 +70,8 @@ public class CardDeckGame {
     private void putCard(CardView source) {
 
         /**
-         * listener which calls when a card put in game
+         * listener which calls when a card put successfully in game
+         * so it remove card from deck and reduce elixir
          */
         ChangeListener put = new ChangeListener<Boolean>() {
             @Override
@@ -97,6 +98,11 @@ public class CardDeckGame {
             }
         };
 
+        /**
+         * listener to cancel previous (put) listener
+         * after handling one card the previous (put) listener  should canceled
+         * because if it stays it still reduce elixir each time a new card put!
+         */
         ChangeListener skip = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
