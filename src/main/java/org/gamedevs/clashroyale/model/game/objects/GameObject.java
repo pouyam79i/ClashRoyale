@@ -3,6 +3,7 @@ package org.gamedevs.clashroyale.model.game.objects;
 import org.gamedevs.clashroyale.model.game.battle.field.Angle;
 import org.gamedevs.clashroyale.model.game.battle.field.DropType;
 import org.gamedevs.clashroyale.model.game.battle.field.Droppable;
+import org.gamedevs.clashroyale.model.game.battle.field.Pixel;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 /**
@@ -57,6 +58,10 @@ public abstract class GameObject extends Droppable {
      * Object do not attack same sides
      */
     protected final Side objectTeamSide;
+    // Shape property
+    protected boolean isStar;
+    protected double neededTiles;
+    protected Pixel centerPixel;
 
     /**
      * Constructor of game object

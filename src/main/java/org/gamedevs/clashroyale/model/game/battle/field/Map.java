@@ -1,6 +1,5 @@
 package org.gamedevs.clashroyale.model.game.battle.field;
 
-import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.game.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.spell.Spell;
 
@@ -83,21 +82,49 @@ public class Map {
      * Initializes all pixel
      */
     private void buildMap(){
-
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
+                pixels[i][j] = new Pixel(i, j);
+            }
+        }
     }
 
     /**
      * Connects pixel graph
      */
     private void matchGraph(){
-
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
+                Pixel currentPixel = pixels[i][j];
+                if((i-1) >= 0){
+                    currentPixel.setSurroundingPixel(Angle.WEST, pixels[i-1][j]);
+                    pixels[i-1][j].setSurroundingPixel(Angle.EAST, currentPixel);
+                }
+                if((j-1) >= 0){
+                    currentPixel.setSurroundingPixel(Angle.SOUTH, pixels[i][j-1]);
+                    pixels[i][j-1].setSurroundingPixel(Angle.NORTH, currentPixel);
+                    if((i-1) >= 0){
+                        currentPixel.setSurroundingPixel(Angle.SOUTH_WEST, pixels[i-1][j-1]);
+                        pixels[i-1][j-1].setSurroundingPixel(Angle.NORTH_EAST, currentPixel);
+                    }
+                    if((i+1) < width){
+                        currentPixel.setSurroundingPixel(Angle.SOUTH_EAST, pixels[i+1][j-1]);
+                        pixels[i+1][j-1].setSurroundingPixel(Angle.NORTH_WEST, currentPixel);
+                    }
+                }
+            }
+        }
     }
 
     /**
      * Locks all pixels
      */
     private void lock(){
-
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
+                pixels[i][j].lock();
+            }
+        }
     }
 
     // Getters

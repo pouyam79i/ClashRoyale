@@ -104,7 +104,7 @@
             <Image url="@../../../img/battlefield/dark_arena/red_area_back.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="354.0" fitWidth="374.0" layoutX="14.0" layoutY="236.0" onDragDetected="#updatePosition" onDragDone="#updatePosition" onDragDropped="#updatePosition" onDragEntered="#updatePosition" onDragExited="#updatePosition" onDragOver="#updatePosition" onMouseClicked="#updatePosition" onMouseDragEntered="#updatePosition" onMouseDragExited="#updatePosition" onMouseDragOver="#updatePosition" onMouseDragReleased="#updatePosition" onMouseDragged="#updatePosition" onMouseEntered="#updatePosition" onMouseExited="#updatePosition" onMouseMoved="#updatePosition" onMousePressed="#updatePosition" onMouseReleased="#updatePosition" onScroll="#updatePosition" onScrollFinished="#updatePosition" onScrollStarted="#updatePosition" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="354.0" fitWidth="374.0" layoutX="14.0" layoutY="236.0" onMouseDragged="#updatePosition" onMouseMoved="#updatePosition" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="selectedTile" fitHeight="19.0" fitWidth="17.0" layoutX="19.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/battlefield/dark_arena/selected_tile.png" />
