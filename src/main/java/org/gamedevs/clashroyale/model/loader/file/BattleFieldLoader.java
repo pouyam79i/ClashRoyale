@@ -2,8 +2,12 @@ package org.gamedevs.clashroyale.model.loader.file;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
+import org.gamedevs.clashroyale.model.game.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.IOException;
@@ -24,6 +28,27 @@ public class BattleFieldLoader {
         Console.getConsole().printTracingMessage("Loading battle requirements...");
         // Getting battle field container
         BattleFieldContainer battleFieldContainer = BattleFieldContainer.getBattleFieldContainer();
+        // Getting battle field image container
+        GameDroppableImageContainer cardAnimationContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
+        // Loading gif animations:
+        // King tower
+        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, false,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER.png"))
+        );
+        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, true,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER_ENEMY.png"))
+        );
+        // Princess towers
+        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, false,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER.png"))
+        );
+        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, true,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png"))
+        );
+        // Loading more gifs...
+
+
+
         // Loading battle field
         AnchorPane battleField = FXMLLoader.load(getClass().getResource(
                 "../../../view/fxml/battle/dark_arena/main_battle_field.fxml"

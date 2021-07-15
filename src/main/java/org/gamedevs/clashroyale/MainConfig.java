@@ -35,7 +35,7 @@ public interface MainConfig {
     /**
      * Standard battle field height
      */
-    int STD_BATTLE_FIELD_HEIGHT = 505;
+    int STD_BATTLE_FIELD_HEIGHT = 504;
     /**
      * Standard battle field width
      */

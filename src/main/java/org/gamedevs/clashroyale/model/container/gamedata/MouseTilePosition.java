@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.container.gamedata;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import org.gamedevs.clashroyale.MainConfig;
 
 /**
  * This class contains (x,y) of mouse drop in game!
@@ -39,12 +40,13 @@ public class MouseTilePosition {
 
     // Setters
     public void setX(double x){
-        this.x.setValue(x);
+        this.x.setValue(Math.floor(x) + 10);
         this.xSelectedTile.setValue(x + caliberX);
     }
     public void setY(double y){
-        this.y.setValue(y);
         this.ySelectedTile.setValue(y + caliberY);
+        y = MainConfig.STD_BATTLE_FIELD_HEIGHT - y;
+        this.y.setValue(Math.floor(y) - 8);
     }
     public void setCaliberX(double caliberX) {
         this.caliberX = caliberX;
