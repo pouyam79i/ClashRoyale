@@ -1,28 +1,18 @@
 package org.gamedevs.clashroyale.controller.battle.main;
 
-import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import org.gamedevs.clashroyale.model.cards.Card;
-import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
-import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
-import org.gamedevs.clashroyale.model.game.battle.tools.Clock;
-import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -46,6 +36,7 @@ public class CardDeckGame {
     private ProgressBar elixirProgressBar;
     private static ProgressBar elixirProgressBarUpdatable = new ProgressBar();
 
+    private CardView selected;
     private Player player;
 
     /**
@@ -54,34 +45,51 @@ public class CardDeckGame {
     private EventHandler<MouseEvent> pickCard = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
+
             CardView source = (CardView) event.getSource();
-            Image image = source.getCardImage().getImage();
-            Dragboard db = (source.getCardImage()).startDragAndDrop(TransferMode.MOVE);
-            ClipboardContent cc = new ClipboardContent();
-            cc.putImage(image);
-            db.setContent(cc);
+            if(source.equals(selected)) {
+                selected = null;
+                deselectCard(source);
+            }else{
+                if(selected != null)
+                deselectCard(selected);
+                selected = source;
+                selectCard(source);
+            }
 
-//            if(player.drop(,,source.getCard())) {
-            //reduce elixir
-            player.getElixir().reduceElixir(source.getCard().getCost());
-
-            //remove previous card
-            cardGridPaneUpdatable.getChildren().remove(source);
-
-            //get a new card from card generator and add it to deck
-            CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
-            cardGridPaneUpdatable.add(cardImageView, cardImageView.getCol(), 0);
-
-            //change Next card
-            nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
-
-            //add previous card to player possible deck
-            player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
-//            }
+////            if(player.drop(,,source.getCard())) {
+//            //reduce elixir
+//            player.getElixir().reduceElixir(source.getCard().getCost());
+//
+//            //remove previous card
+//            cardGridPaneUpdatable.getChildren().remove(source);
+//
+//            //get a new card from card generator and add it to deck
+//            CardView cardImageView = new CardView(player.getCardGenerator().getANewCard(), source.getCol());
+//            cardGridPaneUpdatable.add(cardImageView, cardImageView.getCol(), 0);
+//
+//            //change Next card
+//            nextUpdatable.setImage(CardImageContainer.getCardImageContainer().getCardImage(player.getCardGenerator().getNextCard().getCardName()));
+//
+//            //add previous card to player possible deck
+//            player.getCardGenerator().getCompleteDeck().addCard(source.getCard());
+////            }
 
             event.consume();
         }
     };
+
+    private void selectCard(CardView source) {
+        source.getCardImage().setFitHeight(85);
+        source.getCardImage().setFitWidth(72);
+        Console.getConsole().printTracingMessage("select " + source.getCard().getCardName());
+    }
+
+    private void deselectCard(CardView source) {
+        source.getCardImage().setFitHeight(80);
+        source.getCardImage().setFitWidth(68);
+        Console.getConsole().printTracingMessage("deselect " + source.getCard().getCardName());
+    }
 
     public void initialize() {
         setCardGridPaneUpdatable(cardGridPane);
@@ -168,11 +176,11 @@ public class CardDeckGame {
 
             player.getElixir().elixirValueProperty().addListener((observableValue, oldValue, newValue) -> {
                 if (newValue.doubleValue() < card.getCost()) {
-                    removeEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
+                    removeEventFilter(MouseEvent.MOUSE_CLICKED, pickCard);
                     Effect lockEffect = new ColorAdjust(0, -100, 0, 0);
                     setEffect(lockEffect);
                 } else {
-                    addEventFilter(MouseEvent.DRAG_DETECTED, pickCard);
+                    addEventFilter(MouseEvent.MOUSE_CLICKED, pickCard);
                     Effect unlockEffect = new ColorAdjust(0, 0, 0, 0);
                     setEffect(unlockEffect);
                 }

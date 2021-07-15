@@ -23,10 +23,6 @@ public class Elixir extends Runnable {
      */
     private static final int SLOW_PRODUCTION_DURATION = 60 * 1;
     /**
-     * whole time (in seconds) that elixir has to produce
-     */
-    private static final int PRODUCTION_DURATION = 60 * 3;
-    /**
      * maximum elixir that can be produce;
      */
     private static final int MAXIMUM_ELIXIR = 10;
@@ -56,6 +52,7 @@ public class Elixir extends Runnable {
                     Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
                 else
                     Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
+
             }
 
             try {
@@ -64,7 +61,7 @@ public class Elixir extends Runnable {
                 Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
             }
 
-        } while (clock.getTotalSeconds() < PRODUCTION_DURATION);
+        } while (clock.getTotalSeconds() > 0);
     }
 
 
