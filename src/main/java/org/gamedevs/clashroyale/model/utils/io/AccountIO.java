@@ -206,7 +206,7 @@ public class AccountIO {
                 Path path = Paths.get("save");
                 DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
                 for (Path path1 : directoryStream) {
-                    if (path1.endsWith(username + ".bin")) {
+                    if (path1.endsWith(DIR +"/" + username + ".bin")) {
                         Account account = singleObjectFileReader(username + ".bin");
                         if (account.getPassword().equals(password)) {
                             finalAccount[0] = account;

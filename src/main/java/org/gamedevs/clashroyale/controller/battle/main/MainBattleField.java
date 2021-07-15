@@ -7,6 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
+import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
@@ -80,11 +83,24 @@ public class MainBattleField implements Initializable {
             MouseTilePosition.getMouseTilePosition().setX(x);
             MouseTilePosition.getMouseTilePosition().setY(y);
             // TODO: uncomment this to know where is (x,y) of pointer
-            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
-                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
+//            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
+//                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
         }));
         thread.setDaemon(true);
         thread.start();
+    }
+
+    @FXML
+    void dropCard(MouseEvent event) {
+        Player player = PlayerContainer.getPlayerContainer().getPlayer();
+        if(SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist())
+            if(player.drop(event.getSceneY(), event.getSceneY(), SelectedCardContainer.getSelectedCardContainer().getSelectedCard())) {
+                SelectedCardContainer.getSelectedCardContainer().dropped();
+                Console.getConsole().printTracingMessage("drop " +  SelectedCardContainer.getSelectedCardContainer().getSelectedCard().getCardName() );
+            }
+            else
+                SelectedCardContainer.getSelectedCardContainer().droppingFailed();
+
     }
 
     /**

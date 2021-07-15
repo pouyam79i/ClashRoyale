@@ -50,22 +50,21 @@ public class CardDeckGame {
         public void handle(MouseEvent event) {
 
             CardView source = (CardView) event.getSource();
-            if(source.equals(selected)) {
+            if (source.equals(selected)) {
                 selected = null;
                 deselectCard(source);
-            }else{
-                if(selected != null)
-                deselectCard(selected);
-                selected = source;
+            } else {
+                if (selected != null)
+                    deselectCard(selected);
                 selectCard(source);
             }
-
             putCard(source);
         }
     };
 
     /**
      * check if its possible to put card remove it from deck and produce new one
+     *
      * @param source card to put
      */
     private void putCard(CardView source) {
@@ -102,9 +101,12 @@ public class CardDeckGame {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
                 if (!newValue) {
-                    deselectCard(source);
+//                    if (!SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().get() &&
+//                        selected.equals(source))
+//                        deselectCard(source);
+
                     SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().removeListener(put);
-                    SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().removeListener(this);
+//                    SelectedCardContainer.getSelectedCardContainer().selectedCardExistProperty().removeListener(this);
                 }
             }
         };
@@ -116,9 +118,11 @@ public class CardDeckGame {
 
     /**
      * select card
+     *
      * @param source card to be selected
      */
     private void selectCard(CardView source) {
+        selected = source;
         source.getCardImage().setFitHeight(88);
         source.getCardImage().setFitWidth(75);
         SelectedCardContainer.getSelectedCardContainer().put(source.getCard());
@@ -128,9 +132,11 @@ public class CardDeckGame {
 
     /**
      * deselect card
+     *
      * @param source card to be deselected
      */
     private void deselectCard(CardView source) {
+        selected = null;
         source.getCardImage().setFitHeight(80);
         source.getCardImage().setFitWidth(68);
         SelectedCardContainer.getSelectedCardContainer().takeOut();

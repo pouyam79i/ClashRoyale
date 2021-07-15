@@ -90,8 +90,8 @@ public class SelectedCardContainer {
      */
     public void dropped(){
         Platform.runLater(() -> {
-            selectedCardExist.setValue(false);
             selectedCardIsDropped.setValue(true);
+            selectedCardExist.setValue(false);
             selectedCardFailedToDrop.setValue(false);
         });
     }

@@ -71,8 +71,8 @@ public abstract class Player extends Runnable {
      * @param y of drop
      * @param card of drop
      */
-    public boolean drop(int x, int y, Card card){
-        return false; // TODO: change when code is completed
+    public boolean drop(double x, double y, Card card){
+        return true; // TODO: change when code is completed
     }
 
     /**
