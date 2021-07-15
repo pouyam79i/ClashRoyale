@@ -5,6 +5,8 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
+import org.gamedevs.clashroyale.model.game.objects.buildings.KingTower;
+import org.gamedevs.clashroyale.model.game.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -36,6 +38,11 @@ public abstract class Player extends Runnable {
      */
     protected final int level;
 
+    // Player main towers
+    protected KingTower kingTower;
+    protected PrincessTower leftPrincessTower;
+    protected PrincessTower rightPrincessTower;
+
     /**
      * Gets main game tools to be able to play.
      * @param map of game
@@ -50,6 +57,9 @@ public abstract class Player extends Runnable {
         this.elixir = elixir;
         this.cardGenerator = cardGenerator;
         this.level = level;
+        kingTower = new KingTower(level, playerSide);
+        leftPrincessTower = new PrincessTower(level, playerSide);
+        rightPrincessTower = new PrincessTower(level, playerSide);
     }
 
     /**
