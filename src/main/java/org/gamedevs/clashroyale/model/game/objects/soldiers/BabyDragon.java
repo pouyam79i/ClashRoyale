@@ -1,14 +1,17 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class BabyDragon extends Soldier{
-    public BabyDragon(int level) {
+
+    public BabyDragon(int level, Side side) {
+        super(side);
         hitSpeed = 1.8;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         range = 3;
         areaSplash = true;
-
+        z = 1;
         switch (level){
             case 1 :
                 hp = 800;

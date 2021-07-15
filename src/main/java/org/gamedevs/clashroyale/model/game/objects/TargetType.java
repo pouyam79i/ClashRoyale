@@ -7,6 +7,9 @@ package org.gamedevs.clashroyale.model.game.objects;
  */
 public enum TargetType {
 
+    // Immortal object cannot die!
+    IMMORTAL_OBJECT(-1),
+
     // Place related
     GROUND(0),
     AIR_GROUND(1),

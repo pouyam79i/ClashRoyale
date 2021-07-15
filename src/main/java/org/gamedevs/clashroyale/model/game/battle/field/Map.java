@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.game.battle.field;
 
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.spell.Spell;
 
 /**
  * Model of map.
@@ -44,10 +46,22 @@ public class Map {
      *
      * @param x recommended x to drop game object
      * @param y recommended y to drop game object
-     * @param card is my card
+     * @param gameObject is my solder or building
      * @return true if it could drop game object in map!
      */
-    public boolean dropGameObject(int x, int y, Card card){
+    public boolean dropGameObject(int x, int y, GameObject gameObject){
+
+        return false;
+    }
+
+    /**
+     *
+     * @param x recommended x to drop game object
+     * @param y recommended y to drop game object
+     * @param spell is my card
+     * @return true if it could drop game object in map!
+     */
+    public boolean dropSpell(int x, int y, Spell spell){
 
         return false;
     }

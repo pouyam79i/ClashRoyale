@@ -1,13 +1,15 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class KingTower extends Building{
 
-    public KingTower(int level){
+    public KingTower(int level, Side side){
+        super(side);
         hitSpeed = 1;
         range = 7;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         lifeTime = 1000;
         effectiveLifeTime = false;
 

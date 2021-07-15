@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public abstract class Building extends GameObject {
 
@@ -18,8 +19,8 @@ public abstract class Building extends GameObject {
     /**
      * Setting default values for building object
      */
-    protected Building(){
-
+    protected Building(Side side){
+        super(side);
     }
 
     /**

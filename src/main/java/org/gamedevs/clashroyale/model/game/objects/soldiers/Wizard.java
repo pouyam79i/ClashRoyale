@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Wizard extends Soldier{
-    public Wizard(int level) {
+    public Wizard(int level, Side side) {
+        super(side);
         hitSpeed = 1.7;
-        target = TargetType.AIR_GROUND;
+        attackTargetType = TargetType.AIR_GROUND;
         range = 5;
         areaSplash = true;
 

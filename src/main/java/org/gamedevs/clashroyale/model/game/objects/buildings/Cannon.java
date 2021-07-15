@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Cannon extends Building{
-    public Cannon(int level) {
+    public Cannon(int level, Side side){
+        super(side);
         hitSpeed = 0.8;
-        target = TargetType.GROUND;
+        attackTargetType = TargetType.GROUND;
         range = 5.5;
         lifeTime = 30;
         effectiveLifeTime = true;

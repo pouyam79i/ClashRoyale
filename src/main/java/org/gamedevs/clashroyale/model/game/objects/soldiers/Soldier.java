@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 public abstract class Soldier extends GameObject {
 
@@ -16,8 +17,8 @@ public abstract class Soldier extends GameObject {
     /**
      * Setting default values for soldier object
      */
-    protected Soldier(){
-
+    protected Soldier(Side side){
+        super(side);
     }
 
     /**

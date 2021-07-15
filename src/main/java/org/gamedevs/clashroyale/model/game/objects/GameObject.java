@@ -1,14 +1,16 @@
 package org.gamedevs.clashroyale.model.game.objects;
 
 import org.gamedevs.clashroyale.model.game.battle.field.Angle;
-import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+import org.gamedevs.clashroyale.model.game.battle.field.DropType;
+import org.gamedevs.clashroyale.model.game.battle.field.Droppable;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 /**
  * Main structure game object class!
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
  * @version 1.0
  */
-public abstract class GameObject extends Runnable {
+public abstract class GameObject extends Droppable {
 
     /**
      * hit point
@@ -29,13 +31,15 @@ public abstract class GameObject extends Runnable {
      * the max attacking radius!
      */
     protected double range;
-
     /**
      * attack target
      * the max attacking radius!
      */
-    protected TargetType target;
-
+    protected TargetType attackTargetType;
+    /**
+     * Type of this object
+     */
+    protected TargetType myType;
     /**
      * z value says if the object
      * is on the ground or in the air!
@@ -49,19 +53,21 @@ public abstract class GameObject extends Runnable {
      * State of game object
      */
     protected GameObjectState state;
+    /**
+     * Object do not attack same sides
+     */
+    protected final Side objectTeamSide;
 
     /**
-     * Setting default values for game object
+     * Constructor of game object
+     * @param side side of object
      */
-    protected GameObject(){
-
-    }
-
-    public GameObject(int hp, int damage, int hitSpeed, int range) {
-        this.hp = hp;
-        this.damage = damage;
-        this.hitSpeed = hitSpeed;
-        this.range = range;
+    protected GameObject(Side side) {
+        super(DropType.OBJECT);
+        this.objectTeamSide = side;
+        angle = Angle.NORTH;
+        state = GameObjectState.IDLE;
+        z = 0;
     }
 
     /**

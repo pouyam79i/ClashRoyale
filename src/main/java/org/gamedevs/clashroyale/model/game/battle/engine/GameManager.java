@@ -92,6 +92,8 @@ public class GameManager extends Runnable {
     @Override
     public void run() {
         clock.start();
+        topPlayer.start();
+        downPlayer.start();
         // When we have still tile
         while (!clock.isEndOfTime()){
             // When we have a winner!
