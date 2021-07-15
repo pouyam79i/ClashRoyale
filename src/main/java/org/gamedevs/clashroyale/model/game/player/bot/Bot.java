@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.player.bot;
 
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -18,9 +19,11 @@ public abstract class Bot extends Player {
      * @param map of game
      * @param playerSide side of player (TOP/DOWN)
      * @param elixir counter of elixir
+     * @param cardGenerator player card generator
+     * @param level level of player
      */
-    protected Bot(Map map, Side playerSide, Elixir elixir) {
-        super(map, playerSide, elixir);
+    protected Bot(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level) {
+        super(map, playerSide, elixir, cardGenerator, level);
     }
 
     /**

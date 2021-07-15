@@ -5,28 +5,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/game_starter.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameStarterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/game_starter.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameStarterController">
    <children>
       <ImageView fitHeight="118.0" fitWidth="290.0" layoutX="54.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/gamestarter/titleblue.png" />
+            <Image url="@../../../img/gamestarter/titleblue.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="741.0" fitWidth="492.0" layoutX="-43.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/menu/menu_background_cover.png" />
+            <Image url="@../../../img/menu/menu_background_cover.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="118.0" fitWidth="290.0" layoutX="54.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/gamestarter/titlered.png" />
+            <Image url="@../../../img/gamestarter/titlered.png" />
          </image>
       </ImageView>
       <Label fx:id="playerRed" layoutX="157.0" layoutY="195.0" text="Player1" textFill="WHITE" />
       <Label fx:id="playerBlue" layoutX="157.0" layoutY="516.0" text="Player2" textFill="WHITE" />
       <ImageView fitHeight="70.0" fitWidth="103.0" layoutX="164.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/ui/icon/battle-ladder.png" />
+            <Image url="@../../../img/ui/icon/battle-ladder.png" />
          </image>
       </ImageView>
       <Label layoutX="115.0" layoutY="391.0" text="Pekka Stadium" textFill="#dceb67" />

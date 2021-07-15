@@ -90,7 +90,7 @@ public class CardDeckGame {
         cardGenerator = new CardGenerator(UserAccountContainer.getUserAccountContainer().getAccount().getDeckContainer(), Elixir.getPlayer1Elixir());
         elixir = cardGenerator.getElixir();
         ////////These line should be omitted later////////
-        Clock.getClock().startClock();
+//        Clock.getClock().startClock();
         elixir.startElixir();
         //////////////////////////////////////////////////////
 

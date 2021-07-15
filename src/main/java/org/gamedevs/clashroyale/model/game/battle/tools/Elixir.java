@@ -21,7 +21,7 @@ public class Elixir extends Runnable {
     /**
      * clock which elixir work regarding to it
      */
-    Clock clock = Clock.getClock();
+//    Clock clock = Clock.getClock();
 
     /**
      * time (in seconds) that elixir has to produce slowly
@@ -44,7 +44,7 @@ public class Elixir extends Runnable {
     /**
      * constructor
      */
-    private Elixir() {
+    public Elixir() {
     }
 
     /**
@@ -52,23 +52,22 @@ public class Elixir extends Runnable {
      * stop when it reaches 3 min
      */
     public void run() {
-
-        do {
-
-            if (elixirValue.get() < MAXIMUM_ELIXIR) {
-                if (clock.getClockValue() < SLOW_PRODUCTION_DURATION)
-                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
-                else
-                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
-            }
-
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
-            }
-
-        } while (clock.getClockValue() < PRODUCTION_DURATION);
+        // TODO: fix this part
+//        do {
+//            if (elixirValue.get() < MAXIMUM_ELIXIR) {
+//                if (clock.getClockValue() < SLOW_PRODUCTION_DURATION)
+//                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.05).getValue()));
+//                else
+//                    Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
+//            }
+//
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                Console.getConsole().printTracingMessage("interruption in elixir thread while sleeping");
+//            }
+//
+//        } while (clock.getClockValue() < PRODUCTION_DURATION);
     }
 
 

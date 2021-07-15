@@ -1,17 +1,25 @@
 package org.gamedevs.clashroyale.model.game.battle.engine;
 
 import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Clock;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
+import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
+import org.gamedevs.clashroyale.model.game.player.Human;
 import org.gamedevs.clashroyale.model.game.player.Player;
+import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.game.player.bot.EasyBot;
+import org.gamedevs.clashroyale.model.game.player.bot.HardBot;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
  * Game manager is the engine of game builder!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
  * @version 1.0
  */
-public class GameManager {
+public class GameManager extends Runnable {
 
     // Game main tools:
     /**
@@ -21,7 +29,7 @@ public class GameManager {
     /**
      * Clock of game (reverse timer)
      */
-//    private final Clock clock;
+    private final Clock clock;
     // Players:
     /**
      * Top side player
@@ -31,29 +39,44 @@ public class GameManager {
      * Down side player
      */
     private Player downPlayer;
+    // Result:
     /**
-     * top side player elixir counter
+     * Top side player game result
      */
-    private Elixir elixirTopPlayer;
-    /**
-     * down side player elixir counter
-     */
-    private Elixir elixirDownPlayer;
+    private GameResult gameResult;
+
 
     /**
      * Constructor of game manager,
      * builds main game requirements
      */
     public GameManager() {
+        threadName = "GameManager";
         map = new Map(MainConfig.STD_BATTLE_FIELD_WIDTH, MainConfig.STD_BATTLE_FIELD_HEIGHT);
-//        clock = new Clock();
+        clock = new Clock();
+        gameResult = null;
     }
 
     /**
      * Build game for offline single player mode
      */
-    public void buildOfflineSingleGame(){
-
+    public void buildOfflineSingleGame(Account account, boolean hardBot){
+        // human player elixir
+        Elixir elixirTopPlayer = new Elixir(clock);
+        // bot elixir
+        Elixir elixirDownPlayer = new Elixir(clock);
+        // This is used for human player
+        CardGenerator cardGeneratorTopPlayer = new CardGenerator(account.getDeckContainer(), elixirTopPlayer);
+        // This is used for bot
+        CardGenerator cardGeneratorDownPlayer = new CardGenerator(account.getDeckContainer(), elixirDownPlayer);
+        // Setting human player requirements
+        topPlayer = new Human(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
+        // Setting bot player requirements
+        if(hardBot)
+            downPlayer = new HardBot(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
+        else
+            downPlayer = new EasyBot(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
+        gameResult = new GameResult(GameType.SINGLE_OFFLINE, account.getUsername(), "BOT");
     }
 
     /**
@@ -64,10 +87,37 @@ public class GameManager {
     }
 
     /**
-     * Runs the game
+     * runs the game
      */
-    public void start(){
+    @Override
+    public void run() {
+        clock.start();
+        // When we have still tile
+        while (!clock.isEndOfTime()){
+            // When we have a winner!
+            if(gameResult.checkWinner()){
+                // TODO: complete wining process
+                return;
+            }
+        }
+        // TODO: complete time process
+    }
 
+    // Getters
+    public Map getMap() {
+        return map;
+    }
+    public Clock getClock() {
+        return clock;
+    }
+    public Player getTopPlayer() {
+        return topPlayer;
+    }
+    public Player getDownPlayer() {
+        return downPlayer;
+    }
+    public GameResult getGameResult() {
+        return gameResult;
     }
 
 }

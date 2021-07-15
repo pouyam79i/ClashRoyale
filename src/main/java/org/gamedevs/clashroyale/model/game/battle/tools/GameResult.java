@@ -1,65 +1,146 @@
 package org.gamedevs.clashroyale.model.game.battle.tools;
 
-import org.gamedevs.clashroyale.model.account.Account;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
+import org.gamedevs.clashroyale.model.game.player.Side;
 
 /**
- * A class to store game result
- * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * This class contains game result!
+ * @author Pouya Mohammadi - Hosna Hoseini
+ *         9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
 public class GameResult {
 
+    private final GameType gameType;
+
     /**
      * first player in this game
      */
-    private String player1Name;
-
+    private final String topPlayerName;
+    private final SimpleIntegerProperty topPlayerScore;
     /**
      * second player in this game
      */
-    private String player2Name;
-
+    private final String downPlayerName;
+    private final SimpleIntegerProperty downPlayerScore;
     /**
-     * winner name
+     * Side of winner
      */
-    private String winner;
+    private Side winnerSide;
+    /**
+     * If result is locked
+     */
+    private boolean lock;
 
     /**
      * constructor
-     * @param gameType gameType
-     * @param player1Name player1Name
-     * @param player2Name player2Name
-     * @param winner winner name
+     * @param gameType type of game
+     * @param topPlayerName topPlayerName
+     * @param downPlayerName downPlayerName
      */
-    public GameResult(String gameType, String player1Name, String player2Name, String winner) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-        this.winner = winner;
+    public GameResult(GameType gameType, String topPlayerName, String downPlayerName) {
+        this.gameType = gameType;
+        this.topPlayerName = topPlayerName;
+        this.downPlayerName = downPlayerName;
+        topPlayerScore = new SimpleIntegerProperty(0);
+        topPlayerScore.setValue(0);
+        downPlayerScore = new SimpleIntegerProperty(0);
+        downPlayerScore.setValue(0);
+        lock = false;
+        winnerSide = null;
     }
 
-
-    //Getter and setters
-    public String getPlayer1Name() {
-        return player1Name;
+    /**
+     * adds one score to player
+     * @param side of player
+     */
+    public void addScore(Side side){
+        if(lock)
+            return;
+        if(side == Side.TOP){
+            Platform.runLater(() -> {
+                topPlayerScore.add(1);
+            });
+            if(topPlayerScore.getValue() == 3)
+                lock();
+        }
+        else {
+            Platform.runLater(() -> {
+                downPlayerScore.add(1);
+            });
+            if(downPlayerScore.getValue() == 3)
+                lock();
+        }
     }
 
-    public void setPlayer1Name(String player1Name) {
-        this.player1Name = player1Name;
+    /**
+     * sets full score to a player
+     * @param side of player
+     */
+    public void setFullScore(Side side){
+        if(lock)
+            return;
+        if(side == Side.TOP){
+            Platform.runLater(() -> {
+                topPlayerScore.setValue(3);
+            });
+        }
+        else{
+            Platform.runLater(() -> {
+                downPlayerScore.setValue(3);
+            });
+        }
+        lock();
     }
 
-    public String getPlayer2Name() {
-        return player2Name;
+    /**
+     * @return true if some one has reached full score!
+     */
+    public boolean checkWinner(){
+        if(topPlayerScore.getValue() == 3 || downPlayerScore.getValue() == 3){
+            lock();
+            return true;
+        }
+        return false;
     }
 
-    public void setPlayer2Name(String player2Name) {
-        this.player2Name = player2Name;
+    /**
+     * Locks the result and sets winner
+     */
+    public void lock(){
+        if(topPlayerScore.getValue() > downPlayerScore.getValue())
+            winnerSide = Side.TOP;
+        else
+            winnerSide = Side.DOWN;
+        lock = true;
     }
 
-    public String getWinner() {
-        return winner;
+    // Getters
+    public String getTopPlayerName() {
+        return topPlayerName;
+    }
+    public int getTopPlayerScore() {
+        return topPlayerScore.get();
+    }
+    public SimpleIntegerProperty topPlayerScoreProperty() {
+        return topPlayerScore;
+    }
+    public String getDownPlayerName() {
+        return downPlayerName;
+    }
+    public int getDownPlayerScore() {
+        return downPlayerScore.get();
+    }
+    public SimpleIntegerProperty downPlayerScoreProperty() {
+        return downPlayerScore;
+    }
+    public Side getWinnerSide() {
+        return winnerSide;
+    }
+    public GameType getGameType() {
+        return gameType;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
 }

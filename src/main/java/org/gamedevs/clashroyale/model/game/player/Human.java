@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.player;
 
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 
 /**
@@ -16,9 +17,11 @@ public class Human extends Player {
      * @param map of game
      * @param playerSide side of player (TOP/DOWN)
      * @param elixir counter of elixir
+     * @param cardGenerator player card generator
+     * @param level level of player
      */
-    protected Human(Map map, Side playerSide, Elixir elixir) {
-        super(map, playerSide, elixir);
+    public Human(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level) {
+        super(map, playerSide, elixir, cardGenerator, level);
     }
 
     /**

@@ -22,6 +22,7 @@ public class BattleFieldContainer {
     private AnchorPane cardDeck;
     private AnchorPane gameStarter;
     private AnchorPane gameResult;
+    private AnchorPane gameTimer;
     private Group mainBattleGroup;
 
     /**
@@ -33,6 +34,7 @@ public class BattleFieldContainer {
         cardDeck = null;
         gameStarter = null;
         gameResult = null;
+        gameTimer = null;
         mainBattleGroup = null;
     }
 
@@ -51,6 +53,9 @@ public class BattleFieldContainer {
     }
     public Group getMainBattleGroup() {
         return mainBattleGroup;
+    }
+    public AnchorPane getGameTimer() {
+        return gameTimer;
     }
 
     // Setters
@@ -73,6 +78,10 @@ public class BattleFieldContainer {
     public void setMainBattleGroup(Group mainBattleGroup) {
         if(this.mainBattleGroup == null)
             this.mainBattleGroup = mainBattleGroup;
+    }
+    public void setGameTimer(AnchorPane gameTimer) {
+        if(this.gameTimer == null)
+            this.gameTimer = gameTimer;
     }
 
     /**

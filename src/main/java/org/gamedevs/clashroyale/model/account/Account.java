@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.account;
 
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 
 import java.io.Serializable;
 
@@ -53,6 +54,32 @@ public class Account implements Serializable {
     }
 
     /**
+     * @return level of player according to total xp
+     */
+    public int getLevel(){
+        int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
+        String labelText = "";
+        if(xp < 1000){
+            return 1;
+        }
+        else if(xp < 6000){
+            return 2;
+        }
+        else if(xp < 16000){
+            return 3;
+        }
+        else if(xp < 36000){
+            return 4;
+        }
+        else if(xp < 66000){
+            return 5;
+        }
+        else{
+            return 6;
+        }
+    }
+
+    /**
      * Increase xp
      * @param additionalXP will be added to current xp
      */
@@ -73,7 +100,6 @@ public class Account implements Serializable {
     public DeckContainer getDeckAvailable() {
         return deckAvailable;
     }
-
     public int getTotalXP() {
         return totalXP;
     }
@@ -91,4 +117,5 @@ public class Account implements Serializable {
     public void setDeckAvailable(DeckContainer deckAvailable) {
         this.deckAvailable = deckAvailable;
     }
+
 }

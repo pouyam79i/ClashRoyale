@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="130.0" prefWidth="405.0" style="-fx-background-color: transparent;" stylesheets="@../../css/game_card_deck.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.main.CardDeckGame">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="130.0" prefWidth="405.0" style="-fx-background-color: transparent;" stylesheets="@../../../css/game_card_deck.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.main.CardDeckGame">
    <children>
       <VBox fx:id="vbox" alignment="CENTER" layoutX="15.0" layoutY="7.0" prefHeight="120.0" prefWidth="304.0">
          <children>
@@ -38,7 +38,7 @@
                   </ProgressBar>
                   <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../img/ui/icon/cost.png" />
+                        <Image url="@../../../img/ui/icon/cost.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="elixirLabel" layoutX="14.0" layoutY="7.0" text="1" textFill="WHITE" />

@@ -1,8 +1,6 @@
 package org.gamedevs.clashroyale.model.game.battle.tools;
 
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
@@ -15,127 +13,78 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 public class Clock extends Runnable {
 
     /**
-     * seconds passed from beginning of game
+     * timer has values of time!
      */
-    private IntegerProperty clockValue = new SimpleIntegerProperty(0);
-    
+    private Timer timer;
     /**
-     * current second
+     * When time is up
      */
-    private IntegerProperty second = new SimpleIntegerProperty(0);
-    /**
-     * current minute
-     */
-    private IntegerProperty minute = new SimpleIntegerProperty(0);
-
-    private boolean Isend = false;
-    /**
-     * instance of clock
-     */
-    private static Clock clock = null;
+    private boolean endOfTime;
     /**
      * instance
      */
-    private StringProperty clockString = new SimpleStringProperty();
+    private SimpleStringProperty clockString;
+
     /**
-     * constructor
+     * Constructor of clock
      */
-    private Clock() {
+    public Clock() {
+        timer = new Timer(3, 0);
+        endOfTime = false;
+        finished = false;
+        clockString = new SimpleStringProperty();
+        updateStringOfTimer();
     }
 
     /**
-     * start clock from 0 to 3 min
+     * start timer count down!
      */
     @Override
     public void run() {
-        while (clockValue.getValue() < 3 * 60){
+        while (!timer.isEndOfTime()){
+            if(finished)
+                return;
             try {
-                Thread.sleep(1000);
-                clockValue.setValue(clockValue.add(1).getValue());
-                minute.setValue(clockValue.divide(60).getValue());
-                second.setValue((clockValue.subtract(minute.multiply(60))).getValue());
-                timeToString();
-            } catch (InterruptedException e) {
-            }
+                Thread.sleep(999);
+            } catch (InterruptedException ignored) {}
+            timer.decrees();
+            updateStringOfTimer();
         }
-        Isend = true;
+        endOfTime = true;
     }
 
     /**
      * stop clock
      */
     public void stop(){
-        super.shutdown();
-    }
-
-    /**
-     * start clock
-     */
-    public void startClock(){
-        super.start();
+        this.shutdown();
     }
 
     /**
      * get current time in mm:ss format
-     * @return current time
      */
-    public void timeToString(){
-        String res;
-        res = "0" + minute.get() + ":";
-        if(second.get() < 10)
-            res += "0" + second.get();
+    public void updateStringOfTimer(){
+        String clockLabelText = timer.getMin() + ":";
+        if(timer.getSecond() < 10)
+            clockLabelText += "0" + timer.getSecond();
         else
-            res += second.get();
-
-        String finalRes = res;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                clockString.setValue(finalRes);
-            }
+            clockLabelText += "" + timer.getSecond();
+        String finalLabel = clockLabelText;
+        Platform.runLater(() -> {
+            clockString.setValue(finalLabel);
         });
     }
 
+    public int getTotalSeconds(){
+        return (timer.getMin() * 60) + timer.getSecond();
+    }
+
     //Getter
-    public int getClockValue() {
-        return clockValue.get();
+    public boolean isEndOfTime() {
+        return endOfTime;
     }
-
-    public IntegerProperty clockValueProperty() {
-        return clockValue;
-    }
-
-    public int getSecond() {
-        return second.get();
-    }
-
-    public IntegerProperty secondProperty() {
-        return second;
-    }
-
-    public int getMinute() {
-        return minute.get();
-    }
-
-    public IntegerProperty minuteProperty() {
-        return minute;
-    }
-
-    public static Clock getClock(){
-        if(clock == null)
-            clock = new Clock();
-        return clock;
-    }
-
-    public String getClockString() {
-        return clockString.get();
-    }
-
     public StringProperty clockStringProperty() {
         return clockString;
     }
 
-    public boolean isIsend() {
-        return Isend;
-    }
 }

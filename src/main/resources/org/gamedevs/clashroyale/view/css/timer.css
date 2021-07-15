@@ -1,0 +1,9 @@
+
+@font-face {
+    src: url('../fonts/Clash-Regular.ttf');
+}
+
+.clock_label{
+    -fx-font-family: 'Clash';
+    -fx-font-size: 18pt;
+}

@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
-import org.gamedevs.clashroyale.model.game.battle.tools.Clock;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +40,7 @@ public class MainBattleField implements Initializable {
     private GridPane secondPass;
     @FXML
     private Label clockLabel;
+
     // Updatable properties
     private ImageView selectedTileUpdatable;
 
@@ -54,7 +53,6 @@ public class MainBattleField implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: uncomment line bellow when out of test!
 //        selectedTile.setVisible(false);
-        clockLabel.textProperty().bind(Clock.getClock().clockStringProperty());
         MouseTilePosition.getMouseTilePosition().setCaliberX(selectedTile.getLayoutX());
         MouseTilePosition.getMouseTilePosition().setCaliberY(selectedTile.getLayoutY());
         selectedTile.layoutXProperty().bindBidirectional(MouseTilePosition.getMouseTilePosition().xSelectedTileProperty());
@@ -93,7 +91,7 @@ public class MainBattleField implements Initializable {
     }
 
     /**
-     * Set visibilty of selected tile!
+     * Set visibility of selected tile!
      * @param visibility of selected tile image
      */
     public void setSelectedTileVisibility(boolean visibility){

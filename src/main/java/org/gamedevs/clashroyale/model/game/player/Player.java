@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.game.player;
 
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
@@ -25,17 +26,29 @@ public abstract class Player extends Runnable {
      * Elixir counter
      */
     protected final Elixir elixir;
+    /**
+     * Player card generator gives current usable cards.
+     */
+    protected final CardGenerator cardGenerator;
+    /**
+     * level of player
+     */
+    protected final int level;
 
     /**
      * Gets main game tools to be able to play.
      * @param map of game
      * @param playerSide side of player (TOP/DOWN)
      * @param elixir counter of elixir
+     * @param cardGenerator player card generator
+     * @param level level of player
      */
-    protected Player(Map map, Side playerSide, Elixir elixir){
+    protected Player(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level){
         this.playerSide = playerSide;
         this.map = map;
         this.elixir = elixir;
+        this.cardGenerator = cardGenerator;
+        this.level = level;
     }
 
     /**
@@ -46,6 +59,23 @@ public abstract class Player extends Runnable {
      */
     public boolean drop(int x, int y, Card card){
         return false; // TODO: change when code is completed
+    }
+
+    // Getters
+    public Map getMap() {
+        return map;
+    }
+    public Side getPlayerSide() {
+        return playerSide;
+    }
+    public Elixir getElixir() {
+        return elixir;
+    }
+    public CardGenerator getCardGenerator() {
+        return cardGenerator;
+    }
+    public int getLevel() {
+        return level;
     }
 
 }

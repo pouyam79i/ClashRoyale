@@ -41,7 +41,6 @@ public class CardGenerator {
         this.elixir = elixir;
     }
 
-
     /**
      * get 4 cards as firsts card in deck
      *

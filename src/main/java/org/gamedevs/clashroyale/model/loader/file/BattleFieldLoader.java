@@ -33,28 +33,36 @@ public class BattleFieldLoader {
         battleFieldContainer.setBattleField(battleField);
         // Loading card deck
         AnchorPane cardDeck = FXMLLoader.load(getClass().getResource(
-                "../../../view/fxml/game/game_card_deck.fxml"
+                "../../../view/fxml/battle/tools/game_card_deck.fxml"
         ));
         cardDeck.setLayoutX(0);
         cardDeck.setLayoutY(555);
         battleFieldContainer.setCardDeck(cardDeck);
         // Loading game starter
         AnchorPane gameStarter = FXMLLoader.load(getClass().getResource(
-                "../../../view/fxml/game/game_starter.fxml"
+                "../../../view/fxml/battle/tools/game_starter.fxml"
         ));
         gameStarter.setLayoutX(0);
         gameStarter.setLayoutY(700);
         battleFieldContainer.setGameStarter(gameStarter);
         // Loading result display
         AnchorPane gameResult = FXMLLoader.load(getClass().getResource(
-                "../../../view/fxml/game/game_starter.fxml"
+                "../../../view/fxml/battle/tools/game_starter.fxml"
         ));
         gameResult.setLayoutX(0);
         gameResult.setLayoutY(0);
         battleFieldContainer.setGameResult(gameResult);
+        // Loading timer label
+        AnchorPane gameTimer = FXMLLoader.load(getClass().getResource(
+                "../../../view/fxml/battle/tools/game_timer.fxml"
+        ));
+        gameTimer.setLayoutX(310);
+        gameTimer.setLayoutY(5);
+        battleFieldContainer.setGameTimer(gameTimer);
         // Setting main group of battle field
         Group mainBattleGroup = new Group();
         mainBattleGroup.getChildren().add(battleField);
+        mainBattleGroup.getChildren().add(gameTimer);
         mainBattleGroup.getChildren().add(cardDeck);
         battleFieldContainer.setMainBattleGroup(mainBattleGroup);
         // Printing finished message

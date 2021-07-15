@@ -1,8 +1,10 @@
 package org.gamedevs.clashroyale.model.launcher;
 
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.game.battle.engine.GameManager;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.media.Musics;
@@ -40,22 +42,25 @@ public class OfflineBattleLauncher extends Runnable {
             OnWaitLoader.getOnWaitLoader().displayBattleLoadingScreen(
                     MenuDataContainer.getMenuDataContainer().getRootPane()
             );
-        });
-        try {
-            Thread.sleep(1500); //TODO: Just testing :)
-        } catch (InterruptedException ignored) {}
-        Platform.runLater(() -> {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().remove(
                     MenuDataContainer.getMenuDataContainer().getMainMenuRootGroup()
             );
+        });
+        GameManager gameManager = new GameManager();
+        GameTimer.getGameTimer().bindTimerLabel(gameManager.getClock().clockStringProperty());
+        Platform.runLater(() -> {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                     BattleFieldContainer.getBattleFieldContainer().getMainBattleGroup()
             );
         });
+        gameManager.start();
         MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
         Platform.runLater(() -> {
             OnWaitLoader.getOnWaitLoader().disappear();
         });
+        try {
+            Thread.sleep(30000); //TODO: Just testing :)
+        } catch (InterruptedException ignored) {}
         // Killing launcher
         this.shutdown();
     }
