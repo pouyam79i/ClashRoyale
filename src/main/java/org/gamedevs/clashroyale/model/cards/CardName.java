@@ -6,7 +6,7 @@ import java.io.Serializable;
  * This class contains name of all cards,
  * which are designed for this game so far.
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
- * @version 1.0
+ * @version 1.0.1
  */
 public enum CardName implements Serializable {
 
@@ -27,6 +27,9 @@ public enum CardName implements Serializable {
     // Buildings
     CANNON,
     INFERNO_TOWER,
+    // Special Cards (only build once)
+    KING_TOWER,
+    PRINCESS_TOWER,
 
     // No card
     EMPTY,

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -71,20 +72,16 @@ public class MainBattleField implements Initializable {
             double y = mouseEvent.getY();
             x = Math.floor(x/20.7);
             y = Math.floor(y/16.8);
-            if(y == 5 || y == 6){
-                if((0 <= x && x <= 2) || (4 <= x && x <= 13) || (15 <= x && x <= 18)){
-                    return;
-                }
-            }
-            if(y > 20 || x > 17 || x < 0 || y < 0){
+            if(y > 29 || x > 17 || x < 0 || y < 0){
                 return;
             }
             x *= 20.7;
             y *= 16.8;
-            // TODO: uncomment this to know where is (x,y) of pointer
-//            Console.getConsole().printTracingMessage("Mose move detected: " + x  + ", " + y);
             MouseTilePosition.getMouseTilePosition().setX(x);
             MouseTilePosition.getMouseTilePosition().setY(y);
+            // TODO: uncomment this to know where is (x,y) of pointer
+            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
+                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
         }));
         thread.setDaemon(true);
         thread.start();
