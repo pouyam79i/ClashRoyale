@@ -39,10 +39,10 @@ public class BattleFieldLoader {
                 new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER_ENEMY.png"))
         );
         // Princess towers
-        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, false,
+        cardAnimationContainer.set(CardName.PRINCESS_TOWER, GameObjectState.IDLE, false,
                 new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER.png"))
         );
-        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, true,
+        cardAnimationContainer.set(CardName.PRINCESS_TOWER, GameObjectState.IDLE, true,
                 new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png"))
         );
         // Loading more gifs...

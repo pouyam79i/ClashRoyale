@@ -87,8 +87,17 @@ public class Pixel {
     }
 
     /**
-     * used for setting next pixel graph.
-     * @param angle of next pixel (respected to this pixel)
+     * Gets the surrounding pixel.
+     * @param angle of next pixel with respect to this pixel.
+     * @return pixel if there is any pixel.
+     */
+    public Pixel getSurroundingPixel(Angle angle){
+        return surroundingPixels.get(angle);
+    }
+
+    /**
+     * Used for setting next pixel graph.
+     * @param angle of next pixel (respected to this pixel).
      * @param pixel in that angle!
      */
     public void setSurroundingPixel(Angle angle, Pixel pixel){

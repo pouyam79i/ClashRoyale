@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
@@ -39,14 +40,11 @@ public class MainBattleField implements Initializable {
     @FXML
     private ImageView selectedTile;
     @FXML
-    private GridPane firstPass;
-    @FXML
-    private GridPane secondPass;
-    @FXML
-    private Label clockLabel;
+    private AnchorPane battleFieldPane;
 
     // Updatable properties
     private ImageView selectedTileUpdatable;
+    private AnchorPane battleFieldPaneUpdatable;
 
     /**
      * Initializes requirements of battle field view
@@ -62,6 +60,7 @@ public class MainBattleField implements Initializable {
         selectedTile.layoutXProperty().bindBidirectional(MouseTilePosition.getMouseTilePosition().xSelectedTileProperty());
         selectedTile.layoutYProperty().bindBidirectional(MouseTilePosition.getMouseTilePosition().ySelectedTileProperty());
         getMainBattleField().setSelectedTileUpdatable(selectedTile);
+        getMainBattleField().setBattleFieldPaneUpdatable(battleFieldPane);
     }
 
     /**
@@ -111,9 +110,16 @@ public class MainBattleField implements Initializable {
         selectedTile.setVisible(visibility);
     }
 
+    public AnchorPane getBattleFieldPaneUpdatable() {
+        return battleFieldPaneUpdatable;
+    }
+
     // Setters
     private void setSelectedTileUpdatable(ImageView selectedTileUpdatable) {
         this.selectedTileUpdatable = selectedTileUpdatable;
+    }
+    public void setBattleFieldPaneUpdatable(AnchorPane battleFieldPaneUpdatable) {
+        this.battleFieldPaneUpdatable = battleFieldPaneUpdatable;
     }
 
     /**

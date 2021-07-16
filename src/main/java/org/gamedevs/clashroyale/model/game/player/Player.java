@@ -5,6 +5,8 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.field.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
+import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.objects.buildings.Building;
 import org.gamedevs.clashroyale.model.game.objects.buildings.KingTower;
 import org.gamedevs.clashroyale.model.game.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
@@ -60,6 +62,7 @@ public abstract class Player extends Runnable {
         kingTower = new KingTower(level, playerSide);
         leftPrincessTower = new PrincessTower(level, playerSide);
         rightPrincessTower = new PrincessTower(level, playerSide);
+        setMainTowers();
     }
 
     /**
@@ -86,6 +89,19 @@ public abstract class Player extends Runnable {
      */
     public boolean drop(int x, int y, CardName cardName){
         return false; // TODO: change when code is completed
+    }
+
+    private void setMainTowers(){
+        if(playerSide == Side.DOWN){
+            map.dropGameObject(147, 435, kingTower);
+            map.dropGameObject(45, 385, leftPrincessTower);
+            map.dropGameObject(270, 385, rightPrincessTower);
+        }
+        else {
+            map.dropGameObject(147, 0, kingTower);
+            map.dropGameObject(45, 70, leftPrincessTower);
+            map.dropGameObject(270, 70, rightPrincessTower);
+        }
     }
 
     // Getters

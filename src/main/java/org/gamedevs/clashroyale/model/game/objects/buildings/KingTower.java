@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -7,6 +8,7 @@ public class KingTower extends Building{
 
     public KingTower(int level, Side side){
         super(side);
+        nameOfDroppable = CardName.KING_TOWER;
         hitSpeed = 1;
         range = 7;
         attackTargetType = TargetType.AIR_GROUND;

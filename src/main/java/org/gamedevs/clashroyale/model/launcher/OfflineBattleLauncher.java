@@ -8,9 +8,11 @@ import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameManager;
+import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.media.Musics;
+import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -51,6 +53,7 @@ public class OfflineBattleLauncher extends Runnable {
         });
         // Initializing game engines
         GameManager gameManager = new GameManager();
+        gameManager.getMap().setViewManager(new ViewManager(Side.DOWN));
         gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), false);
         // Setting player to player container
         PlayerContainer.getPlayerContainer().setPlayer(gameManager.getTopPlayer());

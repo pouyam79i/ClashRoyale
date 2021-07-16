@@ -2,6 +2,10 @@ package org.gamedevs.clashroyale.model.game.battle.field;
 
 import org.gamedevs.clashroyale.model.game.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.spell.Spell;
+import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+
+import java.util.ArrayList;
 
 /**
  * Model of map.
@@ -26,6 +30,17 @@ public class Map {
      */
     private Pixel[][] pixels;
 
+    // Droppables:
+    /**
+     * Alive objects of top side player
+     */
+    private ArrayList<GameObject> topSideAliveObj;
+    /**
+     * Alive objects of down side player
+     */
+    private ArrayList<GameObject> downSideAliveObj;
+    private ViewManager viewManager;
+
     /**
      * Constructor of map.
      * Build a map with giving length and width.
@@ -36,6 +51,9 @@ public class Map {
         this.width = width;
         this.height = height;
         pixels = new Pixel[width][height];
+        topSideAliveObj = new ArrayList<GameObject>();
+        downSideAliveObj = new ArrayList<GameObject>();
+        viewManager = null;
         buildMap();
         matchGraph();
         lock();
@@ -49,7 +67,36 @@ public class Map {
      * @return true if it could drop game object in map!
      */
     public boolean dropGameObject(int x, int y, GameObject gameObject){
-
+        ArrayList<Pixel> visitedPixel;
+        Pixel calledPixel = getPixel(x, y);
+        if(calledPixel == null){
+            Console.getConsole().printTracingMessage("called pixel (" + x + "," + y + ") does not exist!");
+            return false;
+        }
+        if(calledPixel.isEmpty()){
+            calledPixel.setGameObject(gameObject);
+            gameObject.setHeadPixel(calledPixel);
+            if(viewManager != null){
+                viewManager.addObjectToView(gameObject);
+            }
+            return true;
+        }
+        int maxRadius = 1;      // TODO: define this in side configs
+        for(int radius = 0; radius < maxRadius; radius++){
+            for(int degree = 0; degree < 360;){
+                if(calledPixel.peak(Angle.getAngle(degree))){
+                    Pixel detectedPixel = calledPixel.getSurroundingPixel(Angle.getAngle(degree));
+                    detectedPixel.setGameObject(gameObject);
+                    gameObject.setHeadPixel(detectedPixel);
+                    if(viewManager != null){
+                        viewManager.addObjectToView(gameObject);
+                    }
+                    return true;
+                }
+                degree += Angle.STEP.getAngle();
+            }
+        }
+        Console.getConsole().printTracingMessage("failed to drop object");
         return false;
     }
 
@@ -125,6 +172,10 @@ public class Map {
                 pixels[i][j].lock();
             }
         }
+    }
+
+    public void setViewManager(ViewManager viewManager) {
+        this.viewManager = viewManager;
     }
 
     // Getters

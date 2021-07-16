@@ -31,7 +31,7 @@
             <Image url="@../../../img/battlefield/dark_arena/red_area_back.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="15.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#dropCard" prefHeight="504.0" prefWidth="374.0" visible="false" />
+      <AnchorPane fx:id="battleFieldPane" layoutX="15.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#dropCard" prefHeight="504.0" prefWidth="374.0" />
       <ImageView fitHeight="504.0" fitWidth="374.0" layoutX="15.0" layoutY="86.0" onMouseClicked="#dropCard" onMouseMoved="#updatePosition" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="selectedTile" fitHeight="19.0" fitWidth="17.0" layoutX="18.0" layoutY="87.0" onMouseClicked="#dropCard" pickOnBounds="true" preserveRatio="true">
          <image>

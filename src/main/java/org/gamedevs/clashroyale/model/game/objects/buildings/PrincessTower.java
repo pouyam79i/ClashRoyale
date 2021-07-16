@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.objects.buildings;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -7,6 +8,7 @@ public class PrincessTower extends Building{
 
     public PrincessTower(int level, Side side){
         super(side);
+        nameOfDroppable = CardName.PRINCESS_TOWER;
         hitSpeed = 0.8;
         range = 7.5;
         attackTargetType = TargetType.AIR_GROUND;

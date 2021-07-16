@@ -69,7 +69,7 @@ public class GameDroppableImageContainer {
      * @param isEnemyCard if the image is related to enemy
      * @return image of related card and its state
      */
-    private Image get(CardName cardName, GameObjectState state, boolean isEnemyCard){
+    public Image get(CardName cardName, GameObjectState state, boolean isEnemyCard){
         Image image = null;
         if(isEnemyCard){
             if(enemyImageContainer.containsKey(cardName)){

@@ -70,13 +70,13 @@ public class GameManager extends Runnable {
         // This is used for bot
         CardGenerator cardGeneratorDownPlayer = new CardGenerator(account.getDeckContainer(), elixirDownPlayer);
         // Setting human player requirements
-        topPlayer = new Human(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
+        downPlayer = new Human(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
         // Setting bot player requirements
         if(hardBot)
-            downPlayer = new HardBot(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
+            topPlayer = new HardBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
         else
-            downPlayer = new EasyBot(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
-        gameResult = new GameResult(GameType.SINGLE_OFFLINE, account.getUsername(), "BOT");
+            topPlayer = new EasyBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
+        gameResult = new GameResult(GameType.SINGLE_OFFLINE, "Bot", account.getUsername());
     }
 
     /**

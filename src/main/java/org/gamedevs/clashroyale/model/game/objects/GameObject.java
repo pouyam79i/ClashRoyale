@@ -61,7 +61,7 @@ public abstract class GameObject extends Droppable {
     // Shape property
     protected boolean isStar;
     protected double neededTiles;
-    protected Pixel centerPixel;
+    protected Pixel headPixel;
 
     /**
      * Constructor of game object
@@ -89,6 +89,56 @@ public abstract class GameObject extends Droppable {
      */
     protected void checkTargetRange(){
 
+    }
+
+    // Getters
+    public GameObjectState getState() {
+        return state;
+    }
+    public Angle getAngle() {
+        return angle;
+    }
+
+    public Pixel getHeadPixel() {
+        return headPixel;
+    }
+    public int getHp() {
+        return hp;
+    }
+    public int getDamage() {
+        return damage;
+    }
+    public double getHitSpeed() {
+        return hitSpeed;
+    }
+    public double getRange() {
+        return range;
+    }
+    public TargetType getAttackTargetType() {
+        return attackTargetType;
+    }
+    public TargetType getMyType() {
+        return myType;
+    }
+    public int getZ() {
+        return z;
+    }
+    public Side getObjectTeamSide() {
+        return objectTeamSide;
+    }
+    public boolean isStar() {
+        return isStar;
+    }
+    public double getNeededTiles() {
+        return neededTiles;
+    }
+
+    // Setters
+    public void setZ(int z) {
+        this.z = z;
+    }
+    public void setHeadPixel(Pixel headPixel) {
+        this.headPixel = headPixel;
     }
 
 }
