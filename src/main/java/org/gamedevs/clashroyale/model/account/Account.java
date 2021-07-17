@@ -32,6 +32,14 @@ public class Account implements Serializable {
      * total XP of user
      */
     private int totalXP;
+    /**
+     * xp needed to go to next level.
+     */
+    private int levelUpXP;
+    /**
+     * current xp (xp of this level)
+     */
+    private int currentLevelXP;
 
     /**
      * Builds an account.
@@ -57,24 +65,34 @@ public class Account implements Serializable {
      * @return level of player according to total xp
      */
     public int getLevel(){
-        int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
-        String labelText = "";
-        if(xp < 1000){
+        if(totalXP < 1000){
+            currentLevelXP = totalXP;
+            levelUpXP = 1000;
             return 1;
         }
-        else if(xp < 6000){
+        else if(totalXP < 6000){
+            currentLevelXP = totalXP - 1000;
+            levelUpXP = 5000;
             return 2;
         }
-        else if(xp < 16000){
+        else if(totalXP < 16000){
+            currentLevelXP = totalXP -  6000;
+            levelUpXP = 10000;
             return 3;
         }
-        else if(xp < 36000){
+        else if(totalXP < 36000){
+            currentLevelXP = totalXP -  16000;
+            levelUpXP = 20000;
             return 4;
         }
-        else if(xp < 66000){
+        else if(totalXP < 66000){
+            currentLevelXP = totalXP -  36000;
+            levelUpXP = 30000;
             return 5;
         }
         else{
+            currentLevelXP = totalXP - 66000;
+            levelUpXP = 1;
             return 6;
         }
     }
@@ -103,14 +121,14 @@ public class Account implements Serializable {
     public int getTotalXP() {
         return totalXP;
     }
+    public int getLevelUpXP() {
+        return levelUpXP;
+    }
+    public int getCurrentLevelXP() {
+        return currentLevelXP;
+    }
 
     // Setters
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
     public void setDeckContainer(DeckContainer deckContainer) {
         this.deckContainer = deckContainer;
     }

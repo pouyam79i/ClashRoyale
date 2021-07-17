@@ -87,46 +87,34 @@ public class ProfilePopup implements Initializable {
     /**
      * Setting level of player with this method!
      */
-    private void setLevel(){
-        int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
-        if(xp < 1000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(0));
-            xpBarUpdatable.setProgress((xp)/1000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
+    private void updateView(){
+        int level = UserAccountContainer.getUserAccountContainer().getAccount().getLevel();
+        int currentXP = UserAccountContainer.getUserAccountContainer().getAccount().getCurrentLevelXP();
+        double levelUpXP = UserAccountContainer.getUserAccountContainer().getAccount().getLevelUpXP();
+        if(level < 6){
+            Platform.runLater(() -> {
+                leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(level - 1));
+                xpBarUpdatable.setProgress((currentXP)/levelUpXP);
+                arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(level - 1));
+            });
         }
-        else if(xp < 6000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(1));
-            xpBarUpdatable.setProgress((xp - 1000)/5000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
+        else {
+            Platform.runLater(() -> {
+                leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(level - 1));
+                xpBarUpdatable.setProgress(1);
+                arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(level - 1));
+            });
         }
-        else if(xp < 16000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(2));
-            xpBarUpdatable.setProgress((xp - 6000)/10000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
-        }
-        else if(xp < 36000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(3));
-            xpBarUpdatable.setProgress((xp - 16000)/20000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
-        }
-        else if(xp < 66000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(4));
-            xpBarUpdatable.setProgress((xp - 36000)/30000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(2));
-        }
-        else if(xp < 106000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(5));
-            xpBarUpdatable.setProgress((xp - 66000)/40000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(3));
-        }
-        nameTFUpdatable.setText(UserAccountContainer.getUserAccountContainer().getAccount().getUsername());
+        Platform.runLater(() -> {
+            nameTFUpdatable.setText(UserAccountContainer.getUserAccountContainer().getAccount().getUsername());
+        });
     }
 
     /**
      * Initializing values
      */
     public void init(){
-        setLevel();
+        updateView();
     }
 
     // Setters

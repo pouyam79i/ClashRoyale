@@ -58,6 +58,10 @@ public class MainBattle implements Initializable {
     private ImageView leveImgUpdatable;
     private ImageView arenaImgUpdatable;
 
+    // Other fields
+    private int currentXP;
+    private double levelUpXP;
+
     /**
      * Initialize the requirements
      * @param url 'not used'
@@ -70,6 +74,8 @@ public class MainBattle implements Initializable {
         getMainBattle().setLeveImgUpdatable(levelImg);
         getMainBattle().setArenaImgUpdatable(arenaImg);
         getMainBattle().setXpBarUpdatable(xpBar);
+        getMainBattle().setLevelUpXP(1);
+        getMainBattle().setCurrentXP(1);
     }
 
     /**
@@ -84,10 +90,38 @@ public class MainBattle implements Initializable {
      * updates xp
      * this method does not effect account information!
      * @param additionalXP will be added to xp
-     * @param currentXP is the amount of current xp
      */
-    public void updateXP(int additionalXP, int currentXP){
-
+    public void updateXP(int additionalXP){
+        int currentXP = getMainBattle().getCurrentXP();
+        double levelUpXP = getMainBattle().getLevelUpXP();
+        Thread thread = (new Thread(() -> {
+            for (int i = 1; i <= additionalXP; i++){
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ignored) {}
+                if((i + currentXP) >= ((int) levelUpXP)){
+                    Platform.runLater(() -> {
+                        setLevel();
+                        new BounceIn(leveImgUpdatable).play();
+                    });
+                    return;
+                }
+                else {
+                    String label = (i + currentXP) + "/" + ((int) levelUpXP);
+                    int finalI = i;
+                    Platform.runLater(() -> {
+                        xpLabelUpdatable.setText(label);
+                        xpBarUpdatable.setProgress(((finalI + currentXP) / levelUpXP));
+                    });
+                }
+            }
+            Platform.runLater(() -> {
+                setLevel();
+                new BounceIn(leveImgUpdatable).play();
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -161,46 +195,31 @@ public class MainBattle implements Initializable {
      * Sets level xp and images
      * this method does not effect account information!
      */
-    private void setLevel(){
-        int xp = UserAccountContainer.getUserAccountContainer().getAccount().getTotalXP();
+    private void setLevel() {
+        int level = UserAccountContainer.getUserAccountContainer().getAccount().getLevel();
+        int currentXP = UserAccountContainer.getUserAccountContainer().getAccount().getCurrentLevelXP();
+        double levelUpXP = UserAccountContainer.getUserAccountContainer().getAccount().getLevelUpXP();
+        getMainBattle().setLevelUpXP(levelUpXP);
+        getMainBattle().setCurrentXP(currentXP);
         String labelText = "";
-        if(xp < 1000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(0));
-            labelText = xp + "/" + 1000;
-            xpBarUpdatable.setProgress((xp)/1000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
-        }
-        else if(xp < 6000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(1));
-            labelText = (xp - 1000) + "/" + 5000;
-            xpBarUpdatable.setProgress((xp - 1000)/5000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
-        }
-        else if(xp < 16000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(2));
-            labelText = (xp - 6000) + "/" + 10000;
-            xpBarUpdatable.setProgress((xp - 6000)/10000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(0));
-        }
-        else if(xp < 36000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(3));
-            labelText = (xp - 16000) + "/" + 20000;
-            xpBarUpdatable.setProgress((xp - 16000)/20000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(1));
-        }
-        else if(xp < 66000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(4));
-            labelText = (xp - 36000) + "/" + 30000;
-            xpBarUpdatable.setProgress((xp - 36000)/30000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(2));
-        }
-        else if(xp < 106000){
-            leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(5));
-            labelText = (xp - 66000) + "/" + 40000;
-            xpBarUpdatable.setProgress((xp - 66000)/40000.0);
-            arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(3));
+        leveImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getLevelImages().get(level - 1));
+        arenaImgUpdatable.setImage(GameIconContainer.getGameIconContainer().getArenaImages().get(level - 1));
+        if (level < 6) {
+            labelText = currentXP + "/" + ((int) levelUpXP);
+            xpBarUpdatable.setProgress(currentXP / levelUpXP);
+        }else {
+            labelText = "" + currentXP;
+            xpBarUpdatable.setProgress(1);
         }
         xpLabelUpdatable.setText(labelText);
+    }
+
+    // Getters
+    private int getCurrentXP() {
+        return currentXP;
+    }
+    private double getLevelUpXP() {
+        return levelUpXP;
     }
 
     // Setters
@@ -218,6 +237,12 @@ public class MainBattle implements Initializable {
     }
     private void setXpBarUpdatable(ProgressBar xpBarUpdatable) {
         this.xpBarUpdatable = xpBarUpdatable;
+    }
+    private void setCurrentXP(int currentXP) {
+        this.currentXP = currentXP;
+    }
+    private void setLevelUpXP(double levelUpXP) {
+        this.levelUpXP = levelUpXP;
     }
 
     /**
