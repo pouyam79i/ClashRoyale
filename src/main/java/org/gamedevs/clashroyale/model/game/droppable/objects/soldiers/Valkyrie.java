@@ -6,14 +6,12 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.Building;
 import org.gamedevs.clashroyale.model.game.player.Side;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Valkyrie extends Soldier {
-    private HashMap<Tile, ArrayList<Building>> towers = new HashMap<>();
+
 
     public Valkyrie(int level, Side side) {
         super(side);
@@ -52,17 +50,15 @@ public class Valkyrie extends Soldier {
      */
     @Override
     protected void attack(GameObject target) {
-        if (!towers.containsKey(headTile))
-            towers.put(headTile, new ArrayList<>());
+        ArrayList<Building> hitTowers = new ArrayList<>();
 
         if (target != null) {
             state = GameObjectState.ATTACK;
-            if (target.getMyType() != TargetType.BUILDING || !towers.get(headTile).contains(target)) {
-                if (target.getMyType() == TargetType.BUILDING)
-                    towers.get(headTile).add((Building) target);
-                target.reduceHP(damage);
-            }
-            areaSplashDamage();
+            if (target.getMyType() == TargetType.BUILDING)
+                hitTowers.add((Building) target);
+            target.reduceHP(damage);
+
+            areaSplashDamage(hitTowers);
             try {
                 Thread.sleep((int) (hitSpeed * 1000));
             } catch (InterruptedException ignored) {
@@ -74,8 +70,10 @@ public class Valkyrie extends Soldier {
 
     /**
      * area splash for target which is hit by valkyrie
+     *
+     * @param hitTowers array which store towers which one hit by valkyrie in this turn of attack
      */
-    protected void areaSplashDamage() {
+    protected void areaSplashDamage(ArrayList<Building> hitTowers) {
         float range = 1;
         Thread areaSplashDamageThread = (new Thread(() -> {
             int x, y;       // beginning x,y of search area
@@ -92,10 +90,10 @@ public class Valkyrie extends Soldier {
                             if (subTarget.getTeamSide() != teamSide) {
                                 if (subTarget.getMyType() == TargetType.GROUND || subTarget.getMyType() == TargetType.BUILDING) {
                                     if (subTarget.getHp() > 0 &&
-                                            (subTarget.getMyType() != TargetType.BUILDING || !towers.get(headTile).contains(subTarget))) {
+                                            (subTarget.getMyType() != TargetType.BUILDING || !hitTowers.contains(subTarget))) {
                                         subTarget.reduceHP(damage);
                                         if (subTarget.getMyType() == TargetType.BUILDING)
-                                            towers.get(headTile).add((Building) subTarget);
+                                            hitTowers.add((Building) subTarget);
 
                                     }
                                 }
