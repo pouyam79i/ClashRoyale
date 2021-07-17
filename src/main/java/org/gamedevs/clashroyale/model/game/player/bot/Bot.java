@@ -1,6 +1,6 @@
 package org.gamedevs.clashroyale.model.game.player.bot;
 
-import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;

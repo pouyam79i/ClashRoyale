@@ -7,7 +7,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
-import org.gamedevs.clashroyale.model.game.battle.engine.GameManager;
+import org.gamedevs.clashroyale.model.game.battle.engine.manager.GameManager;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;

@@ -2,7 +2,7 @@ package org.gamedevs.clashroyale.model.container.gamedata;
 
 import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.game.objects.GameObjectState;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 
 import java.util.HashMap;
 

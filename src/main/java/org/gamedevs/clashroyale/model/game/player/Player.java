@@ -2,13 +2,11 @@ package org.gamedevs.clashroyale.model.game.player;
 
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.game.battle.field.Map;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
-import org.gamedevs.clashroyale.model.game.objects.GameObject;
-import org.gamedevs.clashroyale.model.game.objects.buildings.Building;
-import org.gamedevs.clashroyale.model.game.objects.buildings.KingTower;
-import org.gamedevs.clashroyale.model.game.objects.buildings.PrincessTower;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.KingTower;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
