@@ -255,7 +255,6 @@ public class DeckScene {
         private Card card;
         private ImageView cardImage = new ImageView();
 
-
         /**
          * constructor to make a new AnchorPane
          *
@@ -269,7 +268,6 @@ public class DeckScene {
             //set size
             cardImage.setFitHeight(105);
             cardImage.setFitWidth(85);
-
 
             //add to AnchorPane
             getChildren().add(cardImage);
