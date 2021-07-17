@@ -62,7 +62,7 @@ public class Valkyrie extends Soldier {
                     towers.get(headTile).add((Building) target);
                 target.reduceHP(damage);
             }
-            areaSplashDamage(target);
+            areaSplashDamage();
             try {
                 Thread.sleep((int) (hitSpeed * 1000));
             } catch (InterruptedException ignored) {
@@ -73,21 +73,20 @@ public class Valkyrie extends Soldier {
     }
 
     /**
-     * run area splash for each target which is directly hit by valkyrie
-     * @param target target which is directly hit by valkyrie
+     * area splash for target which is hit by valkyrie
      */
-    protected void areaSplashDamage(GameObject target) {
+    protected void areaSplashDamage() {
         float range = 1;
         Thread areaSplashDamageThread = (new Thread(() -> {
             int x, y;       // beginning x,y of search area
 
-            x = target.getHeadPixel().getX() - (int) Math.round(range);
-            y = target.getHeadPixel().getY() - (int) Math.round(range);
+            x = getHeadPixel().getX() - (int) Math.round(range);
+            y = getHeadPixel().getY() - (int) Math.round(range);
             for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
                 for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
                     Tile searchTile = battleField.getPixel(x + i, y + j);
                     if (searchTile != null) {
-                        if (battleField.calculateDistance(target.getHeadPixel(), searchTile) <= Math.round(range)) {
+                        if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
                             GameObject subTarget = null;
                             // Ground soldiers
                             if (subTarget.getTeamSide() != teamSide) {
