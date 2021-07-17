@@ -1,7 +1,9 @@
 package org.gamedevs.clashroyale.model.game.battle.engine.map;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.MainTowers;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
+import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -32,13 +34,16 @@ public class Map {
 
     // Droppables:
     /**
-     * Alive objects of top side player
+     * Alive objects of top side player.
      */
     private ArrayList<GameObject> topSideAliveObj;
     /**
-     * Alive objects of down side player
+     * Alive objects of down side player.
      */
     private ArrayList<GameObject> downSideAliveObj;
+    /**
+     * View manager of map.
+     */
     private ViewManager viewManager;
 
     /**
@@ -113,6 +118,68 @@ public class Map {
     }
 
     /**
+     * drop main towers on its position!
+     * @param mainTower side
+     * @param side side of tower
+     * @param kind of tower (left princess is -1, king is 0, right princess is 1)
+     */
+    public void setMainTower(MainTowers mainTower, Side side, int kind){
+        if(side == Side.DOWN){
+            if(kind == -1){
+                mainTower.setHeadPixel(tiles[3][5]);
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 2; i <= 4; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+            else if(kind == 0){
+                mainTower.setHeadPixel(tiles[8][2]);
+                for(int j = 0; j <= 3; j++){
+                    for (int i = 7; i <= 10; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+            else if(kind == 1){
+                mainTower.setHeadPixel(tiles[14][5]);
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 13; i <= 15; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+        }
+        else if(side == Side.TOP){
+            if (kind == -1) {
+                mainTower.setHeadPixel(tiles[3][24]);
+                for (int j = 23; j <= 25; j++) {
+                    for (int i = 2; i <= 4; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            } else if (kind == 0) {
+                mainTower.setHeadPixel(tiles[8][27]);
+                for (int j = 26; j <= 29; j++) {
+                    for (int i = 7; i <= 10; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            } else if (kind == 1) {
+                mainTower.setHeadPixel(tiles[14][24]);
+                for (int j = 23; j <= 25; j++) {
+                    for (int i = 13; i <= 15; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+
+        }
+        getOneSideObjects(side).add(mainTower);
+        mainTower.setBattleField(this);
+    }
+
+    /**
      * calculates the distance between two tiles
      * @param src beginning tile
      * @param des ending tile
@@ -139,6 +206,19 @@ public class Map {
         if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return tiles[x][y];
+    }
+
+    /**
+     * returns list of one side objet
+     * @param side of objects
+     * @return array list of one side objet list
+     */
+    public ArrayList<GameObject> getOneSideObjects(Side side){
+        if(side == Side.TOP)
+            return topSideAliveObj;
+        else if(side == Side.DOWN)
+            return downSideAliveObj;
+        return null;
     }
 
     /**

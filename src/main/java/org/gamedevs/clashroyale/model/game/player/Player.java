@@ -63,6 +63,15 @@ public abstract class Player extends Runnable {
     }
 
     /**
+     * drops main tower of player
+     */
+    public void dropMainTowers(){
+        map.setMainTower(kingTower, playerSide, 0);
+        map.setMainTower(leftPrincessTower, playerSide, -1);
+        map.setMainTower(rightPrincessTower, playerSide, 1);
+    }
+
+    /**
      * Translate x and y according to player side!
      * Tells the map engine to drop player card on that!
      * Also no need to translate x and y for bot,
