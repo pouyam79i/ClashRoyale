@@ -1,7 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
-import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
@@ -78,10 +77,14 @@ public abstract class GameObject extends Droppable {
      */
     protected void attack(GameObject target){
         if(target != null){
+            state = GameObjectState.ATTACK;
             target.reduceHP(damage);
             try {
                 Thread.sleep((int)(hitSpeed * 1000));
             } catch (InterruptedException ignored) {}
+        }
+        else {
+            state = GameObjectState.MOVING;
         }
     }
 
@@ -216,9 +219,6 @@ public abstract class GameObject extends Droppable {
     }
 
     // Setters
-    public void setZ(int z) {
-        this.z = z;
-    }
     public void setHeadPixel(Tile headTile) {
         this.headTile = headTile;
     }

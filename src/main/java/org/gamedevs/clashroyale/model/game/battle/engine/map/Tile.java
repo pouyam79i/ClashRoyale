@@ -142,7 +142,7 @@ public class Tile {
             if(gameObject == null)
                 return true;
             if(getSurroundingPixel(angle).setGameObject(gameObject)){
-                gameObject = null;
+                gameObject = null; // TODO: remember to set head pixel of game objects
                 return true;
             }
             return false;
@@ -155,6 +155,22 @@ public class Tile {
             }
             return false;
         }
+    }
+
+    /**
+     * get the angle of surrounding next tile
+     * @param surroundingTile next tile
+     * @return angle if this tile is surrounded by the surrounding tile
+     */
+    public Angle getSurroundingTileAngel(Tile surroundingTile){
+        if(surroundingTile != null){
+            for (int i = 0; i < 360; i = i + 45){
+                if(getSurroundingPixel(Angle.getAngle(i)) == surroundingTile){
+                    return Angle.getAngle(i);
+                }
+            }
+        }
+        return null;
     }
 
     /**

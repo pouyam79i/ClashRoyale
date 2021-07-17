@@ -1,6 +1,9 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -32,10 +35,39 @@ public abstract class Soldier extends GameObject {
     }
 
     /**
+     * move me to next tile
+     * @param nextTile next tile
+     * @return true if i have moved successfully
+     */
+    protected boolean move(Tile nextTile){
+        if(nextTile != null){
+            Angle nextTileAngel = headTile.getSurroundingTileAngel(nextTile);
+            if(nextTileAngel != null){
+                if(headTile.carry(angle, z)){
+                    headTile = nextTile;
+                    try {
+                        Thread.sleep((int)(speed * 1000));
+                    } catch (InterruptedException ignored) {}
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Updates object to next place
      */
-    protected void move(){
+    protected void mover(){
+        Thread moverThread = (new Thread(() -> {
+            while (hp > 0){
+                if(state == GameObjectState.MOVING){
 
+                }
+            }
+        }));
+        moverThread.setDaemon(true);
+        moverThread.start();
     }
 
     /**
