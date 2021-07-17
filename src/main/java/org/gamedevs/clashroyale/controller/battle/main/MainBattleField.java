@@ -95,7 +95,6 @@ public class MainBattleField implements Initializable {
         if(SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist())
             if(player.drop(event.getSceneY(), event.getSceneY(), SelectedCardContainer.getSelectedCardContainer().getSelectedCard())) {
                 SelectedCardContainer.getSelectedCardContainer().dropped();
-                Console.getConsole().printTracingMessage("drop " +  SelectedCardContainer.getSelectedCardContainer().getSelectedCard().getCardName() );
             }
             else
                 SelectedCardContainer.getSelectedCardContainer().droppingFailed();

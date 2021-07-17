@@ -53,12 +53,14 @@ public class CardDeckGame {
             if (source.equals(selected)) {
                 selected = null;
                 deselectCard(source);
+
             } else {
-                if (selected != null)
+                if (selected != null) {
                     deselectCard(selected);
+                }
                 selectCard(source);
+                putCard(source);
             }
-            putCard(source);
         }
     };
 
@@ -98,6 +100,7 @@ public class CardDeckGame {
             }
         };
 
+
         /**
          * listener to cancel previous (put) listener
          * after handling one card the previous (put) listener  should canceled
@@ -107,18 +110,15 @@ public class CardDeckGame {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
                 if (!newValue) {
-//                    if (!SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().get() &&
-//                        selected.equals(source))
-//                        deselectCard(source);
-
+                    deselectCard(source);
                     SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().removeListener(put);
-//                    SelectedCardContainer.getSelectedCardContainer().selectedCardExistProperty().removeListener(this);
                 }
             }
         };
 
+
         SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().addListener(put);
-        SelectedCardContainer.getSelectedCardContainer().selectedCardIsDroppedProperty().addListener(skip);
+        SelectedCardContainer.getSelectedCardContainer().selectedCardExistProperty().addListener(skip);
 
     }
 
@@ -141,12 +141,13 @@ public class CardDeckGame {
      *
      * @param source card to be deselected
      */
-    private void deselectCard(CardView source) {
+    private boolean deselectCard(CardView source) {
         selected = null;
         source.getCardImage().setFitHeight(80);
         source.getCardImage().setFitWidth(68);
         SelectedCardContainer.getSelectedCardContainer().takeOut();
         Console.getConsole().printTracingMessage("deselect " + source.getCard().getCardName());
+        return true;
     }
 
     /**
@@ -164,7 +165,6 @@ public class CardDeckGame {
      */
     public void init() {
         player = PlayerContainer.getPlayerContainer().getPlayer();
-        System.out.println(player);
         elixirProgressBarUpdatable.progressProperty().bind(player.getElixir().elixirValueProperty().divide(10));
         elixirLabelUpdatable.textProperty().bind(player.getElixir().elixirValueProperty().asString("%.0f"));
         initPlayCards();
