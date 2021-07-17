@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.game.battle.engine.map;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
+import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -32,13 +33,16 @@ public class Map {
 
     // Droppables:
     /**
-     * Alive objects of top side player
+     * Alive objects of top side player.
      */
     private ArrayList<GameObject> topSideAliveObj;
     /**
-     * Alive objects of down side player
+     * Alive objects of down side player.
      */
     private ArrayList<GameObject> downSideAliveObj;
+    /**
+     * View manager of map.
+     */
     private ViewManager viewManager;
 
     /**
@@ -139,6 +143,19 @@ public class Map {
         if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return tiles[x][y];
+    }
+
+    /**
+     * returns list of one side objet
+     * @param side of objects
+     * @return array list of one side objet list
+     */
+    public ArrayList<GameObject> getOneSideObjects(Side side){
+        if(side == Side.TOP)
+            return topSideAliveObj;
+        else if(side == Side.DOWN)
+            return downSideAliveObj;
+        return null;
     }
 
     /**
