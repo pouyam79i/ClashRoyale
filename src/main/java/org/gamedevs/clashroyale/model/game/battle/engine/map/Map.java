@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.battle.engine.map;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.MainTowers;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
@@ -114,6 +115,68 @@ public class Map {
     public boolean dropSpell(int x, int y, Spell spell){
 
         return false;
+    }
+
+    /**
+     * drop main towers on its position!
+     * @param mainTower side
+     * @param side side of tower
+     * @param kind of tower (left princess is -1, king is 0, right princess is 1)
+     */
+    public void setMainTower(MainTowers mainTower, Side side, int kind){
+        if(side == Side.DOWN){
+            if(kind == -1){
+                mainTower.setHeadPixel(tiles[3][5]);
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 2; i <= 4; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+            else if(kind == 0){
+                mainTower.setHeadPixel(tiles[8][2]);
+                for(int j = 0; j <= 3; j++){
+                    for (int i = 7; i <= 10; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+            else if(kind == 1){
+                mainTower.setHeadPixel(tiles[14][5]);
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 13; i <= 15; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+        }
+        else if(side == Side.TOP){
+            if (kind == -1) {
+                mainTower.setHeadPixel(tiles[3][24]);
+                for (int j = 23; j <= 25; j++) {
+                    for (int i = 2; i <= 4; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            } else if (kind == 0) {
+                mainTower.setHeadPixel(tiles[8][27]);
+                for (int j = 26; j <= 29; j++) {
+                    for (int i = 7; i <= 10; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            } else if (kind == 1) {
+                mainTower.setHeadPixel(tiles[14][24]);
+                for (int j = 23; j <= 25; j++) {
+                    for (int i = 13; i <= 15; i++) {
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+
+        }
+        getOneSideObjects(side).add(mainTower);
+        mainTower.setBattleField(this);
     }
 
     /**

@@ -60,6 +60,9 @@ public abstract class Player extends Runnable {
         kingTower = new KingTower(level, playerSide);
         leftPrincessTower = new PrincessTower(level, playerSide);
         rightPrincessTower = new PrincessTower(level, playerSide);
+        map.setMainTower(kingTower, playerSide, 0);
+        map.setMainTower(leftPrincessTower, playerSide, -1);
+        map.setMainTower(rightPrincessTower, playerSide, 1);
     }
 
     /**

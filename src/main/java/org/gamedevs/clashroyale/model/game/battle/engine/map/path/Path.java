@@ -61,6 +61,18 @@ public class Path {
         return null;
     }
 
+    /**
+     * backwards on the path!
+     */
+    public void backward(){
+        if(index > 0)
+            index--;
+    }
+
+    /**
+     * calculates cost of path
+     * @return cost of path!
+     */
     public int getCost(){
         return (path.size() - index);
     }
