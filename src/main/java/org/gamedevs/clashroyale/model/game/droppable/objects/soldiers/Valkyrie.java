@@ -54,10 +54,6 @@ public class Valkyrie extends Soldier {
 
         if (target != null) {
             state = GameObjectState.ATTACK;
-            if (target.getMyType() == TargetType.BUILDING)
-                hitTowers.add((Building) target);
-            target.reduceHP(damage);
-
             areaSplashDamage(hitTowers);
             try {
                 Thread.sleep((int) (hitSpeed * 1000));

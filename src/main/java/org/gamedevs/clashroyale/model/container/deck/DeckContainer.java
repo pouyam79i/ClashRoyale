@@ -79,14 +79,36 @@ public class DeckContainer implements Serializable {
     }
 
 
+    /**
+     * get a random card
+     *
+     * @return random card
+     */
     public Card getRandomCard() {
         Card card;
         Random random = new Random();
-        do{
-            card = deck.get(random.nextInt(deck.size() - 1));
-        }while (card.getCardName() == CardName.EMPTY);
-        return card;
+        if(deck.size() > 0) {
+            do {
+                card = deck.get(random.nextInt(deck.size() - 1));
+            } while (card.getCardName() == CardName.EMPTY);
+            return card;
+        }else
+            return null;
     }
+
+    /**
+     * get unlock cards
+     *
+     * @return cardswhich are unlock
+     */
+    public DeckContainer getUnlockCards() {
+        DeckContainer unlocks = new DeckContainer();
+        for (Card card : deck)
+            if (!card.isLock())
+                unlocks.addCard(card);
+        return unlocks;
+    }
+
 
     // Getter
     public ArrayList<Card> getDeck() {

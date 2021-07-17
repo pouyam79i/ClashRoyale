@@ -31,4 +31,9 @@ public class HardBot extends Bot{
 
     }
 
+    @Override
+    protected void pickCard() {
+
+    }
+
 }

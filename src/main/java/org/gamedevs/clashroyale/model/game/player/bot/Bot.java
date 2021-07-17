@@ -1,10 +1,14 @@
 package org.gamedevs.clashroyale.model.game.player.bot;
 
+import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
+
+import java.util.ArrayList;
 
 /**
  * This class contains main structure of bot!
@@ -14,6 +18,7 @@ import org.gamedevs.clashroyale.model.game.player.Side;
  */
 public abstract class Bot extends Player {
 
+    protected DeckContainer gameDeck = new DeckContainer();
     /**
      * Gets main game tools to be able to play
      * @param map of game
@@ -33,7 +38,9 @@ public abstract class Bot extends Player {
     @Override
     public void run() {
         elixir.start();
+        gameDeck.setDeck(cardGenerator.getInitialCards());
         algorithm();
+
     }
 
     /**
@@ -42,4 +49,11 @@ public abstract class Bot extends Player {
      */
     protected abstract void algorithm();
 
+    protected abstract void pickCard();
+
+    protected void removeCard(Card card){
+        elixir.reduceElixir(card.getCost());
+        gameDeck.removeCard(card);
+        gameDeck.addCard(cardGenerator.getANewCard());
+    }
 }
