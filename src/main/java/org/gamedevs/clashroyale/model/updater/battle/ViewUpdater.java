@@ -4,11 +4,10 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
-import org.gamedevs.clashroyale.model.game.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 public class ViewUpdater extends Runnable {

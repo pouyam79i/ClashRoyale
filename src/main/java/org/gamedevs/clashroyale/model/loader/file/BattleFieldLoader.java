@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
-import org.gamedevs.clashroyale.model.game.objects.GameObjectState;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.IOException;

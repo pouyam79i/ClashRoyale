@@ -196,7 +196,7 @@
         <mxCell id="zqAuQhhgoHddIaEAl3AS-4" value="Tile" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="196.5" y="78" width="140" height="78" as="geometry" />
         </mxCell>
-        <mxCell id="zqAuQhhgoHddIaEAl3AS-5" value="+ ArrayList&lt;Pixel&gt; pixel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zqAuQhhgoHddIaEAl3AS-4" vertex="1">
+        <mxCell id="zqAuQhhgoHddIaEAl3AS-5" value="+ ArrayList&lt;Pixel&gt; tile" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zqAuQhhgoHddIaEAl3AS-4" vertex="1">
           <mxGeometry y="26" width="140" height="26" as="geometry" />
         </mxCell>
         <mxCell id="zqAuQhhgoHddIaEAl3AS-6" value="+ 2Dpoint location" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zqAuQhhgoHddIaEAl3AS-4" vertex="1">
@@ -355,7 +355,7 @@
         <mxCell id="vwh6TF44wRvRAHBiwVrO-21" value="Player" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="249.5" y="350" width="140" height="78" as="geometry" />
         </mxCell>
-        <mxCell id="vwh6TF44wRvRAHBiwVrO-23" value="- drop(pixel, card)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="vwh6TF44wRvRAHBiwVrO-21" vertex="1">
+        <mxCell id="vwh6TF44wRvRAHBiwVrO-23" value="- drop(tile, card)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="vwh6TF44wRvRAHBiwVrO-21" vertex="1">
           <mxGeometry y="26" width="140" height="26" as="geometry" />
         </mxCell>
         <mxCell id="vwh6TF44wRvRAHBiwVrO-24" value="- update()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="vwh6TF44wRvRAHBiwVrO-21" vertex="1">
