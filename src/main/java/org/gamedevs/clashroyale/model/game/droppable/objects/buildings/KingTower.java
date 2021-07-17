@@ -4,7 +4,7 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
-public class KingTower extends Building{
+public class KingTower extends MainTowers{
 
     public KingTower(int level, Side side){
         super(side);

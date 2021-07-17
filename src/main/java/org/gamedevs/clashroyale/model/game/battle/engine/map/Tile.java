@@ -191,5 +191,8 @@ public class Tile {
     public GameObject getGameObject() {
         return gameObject;
     }
+    public GameObject getFlyingGameObject() {
+        return flyingGameObject;
+    }
 
 }

@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 public abstract class Building extends GameObject {
@@ -21,6 +22,7 @@ public abstract class Building extends GameObject {
      */
     protected Building(Side side){
         super(side);
+        myType = TargetType.BUILDING;
     }
 
     /**
@@ -28,7 +30,9 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-
+        while (hp > 0){
+            checkTargetRange();
+        }
     }
 
     /**

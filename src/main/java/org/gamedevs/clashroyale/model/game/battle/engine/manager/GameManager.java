@@ -53,7 +53,7 @@ public class GameManager extends Runnable {
      */
     public GameManager() {
         threadName = "GameManager";
-        map = new Map(MainConfig.STD_BATTLE_FIELD_WIDTH, MainConfig.STD_BATTLE_FIELD_HEIGHT);
+        map = new Map(MainConfig.STD_BATTLE_FIELD_X_TILE, MainConfig.STD_BATTLE_FIELD_Y_TILE);
         clock = new Clock();
         gameResult = null;
     }

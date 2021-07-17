@@ -1,0 +1,17 @@
+@font-face {
+    src: url('../../fonts/Clash-Regular.ttf');
+}
+
+
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}
+
+.progress-bar{
+    -fx-accent: #ff0000;
+}
+
+.progress-bar > .track {
+    -fx-text-box-border: rgba(9, 9, 9, 0.0);
+    -fx-control-inner-background: rgba(0, 0, 0, 0.66);
+}

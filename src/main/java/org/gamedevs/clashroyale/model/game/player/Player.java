@@ -38,7 +38,7 @@ public abstract class Player extends Runnable {
      */
     protected final int level;
 
-    // Player main towers
+    // Player main towers:
     protected KingTower kingTower;
     protected PrincessTower leftPrincessTower;
     protected PrincessTower rightPrincessTower;
@@ -60,7 +60,6 @@ public abstract class Player extends Runnable {
         kingTower = new KingTower(level, playerSide);
         leftPrincessTower = new PrincessTower(level, playerSide);
         rightPrincessTower = new PrincessTower(level, playerSide);
-        setMainTowers();
     }
 
     /**
@@ -87,19 +86,6 @@ public abstract class Player extends Runnable {
      */
     public boolean drop(int x, int y, CardName cardName){
         return false; // TODO: change when code is completed
-    }
-
-    private void setMainTowers(){
-        if(playerSide == Side.DOWN){
-            map.dropGameObject(147, 435, kingTower);
-            map.dropGameObject(45, 385, leftPrincessTower);
-            map.dropGameObject(270, 385, rightPrincessTower);
-        }
-        else {
-            map.dropGameObject(147, 0, kingTower);
-            map.dropGameObject(45, 70, leftPrincessTower);
-            map.dropGameObject(270, 70, rightPrincessTower);
-        }
     }
 
     // Getters

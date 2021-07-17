@@ -8,4 +8,9 @@ public class Arrows extends Spell{
         super(side);
     }
 
+    @Override
+    protected void effect() {
+
+    }
+
 }

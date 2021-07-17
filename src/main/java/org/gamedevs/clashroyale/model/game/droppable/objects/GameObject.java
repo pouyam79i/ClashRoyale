@@ -1,10 +1,12 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
  * Main structure game object class!
@@ -33,8 +35,7 @@ public abstract class GameObject extends Droppable {
      */
     protected double range;
     /**
-     * attack target
-     * the max attacking radius!
+     * attack target type
      */
     protected TargetType attackTargetType;
     /**
@@ -76,8 +77,12 @@ public abstract class GameObject extends Droppable {
      * Start attacking to the target (gives damage to target object)
      */
     protected void attack(GameObject target){
-        if(target != null)
+        if(target != null){
             target.reduceHP(damage);
+            try {
+                Thread.sleep((int)(hitSpeed * 1000));
+            } catch (InterruptedException ignored) {}
+        }
     }
 
     /**
@@ -94,7 +99,85 @@ public abstract class GameObject extends Droppable {
      * calls attack() on that target!
      */
     protected void checkTargetRange(){
-
+        Thread targetRangeCheckerThread = (new Thread(() -> {
+            GameObject lockedTarget = null;
+            int x, y;       // beginning x,y of search area
+            checkAttack:
+            while (hp > 0){
+                attack(lockedTarget);
+                if (lockedTarget != null){
+                    if(lockedTarget.getHp() <= 0){
+                        lockedTarget = null;
+                        continue;
+                    }
+                   if(Math.round(range) >= battleField.calculateDistance(headTile, lockedTarget.getHeadPixel())){
+                        continue;
+                   }
+                }
+                x = headTile.getX() - (int)Math.round(range);
+                y = headTile.getY() - (int) Math.round(range);
+                for(int j = 0; j <= (Math.round(range) * 2 + 1); j++){
+                    for(int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
+                        Tile searchTile = battleField.getPixel(x + i, y + j);
+                        if(searchTile != null){
+                            if(battleField.calculateDistance(headTile, searchTile) <= Math.round(range)){
+                                GameObject target = null;
+                                // Giant
+                                if(attackTargetType == TargetType.BUILDING){
+                                    target = searchTile.getGameObject();
+                                    if(target.getTeamSide() != teamSide){
+                                        if(target.getMyType() == TargetType.BUILDING){
+                                            if(target.getHp() > 0){
+                                                lockedTarget = target;
+                                                continue checkAttack;
+                                            }
+                                        }
+                                    }
+                                }
+                                // Ground soldiers
+                                else if(attackTargetType == TargetType.GROUND){
+                                    if(target.getTeamSide() != teamSide){
+                                        if(target.getMyType() == TargetType.GROUND){
+                                            if(target.getHp() > 0){
+                                                lockedTarget = target;
+                                                continue checkAttack;
+                                            }
+                                        }
+                                        else if(target.getMyType() == TargetType.BUILDING){
+                                            if(target.getHp() > 0){
+                                                lockedTarget = target;
+                                                continue checkAttack;
+                                            }
+                                        }
+                                    }
+                                }
+                                else if(attackTargetType == TargetType.AIR_GROUND){
+                                    if(target.getTeamSide() != teamSide){
+                                        if(target.getMyType() == TargetType.AIR || target.getMyType() == TargetType.GROUND){
+                                            if(target.getHp() > 0){
+                                                lockedTarget = target;
+                                                continue checkAttack;
+                                            }
+                                        }
+                                        else if(target.getMyType() == TargetType.BUILDING){
+                                            if(target.getHp() > 0){
+                                                lockedTarget = target;
+                                                continue checkAttack;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if(hp > 0){
+                Console.getConsole().printTracingMessage("Failed to complete check attack loop!");
+            }
+        }));
+        targetRangeCheckerThread.setDaemon(true);
+        targetRangeCheckerThread.start();
     }
 
     // Getters

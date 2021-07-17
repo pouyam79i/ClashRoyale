@@ -113,6 +113,22 @@ public class Map {
     }
 
     /**
+     * calculates the distance between two tiles
+     * @param src beginning tile
+     * @param des ending tile
+     * @return double value of distance
+     */
+    public double calculateDistance(Tile src, Tile des){
+        if(src == null || des == null)
+            return -1;
+        int x1 = src.getX();
+        int y1 = src.getY();
+        int x2 = des.getX();
+        int y2 = des.getY();
+        return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+    }
+
+    /**
      * Getting a pixel with its tiles!
      * Use this to read tiles
      * @param x of pixel

@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 public abstract class Soldier extends GameObject {
@@ -19,6 +20,7 @@ public abstract class Soldier extends GameObject {
      */
     protected Soldier(Side side){
         super(side);
+        myType = TargetType.GROUND; // except for baby dragon!
     }
 
     /**

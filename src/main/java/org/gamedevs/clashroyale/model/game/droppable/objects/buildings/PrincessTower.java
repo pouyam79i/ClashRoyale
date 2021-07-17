@@ -4,8 +4,17 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
-public class PrincessTower extends Building{
+/**
+ *
+ */
+public class PrincessTower extends MainTowers{
 
+    /**
+     * Constructor of PrincessTower.
+     * Sets defaults of princes tower!
+     * @param level of PrincessTower
+     * @param side of PrincessTower
+     */
     public PrincessTower(int level, Side side){
         super(side);
         nameOfDroppable = CardName.PRINCESS_TOWER;
@@ -14,7 +23,6 @@ public class PrincessTower extends Building{
         attackTargetType = TargetType.AIR_GROUND;
         lifeTime = 1000;
         effectiveLifeTime = false;
-
         switch (level){
             case 1 :
                 hp = 1400;

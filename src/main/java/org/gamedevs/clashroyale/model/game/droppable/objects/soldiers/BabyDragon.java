@@ -9,6 +9,7 @@ public class BabyDragon extends Soldier{
         super(side);
         hitSpeed = 1.8;
         attackTargetType = TargetType.AIR_GROUND;
+        myType = TargetType.AIR;
         range = 3;
         areaSplash = true;
         z = 1;
@@ -34,6 +35,6 @@ public class BabyDragon extends Soldier{
                 damage = 146;
                 break;
         }
-
     }
+
 }
