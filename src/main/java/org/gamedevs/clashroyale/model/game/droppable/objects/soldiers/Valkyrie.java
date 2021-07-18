@@ -19,7 +19,7 @@ public class Valkyrie extends Soldier {
         nameOfDroppable = CardName.VALKYRIE;
         hitSpeed = 1.5;
         attackTargetType = TargetType.GROUND;
-        range = 3;//TODO
+        range = 1;
         areaSplash = true;
 
         switch (level) {

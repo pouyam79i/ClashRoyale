@@ -32,7 +32,7 @@ public class BattleFieldLoader {
         // Getting battle field image container
         GameDroppableImageContainer cardAnimationContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
         // Loading gif animations:
-        for(int cardNameValue = 0; cardNameValue <= 5; cardNameValue++){
+        for(int cardNameValue = 0; cardNameValue <= 6; cardNameValue++){
             for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++){
                 for(int angle = 0; angle < 360; angle = angle + 45){
                     try {

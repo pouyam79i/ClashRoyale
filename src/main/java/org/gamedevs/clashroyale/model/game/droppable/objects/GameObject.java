@@ -68,7 +68,7 @@ public abstract class GameObject extends Droppable {
     protected GameObject(Side side) {
         super(DropType.OBJECT, side);
         angle = Angle.NORTH;
-        state = GameObjectState.IDLE;
+        state = GameObjectState.MOVING;
         z = 0; // This is zero except for baby dragon!
     }
 
@@ -223,4 +223,7 @@ public abstract class GameObject extends Droppable {
         this.headTile = headTile;
     }
 
+    public void setState(GameObjectState state) {
+        this.state = state;
+    }
 }

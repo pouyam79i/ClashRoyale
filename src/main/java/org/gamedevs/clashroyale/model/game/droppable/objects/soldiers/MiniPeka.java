@@ -11,7 +11,7 @@ public class MiniPeka extends Soldier{
         nameOfDroppable = CardName.MINI_PEKKA;
         hitSpeed = 1.8;
         attackTargetType = TargetType.GROUND;
-        range = 3;//TODO
+        range = 1;
         areaSplash = false;
 
         switch (level){

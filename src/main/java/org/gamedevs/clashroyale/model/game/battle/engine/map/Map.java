@@ -81,6 +81,7 @@ public class Map {
         if(calledTile.isEmpty(gameObject.getZ())){
             calledTile.setGameObject(gameObject);
             gameObject.setHeadPixel(calledTile);
+            Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
             if(viewManager != null){
                 viewManager.addObjectToView(gameObject);
             }
@@ -228,7 +229,6 @@ public class Map {
         for(int j = 0; j < height; j++){
             for (int i = 0; i < width; i++){
                 tiles[i][j] = new Tile(i, j);
-                Console.getConsole().printTracingMessage("map made: " + i + ": " + j);
             }
         }
     }

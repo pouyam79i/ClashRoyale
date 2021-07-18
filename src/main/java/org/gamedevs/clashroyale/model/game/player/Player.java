@@ -92,6 +92,7 @@ public abstract class Player extends Runnable {
      * @param card of drop
      */
     public boolean drop(double x, double y, Card card) {
+        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
         int tileX = MouseTilePosition.TranslatePixelToTileX(x);
         int tileY = MouseTilePosition.TranslatePixelToTileY(y);
 
