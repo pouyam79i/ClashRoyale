@@ -190,8 +190,6 @@ public class DeckScene {
     private void makeEmpty() {
         availableCardGridPaneUpdatable.getChildren().clear();
         playCardGridPaneUpdatable.getChildren().clear();
-        availableCardGridPaneUpdatable.gridLinesVisibleProperty().setValue(true);
-        playCardGridPaneUpdatable.gridLinesVisibleProperty().setValue(true);
     }
 
     /**
@@ -277,7 +275,6 @@ public class DeckScene {
             //set size
             cardImage.setFitHeight(105);
             cardImage.setFitWidth(85);
-            cardImage.setStyle("-fx-border-color: black;-fx-border-width: 5;");
 
             //add to AnchorPane
             getChildren().add(cardImage);
