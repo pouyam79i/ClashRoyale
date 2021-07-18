@@ -31,7 +31,7 @@ public class ViewUpdater extends Runnable {
     @Override
     public void run() {
         // Initializing thread needs
-        Image currentImage = imageContainer.get(cardName, gameObject.getState(), isEnemy);
+        Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
         objectView = new ImageView(currentImage);
         objectView.setFitWidth(currentImage.getWidth()/6);
         objectView.setFitHeight(currentImage.getHeight()/6);

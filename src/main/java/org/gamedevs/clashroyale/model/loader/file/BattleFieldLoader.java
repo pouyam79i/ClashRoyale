@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -31,24 +32,25 @@ public class BattleFieldLoader {
         // Getting battle field image container
         GameDroppableImageContainer cardAnimationContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
         // Loading gif animations:
-        // King tower
-        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, false,
-                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER.png"))
-        );
-        cardAnimationContainer.set(CardName.KING_TOWER, GameObjectState.IDLE, true,
-                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER_ENEMY.png"))
-        );
-        // Princess towers
-        cardAnimationContainer.set(CardName.PRINCESS_TOWER, GameObjectState.IDLE, false,
-                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER.png"))
-        );
-        cardAnimationContainer.set(CardName.PRINCESS_TOWER, GameObjectState.IDLE, true,
-                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png"))
-        );
-        // Loading more gifs...
-
-
-
+        for(int cardNameValue = 0; cardNameValue <= 5; cardNameValue++){
+            for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++){
+                for(int angle = 0; angle < 360; angle = angle + 45){
+                    try {
+                        cardAnimationContainer.set(CardName.getCardByValue(cardNameValue),
+                                Angle.getAngle(angle),
+                                GameObjectState.getState(objectStateValue),
+                                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/" +
+                                        CardName.getCardByValue(cardNameValue).toString() + "/" +
+                                        GameObjectState.ATTACK.toString() + "-" + Angle.getAngle(angle).toString() + ".gif"))
+                        );
+                    }catch (Exception error){
+                        Console.getConsole().printTracingMessage("Failed to load gif of " +
+                                CardName.getCardByValue(cardNameValue).toString() + " - " + Angle.getAngle(angle) +
+                                " - " + GameObjectState.getState(objectStateValue).toString());
+                    }
+                }
+            }
+        }
         // Loading battle field
         AnchorPane battleField = FXMLLoader.load(getClass().getResource(
                 "../../../view/fxml/battle/dark_arena/main_battle_field.fxml"
