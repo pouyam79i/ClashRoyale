@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/profile_view_popup.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.main.ProfilePopup">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/menu/profile_view_popup.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.main.ProfilePopup">
    <children>
       <ImageView fitHeight="315.0" fitWidth="300.0" pickOnBounds="true">
          <image>
@@ -55,7 +55,7 @@
       </Label>
       <Label layoutX="17.0" layoutY="138.0" text="Level" />
       <Label layoutX="19.0" layoutY="209.0" text="Cups" />
-      <Label fx:id="arenaName" layoutX="166.0" layoutY="97.0" text="Arena name">
+      <Label fx:id="arenaName" alignment="CENTER" contentDisplay="CENTER" layoutX="159.0" layoutY="96.0" prefHeight="18.0" prefWidth="131.0" text="Arena name" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>

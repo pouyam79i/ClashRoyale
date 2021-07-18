@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
+import org.gamedevs.clashroyale.model.account.levelproperty.Arenas;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
@@ -37,44 +38,18 @@ public class MenuFileLoader {
         menuData.setGameIcon(new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/icon/cr_icon.png"))
         );
-        // Loading level images
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/1.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/2.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/3.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/4.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/5.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/6.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/7.png")
-        ));
-        GameIconContainer.getGameIconContainer().addLevelImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/8.png")
-        ));
-        // Loading arena images
-        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_training.png")
-        ));
-        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_barbarian.png")
-        ));
-        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_bone.png")
-        ));
-        GameIconContainer.getGameIconContainer().addArenaImage(new Image(
-                MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/ui_icon_pekka.png")
-        ));
+        // Loading arena and level images
+        for(int level = 1; level <= 6; level++){
+            GameIconContainer.getGameIconContainer().addLevelImage(new Image(
+                    MenuFileLoader.class.getResourceAsStream("../../../view/img/ui/xp/" +
+                            level + ".png")
+            ));
+            GameIconContainer.getGameIconContainer().addArenaImage(new Image(
+                    MenuFileLoader.class.getResourceAsStream("../../../view/img/arenas/" +
+                            Arenas.getArenaByLevel(level) + ".png")
+            ));
+        }
+        // TODO: optimize the below code - by naming card in a proper form
         // Loading card images
         CardImageContainer.getCardImageContainer().addImage(CardName.ARCHERS , new Image(
                 MenuFileLoader.class.getResourceAsStream("../../../view/img/cards/archers.png")

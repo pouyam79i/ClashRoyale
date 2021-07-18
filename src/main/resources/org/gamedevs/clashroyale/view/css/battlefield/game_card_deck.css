@@ -1,9 +1,9 @@
 @font-face {
-    src: url('../fonts/Clash-Regular.ttf');
+    src: url('../../fonts/Clash-Regular.ttf');
 }
 
 #vbox{
-    -fx-background-image : url("../img/gamedeck/wooden1.jpg");
+    -fx-background-image : url("../../img/gamedeck/wooden1.jpg");
     -fx-background-size : cover;
 }
 

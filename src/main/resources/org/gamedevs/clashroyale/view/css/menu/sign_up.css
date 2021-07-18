@@ -1,16 +1,17 @@
 @font-face {
-    src: url('../fonts/Clash-Regular.ttf');
+    src: url('../../fonts/Clash-Regular.ttf');
 }
 
-.anchor-pane{
-     -fx-background: rgba(0, 0, 0, 0);
-}
 
 .text-field{
     -fx-font-family: 'Clash';
     -fx-background: rgba(0, 0, 0, 0);
     -fx-border: none;
     -fx-outline: none;
+}
+
+.password-field{
+    -fx-background: transparent;
 }
 
 .button{
@@ -24,16 +25,19 @@
     -fx-text-overrun: clip;
     -fx-font-family: 'Clash';
     -fx-font-scale: Bold;
-    -fx-font-size: 21px;
-    -fx-background-image: url("../img/ui/button/btn_blue.png");
 
+}
+
+.login_btn{
+    -fx-font-size: 21px;
+    -fx-background-image: url("../../img/ui/button/btn_yellow_e.png");
+}
+
+.signup_btn{
+    -fx-font-size: 21px;
+    -fx-background-image: url("../../img/ui/button/btn_green_e.png");
 }
 
 .label {
     -fx-font-family: 'Clash';
-    -fx-color: yellow;
-    -fx-font-size: 21px;
-    -fx-font-scale: Bold;
-
-
 }

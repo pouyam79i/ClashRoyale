@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/main_battle_menu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.main.MainBattle">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../css/menu/main_battle_menu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.menu.main.MainBattle">
    <children>
       <ImageView fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,7 +23,7 @@
       </ImageView>
       <AnchorPane prefHeight="720.0" prefWidth="405.0">
          <children>
-            <Button fx:id="battleBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="120.0" layoutY="436.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringBattlePopup" prefHeight="84.0" prefWidth="168.0" styleClass="battle_btn" stylesheets="@../../css/main_battle_menu.css" text="Battle" textAlignment="CENTER" textOverrun="CLIP">
+            <Button fx:id="battleBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="120.0" layoutY="436.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bringBattlePopup" prefHeight="84.0" prefWidth="168.0" styleClass="battle_btn" stylesheets="@../../css/menu/main_battle_menu.css" text="Battle" textAlignment="CENTER" textOverrun="CLIP">
                <font>
                   <Font name="Clash Regular" size="32.0" />
                </font>

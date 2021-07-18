@@ -29,15 +29,25 @@ public class BattlePopup {
     @FXML
     private Button cancelBtn;
 
-
+    /**
+     * Bringing battle in single online mode (official match)
+     */
     @FXML
     private void bringSingleOnlineBattle(){
         new BounceIn(singleOnlineBtn).play();
     }
+
+    /**
+     * Bringing battle in double online mode
+     */
     @FXML
     private void bringDoubleOnlineBattle(){
         new BounceIn(doubleOnlineBtn).play();
     }
+
+    /**
+     * Bringing battle in single offline mode (training mode)
+     */
     @FXML
     private void bringSingleOfflineBattle(){
         Thread thread = (new Thread(() -> {
@@ -54,6 +64,10 @@ public class BattlePopup {
         thread.setDaemon(true);
         thread.start();
     }
+
+    /**
+     * Bringing battle in double offline mode
+     */
     @FXML
     private void bringDoubleOfflineBattle(){
         new BounceIn(doubleOfflineBtn).play();
