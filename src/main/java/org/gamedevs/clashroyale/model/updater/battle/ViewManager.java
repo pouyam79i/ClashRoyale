@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.updater.battle;
 
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.MainTowers;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class ViewManager {
@@ -18,6 +19,10 @@ public class ViewManager {
             new ViewUpdater(gameObject, false).start();
         else
             new ViewUpdater(gameObject, true).start();
+    }
+
+    public void matchMainTowers(MainTowers mainTower, Side side, int kind){
+        // TODO: add related tower to related view!
     }
 
 }
