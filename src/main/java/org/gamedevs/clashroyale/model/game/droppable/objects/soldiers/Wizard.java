@@ -1,11 +1,13 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Wizard extends Soldier{
     public Wizard(int level, Side side) {
         super(side);
+        nameOfDroppable = CardName.WIZARD;
         hitSpeed = 1.7;
         attackTargetType = TargetType.AIR_GROUND;
         range = 5;

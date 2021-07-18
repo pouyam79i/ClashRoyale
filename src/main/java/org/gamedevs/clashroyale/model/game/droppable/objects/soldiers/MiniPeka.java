@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -7,6 +8,7 @@ public class MiniPeka extends Soldier{
 
     public MiniPeka(int level, Side side) {
         super(side);
+        nameOfDroppable = CardName.MINI_PEKKA;
         hitSpeed = 1.8;
         attackTargetType = TargetType.GROUND;
         range = 3;//TODO

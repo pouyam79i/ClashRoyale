@@ -37,7 +37,6 @@ public abstract class Droppable extends Runnable {
      * @param side side of drop
      */
     protected Droppable(DropType dropType, Side side){
-        nameOfDroppable = CardName.EMPTY;
         this.dropType = dropType;
         this.teamSide = side;
     }

@@ -112,7 +112,7 @@ public class Map {
      * @param spell is my card
      * @return true if it could drop game object in map!
      */
-    public boolean dropSpell(int x, int y, Spell spell){
+    public boolean dropSpell(double x, double y, Spell spell){
 
         return false;
     }
@@ -228,6 +228,7 @@ public class Map {
         for(int j = 0; j < height; j++){
             for (int i = 0; i < width; i++){
                 tiles[i][j] = new Tile(i, j);
+                Console.getConsole().printTracingMessage("map made: " + i + ": " + j);
             }
         }
     }
@@ -282,4 +283,11 @@ public class Map {
         return height;
     }
 
+    public ArrayList<GameObject> getTopSideAliveObj() {
+        return topSideAliveObj;
+    }
+
+    public ArrayList<GameObject> getDownSideAliveObj() {
+        return downSideAliveObj;
+    }
 }

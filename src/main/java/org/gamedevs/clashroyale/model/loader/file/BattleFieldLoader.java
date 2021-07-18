@@ -46,7 +46,13 @@ public class BattleFieldLoader {
                 new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png"))
         );
         // Loading more gifs...
+        cardAnimationContainer.set(CardName.BABY_DRAGON, GameObjectState.MOVING, false,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/BABY_DRAGON/MOVING-NORTH.gif"))
+        );
 
+        cardAnimationContainer.set(CardName.BABY_DRAGON, GameObjectState.MOVING, true,
+                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/BABY_DRAGON/MOVING-NORTH.gif"))
+        );
 
 
         // Loading battle field

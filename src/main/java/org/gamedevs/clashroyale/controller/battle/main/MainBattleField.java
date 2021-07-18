@@ -80,8 +80,8 @@ public class MainBattleField implements Initializable {
             MouseTilePosition.getMouseTilePosition().setX(x);
             MouseTilePosition.getMouseTilePosition().setY(y);
             // TODO: uncomment this to know where is (x,y) of pointer
-            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
-                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
+//            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
+//                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
         }));
         thread.setDaemon(true);
         thread.start();
@@ -90,13 +90,13 @@ public class MainBattleField implements Initializable {
     @FXML
     void dropCard(MouseEvent event) {
         Player player = PlayerContainer.getPlayerContainer().getPlayer();
-        if(SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist())
-            if(player.drop(event.getSceneY(), event.getSceneY(), SelectedCardContainer.getSelectedCardContainer().getSelectedCard())) {
+        if(SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist()) {
+            System.out.println(event.getX() + ":" + event.getY());
+            if (player.drop(event.getX(), event.getY(), SelectedCardContainer.getSelectedCardContainer().getSelectedCard())) {
                 SelectedCardContainer.getSelectedCardContainer().dropped();
-            }
-            else
+            } else
                 SelectedCardContainer.getSelectedCardContainer().droppingFailed();
-
+        }
     }
 
     /**

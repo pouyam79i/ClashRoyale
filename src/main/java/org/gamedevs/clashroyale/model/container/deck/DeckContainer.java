@@ -87,7 +87,7 @@ public class DeckContainer implements Serializable {
     public Card getRandomCard() {
         Card card;
         Random random = new Random();
-        if(deck.size() > 0) {
+        if(deck.size() > 1) {
             do {
                 card = deck.get(random.nextInt(deck.size() - 1));
             } while (card.getCardName() == CardName.EMPTY);

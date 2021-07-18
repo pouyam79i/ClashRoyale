@@ -43,7 +43,7 @@ public class MouseTilePosition {
      * @param xOfTile X of tile
      * @return X of pixel
      */
-    private static int TranslateTileToPixelX(int xOfTile){
+    public static int TranslateTileToPixelX(double xOfTile){
         int xOfPixel = (int)(xOfTile * 20.7);
         return xOfPixel;
     }
@@ -53,10 +53,20 @@ public class MouseTilePosition {
      * @param yOfTile Y of tile
      * @return Y of pixel
      */
-    private static int TranslateTileToPixelY(int yOfTile){
+    public static int TranslateTileToPixelY(int yOfTile){
         int yOfPixel = (int) (yOfTile * 16.8);
         yOfPixel = MainConfig.STD_BATTLE_FIELD_HEIGHT - yOfPixel;
         return yOfPixel;
+    }
+
+
+    public static int TranslatePixelToTileX(double x){
+        return (int) Math.floor(x /20.7);
+    }
+
+
+    public static int TranslatePixelToTileY(double y){
+        return (int) Math.floor((MainConfig.STD_BATTLE_FIELD_HEIGHT - y)/16.8);
     }
 
     // Setters

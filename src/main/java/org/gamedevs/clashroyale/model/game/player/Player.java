@@ -12,7 +12,10 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.KingTower;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+
+import java.util.ArrayList;
 
 /**
  * This class contains player structure.
@@ -89,15 +92,25 @@ public abstract class Player extends Runnable {
      * @param card of drop
      */
     public boolean drop(double x, double y, Card card) {
+        int tileX = MouseTilePosition.TranslatePixelToTileX(x);
+        int tileY = MouseTilePosition.TranslatePixelToTileY(y);
+
+        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
 
         if (card.getCardName() != CardName.RAGE &&
                 card.getCardName() != CardName.FIREBALL &&
-                card.getCardName() != CardName.ARROWS)
-            for(Droppable droppable : CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN))
-            map.dropGameObject(5, 5, (GameObject) droppable);
-        else
-            map.dropSpell((int) x, (int) y, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN).get(0));
-        return true; // TODO: change when code is completed
+                card.getCardName() != CardName.ARROWS) {
+            ArrayList<Droppable> droppables = CardFactory.buildDroppableItems(card.getCardName(), level, playerSide);
+            if (!map.dropGameObject(tileX, tileY, (GameObject) droppables.get(0))) {
+                return false;
+            } else {
+                for (int i = 1; i < droppables.size(); i++)
+                    return true;
+            }
+
+        } else
+            return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN).get(0));
+            return true;
     }
 
     /**

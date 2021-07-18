@@ -1,14 +1,16 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 public class Barbarian extends Soldier{
     public Barbarian(int level, Side side) {
         super(side);
+        nameOfDroppable = CardName.BARBARIANS;
         hitSpeed = 1.5;
         attackTargetType = TargetType.GROUND;
-        range = 3;//TODO
+        range = 1;
         areaSplash = false;
 
         switch (level){

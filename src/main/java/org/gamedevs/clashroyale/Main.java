@@ -69,7 +69,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         // Setting the preloader
-        System.setProperty("javafx.preloader", PreloaderSplashScreen.class.getCanonicalName());
+//        System.setProperty("javafx.preloader", PreloaderSplashScreen.class.getCanonicalName());
         launch(args);
     }
 

@@ -38,7 +38,7 @@ public abstract class Bot extends Player {
     @Override
     public void run() {
         elixir.start();
-        gameDeck.setDeck(cardGenerator.getInitialCards());
+//        gameDeck.setDeck(cardGenerator.getInitialCards());
         algorithm();
 
     }

@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
@@ -15,6 +16,7 @@ public class Valkyrie extends Soldier {
 
     public Valkyrie(int level, Side side) {
         super(side);
+        nameOfDroppable = CardName.VALKYRIE;
         hitSpeed = 1.5;
         attackTargetType = TargetType.GROUND;
         range = 3;//TODO

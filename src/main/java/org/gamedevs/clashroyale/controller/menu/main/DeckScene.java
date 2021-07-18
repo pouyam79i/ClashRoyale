@@ -3,6 +3,7 @@ package org.gamedevs.clashroyale.controller.menu.main;
 import com.sun.scenario.effect.Effect;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 //import javafx.scene.control.Cost;
 import javafx.scene.control.Label;
@@ -179,10 +180,18 @@ public class DeckScene {
      * fill the grids by player cards
      */
     public void init() {
+        makeEmpty();
         initAccount();
         initPlayCards();
         initAvailableCards();
 
+    }
+
+    private void makeEmpty() {
+        availableCardGridPaneUpdatable.getChildren().clear();
+        playCardGridPaneUpdatable.getChildren().clear();
+        availableCardGridPaneUpdatable.gridLinesVisibleProperty().setValue(true);
+        playCardGridPaneUpdatable.gridLinesVisibleProperty().setValue(true);
     }
 
     /**
@@ -268,6 +277,7 @@ public class DeckScene {
             //set size
             cardImage.setFitHeight(105);
             cardImage.setFitWidth(85);
+            cardImage.setStyle("-fx-border-color: black;-fx-border-width: 5;");
 
             //add to AnchorPane
             getChildren().add(cardImage);

@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -7,6 +8,7 @@ public class Archer extends Soldier{
 
     public Archer(int level, Side side) {
         super(side);
+        nameOfDroppable = CardName.ARCHERS;
         hitSpeed = 1.2;
         attackTargetType = TargetType.AIR_GROUND;
         range = 5;
