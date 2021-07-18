@@ -77,13 +77,11 @@ public class MainBattleField implements Initializable {
             if(y > 29 || x > 17 || x < 0 || y < 0){
                 return;
             }
-            x *= 20.7;
-            y *= 16.8;
             MouseTilePosition.getMouseTilePosition().setX(x);
             MouseTilePosition.getMouseTilePosition().setY(y);
             // TODO: uncomment this to know where is (x,y) of pointer
-//            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
-//                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
+            Console.getConsole().printTracingMessage("Mose move detected: " + MouseTilePosition.getMouseTilePosition().getX()
+                    + ", " + MouseTilePosition.getMouseTilePosition().getY());
         }));
         thread.setDaemon(true);
         thread.start();

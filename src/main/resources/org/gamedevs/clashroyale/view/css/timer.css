@@ -3,6 +3,11 @@
     src: url('../fonts/Clash-Regular.ttf');
 }
 
+.label{
+    -fx-font-family: 'Clash';
+}
+
+
 .clock_label{
     -fx-font-family: 'Clash';
     -fx-font-size: 18pt;

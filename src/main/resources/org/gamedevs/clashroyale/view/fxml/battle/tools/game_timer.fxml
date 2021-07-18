@@ -4,14 +4,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="84.0" stylesheets="@../../../css/timer.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameTimer">
    <children>
-      <ImageView fitHeight="40.0" fitWidth="84.0" pickOnBounds="true">
+      <ImageView fitHeight="52.0" fitWidth="84.0" pickOnBounds="true">
          <image>
             <Image url="@../../../img/ui/timer/timer-skin.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="13.0" layoutY="5.0" styleClass="clock_label" text="3:00" textFill="WHITE" />
+      <Label fx:id="timerLabel" layoutX="13.0" layoutY="17.0" prefWidth="62.0" styleClass="clock_label" text="3:00" textFill="WHITE" />
+      <Label layoutX="17.0" layoutY="5.0" text="Timer:" textFill="#ffe847">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
