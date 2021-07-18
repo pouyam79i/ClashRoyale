@@ -1,5 +1,5 @@
 @font-face {
-    src: url('../fonts/Clash-Regular.ttf');
+    src: url('../../fonts/Clash-Regular.ttf');
 }
 
 .popup_background {
@@ -29,13 +29,13 @@
 }
 
 .online_btn{
-    -fx-background-image: url("../img/ui/button/btn_yellow_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_yellow_e.png");
 }
 
 .offline_btn{
-    -fx-background-image: url("../img/ui/button/btn_blue_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_blue_e.png");
 }
 
 .cancel_btn{
-    -fx-background-image: url("../img/ui/button/btn_red_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_red_e.png");
 }
