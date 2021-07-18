@@ -46,7 +46,11 @@
 }
 
 .back_btn{
-    -fx-background-image: url("../img/ui/button/btn_blue.png");
+    -fx-background-image: url("../img/ui/button/btn_blue_e.png");
+}
+
+.logout_btn{
+    -fx-background-image: url("../img/ui/button/btn_red_e.png");
 }
 
 .progress-bar > .bar, .progress-bar > .track {
