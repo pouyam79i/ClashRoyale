@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.container.gamedata;
 
 import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 /**
  * This class contains all images of card animations (gifs)
  * @author Pouya Mohammadi - CE@AUT 9829039
- * @version 1.0
+ * @version 1.1
  */
 public class GameDroppableImageContainer {
 
@@ -21,66 +22,56 @@ public class GameDroppableImageContainer {
     /**
      * Image container
      */
-    private final HashMap<CardName, HashMap<GameObjectState, Image>> allyImageContainer;
-    private final HashMap<CardName, HashMap<GameObjectState, Image>> enemyImageContainer;
+    private final HashMap<CardName, HashMap<Angle, HashMap<GameObjectState, Image>>> imageContainer;
 
     /**
      * Constructor of GameDroppableImageContainer
      * sets requirements
      */
     private GameDroppableImageContainer(){
-        allyImageContainer = new HashMap<CardName, HashMap<GameObjectState, Image>>();
-        enemyImageContainer = new HashMap<CardName, HashMap<GameObjectState, Image>>();
+        imageContainer = new HashMap<CardName, HashMap<Angle, HashMap<GameObjectState, Image>>>();
     }
 
     /**
      * set a loaded image for the card
      * @param cardName name of card
-     * @param state state of card
-     * @param isEnemyCard if the image is related to enemy
+     * @param angle of object
+     * @param objectState state of card
      * @param image of card in the mentioned state
      */
-    public void set(CardName cardName, GameObjectState state, boolean isEnemyCard, Image image){
-        if(image == null)
+    public void set(CardName cardName, Angle angle, GameObjectState objectState, Image image){
+        if(image == null || cardName == null || objectState == null || angle == null)
             return;
-        if(isEnemyCard){
-            if(enemyImageContainer.containsKey(cardName)){
-                enemyImageContainer.get(cardName).put(state, image);
+        if(imageContainer.containsKey(cardName)){
+            if(imageContainer.get(cardName).containsKey(angle)){
+                imageContainer.get(cardName).get(angle).put(objectState, image);
             }else {
-                HashMap<GameObjectState, Image> imageStateContainer = new HashMap<GameObjectState, Image>();
-                imageStateContainer.put(state, image);
-                enemyImageContainer.put(cardName, imageStateContainer);
+                HashMap<GameObjectState, Image> angleContainer = new  HashMap<GameObjectState, Image>();
+                angleContainer.put(objectState, image);
+                imageContainer.get(cardName).put(angle, angleContainer);
             }
         }else {
-            if(allyImageContainer.containsKey(cardName)){
-                allyImageContainer.get(cardName).put(state, image);
-            }else {
-                HashMap<GameObjectState, Image> imageStateContainer = new HashMap<GameObjectState, Image>();
-                imageStateContainer.put(state, image);
-                allyImageContainer.put(cardName, imageStateContainer);
-            }
+            HashMap<Angle, HashMap<GameObjectState, Image>> cardContainer = new HashMap<Angle, HashMap<GameObjectState, Image>>();
+            HashMap<GameObjectState, Image> angleContainer = new  HashMap<GameObjectState, Image>();
+            angleContainer.put(objectState, image);
+            cardContainer.put(angle, angleContainer);
+            imageContainer.put(cardName, cardContainer);
         }
     }
 
     /**
      * get related card image
      * @param cardName name of card
-     * @param state state of card
-     * @param isEnemyCard if the image is related to enemy
+     * @param angle of object
+     * @param objectState state of card
      * @return image of related card and its state
      */
-    public Image get(CardName cardName, GameObjectState state, boolean isEnemyCard){
+    public Image get(CardName cardName, Angle angle,GameObjectState objectState){
         Image image = null;
-        if(isEnemyCard){
-            if(enemyImageContainer.containsKey(cardName)){
-                if(enemyImageContainer.get(cardName).containsKey(state)){
-                    image = enemyImageContainer.get(cardName).get(state);
-                }
-            }
-        }else {
-            if(allyImageContainer.containsKey(cardName)){
-                if(allyImageContainer.get(cardName).containsKey(state)){
-                    image = allyImageContainer.get(cardName).get(state);
+        if(imageContainer.containsKey(cardName)){
+            if(imageContainer.get(cardName).containsKey(angle)){
+                if(imageContainer.get(cardName).get(angle).containsKey(objectState)){
+                    image = imageContainer.get(cardName).get(angle).get(objectState);
                 }
             }
         }
