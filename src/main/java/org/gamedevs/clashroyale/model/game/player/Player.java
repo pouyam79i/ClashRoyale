@@ -106,12 +106,12 @@ public abstract class Player extends Runnable {
                 return false;
             } else {
                 for (int i = 1; i < droppables.size(); i++)
-                    return true;
+                    map.dropGameObject(tileX, tileY, (GameObject) droppables.get(i));
+                return true;
             }
 
         } else
             return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN).get(0));
-            return true;
     }
 
     /**
