@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
+import org.gamedevs.clashroyale.model.launcher.LogoutLauncher;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +33,8 @@ public class ProfilePopup implements Initializable {
     // fx:id
     @FXML
     private Button backBtn;
+    @FXML
+    private Button logoutBtn;
     @FXML
     private TextField nameTF;
     @FXML
@@ -85,6 +88,26 @@ public class ProfilePopup implements Initializable {
     }
 
     /**
+     * Log out of current logout account!
+     */
+    @FXML
+    public void logoutFromAccount(){
+        Thread thread = (new Thread(() -> {
+            new LogoutLauncher().start();
+        }));
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    /**
+     * Initializing values
+     */
+    public void init(){
+        updateView();
+    }
+
+
+    /**
      * Setting level of player with this method!
      */
     private void updateView(){
@@ -108,13 +131,6 @@ public class ProfilePopup implements Initializable {
         Platform.runLater(() -> {
             nameTFUpdatable.setText(UserAccountContainer.getUserAccountContainer().getAccount().getUsername());
         });
-    }
-
-    /**
-     * Initializing values
-     */
-    public void init(){
-        updateView();
     }
 
     // Setters

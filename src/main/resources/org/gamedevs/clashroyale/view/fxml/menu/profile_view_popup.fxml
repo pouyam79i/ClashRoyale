@@ -60,6 +60,14 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="99.0" layoutY="261.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="92.0" styleClass="back_btn" text="Back" />
+      <Button fx:id="backBtn" layoutX="169.0" layoutY="261.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="92.0" styleClass="back_btn" text="Back">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="logoutBtn" layoutX="35.0" layoutY="261.0" mnemonicParsing="false" onAction="#logoutFromAccount" prefHeight="40.0" prefWidth="92.0" styleClass="logout_btn" text="Log out">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

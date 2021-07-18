@@ -38,15 +38,36 @@ public class MouseTilePosition {
         ySelectedTile = new SimpleDoubleProperty(0);
     }
 
+    /**
+     * Translate x of tile to x of pixel (battle field anchor pane)
+     * @param xOfTile X of tile
+     * @return X of pixel
+     */
+    private static int TranslateTileToPixelX(int xOfTile){
+        int xOfPixel = (int)(xOfTile * 20.7);
+        return xOfPixel;
+    }
+
+    /**
+     * Translate y of tile to y of pixel (battle field anchor pane)
+     * @param yOfTile Y of tile
+     * @return Y of pixel
+     */
+    private static int TranslateTileToPixelY(int yOfTile){
+        int yOfPixel = (int) (yOfTile * 16.8);
+        yOfPixel = MainConfig.STD_BATTLE_FIELD_HEIGHT - yOfPixel;
+        return yOfPixel;
+    }
+
     // Setters
     public void setX(double x){
-        this.x.setValue(Math.floor(x) + 10);
-        this.xSelectedTile.setValue(x + caliberX);
+        this.x.setValue(Math.floor(x));
+        this.xSelectedTile.setValue((x * 20.7) + caliberX);
     }
     public void setY(double y){
-        this.ySelectedTile.setValue(y + caliberY);
-        y = MainConfig.STD_BATTLE_FIELD_HEIGHT - y;
-        this.y.setValue(Math.floor(y) - 8);
+        this.ySelectedTile.setValue((y * 16.8) + caliberY);
+        y = MainConfig.STD_BATTLE_FIELD_Y_TILE - y;
+        this.y.setValue(Math.floor(y) - 1);
     }
     public void setCaliberX(double caliberX) {
         this.caliberX = caliberX;
