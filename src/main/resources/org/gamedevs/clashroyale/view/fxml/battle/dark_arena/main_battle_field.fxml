@@ -72,12 +72,12 @@
             <ProgressBar layoutX="274.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
             <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="135.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../img/battlefield/ui/red-badge.png" />
+                  <Image url="@../../../img/battlefield/ui/badge/red-badge.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="135.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../img/battlefield/ui/green-badge.png" />
+                  <Image url="@../../../img/battlefield/ui/badge/green-badge.png" />
                </image>
             </ImageView>
          </children></AnchorPane>

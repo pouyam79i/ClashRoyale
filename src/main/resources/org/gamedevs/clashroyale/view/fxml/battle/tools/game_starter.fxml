@@ -5,16 +5,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/game_starter.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameStarterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/battlefield/game_starter.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameStarterController">
    <children>
+      <ImageView fitHeight="754.0" fitWidth="484.0" layoutX="-41.0" layoutY="-13.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../img/menu/menu_background_cover_v2.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="118.0" fitWidth="290.0" layoutX="54.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/gamestarter/titleblue.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="741.0" fitWidth="492.0" layoutX="-43.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../img/menu/menu_background_cover.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="118.0" fitWidth="290.0" layoutX="54.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
@@ -22,14 +22,14 @@
             <Image url="@../../../img/gamestarter/titlered.png" />
          </image>
       </ImageView>
-      <Label fx:id="playerRed" layoutX="157.0" layoutY="195.0" text="Player1" textFill="WHITE" />
-      <Label fx:id="playerBlue" layoutX="157.0" layoutY="516.0" text="Player2" textFill="WHITE" />
-      <ImageView fitHeight="70.0" fitWidth="103.0" layoutX="164.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="redName" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="195.0" prefHeight="26.0" prefWidth="204.0" text="Player1" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="blueName" alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="513.0" prefHeight="26.0" prefWidth="190.0" text="Player2" textAlignment="CENTER" textFill="WHITE" />
+      <ImageView fx:id="swordImg" fitHeight="104.0" fitWidth="104.0" layoutX="151.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/ui/icon/battle-ladder.png" />
          </image>
       </ImageView>
-      <Label layoutX="115.0" layoutY="391.0" text="Pekka Stadium" textFill="#dceb67" />
-      <Label layoutX="161.0" layoutY="417.0" text="Arena1" />
+      <Label fx:id="arenaName" alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="399.0" prefHeight="26.0" prefWidth="270.0" text="Pekka Stadium" textAlignment="CENTER" textFill="#dceb67" />
+      <Label fx:id="arenaNumber" alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="430.0" prefHeight="26.0" prefWidth="190.0" text="Arena" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

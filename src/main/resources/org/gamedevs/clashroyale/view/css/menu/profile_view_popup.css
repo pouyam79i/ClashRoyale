@@ -1,5 +1,5 @@
 @font-face {
-    src: url('../fonts/Clash-Regular.ttf');
+    src: url('../../fonts/Clash-Regular.ttf');
 }
 
 .name_text_field {
@@ -46,11 +46,11 @@
 }
 
 .back_btn{
-    -fx-background-image: url("../img/ui/button/btn_blue_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_blue_e.png");
 }
 
 .logout_btn{
-    -fx-background-image: url("../img/ui/button/btn_red_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_red_e.png");
 }
 
 .progress-bar > .bar, .progress-bar > .track {

@@ -14,6 +14,7 @@ import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.game.player.bot.EasyBot;
 import org.gamedevs.clashroyale.model.game.player.bot.HardBot;
+import org.gamedevs.clashroyale.model.launcher.EndOfGameLauncher;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -89,6 +90,18 @@ public class GameManager extends Runnable {
     }
 
     /**
+     * End of game logic
+     */
+    public void checkEndGame(){
+        topPlayer.shutdown();
+        downPlayer.shutdown();
+        // TODO: override player shutdown function and remove below code
+        topPlayer.getElixir().shutdown();
+        downPlayer.getElixir().shutdown();
+        new EndOfGameLauncher(gameResult).start();
+    }
+
+    /**
      * runs the game
      */
     @Override
@@ -101,10 +114,12 @@ public class GameManager extends Runnable {
             // When we have a winner!
             if(gameResult.checkWinner()){
                 // TODO: complete wining process
-                return;
+                break;
             }
         }
         // TODO: complete time process
+        checkEndGame();
+        this.shutdown();
     }
 
     // Getters

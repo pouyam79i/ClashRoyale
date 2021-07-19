@@ -5,11 +5,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.account.levelproperty.Arenas;
 import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
@@ -44,6 +46,8 @@ public class ProfilePopup implements Initializable {
     @FXML
     private ImageView arenaImg;
     @FXML
+    private Label arenaName;
+    @FXML
     private ProgressBar xpBar;
 
     // Updatable properties
@@ -52,6 +56,7 @@ public class ProfilePopup implements Initializable {
     private ProgressBar xpBarUpdatable;
     private ImageView leveImgUpdatable;
     private ImageView arenaImgUpdatable;
+    private Label arenaNameUpdatable;
 
     /**
      * Sets requirements!
@@ -65,6 +70,7 @@ public class ProfilePopup implements Initializable {
         getProfilePopup().setLeveImgUpdatable(levelImg);
         getProfilePopup().setArenaImgUpdatable(arenaImg);
         getProfilePopup().setXpBarUpdatable(xpBar);
+        getProfilePopup().setArenaNameUpdatable(arenaName);
     }
 
     /**
@@ -129,6 +135,7 @@ public class ProfilePopup implements Initializable {
             });
         }
         Platform.runLater(() -> {
+            arenaNameUpdatable.setText(Arenas.getArenaByLevel(level).getName());
             nameTFUpdatable.setText(UserAccountContainer.getUserAccountContainer().getAccount().getUsername());
         });
     }
@@ -148,6 +155,9 @@ public class ProfilePopup implements Initializable {
     }
     private void setXpBarUpdatable(ProgressBar xpBarUpdatable) {
         this.xpBarUpdatable = xpBarUpdatable;
+    }
+    public void setArenaNameUpdatable(Label arenaNameUpdatable) {
+        this.arenaNameUpdatable = arenaNameUpdatable;
     }
 
     /**

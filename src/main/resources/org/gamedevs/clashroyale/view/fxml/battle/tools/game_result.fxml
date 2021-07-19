@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameResultController">
+<AnchorPane fx:id="gameResultRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/battlefield/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameResultController">
    <children>
       <ImageView fitHeight="726.0" fitWidth="495.0" layoutX="-45.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,9 +24,9 @@
          </image>
       </ImageView>
       <Label layoutX="189.0" layoutY="324.0" text="VS" />
-      <Button layoutX="175.0" layoutY="592.0" mnemonicParsing="false" text="OK" />
-      <Label fx:id="blueWinnerLabel" layoutX="160.0" layoutY="366.0" text="Winner" textFill="#4b4beb" />
-      <Label fx:id="redWinnerLabel" layoutX="160.0" layoutY="273.0" text="Winner" textFill="#d33c58" />
+      <Button fx:id="goToMain" alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="599.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="96.0" text="OK" textAlignment="CENTER" />
+      <Label fx:id="blueWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="366.0" text="Winner" textAlignment="CENTER" textFill="#4b4beb" />
+      <Label fx:id="redWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="273.0" text="Winner" textAlignment="CENTER" textFill="#d33c58" />
       <ImageView fx:id="crownRed1" fitHeight="84.0" fitWidth="78.0" layoutX="67.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/ui/icon/crown-red.png" />

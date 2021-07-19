@@ -70,7 +70,7 @@ public class BattleFieldLoader {
                 "../../../view/fxml/battle/tools/game_starter.fxml"
         ));
         gameStarter.setLayoutX(0);
-        gameStarter.setLayoutY(700);
+        gameStarter.setLayoutY(0);
         battleFieldContainer.setGameStarter(gameStarter);
         // Loading result display
         AnchorPane gameResult = FXMLLoader.load(getClass().getResource(

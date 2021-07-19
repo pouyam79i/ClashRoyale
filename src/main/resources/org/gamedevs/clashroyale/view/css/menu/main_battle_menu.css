@@ -1,5 +1,5 @@
 @font-face {
-    src: url('../fonts/Clash-Regular.ttf');
+    src: url('../../fonts/Clash-Regular.ttf');
 }
 
 .button{
@@ -16,20 +16,20 @@
 
 .battle_btn{
     -fx-font-size: 31px;
-    -fx-background-image: url("../img/ui/button/btn_yellow.png");
+    -fx-background-image: url("../../img/ui/button/btn_yellow_e.png");
 }
 .normal_btn{
     -fx-font-size: 8.5px;
-    -fx-background-image: url("../img/ui/button/btn_blue_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_blue_e.png");
 }
 .cancel_btn{
     -fx-font-size: 10px;
-    -fx-background-image: url("../img/ui/button/btn_red_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_red_e.png");
 }
 .profile_btn
 {
     -fx-font-size: 11.5px;
-    -fx-background-image: url("../img/ui/button/btn_green_e.png");
+    -fx-background-image: url("../../img/ui/button/btn_green_e.png");
 }
 
 .text-field {
@@ -53,4 +53,13 @@
 
 .progress-bar > .bar, .progress-bar > .track {
     -fx-background-insets: 0;
+}
+
+.progress-bar{
+    -fx-accent: #00b8c9;
+}
+
+.progress-bar > .track {
+    -fx-text-box-border: rgba(9, 9, 9, 0.0);
+    -fx-control-inner-background: rgba(80, 79, 79, 0);
 }
