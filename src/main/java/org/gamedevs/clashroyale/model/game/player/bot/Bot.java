@@ -51,8 +51,15 @@ public abstract class Bot extends Player {
      */
     protected abstract void algorithm();
 
+    /**
+     * pick random card and put it in battle field
+     */
     protected abstract void pickCard();
 
+    /**
+     * remove card from card deck and add new one
+     * @param card removed card
+     */
     protected void removeCard(Card card) {
         elixir.reduceElixir(card.getCost());
         gameDeck.removeCard(card);

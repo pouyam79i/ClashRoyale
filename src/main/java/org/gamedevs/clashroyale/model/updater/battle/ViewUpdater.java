@@ -18,7 +18,12 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
-
+/**
+ * a class which handle view of game object in GUI
+ *
+ * @author Hosna Hoseini 9823010 -CE@AUT
+ * @version 1.0
+ */
 public class ViewUpdater extends Runnable {
 
     private GameDroppableImageContainer imageContainer;
@@ -59,11 +64,12 @@ public class ViewUpdater extends Runnable {
             objectView.setLayoutY(y - gameObject.getErrorInGUIY() + MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO);
         });
 
-
         update();
     }
 
-
+    /**
+     * update image of game object regarding to its state and angle
+     */
     private void updateImg() {
 
         if (previousAngle != gameObject.getAngle() ||
@@ -81,6 +87,9 @@ public class ViewUpdater extends Runnable {
         }
     }
 
+    /**
+     * update game object view in GUI
+     */
     private void update() {
         Thread updateXY = new Thread() {
             @Override
@@ -94,6 +103,9 @@ public class ViewUpdater extends Runnable {
         updateXY.start();
     }
 
+    /**
+     * update game object image position in GUI
+     */
     public void updatePosition() {
         double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
         double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
@@ -104,28 +116,22 @@ public class ViewUpdater extends Runnable {
             double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
             double deltaX = destX - curX;
             double deltaY = destY - curY;
-//                        Console.getConsole().printTracingMessage("deltaX: " + deltaX +  "deltaY: " + deltaY);
             if (deltaX != 0) {
                 curX = curX + (deltaX > 0 ? 1 : -1);
-//                            Console.getConsole().printTracingMessage("add x" + curX);
             }
             if (deltaY != 0) {
                 curY = curY + (deltaY > 0 ? 1 : -1);
-//                            Console.getConsole().printTracingMessage("add y" + curY);
             }
             double finalCurY = curY;
             double finalCurX = curX;
-//                        Console.getConsole().printTracingMessage(curX + ", " + curY);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-//                                Console.getConsole().printTracingMessage("update plat");
                     objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
                     objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
                 }
             });
             previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
-//                        Console.getConsole().printTracingMessage("new x,y:" + curX + ", " + curY + " new Tile x,y:" + previousTile.getX() + ", " + previousTile.getY());
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -141,11 +147,20 @@ public class ViewUpdater extends Runnable {
         }
     }
 
+    /**
+     * Anchor pane which contains game object image and progress bar
+     * in order to show in GUI
+     */
     class ObjectView extends AnchorPane {
         private ProgressBar progressBar = new ProgressBar();
         private ImageView imageView = new ImageView();
         private double maxHp;
 
+        /**
+         * constructor
+         * @param gameObject gameObject
+         * @param image image
+         */
         public ObjectView(GameObject gameObject, Image image) {
             maxHp = gameObject.getHp();
             this.imageView.setImage(image);
@@ -168,6 +183,7 @@ public class ViewUpdater extends Runnable {
             getChildren().add(progressBar);
         }
 
+        //Getters and Setters
         public ProgressBar getProgressBar() {
             return progressBar;
         }

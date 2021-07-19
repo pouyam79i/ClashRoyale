@@ -36,24 +36,7 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
-        for (int i = 0; i < 3; i++) {
-            headTile = new Tile(headTile.getX() + 1, headTile.getY() + 1);
-            Console.getConsole().printTracingMessage(headTile.getX() + 1+","+ headTile.getY() + 1);
-            reduceHP(100);
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        state = GameObjectState.ATTACK;
-        angle = Angle.EAST;
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

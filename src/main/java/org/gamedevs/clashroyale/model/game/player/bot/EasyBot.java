@@ -12,7 +12,9 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 import java.util.Random;
 
 /**
- *
+ * easy bot logic
+ * @author Hosna Hoseini 9823010 -CE@AUT
+ * @version 1.0
  */
 public class EasyBot extends Bot {
 
@@ -38,6 +40,9 @@ public class EasyBot extends Bot {
         pickCard();
     }
 
+    /**
+     * pick a randomm card and put it in a random x,y
+     */
     @Override
     protected void pickCard() {
         Thread pickThread = new Thread() {
