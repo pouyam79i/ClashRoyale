@@ -138,7 +138,6 @@ public class ViewUpdater extends Runnable {
                 e.printStackTrace();
             }
         }
-        Console.getConsole().printTracingMessage("equal");
 
         try {
             Thread.sleep(50);

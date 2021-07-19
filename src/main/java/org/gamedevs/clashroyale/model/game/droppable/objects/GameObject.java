@@ -29,11 +29,7 @@ public abstract class GameObject extends Droppable {
      * amount of giving damage!
      */
     protected int damage;
-    /**
-     * speed of attacking
-     * (giving damage to the enemy)
-     */
-    protected double hitSpeed;
+
     /**
      * attack range defines
      * the max attacking radius!
@@ -52,10 +48,7 @@ public abstract class GameObject extends Droppable {
      * is on the ground or in the air!
      */
     protected int z;
-    /**
-     * angle of object
-     */
-    protected Angle angle;
+
     /**
      * State of game object
      */
