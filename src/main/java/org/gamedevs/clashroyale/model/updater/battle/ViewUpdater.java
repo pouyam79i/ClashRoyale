@@ -57,7 +57,7 @@ public class ViewUpdater extends Runnable {
         });
 
 
-//        update();
+        update();
     }
 
     public void update() {
