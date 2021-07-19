@@ -74,26 +74,26 @@ public class ViewUpdater extends Runnable {
             public void start() {
                 Console.getConsole().printTracingMessage(previousAngle.toString() + previousState.toString());
 //                while (true) {
-                    if (previousAngle != gameObject.getAngle() ||
-                            previousState != gameObject.getState()) {
-                        System.out.println("here");
-                        Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                objectView.setImage(img);
-                                Console.getConsole().printTracingMessage("changed");
-                            }
-                        });
-                        previousState = gameObject.getState();
-                        previousAngle = gameObject.getAngle();
-                    }
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                if (previousAngle != gameObject.getAngle() ||
+                        previousState != gameObject.getState()) {
+                    System.out.println("here");
+                    Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            objectView.setImage(img);
+                            Console.getConsole().printTracingMessage("changed");
+                        }
+                    });
+                    previousState = gameObject.getState();
+                    previousAngle = gameObject.getAngle();
                 }
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 //            }
         };
         updateImg.start();
@@ -105,58 +105,52 @@ public class ViewUpdater extends Runnable {
         Thread updateXY = new Thread() {
 
             @Override
-            public void start() {
-                double curX;
-                double curY;
-                double destX;
-                double destY;
-                double deltaX;
-                double deltaY;
+            public void start(){
 //                while (true) {
-                    curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
-                    curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
-                    while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
-                            previousTile.getX() != gameObject.getHeadPixel().getX()) {
-                        destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
-                        destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-                        deltaX = destX - curX;
-                        deltaY = destY - curY;
+                double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
+                double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
+                while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
+                        previousTile.getX() != gameObject.getHeadPixel().getX()) {
+                    double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+                    double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+                    double deltaX = destX - curX;
+                    double deltaY = destY - curY;
 //                        Console.getConsole().printTracingMessage("deltaX: " + deltaX +  "deltaY: " + deltaY);
-                        if (deltaX != 0) {
-                            curX = curX + (deltaX > 0 ? 1 : -1);
+                    if (deltaX != 0) {
+                        curX = curX + (deltaX > 0 ? 1 : -1);
 //                            Console.getConsole().printTracingMessage("add x" + curX);
-                        }
-                        if (deltaY != 0) {
-                            curY = curY + (deltaY > 0 ? 1 : -1);
-//                            Console.getConsole().printTracingMessage("add y" + curY);
-                        }
-                        double finalCurY = curY;
-                        double finalCurX = curX;
-//                        Console.getConsole().printTracingMessage(curX + ", " + curY);
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-//                                Console.getConsole().printTracingMessage("update plat");
-                                objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
-                                objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
-                            }
-                        });
-                        previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
-//                        Console.getConsole().printTracingMessage("new x,y:" + curX + ", " + curY + " new Tile x,y:" + previousTile.getX() + ", " + previousTile.getY());
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    Console.getConsole().printTracingMessage("equal");
-
-                try {
+                    if (deltaY != 0) {
+                        curY = curY + (deltaY > 0 ? 1 : -1);
+//                            Console.getConsole().printTracingMessage("add y" + curY);
+                    }
+                    double finalCurY = curY;
+                    double finalCurX = curX;
+//                        Console.getConsole().printTracingMessage(curX + ", " + curY);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+//                                Console.getConsole().printTracingMessage("update plat");
+                            objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
+                            objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
+                        }
+                    });
+                    previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
+//                        Console.getConsole().printTracingMessage("new x,y:" + curX + ", " + curY + " new Tile x,y:" + previousTile.getX() + ", " + previousTile.getY());
+                    try {
                         Thread.sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                Console.getConsole().printTracingMessage("equal");
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 //            }
         };
         updateXY.start();
