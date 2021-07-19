@@ -39,6 +39,8 @@ public abstract class Soldier extends GameObject {
         for (int i = 0; i < 3; i++) {
             headTile = new Tile(headTile.getX() + 1, headTile.getY() + 1);
             Console.getConsole().printTracingMessage(headTile.getX() + 1+","+ headTile.getY() + 1);
+            reduceHP(100);
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -123,7 +125,7 @@ public abstract class Soldier extends GameObject {
             PathFinder pathFinder = new PathFinder(battleField);
             Path path = pathFinder.getPath();
             Tile closestTargetTile = findClosestTargetTile();
-            while (hp > 0) {
+            while (hp.get() > 0) {
                 if (closestTargetTile != findClosestTargetTile()) {
                     closestTargetTile = findClosestTargetTile();
                     pathFinder.findPath(headTile, closestTargetTile, z);

@@ -26,23 +26,23 @@ public class Valkyrie extends Soldier {
         errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
-                hp = 880;
+                hp.setValue(880);
                 damage = 120;
                 break;
             case 2:
-                hp = 968;
+                hp.setValue(968);
                 damage = 132;
                 break;
             case 3:
-                hp = 1064;
+                hp.setValue(1064);
                 damage = 145;
                 break;
             case 4:
-                hp = 1170;
+                hp.setValue(1170);
                 damage = 159;
                 break;
             case 5:
-                hp = 1284;
+                hp.setValue(1284);
                 damage = 175;
                 break;
         }

@@ -26,7 +26,7 @@ public abstract class MainTowers extends Building{
 
     @Override
     public void run(){
-        while (hp > 0){
+        while (hp.get() > 0){
             checkTargetRange();
         }
         if(nameOfDroppable == CardName.KING_TOWER){

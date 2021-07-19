@@ -17,27 +17,27 @@ public class InfernoTower extends Building {
 
         switch (level) {
             case 1:
-                hp = 800;
+                hp.setValue(800);
                 damage = 20;
                 maxDamage = 400;
                 break;
             case 2:
-                hp = 880;
+                hp.setValue(880);
                 damage = 22;
                 maxDamage = 440;
                 break;
             case 3:
-                hp = 968;
+                hp.setValue(968);
                 damage = 24;
                 maxDamage = 484;
                 break;
             case 4:
-                hp = 1064;
+                hp.setValue(1064);
                 damage = 26;
                 maxDamage = 532;
                 break;
             case 5:
-                hp = 1168;
+                hp.setValue(1168);
                 damage = 29;
                 maxDamage = 584;
                 break;

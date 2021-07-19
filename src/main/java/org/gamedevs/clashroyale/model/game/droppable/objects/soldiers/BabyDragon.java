@@ -20,23 +20,23 @@ public class BabyDragon extends Soldier{
         errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level){
             case 1 :
-                hp = 800;
+                hp.setValue(800);
                 damage = 100;
                 break;
             case 2 :
-                hp = 880;
+                hp.setValue(880);
                 damage = 110;
                 break;
             case 3 :
-                hp = 968;
+                hp.setValue(968);
                 damage = 121;
                 break;
             case 4 :
-                hp = 1064;
+                hp.setValue(1064);
                 damage = 133;
                 break;
             case 5 :
-                hp = 1168;
+                hp.setValue(1168);
                 damage = 146;
                 break;
         }

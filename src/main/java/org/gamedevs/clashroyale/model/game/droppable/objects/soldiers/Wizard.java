@@ -17,22 +17,22 @@ public class Wizard extends Soldier{
         errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level){
             case 1 :
-                hp = 340;
+                hp.setValue(340);
                 damage = 130;
                 break;
             case 2 :
-                hp = 374;
+                hp.setValue(374);
                 damage = 143;
             case 3:
-                hp = 411;
+                hp.setValue(411);
                 damage = 157;
                 break;
             case 4 :
-                hp = 452;
+                hp.setValue(452);
                 damage = 172;
                 break;
             case 5 :
-                hp = 496;
+                hp.setValue(496);
                 damage = 182;
                 break;
         }

@@ -6,7 +6,7 @@ public class ImmortalObject extends GameObject{
 
     public ImmortalObject(){
         super(Side.EMPTY);
-        hp = 1000000;
+        hp.setValue(1000000);
         attackTargetType = TargetType.IMMORTAL_OBJECT;
         range = 0;
         damage = 0;

@@ -17,23 +17,23 @@ public class KingTower extends MainTowers{
 
         switch (level){
             case 1 :
-                hp = 2400;
+                hp.setValue(2400);
                 damage = 50;
                 break;
             case 2 :
-                hp = 2568;
+                hp.setValue(2568);
                 damage = 53;
                 break;
             case 3 :
-                hp = 2736;
+                hp.setValue(2736);
                 damage = 57;
                 break;
             case 4 :
-                hp = 2904;
+                hp.setValue(2904);
                 damage = 60;
                 break;
             case 5 :
-                hp = 3096;
+                hp.setValue(3096);
                 damage = 64;
                 break;
         }

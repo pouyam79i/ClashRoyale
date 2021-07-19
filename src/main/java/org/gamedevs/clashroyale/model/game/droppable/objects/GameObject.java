@@ -1,11 +1,17 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
  * Main structure game object class!
@@ -18,7 +24,7 @@ public abstract class GameObject extends Droppable {
      * hit point
      * (when character dies or health of character)
      */
-    protected int hp;
+    protected DoubleProperty hp = new SimpleDoubleProperty();
     /**
      * amount of giving damage!
      */
@@ -94,7 +100,12 @@ public abstract class GameObject extends Droppable {
      * @param takenDamage is the damage given to game object by enemy!
      */
     public synchronized void reduceHP(int takenDamage){
-        hp -= takenDamage;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                hp.setValue(hp.subtract(takenDamage).getValue());
+            }
+        });
     }
 
     /**
@@ -107,7 +118,7 @@ public abstract class GameObject extends Droppable {
             GameObject lockedTarget = null;
             int x, y;       // beginning x,y of search area
             checkAttack:
-            while (hp > 0){
+            while (hp.get() > 0){
                 attack(lockedTarget);
                 if (lockedTarget != null){
                     if(lockedTarget.getHp() <= 0){
@@ -176,7 +187,7 @@ public abstract class GameObject extends Droppable {
                     }
                 }
             }
-            if(hp > 0){
+            if(hp.get() > 0){
                 Console.getConsole().printTracingMessage("Failed to complete check attack loop!");
             }
         }));
@@ -194,9 +205,19 @@ public abstract class GameObject extends Droppable {
     public Tile getHeadPixel() {
         return headTile;
     }
-    public int getHp() {
+
+    public double getHp() {
+        return hp.get();
+    }
+
+    public DoubleProperty hpProperty() {
         return hp;
     }
+
+    public Tile getHeadTile() {
+        return headTile;
+    }
+
     public int getDamage() {
         return damage;
     }

@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.updater.battle;
 
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +15,7 @@ import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
+import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
@@ -22,7 +25,7 @@ public class ViewUpdater extends Runnable {
     private final AnchorPane battleFieldPane;
     private final GameObject gameObject;
     private final CardName cardName;
-    private ImageView objectView;
+    private ObjectView objectView;
     private boolean isEnemy;
     private GameObjectState previousState;
     private Angle previousAngle;
@@ -44,9 +47,9 @@ public class ViewUpdater extends Runnable {
     public void run() {
         // Initializing thread needs
         Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-        objectView = new ImageView(currentImage);
-        objectView.setFitWidth(currentImage.getWidth() / 2.5);
-        objectView.setFitHeight(currentImage.getHeight() / 2.5);
+        objectView = new ObjectView(gameObject,currentImage);
+        objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
+        objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
         int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
         int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
         Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
@@ -79,7 +82,7 @@ public class ViewUpdater extends Runnable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            objectView.setImage(img);
+                            objectView.getImageView().setImage(img);
                             Console.getConsole().printTracingMessage("changed");
                         }
                     });
@@ -152,5 +155,49 @@ public class ViewUpdater extends Runnable {
 //            }
         };
         updateXY.start();
+    }
+    class ObjectView extends AnchorPane{
+        private ProgressBar progressBar = new ProgressBar();
+        private ImageView imageView = new ImageView();
+        private double maxHp;
+
+        public ObjectView(GameObject gameObject, Image image){
+            maxHp = gameObject.getHp();
+            this.imageView.setImage(image);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.progressProperty().bind(gameObject.hpProperty().divide(maxHp));
+                }
+            });
+            progressBar.setPrefWidth(25);
+            progressBar.setPrefHeight(5);
+
+            progressBar.setLayoutX(15);
+            if(gameObject.getTeamSide() == Side.TOP)
+                progressBar.setStyle("-fx-accent: red;");
+            else
+                progressBar.setStyle("-fx-accent: blue;");
+
+            getChildren().add(imageView);
+            getChildren().add(progressBar);
+        }
+
+        public ProgressBar getProgressBar() {
+            return progressBar;
+        }
+
+        public void setProgressBar(ProgressBar progressBar) {
+            this.progressBar = progressBar;
+        }
+
+        public ImageView getImageView() {
+            return imageView;
+        }
+
+        public void setImageView(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
     }
 }

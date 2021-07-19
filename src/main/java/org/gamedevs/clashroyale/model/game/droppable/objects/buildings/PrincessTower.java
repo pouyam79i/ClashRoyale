@@ -25,23 +25,23 @@ public class PrincessTower extends MainTowers{
         effectiveLifeTime = false;
         switch (level){
             case 1 :
-                hp = 1400;
+                hp.setValue(1400);
                 damage = 50;
                 break;
             case 2 :
-                hp = 1512;
+                hp.setValue(1512);
                 damage = 54;
                 break;
             case 3 :
-                hp = 1624;
+                hp.setValue(1624);
                 damage = 58;
                 break;
             case 4 :
-                hp = 1750;
+                hp.setValue(1750);
                 damage = 62;
                 break;
             case 5 :
-                hp = 1890;
+                hp.setValue(1890);
                 damage = 69;
                 break;
         }

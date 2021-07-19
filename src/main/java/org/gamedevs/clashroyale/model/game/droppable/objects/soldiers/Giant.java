@@ -17,23 +17,23 @@ public class Giant extends Soldier{
         errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level){
             case 1 :
-                hp = 2000;
+                hp.setValue(2000);
                 damage = 126;
                 break;
             case 2 :
-                hp = 2200;
+                hp.setValue(2200);
                 damage = 138;
                 break;
             case 3 :
-                hp = 2420;
+                hp.setValue(2420);
                 damage = 152;
                 break;
             case 4 :
-                hp = 2660;
+                hp.setValue(2660);
                 damage = 167;
                 break;
             case 5 :
-                hp = 2920;
+                hp.setValue(2920);
                 damage = 183;
                 break;
         }
