@@ -3,6 +3,7 @@ package org.gamedevs.clashroyale.model.game.battle.engine.map;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Tile of map.
@@ -210,5 +211,6 @@ public class Tile {
     public GameObject getFlyingGameObject() {
         return flyingGameObject;
     }
+
 
 }

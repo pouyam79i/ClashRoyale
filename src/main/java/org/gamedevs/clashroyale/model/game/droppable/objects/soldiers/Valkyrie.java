@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -21,7 +22,8 @@ public class Valkyrie extends Soldier {
         attackTargetType = TargetType.GROUND;
         range = 1;
         areaSplash = true;
-
+        errorInGUIX = 1 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
                 hp = 880;

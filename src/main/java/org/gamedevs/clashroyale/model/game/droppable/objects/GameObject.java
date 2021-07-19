@@ -54,7 +54,8 @@ public abstract class GameObject extends Droppable {
      * State of game object
      */
     protected GameObjectState state;
-
+    protected double errorInGUIX;
+    protected double errorInGUIY;
     // Position properties:
     /**
      * Head pixel of object!
@@ -216,6 +217,14 @@ public abstract class GameObject extends Droppable {
     }
     public Side getTeamSide() {
         return teamSide;
+    }
+
+    public double getErrorInGUIX() {
+        return errorInGUIX;
+    }
+
+    public double getErrorInGUIY() {
+        return errorInGUIY;
     }
 
     // Setters

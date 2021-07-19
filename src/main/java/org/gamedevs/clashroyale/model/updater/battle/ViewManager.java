@@ -15,10 +15,14 @@ public class ViewManager {
     public void addObjectToView(GameObject gameObject){
         if(gameObject == null)
             return;
-        if(gameObject.getTeamSide() == mySide)
+        if(gameObject.getTeamSide() == mySide) {
+            gameObject.start();
             new ViewUpdater(gameObject, false).start();
-        else
+        }
+        else {
+            gameObject.start();
             new ViewUpdater(gameObject, true).start();
+        }
     }
 
     public void matchMainTowers(MainTowers mainTower, Side side, int kind){

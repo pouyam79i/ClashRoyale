@@ -9,6 +9,8 @@ import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.utils.console.Console;
@@ -22,6 +24,9 @@ public class ViewUpdater extends Runnable {
     private final CardName cardName;
     private ImageView objectView;
     private boolean isEnemy;
+    private GameObjectState previousState;
+    private Angle previousAngle;
+    private Tile previousTile;
 
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
         threadName = "ViewUpdater";
@@ -30,12 +35,14 @@ public class ViewUpdater extends Runnable {
         this.gameObject = gameObject;
         cardName = gameObject.getNameOfDroppable();
         this.isEnemy = isEnemy;
+        previousTile = gameObject.getHeadPixel();
+        previousState = gameObject.getState();
+        previousAngle = gameObject.getAngle();
     }
 
     @Override
     public void run() {
         // Initializing thread needs
-        gameObject.setState(GameObjectState.MOVING);
         Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
         objectView = new ImageView(currentImage);
         objectView.setFitWidth(currentImage.getWidth() / 2.5);
@@ -45,12 +52,109 @@ public class ViewUpdater extends Runnable {
         Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
-            if (cardName == CardName.ARCHERS || cardName == CardName.WIZARD)
-                objectView.setLayoutX(x - 0.5 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO);
-            else
-                objectView.setLayoutX(x - MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO);
-            objectView.setLayoutY(y - 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO);
+
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
         });
 
+
+        update();
+    }
+
+    public void update() {
+        updateImg();
+        updateXY();
+    }
+
+    private void updateImg() {
+        Thread updateImg = new Thread() {
+            @Override
+            public void start() {
+                Console.getConsole().printTracingMessage(previousAngle.toString() + previousState.toString());
+                while (true) {
+                    if (previousAngle != gameObject.getAngle() ||
+                            previousState != gameObject.getState()) {
+                        System.out.println("here");
+                        Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                objectView.setImage(img);
+                                Console.getConsole().printTracingMessage("changed");
+                            }
+                        });
+                        previousState = gameObject.getState();
+                        previousAngle = gameObject.getAngle();
+                    }
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        updateImg.start();
+    }
+
+    private void updateXY() {
+
+
+        Thread updateXY = new Thread() {
+
+            @Override
+            public void start() {
+                double curX;
+                double curY;
+                double destX;
+                double destY;
+                double deltaX;
+                double deltaY;
+                while (true) {
+                    curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
+                    curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
+                    while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
+                            previousTile.getX() != gameObject.getHeadPixel().getX()) {
+                        destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+                        destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+                        deltaX = destX - curX;
+                        deltaY = destY - curY;
+//                        Console.getConsole().printTracingMessage("deltaX: " + deltaX +  "deltaY: " + deltaY);
+                        if (deltaX != 0) {
+                            curX = curX + (deltaX > 0 ? 1 : -1);
+//                            Console.getConsole().printTracingMessage("add x" + curX);
+                        }
+                        if (deltaY != 0) {
+                            curY = curY + (deltaY > 0 ? 1 : -1);
+//                            Console.getConsole().printTracingMessage("add y" + curY);
+                        }
+                        double finalCurY = curY;
+                        double finalCurX = curX;
+//                        Console.getConsole().printTracingMessage(curX + ", " + curY);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+//                                Console.getConsole().printTracingMessage("update plat");
+                                objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
+                                objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
+                            }
+                        });
+                        previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
+//                        Console.getConsole().printTracingMessage("new x,y:" + curX + ", " + curY + " new Tile x,y:" + previousTile.getX() + ", " + previousTile.getY());
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        updateXY.start();
     }
 }
