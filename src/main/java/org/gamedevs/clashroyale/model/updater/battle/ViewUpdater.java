@@ -62,8 +62,10 @@ public class ViewUpdater extends Runnable {
     }
 
     public void update() {
-        updateXY();
-        updateImg();
+        while (true) {
+            updateImg();
+            updateXY();
+        }
     }
 
     private void updateImg() {
@@ -71,7 +73,7 @@ public class ViewUpdater extends Runnable {
             @Override
             public void start() {
                 Console.getConsole().printTracingMessage(previousAngle.toString() + previousState.toString());
-                while (true) {
+//                while (true) {
                     if (previousAngle != gameObject.getAngle() ||
                             previousState != gameObject.getState()) {
                         System.out.println("here");
@@ -92,7 +94,7 @@ public class ViewUpdater extends Runnable {
                         e.printStackTrace();
                     }
                 }
-            }
+//            }
         };
         updateImg.start();
     }
@@ -110,7 +112,7 @@ public class ViewUpdater extends Runnable {
                 double destY;
                 double deltaX;
                 double deltaY;
-                while (true) {
+//                while (true) {
                     curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
                     curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
                     while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
@@ -147,13 +149,15 @@ public class ViewUpdater extends Runnable {
                             e.printStackTrace();
                         }
                     }
-                    try {
+                    Console.getConsole().printTracingMessage("equal");
+
+                try {
                         Thread.sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-            }
+//            }
         };
         updateXY.start();
     }
