@@ -128,12 +128,8 @@ public class AccountBuilder {
         availableContainer.getDeck().remove(10);
         availableContainer.getDeck().remove(9);
         availableContainer.getDeck().remove(8);
-//        availableContainer.removeCard(10);
-//        availableContainer.removeCard(9);
-//        availableContainer.removeCard(8);
-        for (Card card: availableContainer.getDeck() ){
-            Console.getConsole().printTracingMessage(card.getCardName().toString());
-        }
+
+
         return availableContainer;
     }
 }

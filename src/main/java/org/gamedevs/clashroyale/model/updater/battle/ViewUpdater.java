@@ -52,13 +52,12 @@ public class ViewUpdater extends Runnable {
         Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
-
             objectView.setLayoutX(x - gameObject.getErrorInGUIX());
             objectView.setLayoutY(y - gameObject.getErrorInGUIY());
         });
 
 
-        update();
+//        update();
     }
 
     public void update() {
@@ -76,7 +75,6 @@ public class ViewUpdater extends Runnable {
 //                while (true) {
                 if (previousAngle != gameObject.getAngle() ||
                         previousState != gameObject.getState()) {
-                    System.out.println("here");
                     Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
                     Platform.runLater(new Runnable() {
                         @Override
