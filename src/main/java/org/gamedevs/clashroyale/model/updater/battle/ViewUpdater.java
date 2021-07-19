@@ -52,8 +52,8 @@ public class ViewUpdater extends Runnable {
         Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
-            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
-            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX()- MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO);
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY()+ MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO);
         });
 
 
