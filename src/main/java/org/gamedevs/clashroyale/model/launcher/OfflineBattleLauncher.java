@@ -72,10 +72,6 @@ public class OfflineBattleLauncher extends Runnable {
         });
         // Starting the game!
         gameManager.start();
-        // TODO: replace this code with end of game checker()!
-        try {
-            Thread.sleep(30000); //TODO: Just testing :)
-        } catch (InterruptedException ignored) {}
         // Killing launcher
         this.shutdown();
     }
