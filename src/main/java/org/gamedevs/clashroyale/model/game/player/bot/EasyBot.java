@@ -35,6 +35,7 @@ public class EasyBot extends Bot {
      */
     @Override
     protected void algorithm() {
+        pickCard();
     }
 
     @Override
@@ -44,22 +45,22 @@ public class EasyBot extends Bot {
             public void start() {
                 while (true) {
                     Random random = new Random();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
 
-                    }
                     DeckContainer deckContainer = new DeckContainer();
                     Card card;
                     do {
                         deckContainer.setDeck(gameDeck.getUnlockCards().getDeck());
-                    } while (deckContainer.getDeck().size() > 0);
+                    } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();
                     float x = random.nextInt(MainConfig.STD_BATTLE_FIELD_WIDTH);
                     float y = random.nextInt(MainConfig.STD_BATTLE_FIELD_HEIGHT);
                     Console.getConsole().printTracingMessage("bot try to put " + card.getCardName() + " in " + x + " , " + y);
                     if (drop(x, y, card))
                         removeCard(card);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
         };

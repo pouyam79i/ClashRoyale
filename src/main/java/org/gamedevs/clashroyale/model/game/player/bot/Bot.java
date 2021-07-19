@@ -42,7 +42,7 @@ public abstract class Bot extends Player {
     public void run() {
         elixir.start();
 //        gameDeck.setDeck(cardGenerator.getInitialCards());
-//        pickCard();
+//        algorithm();
     }
 
     /**
