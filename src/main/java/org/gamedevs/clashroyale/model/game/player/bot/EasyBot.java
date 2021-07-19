@@ -53,12 +53,12 @@ public class EasyBot extends Bot {
                     } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();
                     float x = random.nextInt(MainConfig.STD_BATTLE_FIELD_WIDTH);
-                    float y = random.nextInt(MainConfig.STD_BATTLE_FIELD_HEIGHT);
+                    float y = random.nextInt(MainConfig.STD_BATTLE_FIELD_HEIGHT/2);
                     Console.getConsole().printTracingMessage("bot try to put " + card.getCardName() + " in " + x + " , " + y);
                     if (drop(x, y, card))
                         removeCard(card);
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(random.nextInt(5) * 1000 + 1500);
                     } catch (InterruptedException e) {
                     }
                 }
