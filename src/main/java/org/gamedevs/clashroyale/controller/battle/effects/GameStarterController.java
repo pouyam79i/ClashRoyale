@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * This class handles game starter view!
+ *
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0
  */
@@ -61,16 +62,17 @@ public class GameStarterController implements Initializable {
 
     /**
      * Sets game starter view
+     *
      * @param blueNameText this player name (my side)
-     * @param redNameText opponent player name
-     * @param arena arena of game
+     * @param redNameText  opponent player name
+     * @param arena        arena of game
      */
-    public void init(String blueNameText, String redNameText, Arenas arena){
+    public void init(String blueNameText, String redNameText, Arenas arena) {
         // TODO: not working - reason: I dont know!
         Platform.runLater(() -> {
-            arenaNameUpdatable.setVisible(false);
-            arenaNumberUpdatable.setVisible(false);
-            swordImgUpdatable.setVisible(false);
+            arenaNameUpdatable.setVisible(true);
+            arenaNumberUpdatable.setVisible(true);
+            swordImgUpdatable.setVisible(true);
             arenaNameUpdatable.setText(arena.getName());
             arenaNumberUpdatable.setText("Arena " + arena.getLevel());
             blueNameUpdatable.setText(blueNameText);
@@ -81,7 +83,7 @@ public class GameStarterController implements Initializable {
     /**
      * runs related animation of game starter
      */
-    public void display(){
+    public void display() {
         Platform.runLater(() -> {
             new BounceIn(swordImgUpdatable).play();
             new SlideInLeft(arenaNumberUpdatable).play();
@@ -93,15 +95,19 @@ public class GameStarterController implements Initializable {
     private void setRedNameUpdatable(Label redNameUpdatable) {
         this.redNameUpdatable = redNameUpdatable;
     }
+
     private void setBlueNameUpdatable(Label blueNameUpdatable) {
         this.blueNameUpdatable = blueNameUpdatable;
     }
+
     private void setArenaNameUpdatable(Label arenaNameUpdatable) {
         this.arenaNameUpdatable = arenaNameUpdatable;
     }
+
     private void setArenaNumberUpdatable(Label arenaNumberUpdatable) {
         this.arenaNumberUpdatable = arenaNumberUpdatable;
     }
+
     private void setSwordImgUpdatable(ImageView swordImgUpdatable) {
         this.swordImgUpdatable = swordImgUpdatable;
     }
@@ -110,7 +116,7 @@ public class GameStarterController implements Initializable {
      * @return only instance of this class
      */
     public static GameStarterController getStarterController() {
-        if(starterController == null){
+        if (starterController == null) {
             starterController = new GameStarterController();
         }
         return starterController;

@@ -74,7 +74,7 @@ public class BattleFieldLoader {
         battleFieldContainer.setGameStarter(gameStarter);
         // Loading result display
         AnchorPane gameResult = FXMLLoader.load(getClass().getResource(
-                "../../../view/fxml/battle/tools/game_starter.fxml"
+                "../../../view/fxml/battle/tools/game_result.fxml"
         ));
         gameResult.setLayoutX(0);
         gameResult.setLayoutY(0);
