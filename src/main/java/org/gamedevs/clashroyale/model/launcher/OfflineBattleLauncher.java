@@ -56,7 +56,7 @@ public class OfflineBattleLauncher extends Runnable {
         gameManager.getMap().setViewManager(new ViewManager(Side.DOWN));
         gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), false);
         // Setting player to player container
-        PlayerContainer.getPlayerContainer().setPlayer(gameManager.getTopPlayer());
+        PlayerContainer.getPlayerContainer().setPlayer(gameManager.getDownPlayer());
         // Binding game timer to view
         GameTimer.getGameTimer().bindTimerLabel(gameManager.getClock().clockStringProperty());
         // Initializing card deck of player

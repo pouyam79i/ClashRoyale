@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.account;
 
+import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
@@ -9,6 +10,7 @@ import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 import org.gamedevs.clashroyale.model.utils.io.FileConfig;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class builds a new account! (Applies the algorithm of building new account)
@@ -107,4 +109,31 @@ public class AccountBuilder {
         return accountBuilder;
     }
 
+    public static DeckContainer getRandomDeck(){
+        DeckContainer availableContainer = new DeckContainer();
+        availableContainer.addCard(new Card(CardName.BARBARIANS, 5));
+        availableContainer.addCard(new Card(CardName.ARCHERS, 3));
+        availableContainer.addCard(new Card(CardName.BABY_DRAGON, 4));
+        availableContainer.addCard(new Card(CardName.WIZARD, 5));
+        availableContainer.addCard(new Card(CardName.MINI_PEKKA, 4));
+        availableContainer.addCard(new Card(CardName.GIANT, 5));
+        availableContainer.addCard(new Card(CardName.VALKYRIE, 4));
+        availableContainer.addCard(new Card(CardName.RAGE, 3));
+        availableContainer.addCard(new Card(CardName.FIREBALL, 4));
+        availableContainer.addCard(new Card(CardName.ARROWS, 3));
+        availableContainer.addCard(new Card(CardName.CANNON, 6));
+        availableContainer.addCard(new Card(CardName.INFERNO_TOWER, 5));
+        Collections.shuffle(availableContainer.getDeck());
+        availableContainer.getDeck().remove(11);
+        availableContainer.getDeck().remove(10);
+        availableContainer.getDeck().remove(9);
+        availableContainer.getDeck().remove(8);
+//        availableContainer.removeCard(10);
+//        availableContainer.removeCard(9);
+//        availableContainer.removeCard(8);
+        for (Card card: availableContainer.getDeck() ){
+            Console.getConsole().printTracingMessage(card.getCardName().toString());
+        }
+        return availableContainer;
+    }
 }

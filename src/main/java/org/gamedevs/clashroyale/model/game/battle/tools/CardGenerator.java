@@ -53,6 +53,7 @@ public class CardGenerator {
             putCardAsElixirListener(card);
             cards.add(card);
             completeDeck.removeCard(card);
+            Console.getConsole().printTracingMessage(card.getCardName().toString());
         }
 
         setNextCard();
@@ -92,16 +93,18 @@ public class CardGenerator {
      * @param card card
      */
     private void putCardAsElixirListener(Card card) {
-        elixir.elixirValueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                if (elixir.elixirValueProperty().get() < card.getCost() && !card.isLock()) {
-                    card.setLock(true);
-                } else if (elixir.elixirValueProperty().get() >= card.getCost() && card.isLock()) {
-                    card.setLock(false);
+        if (card != null) {
+            elixir.elixirValueProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                    if (elixir.elixirValueProperty().get() < card.getCost() && !card.isLock()) {
+                        card.setLock(true);
+                    } else if (elixir.elixirValueProperty().get() >= card.getCost() && card.isLock()) {
+                        card.setLock(false);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     //Getter

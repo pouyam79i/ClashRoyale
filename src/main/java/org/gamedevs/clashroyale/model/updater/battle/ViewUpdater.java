@@ -62,8 +62,8 @@ public class ViewUpdater extends Runnable {
     }
 
     public void update() {
-        updateImg();
         updateXY();
+        updateImg();
     }
 
     private void updateImg() {

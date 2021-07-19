@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.game.battle.engine.manager;
 
 import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.account.Account;
+import org.gamedevs.clashroyale.model.account.AccountBuilder;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
@@ -67,7 +68,7 @@ public class GameManager extends Runnable {
         // bot elixir
         Elixir elixirDownPlayer = new Elixir(clock);
         // This is used for human player
-        CardGenerator cardGeneratorTopPlayer = new CardGenerator(account.getDeckContainer(), elixirTopPlayer);
+        CardGenerator cardGeneratorTopPlayer = new CardGenerator(AccountBuilder.getRandomDeck(), elixirTopPlayer);
         // This is used for bot
         CardGenerator cardGeneratorDownPlayer = new CardGenerator(account.getDeckContainer(), elixirDownPlayer);
         // Setting human player requirements

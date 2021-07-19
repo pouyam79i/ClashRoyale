@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.game.player.bot;
 
 import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
@@ -34,7 +35,6 @@ public class EasyBot extends Bot {
      */
     @Override
     protected void algorithm() {
-
     }
 
     @Override
@@ -42,16 +42,25 @@ public class EasyBot extends Bot {
         Thread pickThread = new Thread() {
             @Override
             public void start() {
-                Card card;
-                do {
-                    card = gameDeck.getUnlockCards().getRandomCard();
-                }while (card == null);
-                Random random = new Random();
-                float x = random.nextInt(MainConfig.STD_BATTLE_FIELD_WIDTH);
-                float y = random.nextInt(MainConfig.STD_BATTLE_FIELD_HEIGHT);
-                Console.getConsole().printTracingMessage("bot try to put " + card.getCardName() + " in " + x + " , " + y);
-                if (drop(x, y, card))
-                    removeCard(card);
+                while (true) {
+                    Random random = new Random();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+
+                    }
+                    DeckContainer deckContainer = new DeckContainer();
+                    Card card;
+                    do {
+                        deckContainer.setDeck(gameDeck.getUnlockCards().getDeck());
+                    } while (deckContainer.getDeck().size() > 0);
+                    card = deckContainer.getRandomCard();
+                    float x = random.nextInt(MainConfig.STD_BATTLE_FIELD_WIDTH);
+                    float y = random.nextInt(MainConfig.STD_BATTLE_FIELD_HEIGHT);
+                    Console.getConsole().printTracingMessage("bot try to put " + card.getCardName() + " in " + x + " , " + y);
+                    if (drop(x, y, card))
+                        removeCard(card);
+                }
             }
         };
         pickThread.start();

@@ -12,20 +12,23 @@ import java.util.ArrayList;
 
 /**
  * This class contains main structure of bot!
+ *
  * @author Pouya Mohammadi - Hosna Hoseini
- *         9829039 -CE@AUT   9823010 -CE@AUT
+ * 9829039 -CE@AUT   9823010 -CE@AUT
  * @version 1.0
  */
 public abstract class Bot extends Player {
 
     protected DeckContainer gameDeck = new DeckContainer();
+
     /**
      * Gets main game tools to be able to play
-     * @param map of game
-     * @param playerSide side of player (TOP/DOWN)
-     * @param elixir counter of elixir
+     *
+     * @param map           of game
+     * @param playerSide    side of player (TOP/DOWN)
+     * @param elixir        counter of elixir
      * @param cardGenerator player card generator
-     * @param level level of player
+     * @param level         level of player
      */
     protected Bot(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level) {
         super(map, playerSide, elixir, cardGenerator, level);
@@ -39,8 +42,7 @@ public abstract class Bot extends Player {
     public void run() {
         elixir.start();
 //        gameDeck.setDeck(cardGenerator.getInitialCards());
-        algorithm();
-
+//        pickCard();
     }
 
     /**
@@ -51,7 +53,7 @@ public abstract class Bot extends Player {
 
     protected abstract void pickCard();
 
-    protected void removeCard(Card card){
+    protected void removeCard(Card card) {
         elixir.reduceElixir(card.getCost());
         gameDeck.removeCard(card);
         gameDeck.addCard(cardGenerator.getANewCard());

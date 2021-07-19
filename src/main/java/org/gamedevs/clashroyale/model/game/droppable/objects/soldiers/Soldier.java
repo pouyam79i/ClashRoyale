@@ -47,7 +47,11 @@ public abstract class Soldier extends GameObject {
         }
         state = GameObjectState.ATTACK;
         angle = Angle.EAST;
-        System.out.println("changed");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
