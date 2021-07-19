@@ -1,8 +1,12 @@
 package org.gamedevs.clashroyale.model.launcher;
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.controller.battle.effects.GameStarterController;
 import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
 import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
+import org.gamedevs.clashroyale.model.account.levelproperty.Arenas;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
@@ -64,11 +68,36 @@ public class OfflineBattleLauncher extends Runnable {
         // Playing battle music
         MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
         // Adding battle field group to root pane!
+        GameStarterController.getStarterController().init(UserAccountContainer.getUserAccountContainer().getAccount().getUsername(),
+                "BOT", Arenas.getArenaByLevel(UserAccountContainer.getUserAccountContainer().getAccount().getLevel()));
+        // Displaying game starter
         Platform.runLater(() -> {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
                     BattleFieldContainer.getBattleFieldContainer().getMainBattleGroup()
             );
+            MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().add(
+                    BattleFieldContainer.getBattleFieldContainer().getGameStarter()
+            );
+            new FadeIn(BattleFieldContainer.getBattleFieldContainer().getGameStarter()).play();
             OnWaitLoader.getOnWaitLoader().disappear();
+        });
+        try {
+            Thread.sleep(500);     // TODO: optimize game starter waiter!
+        } catch (InterruptedException ignored) {}
+        GameStarterController.getStarterController().display();
+        try {
+            Thread.sleep(2000);     // TODO: optimize game starter waiter!
+        } catch (InterruptedException ignored) {}
+        Platform.runLater(() -> {
+            new FadeOut(BattleFieldContainer.getBattleFieldContainer().getGameStarter()).play();
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {}
+        Platform.runLater(() -> {
+            MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().remove(
+                    BattleFieldContainer.getBattleFieldContainer().getGameStarter()
+            );
         });
         // Starting the game!
         gameManager.start();
