@@ -5,16 +5,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+import java.io.Serializable;
+
 /**
  * This class contains game result!
  * @author Pouya Mohammadi - Hosna Hoseini
  *         9829039 -CE@AUT   9823010 -CE@AUT
- * @version 1.0
+ * @version 1.0.1
  */
-public class GameResult {
+public class GameResult implements Serializable {
 
+    /**
+     * type of game
+     */
     private final GameType gameType;
-
     /**
      * first player in this game
      */

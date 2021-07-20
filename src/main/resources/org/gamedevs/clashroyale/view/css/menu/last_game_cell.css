@@ -1,0 +1,10 @@
+@font-face {
+    src: url('../../fonts/Clash-Regular.ttf');
+}
+
+
+.label{
+    -fx-font-family: 'Clash';
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-scale: Bold;
+}

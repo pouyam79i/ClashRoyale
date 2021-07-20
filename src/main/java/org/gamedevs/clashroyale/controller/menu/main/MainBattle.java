@@ -218,10 +218,19 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringProfilePopup(){
-        new BounceIn(profileBtn).play();
-        Scene mainBattleMenuScene = profileBtn.getScene();
-        AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-        mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+        Thread thread = (new Thread(() -> {
+            new BounceIn(profileBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                Scene mainBattleMenuScene = profileBtn.getScene();
+                AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+                mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -229,7 +238,19 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringLastGamesPopup(){
-        new BounceIn(lastGamesBtn).play();
+        Thread thread = (new Thread(() -> {
+            new BounceIn(lastGamesBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                Scene mainBattleMenuScene = lastGamesBtn.getScene();
+                AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+                mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getLastGamesPopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**

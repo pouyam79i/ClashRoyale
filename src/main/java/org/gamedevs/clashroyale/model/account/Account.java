@@ -1,25 +1,29 @@
 package org.gamedevs.clashroyale.model.account;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
+import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 
 import java.io.Serializable;
 
 /**
  * This class contains information a user!
  * @author Pouya Mohammadi - CE@AUT Uni ID:9829039
- * @version 1.0
+ * @version 1.1
  */
 public class Account implements Serializable {
 
+    // Main account info:
     /**
      * Username
      */
-    private String username;
+    private final String username;
     /**
      * Password of account
      */
-    private String password;
+    private final String password;
+    // Deck container:
     /**
      * Current deck of user
      */
@@ -28,6 +32,7 @@ public class Account implements Serializable {
      * Current available deck of user
      */
     private DeckContainer deckAvailable;
+    // XP and leve property:
     /**
      * total XP of user
      */
@@ -40,6 +45,8 @@ public class Account implements Serializable {
      * current xp (xp of this level)
      */
     private int currentLevelXP;
+    // Other:
+    private final ObservableList<GameResult> previousGames;
 
     /**
      * Builds an account.
@@ -57,6 +64,7 @@ public class Account implements Serializable {
             throw new Exception("Empty password");
         this.username = username;
         this.password = password;
+        previousGames = new SimpleListProperty<GameResult>();
         deckContainer = new DeckContainer();        // Setting new player deck as an empty deck!
         totalXP = 0;
     }
@@ -98,6 +106,17 @@ public class Account implements Serializable {
     }
 
     /**
+     * a new game result to the collection
+     * @param newGameResult will be added
+     */
+    public void addGameResult(GameResult newGameResult){
+        // TODO: optimize this collection
+        if(newGameResult == null)
+            return;
+        previousGames.add(newGameResult);
+    }
+
+    /**
      * Increase xp
      * @param additionalXP will be added to current xp
      */
@@ -126,6 +145,9 @@ public class Account implements Serializable {
     }
     public int getCurrentLevelXP() {
         return currentLevelXP;
+    }
+    public ObservableList<GameResult> getPreviousGames() {
+        return previousGames;
     }
 
     // Setters
