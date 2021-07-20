@@ -49,9 +49,9 @@ public class GameResult {
         this.gameType = gameType;
         this.topPlayerName = topPlayerName;
         this.downPlayerName = downPlayerName;
-        topPlayerScore = new SimpleIntegerProperty(0);
+        topPlayerScore = new SimpleIntegerProperty();
         topPlayerScore.setValue(0);
-        downPlayerScore = new SimpleIntegerProperty(0);
+        downPlayerScore = new SimpleIntegerProperty();
         downPlayerScore.setValue(0);
         lock = false;
         winnerSide = null;
@@ -67,21 +67,21 @@ public class GameResult {
         if(side == Side.TOP){
             try{
                 Platform.runLater(() -> {
-                    topPlayerScore.add(1);
+                    topPlayerScore.setValue(topPlayerScore.getValue() + 1);
                 });
             }catch (Exception e){
-                topPlayerScore.add(1);
+                topPlayerScore.setValue(topPlayerScore.getValue() + 1);
             }
             if(topPlayerScore.getValue() == 3)
                 lock();
         }
-        else {
+        else if(side == Side.DOWN){
             try{
                 Platform.runLater(() -> {
-                    downPlayerScore.add(1);
+                    downPlayerScore.setValue(downPlayerScore.getValue() + 1);
                 });
             }catch (Exception e){
-                downPlayerScore.add(1);
+                downPlayerScore.setValue(downPlayerScore.getValue() + 1);
             }
             if(downPlayerScore.getValue() == 3)
                 lock();

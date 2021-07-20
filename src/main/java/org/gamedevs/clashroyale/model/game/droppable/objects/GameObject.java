@@ -115,6 +115,7 @@ public abstract class GameObject extends Droppable {
      * calls attack() on that target!
      */
     protected void checkTargetRange() {
+        Console.getConsole().printTracingMessage("checkTargetRange thread initialized");
         Thread targetRangeCheckerThread = (new Thread(() -> {
             GameObject lockedTarget = null;
             int x, y;       // beginning x,y of search area
@@ -139,7 +140,11 @@ public abstract class GameObject extends Droppable {
                         if (searchTile != null) {
                             if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
                                 GameObject target = null;
+                                // checking for not null targets
                                 // Giant
+                                if(target == null){
+                                    continue checkAttack;
+                                }
                                 if (attackTargetType == TargetType.BUILDING) {
                                     target = searchTile.getGameObject();
                                     if (target.getTeamSide() != teamSide) {
@@ -150,10 +155,6 @@ public abstract class GameObject extends Droppable {
                                             }
                                         }
                                     }
-                                }
-                                // checking for not null targets
-                                if(target == null){
-                                    continue checkAttack;
                                 }
                                 // Ground soldiers
                                 else if (attackTargetType == TargetType.GROUND) {
@@ -226,66 +227,50 @@ public abstract class GameObject extends Droppable {
     public GameObjectState getState() {
         return state;
     }
-
     public Angle getAngle() {
         return angle;
     }
-
-
     public double getHp() {
         return hp.get();
     }
-
     public DoubleProperty hpProperty() {
         return hp;
     }
-
     public Tile getHeadTile() {
         return headTile;
     }
-
     public int getDamage() {
         return damage;
     }
-
     public double getHitSpeed() {
         return hitSpeed;
     }
-
     public double getRange() {
         return range;
     }
-
     public TargetType getAttackTargetType() {
         return attackTargetType;
     }
-
     public TargetType getMyType() {
         return myType;
     }
-
     public int getZ() {
         return z;
     }
-
     public Side getTeamSide() {
         return teamSide;
     }
-
     public double getErrorInGUIX() {
         return errorInGUIX;
     }
-
     public double getErrorInGUIY() {
         return errorInGUIY;
     }
 
     // Setters
-
     public void setState(GameObjectState state) {
         this.state = state;
     }
-
     public boolean isBoost() {
         return boost;
     }

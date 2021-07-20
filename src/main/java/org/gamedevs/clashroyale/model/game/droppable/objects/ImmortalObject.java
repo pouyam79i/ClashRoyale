@@ -6,6 +6,7 @@ public class ImmortalObject extends GameObject{
 
     public ImmortalObject(){
         super(Side.EMPTY);
+        threadName = "ImmortalObject";
         hp.setValue(1000000);
         attackTargetType = TargetType.IMMORTAL_OBJECT;
         range = 0;
@@ -14,6 +15,8 @@ public class ImmortalObject extends GameObject{
     }
 
     @Override
-    public void run() {}
+    public void run() {
+        this.shutdown();
+    }
 
 }
