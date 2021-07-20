@@ -46,4 +46,7 @@ public abstract class Building extends GameObject {
 
     }
 
+    public int getLifeTime() {
+        return lifeTime;
+    }
 }

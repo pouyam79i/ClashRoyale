@@ -69,6 +69,8 @@ public abstract class ViewUpdater extends Runnable {
         });
 
         update();
+        shutdown();
+
     }
 
 
@@ -103,6 +105,7 @@ public abstract class ViewUpdater extends Runnable {
             previousAngle = gameObject.getAngle();
         }
     }
+
     /**
      * Anchor pane which contains game object image and progress bar
      * in order to show in GUI
