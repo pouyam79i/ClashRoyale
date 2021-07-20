@@ -1,8 +1,8 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
-import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -13,7 +13,6 @@ public abstract class Building extends GameObject {
      * Set a std  value for infinite life time (used for king and princesses towers)
      */
     protected int lifeTime;
-
     /**
      * If life time matchers for building,
      */
@@ -28,13 +27,29 @@ public abstract class Building extends GameObject {
     }
 
     /**
+     * Start attacking to the target (gives damage to target object)
+     */
+    @Override
+    protected void attack(GameObject target) {
+        if (target != null) {
+            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+            state = GameObjectState.ATTACK;
+            target.reduceHP(damage);
+            try {
+                Thread.sleep((int) (hitSpeed * 1000));
+            } catch (InterruptedException ignored) {
+            }
+        } else {
+            state = GameObjectState.IDLE;
+        }
+    }
+
+    /**
      * Thread of object (applies algorithm of game object)
      */
     @Override
     public void run() {
-        while (hp .get()> 0){
-            checkTargetRange();
-        }
+        checkTargetRange();
     }
 
     /**

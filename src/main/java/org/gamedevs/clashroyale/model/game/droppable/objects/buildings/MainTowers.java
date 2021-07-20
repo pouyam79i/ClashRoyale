@@ -26,15 +26,15 @@ public abstract class MainTowers extends Building{
 
     @Override
     public void run(){
-        while (hp.get() > 0){
-            checkTargetRange();
-        }
+        checkTargetRange();
+        while (hp.get() > 0) Thread.onSpinWait();
         if(nameOfDroppable == CardName.KING_TOWER){
             gameResult.setFullScore(Side.getOppositeSide(teamSide));
         }
         else {
             gameResult.addScore(Side.getOppositeSide(teamSide));
         }
+        this.shutdown();
     }
 
 }

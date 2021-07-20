@@ -22,11 +22,13 @@ public abstract class Spell extends Droppable {
 
     protected Spell(Side side) {
         super(DropType.SPELL, side);
+        threadName = "Spell";
     }
 
     @Override
     public void run() {
         effect();
+        this.shutdown();
     }
 
     protected abstract void effect();

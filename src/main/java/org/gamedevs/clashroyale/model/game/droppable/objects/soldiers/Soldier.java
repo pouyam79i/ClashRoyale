@@ -1,22 +1,15 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
-import javafx.scene.image.Image;
-import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.Path;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.PathFinder;
-import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public abstract class Soldier extends GameObject {
@@ -45,12 +38,6 @@ public abstract class Soldier extends GameObject {
     public void run() {
         checkTargetRange();
         mover();
-        while (hp.getValue() > 0){
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ignored) {}
-        }
-        this.shutdown();
     }
 
     /**
@@ -118,6 +105,7 @@ public abstract class Soldier extends GameObject {
      * Updates object to next place
      */
     protected void mover() {
+        Console.getConsole().printTracingMessage("Mover thread initialized");
         Thread moverThread = (new Thread(() -> {
             PathFinder pathFinder = new PathFinder(battleField);
             Path path = pathFinder.getPath();
@@ -147,14 +135,18 @@ public abstract class Soldier extends GameObject {
 
     @Override
     public void boost(){
-        super.boost();
-        speed *= 1.4;
+        if(!boost){
+            super.boost();
+            speed *= 1.4;
+        }
     }
 
     @Override
     public void unboost(){
-        super.unboost();
-        speed *= (1/1.4);
+        if(boost){
+            super.unboost();
+            speed *= (1/1.4);
+        }
     }
 
 
