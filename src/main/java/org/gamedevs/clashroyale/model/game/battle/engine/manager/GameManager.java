@@ -93,6 +93,7 @@ public class GameManager extends Runnable {
      * End of game logic
      */
     public void checkEndGame(){
+        gameResult.lock();
         topPlayer.shutdown();
         downPlayer.shutdown();
         // TODO: override player shutdown function and remove below code
@@ -113,11 +114,9 @@ public class GameManager extends Runnable {
         while (!clock.isEndOfTime()){
             // When we have a winner!
             if(gameResult.checkWinner()){
-                // TODO: complete wining process
                 break;
             }
         }
-        // TODO: complete time process
         checkEndGame();
         this.shutdown();
     }

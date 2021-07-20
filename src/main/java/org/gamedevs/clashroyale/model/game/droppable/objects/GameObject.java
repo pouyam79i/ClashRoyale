@@ -28,7 +28,6 @@ public abstract class GameObject extends Droppable {
      * amount of giving damage!
      */
     protected int damage;
-
     /**
      * attack range defines
      * the max attacking radius!
@@ -47,7 +46,6 @@ public abstract class GameObject extends Droppable {
      * is on the ground or in the air!
      */
     protected int z;
-
     /**
      * State of game object
      */
@@ -57,19 +55,17 @@ public abstract class GameObject extends Droppable {
      */
     protected double errorInGUIX;
     protected double errorInGUIY;
-
     /**
      * if this G.O. is currently boosted -> true
      */
     protected boolean boost = false;
+
     /**
      * Constructor of game object
-     *
      * @param side side of object
      */
     protected GameObject(Side side) {
         super(DropType.OBJECT, side);
-        angle = Angle.NORTH;
         state = GameObjectState.MOVING;
         z = 0; // This is zero except for baby dragon!
     }
@@ -116,6 +112,7 @@ public abstract class GameObject extends Droppable {
             int x, y;       // beginning x,y of search area
             checkAttack:
             while (hp.get() > 0) {
+                // attacking locked targer
                 attack(lockedTarget);
                 if (lockedTarget != null) {
                     if (lockedTarget.getHp() <= 0) {
@@ -137,6 +134,9 @@ public abstract class GameObject extends Droppable {
                                 // Giant
                                 if (attackTargetType == TargetType.BUILDING) {
                                     target = searchTile.getGameObject();
+                                    if(target == null){
+                                        continue checkAttack;
+                                    }
                                     if (target.getTeamSide() != teamSide) {
                                         if (target.getMyType() == TargetType.BUILDING) {
                                             if (target.getHp() > 0) {
@@ -161,7 +161,9 @@ public abstract class GameObject extends Droppable {
                                             }
                                         }
                                     }
-                                } else if (attackTargetType == TargetType.AIR_GROUND) {
+                                }
+                                // Air and Ground targets
+                                else if (attackTargetType == TargetType.AIR_GROUND) {
                                     if (target.getTeamSide() != teamSide) {
                                         if (target.getMyType() == TargetType.AIR || target.getMyType() == TargetType.GROUND) {
                                             if (target.getHp() > 0) {
@@ -189,82 +191,78 @@ public abstract class GameObject extends Droppable {
         targetRangeCheckerThread.start();
     }
 
+    /**
+     * Boost object property
+     */
     public void boost(){
-        boost = true;
-        damage *= 1.4;
-        hitSpeed *= 1.4;
+        if(!boost){
+            boost = true;
+            damage *= 1.4;
+            hitSpeed *= 1.4;
+        }
     }
 
+    /**
+     * Remove boost object property
+     */
     public void unboost(){
-        boost = false;
-        damage *= (1/1.4);
-        hitSpeed *= (1/1.4);
+        if(boost){
+            boost = false;
+            damage *= (1/1.4);
+            hitSpeed *= (1/1.4);
+        }
     }
+
     // Getters
     public GameObjectState getState() {
         return state;
     }
-
     public Angle getAngle() {
         return angle;
     }
-
-
     public double getHp() {
         return hp.get();
     }
-
     public DoubleProperty hpProperty() {
         return hp;
     }
-
     public Tile getHeadTile() {
         return headTile;
     }
-
     public int getDamage() {
         return damage;
     }
-
     public double getHitSpeed() {
         return hitSpeed;
     }
-
     public double getRange() {
         return range;
     }
-
     public TargetType getAttackTargetType() {
         return attackTargetType;
     }
-
     public TargetType getMyType() {
         return myType;
     }
-
     public int getZ() {
         return z;
     }
-
     public Side getTeamSide() {
         return teamSide;
     }
-
     public double getErrorInGUIX() {
         return errorInGUIX;
     }
-
     public double getErrorInGUIY() {
         return errorInGUIY;
     }
 
     // Setters
-
     public void setState(GameObjectState state) {
         this.state = state;
     }
-
     public boolean isBoost() {
         return boost;
     }
+
 }

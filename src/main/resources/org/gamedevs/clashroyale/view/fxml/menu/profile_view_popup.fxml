@@ -43,7 +43,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="nameTF" editable="false" layoutX="107.0" layoutY="51.0" promptText="Name" styleClass="name_text_field">
+      <TextField fx:id="nameTF" editable="false" layoutX="107.0" layoutY="51.0" prefHeight="29.0" prefWidth="162.0" promptText="Name" styleClass="name_text_field">
          <font>
             <Font size="15.0" />
          </font>
@@ -55,9 +55,9 @@
       </Label>
       <Label layoutX="17.0" layoutY="138.0" text="Level" />
       <Label layoutX="19.0" layoutY="209.0" text="Cups" />
-      <Label fx:id="arenaName" alignment="CENTER" contentDisplay="CENTER" layoutX="159.0" layoutY="96.0" prefHeight="18.0" prefWidth="131.0" text="Arena name" textAlignment="CENTER">
+      <Label fx:id="arenaName" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="96.0" prefHeight="18.0" prefWidth="162.0" text="Arena name" textAlignment="CENTER">
          <font>
-            <Font size="14.0" />
+            <Font size="13.0" />
          </font>
       </Label>
       <Button fx:id="backBtn" layoutX="169.0" layoutY="261.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="92.0" styleClass="back_btn" text="Back">
