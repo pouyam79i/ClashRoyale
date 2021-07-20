@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
+import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -30,6 +32,8 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
+        new Bullet(this).throwBullet(headTile, new Tile(10,20));
+
         while (hp .get()> 0){
 //            checkTargetRange();
         }

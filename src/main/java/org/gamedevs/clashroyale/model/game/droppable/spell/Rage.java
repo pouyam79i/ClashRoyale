@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -22,6 +23,7 @@ public class Rage extends Spell {
     public Rage(int level, Side side) {
         super(side);
         radius = 5;
+        nameOfDroppable = CardName.RAGE;
         switch (level) {
             case 1:
                 duration = 6;
@@ -51,6 +53,9 @@ public class Rage extends Spell {
     }
 
 
+    /**
+     * draw circle on range of range
+     */
     private void drawCircle() {
         circle.setCenterX(MouseTilePosition.TranslateTileToPixelX(headTile.getX()));
         circle.setCenterY(MouseTilePosition.TranslateTileToPixelY(headTile.getY()));
@@ -62,6 +67,9 @@ public class Rage extends Spell {
         });
     }
 
+    /**
+     * boost targets in range for specific duration
+     */
     private void poison() {
         ArrayList<GameObject> targets = findTargetsInRange();
         final boolean[] running = {true};
@@ -81,13 +89,15 @@ public class Rage extends Spell {
         while (running[0]) {
             targets = findTargetsInRange();
             for (GameObject target : targets)
-                target.boost();
+                if (target.getTeamSide() == teamSide)
+                    target.boost();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
             for (GameObject target : targets)
-                target.unboost();
+                if (target.getTeamSide() == teamSide)
+                    target.unboost();
         }
     }
 
