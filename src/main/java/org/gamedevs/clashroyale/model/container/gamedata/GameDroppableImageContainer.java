@@ -72,11 +72,11 @@ public class GameDroppableImageContainer {
     public Image get(CardName cardName, Angle angle,GameObjectState objectState){
         Image image = null;
         if(imageContainer.containsKey(cardName)){
-            Console.getConsole().printTracingMessage("contain " + cardName);
+
             if(imageContainer.get(cardName).containsKey(angle)){
-                Console.getConsole().printTracingMessage("contain " + angle);
+
                 if(imageContainer.get(cardName).get(angle).containsKey(objectState)){
-                    Console.getConsole().printTracingMessage("contain " + objectState);
+
                     image = imageContainer.get(cardName).get(angle).get(objectState);
                 }
             }

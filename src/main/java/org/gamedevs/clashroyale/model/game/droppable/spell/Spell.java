@@ -44,7 +44,7 @@ public abstract class Spell extends Droppable {
                         if (battleField.calculateDistance(headTile, searchTile) <= Math.round(radius)) {
                             GameObject target = null;
                             target = searchTile.getGameObject();
-                            if (target.getHp() > 0) {
+                            if (target != null && target.getHp() > 0) {
                                 targets.add(target);
                             }
                         }

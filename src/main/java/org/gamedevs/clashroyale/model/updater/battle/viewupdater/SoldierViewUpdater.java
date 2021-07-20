@@ -32,6 +32,11 @@ public class SoldierViewUpdater extends ViewUpdater {
                     updateExist();
                     updateImg();
                     updatePosition();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
@@ -69,17 +74,12 @@ public class SoldierViewUpdater extends ViewUpdater {
             });
             previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 

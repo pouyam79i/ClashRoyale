@@ -32,10 +32,8 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-        new Bullet(this).throwBullet(headTile, new Tile(10,20));
-
         while (hp .get()> 0){
-//            checkTargetRange();
+            checkTargetRange();
         }
     }
 

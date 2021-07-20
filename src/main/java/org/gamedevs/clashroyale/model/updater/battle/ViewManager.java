@@ -8,11 +8,14 @@ import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.BuildingViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.SoldierViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
-public class ViewManager {
+import java.util.ArrayList;
+
+public class ViewManager extends Runnable {
 
     private final Side mySide;
-
+    private ArrayList<ViewUpdater> viewUpdaters = new ArrayList<>();
     public ViewManager(Side mySide) {
         this.mySide = mySide;
     }
@@ -27,10 +30,8 @@ public class ViewManager {
             else {
                 new BuildingViewUpdater(gameObject, false).start();
             }
-            gameObject.start();
 
         } else {
-            gameObject.start();
             if (gameObject instanceof Soldier)
                 new SoldierViewUpdater(gameObject, true).start();
             else
@@ -43,5 +44,9 @@ public class ViewManager {
         // TODO: add related tower to related view!
     }
 
+    @Override
+    public void run() {
+
+    }
 }
 

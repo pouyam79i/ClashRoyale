@@ -14,6 +14,7 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
  * Main structure game object class!
+ *
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
  * @version 1.0
  */
@@ -28,6 +29,7 @@ public abstract class GameObject extends Droppable {
      * amount of giving damage!
      */
     protected int damage;
+
     /**
      * attack range defines
      * the max attacking radius!
@@ -46,6 +48,7 @@ public abstract class GameObject extends Droppable {
      * is on the ground or in the air!
      */
     protected int z;
+
     /**
      * State of game object
      */
@@ -55,17 +58,22 @@ public abstract class GameObject extends Droppable {
      */
     protected double errorInGUIX;
     protected double errorInGUIY;
+
     /**
      * if this G.O. is currently boosted -> true
      */
     protected boolean boost = false;
-
     /**
      * Constructor of game object
+     *
      * @param side side of object
      */
     protected GameObject(Side side) {
         super(DropType.OBJECT, side);
+        if (side == Side.TOP)
+            angle = Angle.SOUTH;
+        else
+            angle = Angle.NORTH;
         state = GameObjectState.MOVING;
         z = 0; // This is zero except for baby dragon!
     }
@@ -218,50 +226,66 @@ public abstract class GameObject extends Droppable {
     public GameObjectState getState() {
         return state;
     }
+
     public Angle getAngle() {
         return angle;
     }
+
+
     public double getHp() {
         return hp.get();
     }
+
     public DoubleProperty hpProperty() {
         return hp;
     }
+
     public Tile getHeadTile() {
         return headTile;
     }
+
     public int getDamage() {
         return damage;
     }
+
     public double getHitSpeed() {
         return hitSpeed;
     }
+
     public double getRange() {
         return range;
     }
+
     public TargetType getAttackTargetType() {
         return attackTargetType;
     }
+
     public TargetType getMyType() {
         return myType;
     }
+
     public int getZ() {
         return z;
     }
+
     public Side getTeamSide() {
         return teamSide;
     }
+
     public double getErrorInGUIX() {
         return errorInGUIX;
     }
+
     public double getErrorInGUIY() {
         return errorInGUIY;
     }
 
     // Setters
+
     public void setState(GameObjectState state) {
         this.state = state;
     }
+
     public boolean isBoost() {
         return boost;
     }
