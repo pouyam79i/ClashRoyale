@@ -112,7 +112,7 @@ public abstract class GameObject extends Droppable {
             int x, y;       // beginning x,y of search area
             checkAttack:
             while (hp.get() > 0) {
-                // attacking locked targer
+                // attacking locked target
                 attack(lockedTarget);
                 if (lockedTarget != null) {
                     if (lockedTarget.getHp() <= 0) {
@@ -134,9 +134,6 @@ public abstract class GameObject extends Droppable {
                                 // Giant
                                 if (attackTargetType == TargetType.BUILDING) {
                                     target = searchTile.getGameObject();
-                                    if(target == null){
-                                        continue checkAttack;
-                                    }
                                     if (target.getTeamSide() != teamSide) {
                                         if (target.getMyType() == TargetType.BUILDING) {
                                             if (target.getHp() > 0) {
@@ -145,6 +142,10 @@ public abstract class GameObject extends Droppable {
                                             }
                                         }
                                     }
+                                }
+                                // checking for not null targets
+                                if(target == null){
+                                    continue checkAttack;
                                 }
                                 // Ground soldiers
                                 else if (attackTargetType == TargetType.GROUND) {
