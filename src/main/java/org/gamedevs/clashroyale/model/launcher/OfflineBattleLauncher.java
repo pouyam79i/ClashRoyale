@@ -6,7 +6,10 @@ import javafx.application.Platform;
 import org.gamedevs.clashroyale.controller.battle.effects.GameStarterController;
 import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
 import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
+import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.model.account.levelproperty.Arenas;
+import org.gamedevs.clashroyale.model.cards.Card;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
@@ -17,6 +20,7 @@ import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
 import org.gamedevs.clashroyale.model.media.MusicPlayer;
 import org.gamedevs.clashroyale.model.media.Musics;
 import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -42,15 +46,54 @@ public class OfflineBattleLauncher extends Runnable {
     }
 
     /**
+     * If you cannot bring the game properly,
+     * return to main menu.
+     */
+    public void returnToMain(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
+        Platform.runLater(() -> {
+            OnWaitLoader.getOnWaitLoader().disappear();
+            MainBattle.getMainBattle().displayErrorLabel();
+        });
+    }
+
+    /**
      * This thread brings the game until battle is started!
      */
     @Override
     public void run() {
-        // Removing background panes which are used in main menu
         Platform.runLater(() -> {
             OnWaitLoader.getOnWaitLoader().displayBattleLoadingScreen(
                     MenuDataContainer.getMenuDataContainer().getRootPane()
             );
+        });
+        if(UserAccountContainer.getUserAccountContainer().getAccount().getDeckContainer().getDeck().size() < 8){
+            returnToMain();
+            this.shutdown();
+            return;
+        }
+        int counter = 0;
+        for(Card card : UserAccountContainer.getUserAccountContainer().getAccount().getDeckContainer().getDeck()){
+            if(counter >= 8)
+                break;
+            if(card == null){
+                returnToMain();
+                this.shutdown();
+                return;
+            }else {
+                if(card.getCardName() == CardName.EMPTY){
+                    returnToMain();
+                    this.shutdown();
+                    return;
+                }
+            }
+            counter ++;
+        }
+        Console.getConsole().printTracingMessage("After seq of battle launcher");
+        // Removing background panes which are used in main menu
+        Platform.runLater(() -> {
             MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().remove(
                     MenuDataContainer.getMenuDataContainer().getMainMenuRootGroup()
             );

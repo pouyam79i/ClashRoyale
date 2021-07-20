@@ -30,7 +30,7 @@
             </Button>
             <ImageView id="arena" fx:id="arenaImg" fitHeight="301.0" fitWidth="300.0" layoutX="44.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/arenas/ui_icon_barbarian.png" />
+                  <Image url="@../../img/arenas/ARENA_1.png" />
                </image>
             </ImageView>
             <ProgressBar layoutX="51.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" progress="0.0" fx:id="xpBar" />
@@ -54,6 +54,16 @@
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="24.0" prefHeight="18.0" prefWidth="90.0" text="0/0" fx:id="xpLabel" />
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="377.0" text="Deck must be full to be able " textAlignment="CENTER" textFill="#f2ff00" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorLabel2" alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="398.0" text="to start the battle" textAlignment="CENTER" textFill="#f2ff00" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
