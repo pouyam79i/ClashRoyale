@@ -16,6 +16,7 @@ import java.io.IOException;
 
 /**
  * This class loads all battle field required files.
+ *
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0
  */
@@ -24,6 +25,7 @@ public class BattleFieldLoader {
     /**
      * Loads all required files.
      * sets their properties to default.
+     *
      * @throws IOException if failed to load files!
      */
     public void load() throws IOException {
@@ -33,9 +35,9 @@ public class BattleFieldLoader {
         // Getting battle field image container
         GameDroppableImageContainer cardAnimationContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
         // Loading gif animations:
-        for(int cardNameValue = 0; cardNameValue <= 6; cardNameValue++){
-            for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++){
-                for(int angle = 0; angle < 360; angle = angle + 45){
+        for (int cardNameValue = 0; cardNameValue <= 6; cardNameValue++) {
+            for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++) {
+                for (int angle = 0; angle < 360; angle = angle + 45) {
                     try {
                         cardAnimationContainer.set(CardName.getCardByValue(cardNameValue),
                                 Angle.getAngle(angle),
@@ -44,7 +46,7 @@ public class BattleFieldLoader {
                                         CardName.getCardByValue(cardNameValue).toString() + "/" +
                                         GameObjectState.ATTACK.toString() + "-" + Angle.getAngle(angle).toString() + ".gif"))
                         );
-                    }catch (Exception error){
+                    } catch (Exception error) {
                         Console.getConsole().printTracingMessage("Failed to load gif of " +
                                 CardName.getCardByValue(cardNameValue).toString() + " - " + Angle.getAngle(angle) +
                                 " - " + GameObjectState.getState(objectStateValue).toString());
@@ -53,18 +55,48 @@ public class BattleFieldLoader {
             }
         }
 
-        //load buildings
-        GameImageContainer.getGameImageContainer().setBuilding(CardName.CANNON, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/cannon.png")));
-        GameImageContainer.getGameImageContainer().setBuilding(CardName.INFERNO_TOWER, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/inferno_tower.png")));
+
+        //load inferno tower img
+        for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++) {
+            for (int angle = 0; angle < 360; angle = angle + 45) {
+                try {
+                    cardAnimationContainer.set(CardName.INFERNO_TOWER,
+                            Angle.getAngle(angle),
+                            GameObjectState.getState(objectStateValue), new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/inferno_tower.png")));
+
+
+                } catch (Exception error) {
+                    Console.getConsole().printTracingMessage("Failed to load gif of " +
+                            CardName.INFERNO_TOWER + " - " + Angle.getAngle(angle) +
+                            " - " + GameObjectState.getState(objectStateValue).toString());
+                }
+            }
+        }
+
+        //load cannon img
+        for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++) {
+            for (int angle = 0; angle < 360; angle = angle + 45) {
+                try {
+                    cardAnimationContainer.set(CardName.CANNON,
+                            Angle.getAngle(angle),
+                            GameObjectState.getState(objectStateValue), new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/CANNON/" + Angle.getAngle(angle) + ".png")));
+
+                } catch (Exception error) {
+                    Console.getConsole().printTracingMessage("Failed to load gif of " +
+                            CardName.CANNON + " - " + Angle.getAngle(angle) +
+                            " - " + GameObjectState.getState(objectStateValue).toString());
+                }
+            }
+        }
 
         //load throwable
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.CANNON,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/Cannon_Ball.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.FIREBALL,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.BABY_DRAGON,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.ARCHERS,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
-        GameImageContainer.getGameImageContainer().setThrowable(CardName.ARROWS,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.CANNON, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/Cannon_Ball.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.FIREBALL, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.BABY_DRAGON, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.ARCHERS, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.ARROWS, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
 
         // Loading battle field
         AnchorPane battleField = FXMLLoader.load(getClass().getResource(

@@ -20,10 +20,6 @@ public class GameImageContainer {
      * throwable image container map
      */
     private HashMap<CardName, Image> throwable = new HashMap<>();
-    /**
-     * buildings image container map
-     */
-    private HashMap<CardName, Image> buildings = new HashMap<>();
 
     /**
      * Adds an image to container
@@ -59,29 +55,5 @@ public class GameImageContainer {
         return gameImageContainer;
     }
 
-    /**
-     * Adds an image to container
-     *
-     * @param name  name of card
-     * @param image image of card
-     */
-    public void setBuilding(CardName name, Image image) {
-        if (image == null || name == null)
-            return;
-        buildings.put(name, image);
-    }
-
-    /**
-     * Get image of card by name of card
-     *
-     * @param name name of card
-     * @return image of card (if not found returns null)
-     */
-    public Image getBuilding(CardName name) {
-        if (buildings.containsKey(name))
-            return buildings.get(name);
-        return null;
-
-    }
 
 }

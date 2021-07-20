@@ -51,7 +51,13 @@ public abstract class Droppable extends Runnable {
     /**
      * angle of object
      */
-    protected Angle angle;
+    protected Angle angle = Angle.NORTH;
+    // Position properties:
+    /**
+     * Head pixel of object!
+     */
+    protected Tile headTile;
+
     /**
      * Constructor of Droppable.
      * Sets default of droppable.
@@ -68,57 +74,7 @@ public abstract class Droppable extends Runnable {
         return nameOfDroppable;
     }
 
-    public void throwBullet(Image image, Point2D source, Point2D destination) {
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(25);
-        imageView.setFitHeight(25);
-        imageView.setRotate(imageView.getRotate() + angle.getAngle() + 180);
-        double curX = source.getX();
-        double curY = source.getY();
-        double sleepTime = hitSpeed / Math.abs(source.distance(destination)) * 1000;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(imageView);
-                imageView.setLayoutX(source.getX());
-                imageView.setLayoutY(source.getY());
-            }
-        });
 
-        while (curX != destination.getY() ||
-                curY != destination.getX()) {
-
-            double deltaX = destination.getX() - curX;
-            double deltaY = destination.getY() - curY;
-            if (deltaX != 0) {
-                curX = curX +  (deltaX > 0 ? 1 : -1);
-            }
-            if (deltaY != 0) {
-                curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
-            }
-            double finalCurY = curY;
-            double finalCurX = curX;
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    imageView.setLayoutX(finalCurX);
-                    imageView.setLayoutY(finalCurY);
-                }
-            });
-            try {
-                Thread.sleep((long) sleepTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(imageView);
-            }
-        });
-
-    }
 
     // Getters
     public Side getTeamSide() {
@@ -129,9 +85,24 @@ public abstract class Droppable extends Runnable {
         return dropType;
     }
 
+    public Tile getHeadPixel() {
+        return headTile;
+    }
+
     // Setters
     public void setBattleField(Map battleField) {
         this.battleField = battleField;
     }
 
+    public void setHeadPixel(Tile headTile) {
+        this.headTile = headTile;
+    }
+
+    public Angle getAngle() {
+        return angle;
+    }
+
+    public double getHitSpeed() {
+        return hitSpeed;
+    }
 }

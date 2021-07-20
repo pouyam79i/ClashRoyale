@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
+import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -11,7 +13,9 @@ public class Cannon extends Building{
         range = 5.5;
         lifeTime = 30;
         effectiveLifeTime = true;
-
+        nameOfDroppable = CardName.CANNON;
+        errorInGUIX =  0.5 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIY = 2 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level){
             case 1 :
                 hp.setValue(380);
