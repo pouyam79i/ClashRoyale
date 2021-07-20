@@ -39,7 +39,5 @@ public class Archer extends Soldier{
                 damage = 58;
                 break;
         }
-
-
     }
 }

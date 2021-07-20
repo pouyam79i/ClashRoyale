@@ -1,5 +1,10 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import javafx.scene.image.Image;
+import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.Path;
@@ -10,6 +15,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public abstract class Soldier extends GameObject {
@@ -36,24 +42,6 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
-        for (int i = 0; i < 3; i++) {
-            headTile = new Tile(headTile.getX() + 1, headTile.getY() + 1);
-            Console.getConsole().printTracingMessage(headTile.getX() + 1+","+ headTile.getY() + 1);
-            reduceHP(100);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        state = GameObjectState.ATTACK;
-        angle = Angle.EAST;
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
