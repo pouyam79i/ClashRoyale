@@ -1,7 +1,6 @@
 package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +9,7 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameDroppableImageContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;

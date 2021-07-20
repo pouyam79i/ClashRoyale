@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
+import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
@@ -7,14 +9,16 @@ public class InfernoTower extends Building {
 
     int maxDamage;
 
-    public InfernoTower(int level, Side side){
+    public InfernoTower(int level, Side side) {
         super(side);
         hitSpeed = 0.4;
         attackTargetType = TargetType.AIR_GROUND;
         range = 6;
         lifeTime = 40;
         effectiveLifeTime = true;
-
+        nameOfDroppable = CardName.INFERNO_TOWER;
+        errorInGUIX = - 0.85 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIY = 3.75 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
                 hp.setValue(800);

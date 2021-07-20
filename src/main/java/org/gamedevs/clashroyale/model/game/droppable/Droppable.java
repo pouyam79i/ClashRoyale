@@ -51,7 +51,7 @@ public abstract class Droppable extends Runnable {
     /**
      * angle of object
      */
-    protected Angle angle;
+    protected Angle angle = Angle.NORTH;
     /**
      * Constructor of Droppable.
      * Sets default of droppable.

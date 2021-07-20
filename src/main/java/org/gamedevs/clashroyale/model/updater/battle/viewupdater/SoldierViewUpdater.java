@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 /**
  * a class which handle view of soldier in GUI
@@ -16,6 +15,7 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 public class SoldierViewUpdater extends ViewUpdater {
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
+
     }
 
     /**
@@ -42,7 +42,7 @@ public class SoldierViewUpdater extends ViewUpdater {
      */
     @Override
     public void update() {
-        Thread updateXY = new Thread() {
+        Thread update = new Thread() {
             @Override
             public void start() {
                 while (true) {
@@ -51,7 +51,7 @@ public class SoldierViewUpdater extends ViewUpdater {
                 }
             }
         };
-        updateXY.start();
+        update.start();
     }
 
     /**

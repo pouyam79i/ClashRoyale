@@ -31,7 +31,7 @@ public abstract class Building extends GameObject {
     @Override
     public void run() {
         while (hp .get()> 0){
-            checkTargetRange();
+//            checkTargetRange();
         }
     }
 
