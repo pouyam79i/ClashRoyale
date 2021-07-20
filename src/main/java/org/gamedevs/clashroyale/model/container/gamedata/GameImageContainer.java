@@ -5,27 +5,83 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 
 import java.util.HashMap;
 
+/**
+ * This class contains images of cards!
+ *
+ * @author Hosna Hoseini - CE@AUT - Uni ID: 9823010
+ * @version 1.0
+ */
 public class GameImageContainer {
-    
+    /**
+     * Only instance of this class
+     */
     private static GameImageContainer gameImageContainer = null;
+    /**
+     * throwable image container map
+     */
     private HashMap<CardName, Image> throwable = new HashMap<>();
-    
-    public void setThrowable(CardName name, Image image){
-        if(image == null || name == null)
+    /**
+     * buildings image container map
+     */
+    private HashMap<CardName, Image> buildings = new HashMap<>();
+
+    /**
+     * Adds an image to container
+     *
+     * @param name  name of card
+     * @param image image of card
+     */
+    public void setThrowable(CardName name, Image image) {
+        if (image == null || name == null)
             return;
         throwable.put(name, image);
     }
-    
-    public Image getThrowable(CardName name){
-        if(throwable.containsKey(name))
+
+    /**
+     * Get image of card by name of card
+     *
+     * @param name name of card
+     * @return image of card (if not found returns null)
+     */
+    public Image getThrowable(CardName name) {
+        if (throwable.containsKey(name))
             return throwable.get(name);
         return null;
-        
+
     }
 
-    public static GameImageContainer getGameImageContainer(){
-        if(gameImageContainer == null)
+    /**
+     * @return only instance of this class
+     */
+    public static GameImageContainer getGameImageContainer() {
+        if (gameImageContainer == null)
             gameImageContainer = new GameImageContainer();
         return gameImageContainer;
     }
+
+    /**
+     * Adds an image to container
+     *
+     * @param name  name of card
+     * @param image image of card
+     */
+    public void setBuilding(CardName name, Image image) {
+        if (image == null || name == null)
+            return;
+        buildings.put(name, image);
+    }
+
+    /**
+     * Get image of card by name of card
+     *
+     * @param name name of card
+     * @return image of card (if not found returns null)
+     */
+    public Image getBuilding(CardName name) {
+        if (buildings.containsKey(name))
+            return buildings.get(name);
+        return null;
+
+    }
+
 }

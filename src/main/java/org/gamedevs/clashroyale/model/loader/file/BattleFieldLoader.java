@@ -53,6 +53,10 @@ public class BattleFieldLoader {
             }
         }
 
+        //load buildings
+        GameImageContainer.getGameImageContainer().setBuilding(CardName.CANNON, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/cannon.png")));
+        GameImageContainer.getGameImageContainer().setBuilding(CardName.INFERNO_TOWER, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/inferno_tower.png")));
+
         //load throwable
         GameImageContainer.getGameImageContainer().setThrowable(CardName.CANNON,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/Cannon_Ball.png")));
         GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD,new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));

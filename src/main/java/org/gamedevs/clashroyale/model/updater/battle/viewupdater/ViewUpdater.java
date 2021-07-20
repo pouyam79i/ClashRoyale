@@ -1,4 +1,4 @@
-package org.gamedevs.clashroyale.model.updater.battle;
+package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -25,17 +25,17 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
  * @author Hosna Hoseini 9823010 -CE@AUT
  * @version 1.0
  */
-public class ViewUpdater extends Runnable {
+public abstract class ViewUpdater extends Runnable {
 
-    private GameDroppableImageContainer imageContainer;
-    private final AnchorPane battleFieldPane;
-    private final GameObject gameObject;
-    private final CardName cardName;
-    private ObjectView objectView;
-    private boolean isEnemy;
-    private GameObjectState previousState;
-    private Angle previousAngle;
-    private Tile previousTile;
+    protected GameDroppableImageContainer imageContainer;
+    protected final AnchorPane battleFieldPane;
+    protected final GameObject gameObject;
+    protected final CardName cardName;
+    protected ObjectView objectView;
+    protected boolean isEnemy;
+    protected GameObjectState previousState;
+    protected Angle previousAngle;
+    protected Tile previousTile;
 
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
         threadName = "ViewUpdater";
@@ -68,84 +68,11 @@ public class ViewUpdater extends Runnable {
         update();
     }
 
-    /**
-     * update image of game object regarding to its state and angle
-     */
-    private void updateImg() {
-
-        if (previousAngle != gameObject.getAngle() ||
-                previousState != gameObject.getState()) {
-            Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    objectView.getImageView().setImage(img);
-                    Console.getConsole().printTracingMessage("changed");
-                }
-            });
-            previousState = gameObject.getState();
-            previousAngle = gameObject.getAngle();
-        }
-    }
 
     /**
-     * update game object view in GUI
+     * update GUI
      */
-    private void update() {
-        Thread updateXY = new Thread() {
-            @Override
-            public void start() {
-                while (true) {
-                    updateImg();
-                    updatePosition();
-                }
-            }
-        };
-        updateXY.start();
-    }
-
-    /**
-     * update game object image position in GUI
-     */
-    public void updatePosition() {
-        double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
-        double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
-        while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
-                previousTile.getX() != gameObject.getHeadPixel().getX()) {
-            updateImg();
-            double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
-            double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-            double deltaX = destX - curX;
-            double deltaY = destY - curY;
-            if (deltaX != 0) {
-                curX = curX + (deltaX > 0 ? 1 : -1);
-            }
-            if (deltaY != 0) {
-                curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
-            }
-            double finalCurY = curY;
-            double finalCurX = curX;
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
-                    objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
-                }
-            });
-            previousTile = new Tile(MouseTilePosition.TranslatePixelToTileX(curX), MouseTilePosition.TranslatePixelToTileY(curY));
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    public abstract void update();
 
     /**
      * Anchor pane which contains game object image and progress bar
