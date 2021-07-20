@@ -14,8 +14,8 @@ public class Cannon extends Building{
         lifeTime = 30;
         effectiveLifeTime = true;
         nameOfDroppable = CardName.CANNON;
-        errorInGUIX = - 0.5 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
-        errorInGUIY = 3 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
+        errorInGUIX =  0.5 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIY = 2 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level){
             case 1 :
                 hp.setValue(380);

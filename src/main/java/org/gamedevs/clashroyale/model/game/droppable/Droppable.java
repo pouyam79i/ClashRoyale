@@ -52,6 +52,12 @@ public abstract class Droppable extends Runnable {
      * angle of object
      */
     protected Angle angle = Angle.NORTH;
+    // Position properties:
+    /**
+     * Head pixel of object!
+     */
+    protected Tile headTile;
+
     /**
      * Constructor of Droppable.
      * Sets default of droppable.
@@ -91,7 +97,7 @@ public abstract class Droppable extends Runnable {
             double deltaX = destination.getX() - curX;
             double deltaY = destination.getY() - curY;
             if (deltaX != 0) {
-                curX = curX +  (deltaX > 0 ? 1 : -1);
+                curX = curX + (deltaX > 0 ? 1 : -1);
             }
             if (deltaY != 0) {
                 curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
@@ -129,9 +135,17 @@ public abstract class Droppable extends Runnable {
         return dropType;
     }
 
+    public Tile getHeadPixel() {
+        return headTile;
+    }
+
     // Setters
     public void setBattleField(Map battleField) {
         this.battleField = battleField;
+    }
+
+    public void setHeadPixel(Tile headTile) {
+        this.headTile = headTile;
     }
 
 }

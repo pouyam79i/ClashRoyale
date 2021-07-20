@@ -113,9 +113,17 @@ public class Map {
      * @param spell is my card
      * @return true if it could drop game object in map!
      */
-    public boolean dropSpell(double x, double y, Spell spell){
+    public boolean dropSpell(int x, int y, Spell spell){
+        Tile calledTile = getPixel(x, y);
+        if(calledTile == null){
+            Console.getConsole().printTracingMessage("called pixel (" + x + "," + y + ") does not exist!");
+            return false;
+        }
+            spell.setHeadPixel(calledTile);
+            Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
+            spell.start();
+            return true;
 
-        return false;
     }
 
     /**

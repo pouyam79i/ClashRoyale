@@ -24,25 +24,4 @@ public class BuildingViewUpdater extends ViewUpdater {
 
     }
 
-    /**
-     * update image of game object regarding to its state and angle
-     */
-    private void updateImg() {
-        if (previousAngle != gameObject.getAngle()) {
-            Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    objectView.getImageView().setImage(img);
-                }
-            });
-            previousState = gameObject.getState();
-            previousAngle = gameObject.getAngle();
-        }
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }

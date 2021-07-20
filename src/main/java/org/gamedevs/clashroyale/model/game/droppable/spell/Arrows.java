@@ -6,6 +6,8 @@ public class Arrows extends Spell{
 
     public Arrows(int level, Side side){
         super(side);
+        radius = 4;
+
     }
 
     @Override

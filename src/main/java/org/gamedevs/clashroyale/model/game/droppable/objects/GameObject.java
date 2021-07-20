@@ -59,14 +59,16 @@ public abstract class GameObject extends Droppable {
      * State of game object
      */
     protected GameObjectState state;
+    /**
+     * error for showing img in GUI
+     */
     protected double errorInGUIX;
     protected double errorInGUIY;
-    // Position properties:
-    /**
-     * Head pixel of object!
-     */
-    protected Tile headTile;
 
+    /**
+     * if this G.O. is currently boosted -> true
+     */
+    protected boolean boost = false;
     /**
      * Constructor of game object
      *
@@ -200,6 +202,17 @@ public abstract class GameObject extends Droppable {
         targetRangeCheckerThread.start();
     }
 
+    public void boost(){
+        boost = true;
+        damage *= 1.4;
+        hitSpeed *= 1.4;
+    }
+
+    public void unboost(){
+        boost = false;
+        damage *= (1/1.4);
+        hitSpeed *= (1/1.4);
+    }
     // Getters
     public GameObjectState getState() {
         return state;
@@ -209,9 +222,6 @@ public abstract class GameObject extends Droppable {
         return angle;
     }
 
-    public Tile getHeadPixel() {
-        return headTile;
-    }
 
     public double getHp() {
         return hp.get();
@@ -262,11 +272,12 @@ public abstract class GameObject extends Droppable {
     }
 
     // Setters
-    public void setHeadPixel(Tile headTile) {
-        this.headTile = headTile;
-    }
 
     public void setState(GameObjectState state) {
         this.state = state;
+    }
+
+    public boolean isBoost() {
+        return boost;
     }
 }

@@ -2,6 +2,8 @@ package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 
 import javafx.application.Platform;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +38,7 @@ public abstract class ViewUpdater extends Runnable {
     protected GameObjectState previousState;
     protected Angle previousAngle;
     protected Tile previousTile;
+    protected boolean previousBoost;
 
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
         threadName = "ViewUpdater";
@@ -61,8 +64,8 @@ public abstract class ViewUpdater extends Runnable {
         Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
-            objectView.setLayoutX(x - gameObject.getErrorInGUIX() - MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO);
-            objectView.setLayoutY(y - gameObject.getErrorInGUIY() + MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO);
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX() );
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY() );
         });
 
         update();
@@ -74,6 +77,32 @@ public abstract class ViewUpdater extends Runnable {
      */
     public abstract void update();
 
+    /**
+     * update image of game object regarding to its state and angle
+     */
+    public void updateImg() {
+
+        if (previousAngle != gameObject.getAngle() ||
+                previousState != gameObject.getState() ||
+                previousBoost != gameObject.isBoost()) {
+            Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    objectView.getImageView().setImage(img);
+                    if(gameObject.isBoost()){
+                        Effect boost = new ColorAdjust(50, 0, 0, 0);
+                        objectView.getImageView().setEffect(boost);
+                    }else {
+                        Effect unboost = new ColorAdjust(0, 0, 0, 0);
+                        objectView.getImageView().setEffect(unboost);
+                    }
+                }
+            });
+            previousState = gameObject.getState();
+            previousAngle = gameObject.getAngle();
+        }
+    }
     /**
      * Anchor pane which contains game object image and progress bar
      * in order to show in GUI

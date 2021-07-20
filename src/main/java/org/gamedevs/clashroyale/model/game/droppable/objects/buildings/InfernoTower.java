@@ -17,8 +17,8 @@ public class InfernoTower extends Building {
         lifeTime = 40;
         effectiveLifeTime = true;
         nameOfDroppable = CardName.INFERNO_TOWER;
-        errorInGUIX = - 0.85 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
-        errorInGUIY = 3.75 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
+        errorInGUIX = + 0.15 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIY = 2.75 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
                 hp.setValue(800);

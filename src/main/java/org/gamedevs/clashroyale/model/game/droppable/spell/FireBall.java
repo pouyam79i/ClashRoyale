@@ -10,6 +10,7 @@ public class FireBall extends Spell{
 
     @Override
     protected void effect() {
+        radius = 4;
 
     }
 
