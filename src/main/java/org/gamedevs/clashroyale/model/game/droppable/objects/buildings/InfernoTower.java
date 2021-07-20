@@ -15,7 +15,13 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 import java.awt.geom.Point2D;
-
+/**
+ * a class which handle inferno tower
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public class InfernoTower extends Building {
 
     private int maxDamage;
@@ -64,20 +70,20 @@ public class InfernoTower extends Building {
      * Start attacking to the target (gives damage to target object)
      */
     protected void attack(GameObject target) {
-//        if (target != null) {
-//            infernoBullet(headTile, target.getHeadTile());
-//            if(damage < maxDamage - 5)
-//                damage += 5;
-//            new Bullet(this).throwBullet(headTile, target.getHeadTile());
-//            state = GameObjectState.ATTACK;
-//            target.reduceHP(damage);
-//            try {
-//                Thread.sleep((int) (hitSpeed * 1000));
-//            } catch (InterruptedException ignored) {
-//            }
-//        } else {
-//            state = GameObjectState.MOVING;
-//        }
+        if (target != null) {
+            infernoBullet(headTile, target.getHeadTile());
+            if(damage < maxDamage - 5)
+                damage += 5;
+            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+            state = GameObjectState.ATTACK;
+            target.reduceHP(damage);
+            try {
+                Thread.sleep((int) (hitSpeed * 1000));
+            } catch (InterruptedException ignored) {
+            }
+        } else {
+            state = GameObjectState.MOVING;
+        }
     }
 
     /**

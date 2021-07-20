@@ -4,7 +4,13 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
-
+/**
+ * a class which handle cannon
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public class Cannon extends Building{
     public Cannon(int level, Side side){
         super(side);

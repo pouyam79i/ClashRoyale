@@ -9,12 +9,20 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * a class which handle view of buildings in GUI
+ *
+ * @author Hosna Hoseini 9823010 -CE@AUT
+ * @version 1.0
+ */
 public class BuildingViewUpdater extends ViewUpdater {
     public BuildingViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
     }
 
+    /**
+     * update GUI
+     */
     @Override
     public void update() {
         final boolean[] running = {true};

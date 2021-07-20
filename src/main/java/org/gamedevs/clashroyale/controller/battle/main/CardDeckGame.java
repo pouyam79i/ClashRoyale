@@ -20,7 +20,12 @@ import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
-
+/**
+ * controller for card deck in game
+ *
+ * @author Hosna Hoseini 9823010 -CE@AUT
+ * @version 1.0
+ */
 public class CardDeckGame {
 
     @FXML

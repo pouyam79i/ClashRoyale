@@ -149,4 +149,15 @@ public abstract class Player extends Runnable {
         return level;
     }
 
+    public KingTower getKingTower() {
+        return kingTower;
+    }
+
+    public PrincessTower getLeftPrincessTower() {
+        return leftPrincessTower;
+    }
+
+    public PrincessTower getRightPrincessTower() {
+        return rightPrincessTower;
+    }
 }

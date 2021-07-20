@@ -6,6 +6,13 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+/**
+ * a class which handle buildings
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public abstract class Building extends GameObject {
 
     /**
@@ -22,7 +29,7 @@ public abstract class Building extends GameObject {
     /**
      * Setting default values for building object
      */
-    protected Building(Side side){
+    protected Building(Side side) {
         super(side);
         myType = TargetType.BUILDING;
     }
@@ -32,7 +39,7 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-        while (hp .get()> 0){
+        while (hp.get() > 0) {
             checkTargetRange();
         }
     }
@@ -40,7 +47,7 @@ public abstract class Building extends GameObject {
     /**
      * Updates hp with life time or vise versa
      */
-    protected void updateLifeTime(){
+    protected void updateLifeTime() {
 
     }
 

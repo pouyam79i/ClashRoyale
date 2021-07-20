@@ -18,7 +18,13 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-
+/**
+ * a class which handle soliders
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public abstract class Soldier extends GameObject {
 
     /**
