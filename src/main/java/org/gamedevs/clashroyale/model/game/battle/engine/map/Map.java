@@ -186,8 +186,8 @@ public class Map {
                     }
                 }
             }
-
         }
+        // TODO: connect to view!
         getOneSideObjects(side).add(mainTower);
         mainTower.setBattleField(this);
     }
@@ -305,12 +305,11 @@ public class Map {
     public int getHeight() {
         return height;
     }
-
     public ArrayList<GameObject> getTopSideAliveObj() {
         return topSideAliveObj;
     }
-
     public ArrayList<GameObject> getDownSideAliveObj() {
         return downSideAliveObj;
     }
+
 }
