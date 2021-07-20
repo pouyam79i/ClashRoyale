@@ -70,9 +70,9 @@ public abstract class Droppable extends Runnable {
 
     public void throwBullet(Image image, Point2D source, Point2D destination) {
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
-        imageView.setRotate(imageView.getRotate() - angle.getAngle() + 90);
+        imageView.setFitWidth(25);
+        imageView.setFitHeight(25);
+        imageView.setRotate(imageView.getRotate() + angle.getAngle() + 180);
         double curX = source.getX();
         double curY = source.getY();
         double sleepTime = hitSpeed / Math.abs(source.distance(destination)) * 1000;
@@ -84,16 +84,17 @@ public abstract class Droppable extends Runnable {
                 imageView.setLayoutY(source.getY());
             }
         });
+
         while (curX != destination.getY() ||
                 curY != destination.getX()) {
 
             double deltaX = destination.getX() - curX;
             double deltaY = destination.getY() - curY;
             if (deltaX != 0) {
-                curX = curX + (deltaX > 0 ? 1 : -1);
+                curX = curX +  (deltaX > 0 ? 1 : -1);
             }
             if (deltaY != 0) {
-                curY = curY + (deltaY > 0 ? 1 : -1);
+                curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
             }
             double finalCurY = curY;
             double finalCurX = curX;

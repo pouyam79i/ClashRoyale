@@ -33,7 +33,6 @@ public enum CardName implements Serializable {
 
     // No card
     EMPTY(-1);
-
     /**
      * value of card
      */

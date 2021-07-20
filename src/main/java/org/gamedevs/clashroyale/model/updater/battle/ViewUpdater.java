@@ -18,6 +18,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+
 /**
  * a class which handle view of game object in GUI
  *
@@ -120,7 +121,7 @@ public class ViewUpdater extends Runnable {
                 curX = curX + (deltaX > 0 ? 1 : -1);
             }
             if (deltaY != 0) {
-                curY = curY + (deltaY > 0 ? 1 : -1);
+                curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
             }
             double finalCurY = curY;
             double finalCurX = curX;
@@ -157,8 +158,9 @@ public class ViewUpdater extends Runnable {
 
         /**
          * constructor
+         *
          * @param gameObject gameObject
-         * @param image image
+         * @param image      image
          */
         public ObjectView(GameObject gameObject, Image image) {
             maxHp = gameObject.getHp();

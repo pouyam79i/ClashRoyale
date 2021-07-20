@@ -1,7 +1,10 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.soldiers;
 
+import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.Path;
@@ -39,7 +42,6 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
-        throwBullet(CardImageContainer.getCardImageContainer().getCardImage(CardName.ARCHERS),new Point2D.Double(3,7),new Point2D.Double(200,200) );
     }
 
     /**
