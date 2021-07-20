@@ -25,7 +25,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <ListView fx:id="lastGamesList" fixedCellSize="10.0" layoutX="19.0" layoutY="43.0" prefHeight="207.0" prefWidth="262.0" />
+      <ListView fx:id="lastGamesList" fixedCellSize="0.0" layoutX="18.0" layoutY="42.0" prefHeight="207.0" prefWidth="264.0" />
       <Button fx:id="backBtn" layoutX="108.0" layoutY="261.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="43.0" prefWidth="83.0" styleClass="back_btn" text="Back">
          <font>
             <Font size="19.0" />

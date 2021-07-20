@@ -10,8 +10,6 @@ import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
-import java.io.IOException;
-
 /**
  * Game result cell is controller of
  * game result view in list view of last games.
@@ -55,11 +53,6 @@ public class LastGameCell extends ListCell<GameResultContainer> {
     private AnchorPane lastGameCell;
 
     /**
-     * fxml loader
-     */
-    private FXMLLoader fxmlLoader = null;
-
-    /**
      * Updates items view
      * @param gameResult game result container
      * @param empty if empty
@@ -72,14 +65,13 @@ public class LastGameCell extends ListCell<GameResultContainer> {
             setGraphic(null);
         }
         else {
-            if (fxmlLoader == null) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("../../../view/fxml/menu/list/last_game_cell.fxml"));
-                fxmlLoader.setController(this);
-                try {
-                    fxmlLoader.load();
-                } catch (IOException e) {
-                    Console.getConsole().printTracingMessage("Failed to load game result cell: " + e.getMessage());
-                }
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../view/fxml/menu/list/last_game_cell.fxml"));
+                loader.setController(this);
+                loader.load();
+            }
+            catch (Exception e) {
+                Console.getConsole().printTracingMessage("Failed to load last game cell fxml.");
             }
             // logic of view:
             int myScore = 0, enemyScore = 0;
