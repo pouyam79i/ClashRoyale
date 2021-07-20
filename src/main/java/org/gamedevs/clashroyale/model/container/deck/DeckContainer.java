@@ -90,9 +90,16 @@ public class DeckContainer implements Serializable {
         if(deck.size() > 1) {
             do {
                 card = deck.get(random.nextInt(deck.size() - 1));
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             } while (card.getCardName() == CardName.EMPTY || card == null);
             return card;
-        }else
+        }else if(deck.size() == 1)
+            return deck.get(0);
+
             return null;
     }
 

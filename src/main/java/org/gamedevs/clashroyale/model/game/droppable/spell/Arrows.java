@@ -18,11 +18,15 @@ import java.util.Random;
 public class Arrows extends Spell {
 
     private int damage;
+    private int level;
+    private Side side;
     public Arrows(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.ARROWS;
         radius = 4;
-        hitSpeed = 2;
+        hitSpeed = 1;
+        this.level = level;
+        this.side = side;
         switch (level) {
             case 1:
                 damage = 144;
@@ -45,7 +49,7 @@ public class Arrows extends Spell {
     @Override
     protected void effect() {
         throwArrowsEffect();
-        attack();
+//        attack();
     }
 
     /**
@@ -71,25 +75,21 @@ public class Arrows extends Spell {
             start = new Point2D.Double(187, 504);
 
         for (int i = (int) (headTile.getX() - 2); i <= headTile.getX() + 2; i++)
-            for (int j = (int) (headTile.getX() - 2); j <= headTile.getX() + 2; j++)
+            for (int j = (int) (headTile.getY() - 2); j <= headTile.getY() + 2; j++)
                 if (i >= 0 && i < MainConfig.STD_BATTLE_FIELD_X_TILE && j >= 0 && j < MainConfig.STD_BATTLE_FIELD_Y_TILE) {
                     tilesInRange.add(new Tile(i, j));
-                    Console.getConsole().printTracingMessage(i + ", " + j);
                 }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 20; i++) {
             Tile target = tilesInRange.get(random.nextInt(tilesInRange.size() - 1));
             Console.getConsole().printTracingMessage("target: " + target.getX() + ", " + target.getY());
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            new Bullet(this).throwBullet(start, target);
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-            }
+            Thread thread = new Thread(){
+                @Override
+                public void start() {
+                    new Bullet(new Arrows(level,side)).throwBullet(start, target);
+                }
+            };
+            thread.start();
         }
     }
 

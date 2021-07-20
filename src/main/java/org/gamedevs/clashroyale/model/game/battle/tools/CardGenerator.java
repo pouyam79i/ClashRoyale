@@ -70,7 +70,9 @@ public class CardGenerator {
      */
     public Card getANewCard() {
         Card out = nextCard;
-        nextCard = completeDeck.getRandomCard();
+        do {
+            nextCard = completeDeck.getRandomCard();
+        }while (nextCard == null);
         completeDeck.removeCard(nextCard);
         putCardAsElixirListener(nextCard);
         return out;

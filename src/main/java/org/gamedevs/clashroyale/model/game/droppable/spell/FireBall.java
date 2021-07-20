@@ -14,7 +14,7 @@ public class FireBall extends Spell{
         super(side);
         nameOfDroppable = CardName.FIREBALL;
         radius = 4;
-        hitSpeed = 3;
+        hitSpeed = 1;
         switch (level) {
             case 1:
                 damage = 325;

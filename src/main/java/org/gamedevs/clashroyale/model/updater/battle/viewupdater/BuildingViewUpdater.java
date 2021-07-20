@@ -40,6 +40,11 @@ public class BuildingViewUpdater extends ViewUpdater {
             public void start() {
                 while (running[0]) {
                     updateImg();
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 timer.cancel();
             }

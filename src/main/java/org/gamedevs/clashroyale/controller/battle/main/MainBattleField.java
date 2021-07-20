@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 
 /**
  * Control class of battle field
+ *
  * @author Pouya Mohammadi - CE@AUT 9829039
  * @version 1.0
  */
@@ -30,17 +31,41 @@ public class MainBattleField implements Initializable {
 
     // fx:id
     @FXML
-    private ImageView objects;
-    @FXML
-    private ImageView battleField;
+    private ImageView background;
+
     @FXML
     private ImageView lava;
+
     @FXML
-    private ImageView background;
+    private ImageView battleField;
+
     @FXML
-    private ImageView selectedTile;
+    private ImageView objects;
+
     @FXML
     private AnchorPane battleFieldPane;
+
+    @FXML
+    private ImageView leftPrincessTowerEnemyImg;
+
+    @FXML
+    private ImageView kingTowerImg;
+
+    @FXML
+    private ImageView rightPrincessTowerEnemyImg;
+
+    @FXML
+    private ImageView lefttPrincessTowerImg;
+
+    @FXML
+    private ImageView rightPrincessTowerImg;
+
+    @FXML
+    private ImageView kingTowerEnemyImg;
+
+    @FXML
+    private ImageView selectedTile;
+
 
     // Updatable properties
     private ImageView selectedTileUpdatable;
@@ -48,7 +73,8 @@ public class MainBattleField implements Initializable {
 
     /**
      * Initializes requirements of battle field view
-     * @param url 'not used'
+     *
+     * @param url            'not used'
      * @param resourceBundle 'not used'
      */
     @Override
@@ -65,16 +91,17 @@ public class MainBattleField implements Initializable {
 
     /**
      * updates (x,y) of dropping card!
+     *
      * @param mouseEvent used to get x or y
      */
     @FXML
-    private void updatePosition(MouseEvent mouseEvent){
+    private void updatePosition(MouseEvent mouseEvent) {
         Thread thread = (new Thread(() -> {
             double x = mouseEvent.getX();
             double y = mouseEvent.getY();
-            x = Math.floor(x/20.7);
-            y = Math.floor(y/16.8);
-            if(y > 29 || x > 17 || x < 0 || y < 0){
+            x = Math.floor(x / 20.7);
+            y = Math.floor(y / 16.8);
+            if (y > 29 || x > 17 || x < 0 || y < 0) {
                 return;
             }
             MouseTilePosition.getMouseTilePosition().setX(x);
@@ -90,8 +117,7 @@ public class MainBattleField implements Initializable {
     @FXML
     void dropCard(MouseEvent event) {
         Player player = PlayerContainer.getPlayerContainer().getPlayer();
-        if(SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist()) {
-            System.out.println(event.getX() + ":" + event.getY());
+        if (SelectedCardContainer.getSelectedCardContainer().isSelectedCardExist()) {
             if (player.drop(event.getX(), event.getY(), SelectedCardContainer.getSelectedCardContainer().getSelectedCard())) {
                 SelectedCardContainer.getSelectedCardContainer().dropped();
             } else
@@ -101,9 +127,10 @@ public class MainBattleField implements Initializable {
 
     /**
      * Set visibility of selected tile!
+     *
      * @param visibility of selected tile image
      */
-    public void setSelectedTileVisibility(boolean visibility){
+    public void setSelectedTileVisibility(boolean visibility) {
         selectedTile.setVisible(visibility);
     }
 
@@ -115,6 +142,7 @@ public class MainBattleField implements Initializable {
     private void setSelectedTileUpdatable(ImageView selectedTileUpdatable) {
         this.selectedTileUpdatable = selectedTileUpdatable;
     }
+
     public void setBattleFieldPaneUpdatable(AnchorPane battleFieldPaneUpdatable) {
         this.battleFieldPaneUpdatable = battleFieldPaneUpdatable;
     }
@@ -123,7 +151,7 @@ public class MainBattleField implements Initializable {
      * @return only instance of this class
      */
     public static MainBattleField getMainBattleField() {
-        if(mainBattleField == null)
+        if (mainBattleField == null)
             mainBattleField = new MainBattleField();
         return mainBattleField;
     }

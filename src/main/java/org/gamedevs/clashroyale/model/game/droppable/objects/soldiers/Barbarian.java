@@ -37,6 +37,5 @@ public class Barbarian extends Soldier{
                 damage = 109;
                 break;
         }
-
     }
 }
