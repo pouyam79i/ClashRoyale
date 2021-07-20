@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
-import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
  * @version 1.0
  */
-public class LastGameCell extends ListCell<GameResult> {
+public class LastGameCell extends ListCell<GameResultContainer> {
 
     // fx:id -> graphic related image views
     @FXML
@@ -65,7 +65,7 @@ public class LastGameCell extends ListCell<GameResult> {
      * @param empty if empty
      */
     @Override
-    protected void updateItem(GameResult gameResult, boolean empty){
+    protected void updateItem(GameResultContainer gameResult, boolean empty){
         super.updateItem(gameResult, empty);
         if(empty || gameResult == null) {
             setText(null);

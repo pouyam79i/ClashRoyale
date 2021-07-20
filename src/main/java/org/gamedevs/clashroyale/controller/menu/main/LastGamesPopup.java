@@ -2,6 +2,8 @@ package org.gamedevs.clashroyale.controller.menu.main;
 
 import animatefx.animation.BounceIn;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,9 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
-import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,15 +32,20 @@ public class LastGamesPopup implements Initializable {
 
     // fx:id
     @FXML
-    private ListView<GameResult> lastGamesList;
+    private ListView<GameResultContainer> lastGamesList;
     @FXML
     private Label emptyLabel;
     @FXML
     private Button backBtn;
 
     // updatable properties
-    private ListView<GameResult> lastGamesListUpdatable;
+    private ListView<GameResultContainer> lastGamesListUpdatable;
     private Label emptyLabelUpdatable;
+
+    /**
+     * last games collection
+     */
+    private SimpleListProperty<GameResultContainer> lastGames;
 
     /**
      * This class sets requirements
@@ -53,13 +60,28 @@ public class LastGamesPopup implements Initializable {
     }
 
     /**
-     * updates list view!
+     * Initializes the collection, with account property
      */
-    public void update(){
-        lastGamesListUpdatable.setItems(
-                UserAccountContainer.getUserAccountContainer().getAccount().getPreviousGames()
-        );
-        lastGamesListUpdatable.setCellFactory(lastGameCell -> new LastGameCell());
+    public void init(){
+        Platform.runLater(() -> {
+            lastGames = new SimpleListProperty<GameResultContainer>(FXCollections.observableList(
+                    UserAccountContainer.getUserAccountContainer().getAccount().getPreviousGames()
+            ));
+            lastGamesListUpdatable.setItems(
+                    lastGames
+            );
+            lastGamesListUpdatable.setCellFactory(lastGameCell -> new LastGameCell());
+        });
+    }
+
+    /**
+     * updates list view!
+     * @param newGameResult will be added to the collection!
+     */
+    public void update(GameResultContainer newGameResult){
+        Platform.runLater(() -> {
+            lastGames.add(newGameResult);
+        });
     }
 
     /**
@@ -82,7 +104,7 @@ public class LastGamesPopup implements Initializable {
     }
 
     // Setters
-    private void setLastGamesListUpdatable(ListView<GameResult> lastGamesListUpdatable) {
+    private void setLastGamesListUpdatable(ListView<GameResultContainer> lastGamesListUpdatable) {
         this.lastGamesListUpdatable = lastGamesListUpdatable;
     }
     private void setEmptyLabelUpdatable(Label emptyLabelUpdatable) {

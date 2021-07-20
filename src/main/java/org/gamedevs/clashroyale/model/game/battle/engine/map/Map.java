@@ -80,11 +80,13 @@ public class Map {
         }
         if(calledTile.isEmpty(gameObject.getZ())){
             calledTile.setGameObject(gameObject);
+            gameObject.setBattleField(this);
             gameObject.setHeadPixel(calledTile);
             Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
             if(viewManager != null){
                 viewManager.addObjectToView(gameObject);
             }
+            gameObject.start();
             return true;
         }
         int maxRadius = 1;      // TODO: define this in side configs
@@ -92,11 +94,13 @@ public class Map {
             for(int degree = 0; degree < 360;){
                 if(calledTile.peak(Angle.getAngle(degree), gameObject.getZ())){
                     Tile detectedTile = calledTile.getSurroundingPixel(Angle.getAngle(degree));
+                    gameObject.setBattleField(this);
                     detectedTile.setGameObject(gameObject);
                     gameObject.setHeadPixel(detectedTile);
                     if(viewManager != null){
                         viewManager.addObjectToView(gameObject);
                     }
+                    gameObject.start();
                     return true;
                 }
                 degree += Angle.STEP.getAngle();
@@ -119,11 +123,11 @@ public class Map {
             Console.getConsole().printTracingMessage("called pixel (" + x + "," + y + ") does not exist!");
             return false;
         }
-            spell.setHeadPixel(calledTile);
-            Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
-            spell.start();
-            return true;
-
+        spell.setHeadPixel(calledTile);
+        spell.setBattleField(this);
+        Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
+        spell.start();
+        return true;
     }
 
     /**
@@ -215,6 +219,17 @@ public class Map {
         if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return tiles[x][y];
+    }
+
+    /**
+     * This method removes from alive object list
+     * @param gameObject will be removed
+     */
+    public void removeFromSide(GameObject gameObject){
+        if(gameObject.getTeamSide() == Side.TOP)
+            topSideAliveObj.remove(gameObject);
+        else
+            downSideAliveObj.remove(gameObject);
     }
 
     /**

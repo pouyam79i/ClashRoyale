@@ -43,15 +43,14 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
-        new Bullet(this).throwBullet(headTile, new Tile(10,20));
-        while (true){
+        checkTargetRange();
+        mover();
+        while (hp.getValue() > 0){
             try {
-                Thread.sleep(1000);
-                reduceHP(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {}
         }
+        this.shutdown();
     }
 
     /**

@@ -53,7 +53,7 @@
                   <Image url="@../../img/ui/icon/gold-coin.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="24.0" prefHeight="18.0" prefWidth="90.0" text="0/0" fx:id="xpLabel" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="24.0" prefHeight="18.0" prefWidth="120.0" text="0/0" fx:id="xpLabel" />
             <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="377.0" text="Deck must be full to be able " textAlignment="CENTER" textFill="#f2ff00" visible="false">
                <font>
                   <Font size="17.0" />
