@@ -14,7 +14,6 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
-import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 
 import java.net.URL;
 import java.util.ResourceBundle;
