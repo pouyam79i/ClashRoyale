@@ -85,6 +85,7 @@ public class Map {
             if(viewManager != null){
                 viewManager.addObjectToView(gameObject);
             }
+            gameObject.start();
             return true;
         }
         int maxRadius = 1;      // TODO: define this in side configs
@@ -97,6 +98,7 @@ public class Map {
                     if(viewManager != null){
                         viewManager.addObjectToView(gameObject);
                     }
+                    gameObject.start();
                     return true;
                 }
                 degree += Angle.STEP.getAngle();
@@ -215,6 +217,17 @@ public class Map {
         if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return tiles[x][y];
+    }
+
+    /**
+     * This method removes from alive object list
+     * @param gameObject will be removed
+     */
+    public void removeFromSide(GameObject gameObject){
+        if(gameObject.getTeamSide() == Side.TOP)
+            topSideAliveObj.remove(gameObject);
+        else
+            downSideAliveObj.remove(gameObject);
     }
 
     /**

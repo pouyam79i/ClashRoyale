@@ -3,9 +3,11 @@ package org.gamedevs.clashroyale.model.account;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * This class contains information a user!
@@ -46,7 +48,7 @@ public class Account implements Serializable {
      */
     private int currentLevelXP;
     // Other:
-    private final ObservableList<GameResult> previousGames;
+    private final ArrayList<GameResultContainer> previousGames;
 
     /**
      * Builds an account.
@@ -64,7 +66,7 @@ public class Account implements Serializable {
             throw new Exception("Empty password");
         this.username = username;
         this.password = password;
-        previousGames = new SimpleListProperty<GameResult>();
+        previousGames = new ArrayList<GameResultContainer>();
         deckContainer = new DeckContainer();        // Setting new player deck as an empty deck!
         totalXP = 0;
     }
@@ -109,7 +111,7 @@ public class Account implements Serializable {
      * a new game result to the collection
      * @param newGameResult will be added
      */
-    public void addGameResult(GameResult newGameResult){
+    public void addGameResult(GameResultContainer newGameResult){
         // TODO: optimize this collection
         if(newGameResult == null)
             return;
@@ -146,7 +148,7 @@ public class Account implements Serializable {
     public int getCurrentLevelXP() {
         return currentLevelXP;
     }
-    public ObservableList<GameResult> getPreviousGames() {
+    public ArrayList<GameResultContainer> getPreviousGames() {
         return previousGames;
     }
 

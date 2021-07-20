@@ -2,18 +2,17 @@ package org.gamedevs.clashroyale.model.game.battle.tools;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
 import org.gamedevs.clashroyale.model.game.player.Side;
-
-import java.io.Serializable;
 
 /**
  * This class contains game result!
  * @author Pouya Mohammadi - Hosna Hoseini
  *         9829039 -CE@AUT   9823010 -CE@AUT
- * @version 1.0.1
+ * @version 1.1
  */
-public class GameResult implements Serializable {
+public class GameResult {
 
     /**
      * type of game
@@ -37,6 +36,8 @@ public class GameResult implements Serializable {
      * If result is locked
      */
     private boolean lock;
+
+    private GameResultContainer resultContainer;
 
     /**
      * constructor
@@ -64,16 +65,24 @@ public class GameResult implements Serializable {
         if(lock)
             return;
         if(side == Side.TOP){
-            Platform.runLater(() -> {
+            try{
+                Platform.runLater(() -> {
+                    topPlayerScore.add(1);
+                });
+            }catch (Exception e){
                 topPlayerScore.add(1);
-            });
+            }
             if(topPlayerScore.getValue() == 3)
                 lock();
         }
         else {
-            Platform.runLater(() -> {
+            try{
+                Platform.runLater(() -> {
+                    downPlayerScore.add(1);
+                });
+            }catch (Exception e){
                 downPlayerScore.add(1);
-            });
+            }
             if(downPlayerScore.getValue() == 3)
                 lock();
         }
@@ -87,14 +96,22 @@ public class GameResult implements Serializable {
         if(lock)
             return;
         if(side == Side.TOP){
-            Platform.runLater(() -> {
+            try{
+                Platform.runLater(() -> {
+                    topPlayerScore.setValue(3);
+                });
+            }catch (Exception e){
                 topPlayerScore.setValue(3);
-            });
+            }
         }
         else{
-            Platform.runLater(() -> {
+            try{
+                Platform.runLater(() -> {
+                    downPlayerScore.setValue(3);
+                });
+            }catch (Exception e){
                 downPlayerScore.setValue(3);
-            });
+            }
         }
         lock();
     }
@@ -114,10 +131,16 @@ public class GameResult implements Serializable {
      * Locks the result and sets winner
      */
     public void lock(){
+        if (lock)
+            return;
         if(topPlayerScore.getValue() > downPlayerScore.getValue())
             winnerSide = Side.TOP;
         else
             winnerSide = Side.DOWN;
+        resultContainer = new GameResultContainer(
+                topPlayerName, topPlayerScore.getValue(),
+                downPlayerName, downPlayerScore.getValue()
+        );
         lock = true;
     }
 
@@ -145,6 +168,9 @@ public class GameResult implements Serializable {
     }
     public GameType getGameType() {
         return gameType;
+    }
+    public GameResultContainer getResultContainer() {
+        return resultContainer;
     }
 
 }

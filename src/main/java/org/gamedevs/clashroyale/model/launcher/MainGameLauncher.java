@@ -3,6 +3,7 @@ package org.gamedevs.clashroyale.model.launcher;
 import javafx.application.Platform;
 import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.menu.main.DeckScene;
+import org.gamedevs.clashroyale.controller.menu.main.LastGamesPopup;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.controller.menu.main.ProfilePopup;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
@@ -61,6 +62,7 @@ public class MainGameLauncher extends Runnable {
         // Initializing main view of game
         Platform.runLater(() -> {
             try {
+                LastGamesPopup.getLastGamesPopup().init();
                 ProfilePopup.getProfilePopup().init();
                 MainBattle.getMainBattle().init();
                 DeckScene.getInstance().init();
