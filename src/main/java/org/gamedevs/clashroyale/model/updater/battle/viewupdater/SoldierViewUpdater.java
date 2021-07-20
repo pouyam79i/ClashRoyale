@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 /**
  * a class which handle view of soldier in GUI
@@ -14,27 +13,11 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
  * @version 1.0
  */
 public class SoldierViewUpdater extends ViewUpdater {
+    private boolean running = true;
+
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
-    }
 
-    /**
-     * update image of game object regarding to its state and angle
-     */
-    private void updateImg() {
-
-        if (previousAngle != gameObject.getAngle() ||
-                previousState != gameObject.getState()) {
-            Image img = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    objectView.getImageView().setImage(img);
-                }
-            });
-            previousState = gameObject.getState();
-            previousAngle = gameObject.getAngle();
-        }
     }
 
     /**
@@ -42,16 +25,17 @@ public class SoldierViewUpdater extends ViewUpdater {
      */
     @Override
     public void update() {
-        Thread updateXY = new Thread() {
+        Thread update = new Thread() {
             @Override
             public void start() {
-                while (true) {
+                while (running) {
+                    updateExist();
                     updateImg();
                     updatePosition();
                 }
             }
         };
-        updateXY.start();
+        update.start();
     }
 
     /**
@@ -63,6 +47,7 @@ public class SoldierViewUpdater extends ViewUpdater {
         while (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
             updateImg();
+            updateExist();
             double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
             double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
             double deltaX = destX - curX;
@@ -95,5 +80,23 @@ public class SoldierViewUpdater extends ViewUpdater {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * check if this G.O. hp is zero or less remove it
+     */
+    public void updateExist(){
+        if(gameObject.getHp() <= 0) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    battleFieldPane.getChildren().remove(objectView);
+
+                }
+            });
+            running = false;
+        }
+
     }
 }

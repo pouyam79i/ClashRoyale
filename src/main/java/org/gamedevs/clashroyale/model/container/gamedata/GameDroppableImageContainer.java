@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.HashMap;
 
@@ -50,6 +51,7 @@ public class GameDroppableImageContainer {
                 angleContainer.put(objectState, image);
                 imageContainer.get(cardName).put(angle, angleContainer);
             }
+
         }else {
             HashMap<Angle, HashMap<GameObjectState, Image>> cardContainer = new HashMap<Angle, HashMap<GameObjectState, Image>>();
             HashMap<GameObjectState, Image> angleContainer = new  HashMap<GameObjectState, Image>();
@@ -57,6 +59,7 @@ public class GameDroppableImageContainer {
             cardContainer.put(angle, angleContainer);
             imageContainer.put(cardName, cardContainer);
         }
+
     }
 
     /**
@@ -69,8 +72,11 @@ public class GameDroppableImageContainer {
     public Image get(CardName cardName, Angle angle,GameObjectState objectState){
         Image image = null;
         if(imageContainer.containsKey(cardName)){
+            Console.getConsole().printTracingMessage("contain " + cardName);
             if(imageContainer.get(cardName).containsKey(angle)){
+                Console.getConsole().printTracingMessage("contain " + angle);
                 if(imageContainer.get(cardName).get(angle).containsKey(objectState)){
+                    Console.getConsole().printTracingMessage("contain " + objectState);
                     image = imageContainer.get(cardName).get(angle).get(objectState);
                 }
             }

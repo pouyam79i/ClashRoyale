@@ -10,6 +10,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
+import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -59,14 +60,16 @@ public abstract class GameObject extends Droppable {
      * State of game object
      */
     protected GameObjectState state;
+    /**
+     * error for showing img in GUI
+     */
     protected double errorInGUIX;
     protected double errorInGUIY;
-    // Position properties:
-    /**
-     * Head pixel of object!
-     */
-    protected Tile headTile;
 
+    /**
+     * if this G.O. is currently boosted -> true
+     */
+    protected boolean boost = false;
     /**
      * Constructor of game object
      *
@@ -83,14 +86,8 @@ public abstract class GameObject extends Droppable {
      * Start attacking to the target (gives damage to target object)
      */
     protected void attack(GameObject target) {
-        Image image = GameImageContainer.getGameImageContainer().getThrowable(nameOfDroppable);
         if (target != null) {
-            if (image != null)
-                throwBullet(image, new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(headTile.getX())
-                                , MouseTilePosition.TranslateTileToPixelY(headTile.getY())),
-                        new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(target.headTile.getX()),
-                                MouseTilePosition.TranslateTileToPixelY(target.headTile.getY())));
-
+            new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
             target.reduceHP(damage);
             try {
@@ -200,6 +197,17 @@ public abstract class GameObject extends Droppable {
         targetRangeCheckerThread.start();
     }
 
+    public void boost(){
+        boost = true;
+        damage *= 1.4;
+        hitSpeed *= 1.4;
+    }
+
+    public void unboost(){
+        boost = false;
+        damage *= (1/1.4);
+        hitSpeed *= (1/1.4);
+    }
     // Getters
     public GameObjectState getState() {
         return state;
@@ -209,9 +217,6 @@ public abstract class GameObject extends Droppable {
         return angle;
     }
 
-    public Tile getHeadPixel() {
-        return headTile;
-    }
 
     public double getHp() {
         return hp.get();
@@ -262,11 +267,12 @@ public abstract class GameObject extends Droppable {
     }
 
     // Setters
-    public void setHeadPixel(Tile headTile) {
-        this.headTile = headTile;
-    }
 
     public void setState(GameObjectState state) {
         this.state = state;
+    }
+
+    public boolean isBoost() {
+        return boost;
     }
 }

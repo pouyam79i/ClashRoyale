@@ -66,7 +66,7 @@ public class AccountBuilder {
             availableContainer.addCard(new Card(CardName.RAGE, 3));
             availableContainer.addCard(new Card(CardName.FIREBALL, 4));
             availableContainer.addCard(new Card(CardName.ARROWS, 3));
-            availableContainer.addCard(new Card(CardName.CANNON, 6));
+            availableContainer.addCard(new Card(CardName.CANNON, 3));
             availableContainer.addCard(new Card(CardName.INFERNO_TOWER, 5));
 
 
@@ -121,7 +121,7 @@ public class AccountBuilder {
         availableContainer.addCard(new Card(CardName.RAGE, 3));
         availableContainer.addCard(new Card(CardName.FIREBALL, 4));
         availableContainer.addCard(new Card(CardName.ARROWS, 3));
-        availableContainer.addCard(new Card(CardName.CANNON, 6));
+        availableContainer.addCard(new Card(CardName.CANNON, 3));
         availableContainer.addCard(new Card(CardName.INFERNO_TOWER, 5));
         Collections.shuffle(availableContainer.getDeck());
         availableContainer.getDeck().remove(11);

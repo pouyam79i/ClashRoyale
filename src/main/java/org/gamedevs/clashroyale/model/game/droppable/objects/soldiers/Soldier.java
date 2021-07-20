@@ -9,6 +9,7 @@ import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.Path;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.PathFinder;
+import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
@@ -42,6 +43,15 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
+        new Bullet(this).throwBullet(headTile, new Tile(10,20));
+        while (true){
+            try {
+                Thread.sleep(1000);
+                reduceHP(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -134,6 +144,18 @@ public abstract class Soldier extends GameObject {
      */
     protected void findTarget() {
 
+    }
+
+    @Override
+    public void boost(){
+        super.boost();
+        speed *= 1.4;
+    }
+
+    @Override
+    public void unboost(){
+        super.unboost();
+        speed *= (1/1.4);
     }
 
 
