@@ -70,9 +70,9 @@ public class GameStarterController implements Initializable {
     public void init(String blueNameText, String redNameText, Arenas arena) {
         // TODO: not working - reason: I dont know!
         Platform.runLater(() -> {
-            arenaNameUpdatable.setVisible(true);
-            arenaNumberUpdatable.setVisible(true);
-            swordImgUpdatable.setVisible(true);
+            arenaNameUpdatable.setVisible(false);
+            arenaNumberUpdatable.setVisible(false);
+            swordImgUpdatable.setVisible(false);
             arenaNameUpdatable.setText(arena.getName());
             arenaNumberUpdatable.setText("Arena " + arena.getLevel());
             blueNameUpdatable.setText(blueNameText);
@@ -85,6 +85,9 @@ public class GameStarterController implements Initializable {
      */
     public void display() {
         Platform.runLater(() -> {
+            arenaNameUpdatable.setVisible(true);
+            arenaNumberUpdatable.setVisible(true);
+            swordImgUpdatable.setVisible(true);
             new BounceIn(swordImgUpdatable).play();
             new SlideInLeft(arenaNumberUpdatable).play();
             new SlideInRight(arenaNameUpdatable).play();

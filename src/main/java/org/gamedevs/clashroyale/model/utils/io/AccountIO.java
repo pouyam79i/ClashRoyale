@@ -1,8 +1,6 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
-import javafx.application.Platform;
 import org.gamedevs.clashroyale.model.account.Account;
-import org.gamedevs.clashroyale.model.account.AccountBuilder;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.io.*;

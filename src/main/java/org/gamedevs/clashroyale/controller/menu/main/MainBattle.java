@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
 import animatefx.animation.BounceIn;
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +51,10 @@ public class MainBattle implements Initializable {
     @FXML
     private Label xpLabel;
     @FXML
+    private Label errorLabel;
+    @FXML
+    private Label errorLabel2;
+    @FXML
     private ProgressBar xpBar;
 
     // Updatable properties
@@ -57,6 +63,8 @@ public class MainBattle implements Initializable {
     private ProgressBar xpBarUpdatable;
     private ImageView leveImgUpdatable;
     private ImageView arenaImgUpdatable;
+    private Label errorLabelUpdatable;
+    private Label errorLabel2Updatable;
 
     // Other fields
     private int currentXP;
@@ -74,6 +82,8 @@ public class MainBattle implements Initializable {
         getMainBattle().setLeveImgUpdatable(levelImg);
         getMainBattle().setArenaImgUpdatable(arenaImg);
         getMainBattle().setXpBarUpdatable(xpBar);
+        getMainBattle().setErrorLabelUpdatable(errorLabel);
+        getMainBattle().setErrorLabel2Updatable(errorLabel2);
         getMainBattle().setLevelUpXP(1);
         getMainBattle().setCurrentXP(1);
     }
@@ -153,6 +163,37 @@ public class MainBattle implements Initializable {
     }
 
     /**
+     * This method displays error label,
+     * when failed to bring up battle field!
+     */
+    public void displayErrorLabel(){
+        Thread thread = (new Thread(() -> {
+            Platform.runLater(() -> {
+                errorLabelUpdatable.setVisible(true);
+                errorLabel2Updatable.setVisible(true);
+                new FadeIn(errorLabelUpdatable).play();
+                new FadeIn(errorLabel2Updatable).play();
+            });
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                new FadeOut(errorLabelUpdatable).play();
+                new FadeOut(errorLabel2Updatable).play();
+            });
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                errorLabelUpdatable.setVisible(false);
+                errorLabel2Updatable.setVisible(false);
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    /**
      * Brings battle popup
      */
     @FXML
@@ -177,10 +218,19 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringProfilePopup(){
-        new BounceIn(profileBtn).play();
-        Scene mainBattleMenuScene = profileBtn.getScene();
-        AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
-        mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+        Thread thread = (new Thread(() -> {
+            new BounceIn(profileBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                Scene mainBattleMenuScene = profileBtn.getScene();
+                AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+                mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -188,7 +238,19 @@ public class MainBattle implements Initializable {
      */
     @FXML
     private void bringLastGamesPopup(){
-        new BounceIn(lastGamesBtn).play();
+        Thread thread = (new Thread(() -> {
+            new BounceIn(lastGamesBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                Scene mainBattleMenuScene = lastGamesBtn.getScene();
+                AnchorPane mainBattleMenu = (AnchorPane) mainBattleMenuScene.getRoot();
+                mainBattleMenu.getChildren().add(MenuDataContainer.getMenuDataContainer().getLastGamesPopupMenu());
+            });
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -243,6 +305,12 @@ public class MainBattle implements Initializable {
     }
     private void setLevelUpXP(double levelUpXP) {
         this.levelUpXP = levelUpXP;
+    }
+    private void setErrorLabelUpdatable(Label errorLabelUpdatable) {
+        this.errorLabelUpdatable = errorLabelUpdatable;
+    }
+    private void setErrorLabel2Updatable(Label errorLabel2Updatable) {
+        this.errorLabel2Updatable = errorLabel2Updatable;
     }
 
     /**

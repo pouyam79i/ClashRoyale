@@ -35,7 +35,7 @@
       </ImageView>
       <ImageView fx:id="arenaImg" fitHeight="174.0" fitWidth="174.0" layoutX="123.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/arenas/ui_icon_barbarian.png" />
+            <Image url="@../../img/arenas/ARENA_1.png" />
          </image>
       </ImageView>
       <Label layoutX="77.0" layoutY="14.0" text="Profile View">

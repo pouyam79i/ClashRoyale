@@ -52,9 +52,13 @@ public class MenuDataContainer {
      */
     private Group battlePopupMenu;
     /**
-     * Profile pop group container.
+     * Profile popup group container.
      */
     private Group profilePopupMenu;
+    /**
+     * last games popup group container.
+     */
+    private Group lastGamesPopupMenu;
     /**
      * Icon of game at main menu;
      */
@@ -72,6 +76,7 @@ public class MenuDataContainer {
         sliderBar = null;
         battlePopupMenu = null;
         profilePopupMenu = null;
+        lastGamesPopupMenu = null;
         gameIcon = null;
     }
 
@@ -105,6 +110,9 @@ public class MenuDataContainer {
     }
     public AnchorPane getSignupMenu() {
         return signupMenu;
+    }
+    public Group getLastGamesPopupMenu() {
+        return lastGamesPopupMenu;
     }
 
     // Setter
@@ -157,6 +165,11 @@ public class MenuDataContainer {
         if(this.signupMenu != null)
             return;
         this.signupMenu = signupMenu;
+    }
+    public void setLastGamesPopupMenu(Group lastGamesPopupMenu) {
+        if(this.lastGamesPopupMenu != null)
+            return;
+        this.lastGamesPopupMenu = lastGamesPopupMenu;
     }
 
     /**

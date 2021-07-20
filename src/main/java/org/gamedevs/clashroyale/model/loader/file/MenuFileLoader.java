@@ -130,6 +130,8 @@ public class MenuFileLoader {
                 getClass().getResource("./../../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
         ImageView backgroundCoverForProfilePopup = new ImageView(new Image(
                 getClass().getResource("./../../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
+        ImageView backgroundCoverForLastGamesPopup = new ImageView(new Image(
+                getClass().getResource("./../../../view/img/menu/menu_background_cover_v2.png").toExternalForm()));
         // Loading battle popup
         Group battlePopupGroup = new Group();
         AnchorPane battlePopupMenu = FXMLLoader.load(getClass().getResource(
@@ -150,6 +152,16 @@ public class MenuFileLoader {
         profilePopupMenu.setTranslateY(202.5);
         profilePopupGroup.getChildren().add(profilePopupMenu);
         menuData.setProfilePopupMenu(profilePopupGroup);
+        // Loading last game popup
+        Group lastGamesPopupGroup = new Group();
+        AnchorPane lastGamesPopupMenu = FXMLLoader.load(getClass().getResource(
+                "./../../../view/fxml/menu/list/last_games_popup.fxml"
+        ));
+        lastGamesPopupGroup.getChildren().add(backgroundCoverForLastGamesPopup);
+        lastGamesPopupMenu.setTranslateX(48.5);
+        lastGamesPopupMenu.setTranslateY(202.5);
+        lastGamesPopupGroup.getChildren().add(lastGamesPopupMenu);
+        menuData.setLastGamesPopupMenu(lastGamesPopupGroup);
         // Building main menu group root
         Group mainMenuRootGroup = new Group();
         mainMenuRootGroup.getChildren().add(battleMenu);
