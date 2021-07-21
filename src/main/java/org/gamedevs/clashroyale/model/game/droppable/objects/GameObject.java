@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
@@ -11,6 +12,7 @@ import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+
 
 /**
  * Main structure game object class!
@@ -63,15 +65,16 @@ public abstract class GameObject extends Droppable {
      * to detect state changing!
      */
     protected GameObjectState previousState;
+
     /**
      * if this G.O. is currently boosted -> true
      */
     protected boolean boost = false;
+
     /**
      * view updater
      */
     private ViewUpdater viewUpdater;
-
     /**
      * Constructor of game object
      * @param side side of object
@@ -126,7 +129,12 @@ public abstract class GameObject extends Droppable {
      * @param takenDamage is the damage given to game object by enemy!
      */
     public synchronized void reduceHP(int takenDamage) {
-        hp.setValue(hp.subtract(takenDamage).getValue());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                hp.setValue(hp.subtract(takenDamage).getValue());
+            }
+        });
     }
 
     /**
@@ -266,15 +274,16 @@ public abstract class GameObject extends Droppable {
         return errorInGUIY;
     }
 
+    public ViewUpdater getViewUpdater() {
+        return viewUpdater;
+    }
+
     // Setters
     public void setState(GameObjectState state) {
         this.state = state;
     }
     public boolean isBoost() {
         return boost;
-    }
-    public ViewUpdater getViewUpdater() {
-        return viewUpdater;
     }
 
     public void setViewUpdater(ViewUpdater viewUpdater) {

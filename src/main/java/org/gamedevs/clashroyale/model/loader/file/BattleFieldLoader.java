@@ -44,7 +44,7 @@ public class BattleFieldLoader {
                                 GameObjectState.getState(objectStateValue),
                                 new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/" +
                                         CardName.getCardByValue(cardNameValue).toString() + "/" +
-                                        GameObjectState.ATTACK.toString() + "-" + Angle.getAngle(angle).toString() + ".gif"))
+                                        GameObjectState.getState(objectStateValue) + "-" + Angle.getAngle(angle).toString() + ".gif"))
                         );
                     } catch (Exception error) {
                         Console.getConsole().printTracingMessage("Failed to load gif of " +
@@ -55,9 +55,27 @@ public class BattleFieldLoader {
             }
         }
 
+        for (int cardNameValue = 0; cardNameValue <= 6; cardNameValue++) {
+                for (int angle = 0; angle < 360; angle = angle + 45) {
+                    try {
+                        cardAnimationContainer.set(CardName.getCardByValue(cardNameValue),
+                                Angle.getAngle(angle),
+                                GameObjectState.IDLE,
+                                new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/" +
+                                        CardName.getCardByValue(cardNameValue).toString() + "/" +
+                                        GameObjectState.MOVING.toString() + "-" + Angle.getAngle(angle).toString() + ".gif"))
+                        );
+                    } catch (Exception error) {
+                        Console.getConsole().printTracingMessage("Failed to load gif of " +
+                                CardName.getCardByValue(cardNameValue).toString() + " - " + Angle.getAngle(angle) +
+                                " - idle");
+                    }
+            }
+        }
+
 
         //load inferno tower img
-        for (int objectStateValue = 1; objectStateValue <= 2; objectStateValue++) {
+        for (int objectStateValue = 0; objectStateValue <= 2; objectStateValue++) {
             for (int angle = 0; angle < 360; angle = angle + 45) {
                 try {
                     cardAnimationContainer.set(CardName.INFERNO_TOWER,
@@ -86,6 +104,19 @@ public class BattleFieldLoader {
                             CardName.CANNON + " - " + Angle.getAngle(angle) +
                             " - " + GameObjectState.getState(objectStateValue).toString());
                 }
+            }
+        }
+
+        for (int angle = 0; angle < 360; angle = angle + 45) {
+            try {
+                cardAnimationContainer.set(CardName.CANNON,
+                        Angle.getAngle(angle),
+                        GameObjectState.IDLE, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/buildings/CANNON/" + Angle.getAngle(angle) + ".png")));
+
+            } catch (Exception error) {
+                Console.getConsole().printTracingMessage("Failed to load gif of " +
+                        CardName.CANNON + " - " + Angle.getAngle(angle) +
+                        " - idle");
             }
         }
 

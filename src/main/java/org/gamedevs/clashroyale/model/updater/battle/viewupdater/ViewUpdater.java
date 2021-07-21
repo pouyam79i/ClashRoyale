@@ -61,7 +61,7 @@ public abstract class ViewUpdater extends Runnable {
         objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
         int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
         int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-        Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
+//        Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
             objectView.setLayoutX(x - gameObject.getErrorInGUIX() );

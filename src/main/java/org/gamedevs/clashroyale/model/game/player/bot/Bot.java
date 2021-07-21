@@ -41,8 +41,8 @@ public abstract class Bot extends Player {
     @Override
     public void run() {
         elixir.start();
-//        gameDeck.setDeck(cardGenerator.getInitialCards());
-//        algorithm();
+        gameDeck.setDeck(cardGenerator.getInitialCards());
+        algorithm();
     }
 
     /**
@@ -64,5 +64,6 @@ public abstract class Bot extends Player {
         elixir.reduceElixir(card.getCost());
         gameDeck.removeCard(card);
         gameDeck.addCard(cardGenerator.getANewCard());
+        cardGenerator.getCompleteDeck().addCard(card);
     }
 }
