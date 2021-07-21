@@ -252,7 +252,11 @@ public class Map {
     public void updateObjects(long currentFrame){
         this.currentFrame = currentFrame;
         for (GameObject gameObject : allAlive){
-            gameObject.run();   // refresh one frame
+            try {
+                gameObject.run();   // refresh one frame
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -262,16 +266,20 @@ public class Map {
     public void refreshAlive(){
         Iterator<GameObject> allAliveIterator = allAlive.iterator();
         while (allAliveIterator.hasNext()){
-            GameObject obj = allAliveIterator.next();
-            if(obj.getHp() <= 0){
-                allAliveIterator.remove();
-                obj.getHeadTile().removeObj(obj.getZ());
-                obj.setHeadPixel(null);
-                if(obj.getTeamSide() == Side.TOP){
-                    topSideAliveObj.remove(obj);
-                }else {
-                    downSideAliveObj.remove(obj);
+            try {
+                GameObject obj = allAliveIterator.next();
+                if(obj.getHp() <= 0){
+                    allAliveIterator.remove();
+                    obj.getHeadTile().removeObj(obj.getZ());
+                    obj.setHeadPixel(null);
+                    if(obj.getTeamSide() == Side.TOP){
+                        topSideAliveObj.remove(obj);
+                    }else {
+                        downSideAliveObj.remove(obj);
+                    }
                 }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

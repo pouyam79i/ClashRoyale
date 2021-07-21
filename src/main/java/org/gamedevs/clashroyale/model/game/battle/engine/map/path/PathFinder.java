@@ -3,6 +3,8 @@ package org.gamedevs.clashroyale.model.game.battle.engine.map.path;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 
 import java.util.ArrayList;
 
@@ -40,19 +42,37 @@ public class PathFinder {
         ArrayList<Tile> newPathList = new ArrayList<Tile>();
         Tile headingTile = src;
         Angle bestAngle = findBestAngel(headingTile.getX(), headingTile.getY(), des.getX(), des.getY());
+        int counterLimit = 0;
+        pathFinderLoop:
         while (bestAngle != null){
             for(int i = 0; i <= 360; i = i + 45){
-                if (!headingTile.getSurroundingPixel(bestAngle).isEmpty(z)){
+                if (headingTile.getSurroundingPixel(bestAngle) == null){
                     bestAngle = Angle.getAngle(bestAngle.getAngle() + 45);
-                    // TODO: optimize
-                }else {
+                    if(bestAngle != null){
+                        Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Failed to find best angle :");
+                        break pathFinderLoop;
+                    }
+                    continue;
+                }
+                else if(!headingTile.getSurroundingPixel(bestAngle).isEmpty(z)){
+                    bestAngle = Angle.getAngle(bestAngle.getAngle() + 45);
+                    if(bestAngle != null){
+                        Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Failed to find best angle :");
+                        break pathFinderLoop;
+                    }
+                }
+                else {
                     break;
                 }
             }
-            newPathList.add(headingTile.getSurroundingPixel(bestAngle));
-            bestAngle = findBestAngel(headingTile.getX(), headingTile.getY(), des.getX(), des.getY());
+            headingTile = headingTile.getSurroundingPixel(bestAngle);
+            newPathList.add(headingTile);
+            counterLimit++;
+            if(counterLimit > 70){
+                Console.getConsole().printTracingMessage(ConsoleColor.BLUE_BOLD + "Counter limit over loaded");
+                break;
+            }
         }
-        newPathList.add(des);
         path.setPath(newPathList);
     }
 
@@ -65,6 +85,8 @@ public class PathFinder {
      * @return best angle, if they are equal it returns null.
      */
     private Angle findBestAngel(int srcX, int srcY, int desX, int desY){
+        if(srcX == desX && srcY == desY)
+            return null;
         if(srcX - desX > 0){
             if(srcY - desY > 0){
                 return Angle.SOUTH_WEST;

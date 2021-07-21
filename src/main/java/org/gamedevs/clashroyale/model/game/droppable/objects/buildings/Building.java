@@ -44,6 +44,8 @@ public abstract class Building extends GameObject {
     protected Building(Side side){
         super(side);
         myType = TargetType.BUILDING;
+        state = GameObjectState.IDLE;
+        previousState = GameObjectState.IDLE;
     }
 
     /**
