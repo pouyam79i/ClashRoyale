@@ -8,13 +8,13 @@ import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Model of map.
  * Builds a pixel graph for map!
  * Contains the drop algorithm.
  * Readable map!
- *
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
  * @version 1.0
  */
@@ -42,6 +42,12 @@ public class Map {
      * Alive objects of down side player.
      */
     private ArrayList<GameObject> downSideAliveObj;
+    private ArrayList<GameObject> allAlive;
+
+    /**
+     * currnet frame
+     */
+    protected long currentFrame;
     /**
      * View manager of map.
      */
@@ -50,64 +56,64 @@ public class Map {
     /**
      * Constructor of map.
      * Build a map with giving length and width.
-     *
-     * @param width  of map (max X)
+     * @param width of map (max X)
      * @param height of map (max Y)
      */
-    public Map(int width, int height) {
+    public Map(int width, int height){
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
         topSideAliveObj = new ArrayList<GameObject>();
         downSideAliveObj = new ArrayList<GameObject>();
+        allAlive = new ArrayList<GameObject>();
         viewManager = null;
         buildMap();
         matchGraph();
         lock();
+        currentFrame = 0;
     }
 
     /**
-     * @param x          recommended x to drop game object
-     * @param y          recommended y to drop game object
+     *
+     * @param x recommended x to drop game object
+     * @param y recommended y to drop game object
      * @param gameObject is my solder or building
      * @return true if it could drop game object in map!
      */
-    public boolean dropGameObject(int x, int y, GameObject gameObject) {
+    public boolean dropGameObject(int x, int y, GameObject gameObject){
         ArrayList<Tile> visitedTile;
         Tile calledTile = getPixel(x, y);
-        if (calledTile == null) {
+        if(calledTile == null){
             Console.getConsole().printTracingMessage("called pixel (" + x + "," + y + ") does not exist!");
             return false;
         }
-        if (calledTile.isEmpty(gameObject.getZ())) {
+        if(calledTile.isEmpty(gameObject.getZ())){
             calledTile.setGameObject(gameObject);
             gameObject.setBattleField(this);
             gameObject.setHeadPixel(calledTile);
+            gameObject.setInitialFrame(currentFrame);
             Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
-            if (viewManager != null) {
+            if(viewManager != null){
                 gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
             }
-            if (gameObject.getTeamSide() == Side.DOWN)
-                downSideAliveObj.add(gameObject);
-            else
-                topSideAliveObj.add(gameObject);
+            getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
+            allAlive.add(gameObject);
             return true;
         }
         int maxRadius = 1;      // TODO: define this in side configs
-        for (int radius = 0; radius < maxRadius; radius++) {
-            for (int degree = 0; degree < 360; ) {
-                if (calledTile.peak(Angle.getAngle(degree), gameObject.getZ())) {
+        for(int radius = 0; radius < maxRadius; radius++){
+            for(int degree = 0; degree < 360;){
+                if(calledTile.peak(Angle.getAngle(degree), gameObject.getZ())){
                     Tile detectedTile = calledTile.getSurroundingPixel(Angle.getAngle(degree));
                     gameObject.setBattleField(this);
                     detectedTile.setGameObject(gameObject);
                     gameObject.setHeadPixel(detectedTile);
-                    if (viewManager != null) {
+                    gameObject.setInitialFrame(currentFrame);
+                    if(viewManager != null){
                         gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
                     }
-                    if (gameObject.getTeamSide() == Side.DOWN)
-                        downSideAliveObj.add(gameObject);
-                    else
-                        topSideAliveObj.add(gameObject);
+                    getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
+                    allAlive.add(gameObject);
                     return true;
                 }
                 degree += Angle.STEP.getAngle();
@@ -118,56 +124,58 @@ public class Map {
     }
 
     /**
-     * @param x     recommended x to drop game object
-     * @param y     recommended y to drop game object
+     *
+     * @param x recommended x to drop game object
+     * @param y recommended y to drop game object
      * @param spell is my card
      * @return true if it could drop game object in map!
      */
-    public boolean dropSpell(int x, int y, Spell spell) {
+    public boolean dropSpell(int x, int y, Spell spell){
         Tile calledTile = getPixel(x, y);
-        if (calledTile == null) {
+        if(calledTile == null){
             Console.getConsole().printTracingMessage("called pixel (" + x + "," + y + ") does not exist!");
             return false;
         }
         spell.setHeadPixel(calledTile);
         spell.setBattleField(this);
         Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
-        spell.run();
         return true;
     }
 
     /**
      * drop main towers on its position!
-     *
      * @param mainTower side
-     * @param side      side of tower
-     * @param kind      of tower (left princess is -1, king is 0, right princess is 1)
+     * @param side side of tower
+     * @param kind of tower (left princess is -1, king is 0, right princess is 1)
      */
-    public void setMainTower(MainTowers mainTower, Side side, int kind) {
-        if (side == Side.DOWN) {
-            if (kind == -1) {
+    public void setMainTower(MainTowers mainTower, Side side, int kind){
+        if(side == Side.DOWN){
+            if(kind == -1){
                 mainTower.setHeadPixel(tiles[3][5]);
-                for (int j = 4; j <= 6; j++) {
-                    for (int i = 2; i <= 4; i++) {
-                        tiles[i][j].setGameObject(mainTower);
-                    }
-                }
-            } else if (kind == 0) {
-                mainTower.setHeadPixel(tiles[8][2]);
-                for (int j = 0; j <= 3; j++) {
-                    for (int i = 7; i <= 10; i++) {
-                        tiles[i][j].setGameObject(mainTower);
-                    }
-                }
-            } else if (kind == 1) {
-                mainTower.setHeadPixel(tiles[14][5]);
-                for (int j = 4; j <= 6; j++) {
-                    for (int i = 13; i <= 15; i++) {
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 2; i <= 4; i++){
                         tiles[i][j].setGameObject(mainTower);
                     }
                 }
             }
-        } else if (side == Side.TOP) {
+            else if(kind == 0){
+                mainTower.setHeadPixel(tiles[8][2]);
+                for(int j = 0; j <= 3; j++){
+                    for (int i = 7; i <= 10; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+            else if(kind == 1){
+                mainTower.setHeadPixel(tiles[14][5]);
+                for(int j = 4; j <= 6; j++){
+                    for (int i = 13; i <= 15; i++){
+                        tiles[i][j].setGameObject(mainTower);
+                    }
+                }
+            }
+        }
+        else if(side == Side.TOP){
             if (kind == -1) {
                 mainTower.setHeadPixel(tiles[3][24]);
                 for (int j = 23; j <= 25; j++) {
@@ -192,19 +200,20 @@ public class Map {
             }
         }
         // TODO: connect to view!
-        getOneSideObjects(side).add(mainTower);
+        getOneSideObjects(mainTower.getTeamSide()).add(mainTower);
+        allAlive.add(mainTower);
         mainTower.setBattleField(this);
+        mainTower.setInitialFrame(currentFrame);
     }
 
     /**
      * calculates the distance between two tiles
-     *
      * @param src beginning tile
      * @param des ending tile
      * @return double value of distance
      */
-    public double calculateDistance(Tile src, Tile des) {
-        if (src == null || des == null)
+    public double calculateDistance(Tile src, Tile des){
+        if(src == null || des == null)
             return -1;
         int x1 = src.getX();
         int y1 = src.getY();
@@ -216,49 +225,65 @@ public class Map {
     /**
      * Getting a pixel with its tiles!
      * Use this to read tiles
-     *
      * @param x of pixel
      * @param y of pixel
      * @return pixel of found (else null)
      */
-    public Tile getPixel(int x, int y) {
-        if (x < 0 || y < 0 || x >= width || y >= height)
+    public Tile getPixel(int x, int y){
+        if(x < 0 || y < 0 || x >= width || y >= height)
             return null;
         return tiles[x][y];
     }
 
     /**
-     * This method removes from alive object list
-     *
-     * @param gameObject will be removed
-     */
-    public void removeFromSide(GameObject gameObject) {
-        if (gameObject.getTeamSide() == Side.TOP)
-            topSideAliveObj.remove(gameObject);
-        else
-            downSideAliveObj.remove(gameObject);
-    }
-
-    /**
      * returns list of one side objet
-     *
      * @param side of objects
      * @return array list of one side objet list
      */
-    public ArrayList<GameObject> getOneSideObjects(Side side) {
-        if (side == Side.TOP)
+    public ArrayList<GameObject> getOneSideObjects(Side side){
+        if(side == Side.TOP)
             return topSideAliveObj;
-        else if (side == Side.DOWN)
+        else if(side == Side.DOWN)
             return downSideAliveObj;
         return null;
     }
 
     /**
+     * updates all objects in one frame!
+     */
+    public void updateObjects(long currentFrame){
+        this.currentFrame = currentFrame;
+        for (GameObject gameObject : allAlive){
+            gameObject.run();   // refresh one frame
+        }
+    }
+
+    /**
+     * removes dead objects
+     */
+    public void refreshAlive(){
+        Iterator<GameObject> allAliveIterator = allAlive.iterator();
+        while (allAliveIterator.hasNext()){
+            GameObject obj = allAliveIterator.next();
+            if(obj.getHp() <= 0){
+                allAliveIterator.remove();
+                obj.getHeadTile().removeObj(obj.getZ());
+                obj.setHeadPixel(null);
+                if(obj.getTeamSide() == Side.TOP){
+                    topSideAliveObj.remove(obj);
+                }else {
+                    downSideAliveObj.remove(obj);
+                }
+            }
+        }
+    }
+
+    /**
      * Initializes all pixel
      */
-    private void buildMap() {
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+    private void buildMap(){
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
                 tiles[i][j] = new Tile(i, j);
             }
         }
@@ -267,24 +292,24 @@ public class Map {
     /**
      * Connects pixel graph
      */
-    private void matchGraph() {
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+    private void matchGraph(){
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
                 Tile currentTile = tiles[i][j];
-                if ((i - 1) >= 0) {
-                    currentTile.setSurroundingPixel(Angle.WEST, tiles[i - 1][j]);
-                    tiles[i - 1][j].setSurroundingPixel(Angle.EAST, currentTile);
+                if((i-1) >= 0){
+                    currentTile.setSurroundingPixel(Angle.WEST, tiles[i-1][j]);
+                    tiles[i-1][j].setSurroundingPixel(Angle.EAST, currentTile);
                 }
-                if ((j - 1) >= 0) {
-                    currentTile.setSurroundingPixel(Angle.SOUTH, tiles[i][j - 1]);
-                    tiles[i][j - 1].setSurroundingPixel(Angle.NORTH, currentTile);
-                    if ((i - 1) >= 0) {
-                        currentTile.setSurroundingPixel(Angle.SOUTH_WEST, tiles[i - 1][j - 1]);
-                        tiles[i - 1][j - 1].setSurroundingPixel(Angle.NORTH_EAST, currentTile);
+                if((j-1) >= 0){
+                    currentTile.setSurroundingPixel(Angle.SOUTH, tiles[i][j-1]);
+                    tiles[i][j-1].setSurroundingPixel(Angle.NORTH, currentTile);
+                    if((i-1) >= 0){
+                        currentTile.setSurroundingPixel(Angle.SOUTH_WEST, tiles[i-1][j-1]);
+                        tiles[i-1][j-1].setSurroundingPixel(Angle.NORTH_EAST, currentTile);
                     }
-                    if ((i + 1) < width) {
-                        currentTile.setSurroundingPixel(Angle.SOUTH_EAST, tiles[i + 1][j - 1]);
-                        tiles[i + 1][j - 1].setSurroundingPixel(Angle.NORTH_WEST, currentTile);
+                    if((i+1) < width){
+                        currentTile.setSurroundingPixel(Angle.SOUTH_EAST, tiles[i+1][j-1]);
+                        tiles[i+1][j-1].setSurroundingPixel(Angle.NORTH_WEST, currentTile);
                     }
                 }
             }
@@ -294,9 +319,9 @@ public class Map {
     /**
      * Locks all tiles
      */
-    private void lock() {
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+    private void lock(){
+        for(int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
                 tiles[i][j].lock();
             }
         }
@@ -310,15 +335,12 @@ public class Map {
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
-
     public ArrayList<GameObject> getTopSideAliveObj() {
         return topSideAliveObj;
     }
-
     public ArrayList<GameObject> getDownSideAliveObj() {
         return downSideAliveObj;
     }
