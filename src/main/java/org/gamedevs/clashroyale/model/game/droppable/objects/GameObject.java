@@ -1,6 +1,5 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
-import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
@@ -9,13 +8,15 @@ import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
+<<<<<<<<< Temporary merge branch 1
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+=========
+>>>>>>>>> Temporary merge branch 2
 
 /**
  * Main structure game object class!
- *
  * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
  * @version 1.0
  */
@@ -32,12 +33,12 @@ public abstract class GameObject extends Droppable {
     protected int damage;
 
     /**
-     * attack range defines
+     * attackOrMove range defines
      * the max attacking radius!
      */
     protected double range;
     /**
-     * attack target type
+     * attackOrMove target type
      */
     protected TargetType attackTargetType;
     /**
@@ -77,7 +78,6 @@ public abstract class GameObject extends Droppable {
     private ViewUpdater viewUpdater;
     /**
      * Constructor of game object
-     *
      * @param side side of object
      */
     protected GameObject(Side side) {
@@ -290,4 +290,5 @@ public abstract class GameObject extends Droppable {
     public void setViewUpdater(ViewUpdater viewUpdater) {
         this.viewUpdater = viewUpdater;
     }
+
 }

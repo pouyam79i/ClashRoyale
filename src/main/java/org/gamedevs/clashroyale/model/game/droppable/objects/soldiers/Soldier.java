@@ -8,12 +8,11 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
+
 /**
  * a class which handle soliders
- *
  * @author Pouya Mohammadi -Hosna Hoseini
  * 9826039 -CE@AUT     9823010 -CE@AUT
  * @version 1.0
@@ -23,7 +22,7 @@ public abstract class Soldier extends GameObject {
     /**
      * Speed of player (related to movement)
      */
-    protected int speed = 1;
+    protected int speed = 1; // TODO: remove this and put in in constructor
     /**
      * Area splash ability (attackOrMove point or effect)
      */
@@ -65,7 +64,7 @@ public abstract class Soldier extends GameObject {
         aliveEnemies = new ArrayList<GameObject>(aliveEnemies);
         Tile nextTile = null;
         if (aliveEnemies != null) {
-            double distance = 1000;
+            double distance = 1000; // TODO: max distance - unreachable
             for (GameObject enemy : aliveEnemies) {
                 // Giant
                 if (attackTargetType == TargetType.BUILDING) {
@@ -105,10 +104,6 @@ public abstract class Soldier extends GameObject {
             if (nextTileAngel != null) {
                 if (headTile.carry(angle, z)) {
                     headTile = nextTile;
-                    try {
-                        Thread.sleep((int) (speed * 1000));
-                    } catch (InterruptedException ignored) {
-                    }
                     return true;
                 }
             }
@@ -136,12 +131,8 @@ public abstract class Soldier extends GameObject {
     }
 
     /**
-     * Finds shortest path to the nearest target
+     * boosts the soldier property
      */
-    protected void findTarget() {
-
-    }
-
     @Override
     public void boost(){
         if(!boost){
@@ -164,4 +155,5 @@ public abstract class Soldier extends GameObject {
     public double getSpeed() {
         return speed;
     }
+
 }
