@@ -126,6 +126,10 @@ public class GameManager extends Runnable {
             map.updateObjects(currentFrame);
             map.refreshAlive();
             currentFrame++;
+            // TODO: optimze frame updater sleep
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) {}
         }
         checkEndGame();
         this.shutdown();

@@ -34,7 +34,6 @@ public abstract class MainTowers extends Building{
         else {
             gameResult.addScore(Side.getOppositeSide(teamSide));
         }
-        this.shutdown();
     }
 
 }
