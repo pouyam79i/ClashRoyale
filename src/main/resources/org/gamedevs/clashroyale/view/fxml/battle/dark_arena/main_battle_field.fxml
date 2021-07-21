@@ -64,12 +64,12 @@
                   <Image url="@../../../gif/KING_TOWER/KING_TOWER_ENEMY.png" />
                </image>
             </ImageView>
-            <ProgressBar layoutX="159.0" layoutY="470.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
-            <ProgressBar layoutX="47.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar layoutX="276.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar layoutX="159.0" layoutY="-43.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
-            <ProgressBar layoutX="47.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar layoutX="274.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
+            <ProgressBar fx:id="kingTowerProgress" layoutX="159.0" layoutY="470.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
+            <ProgressBar fx:id="leftPrincessTowerProgress" layoutX="47.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
+            <ProgressBar fx:id="rightPrincessTowerProgress" layoutX="276.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
+            <ProgressBar fx:id="kingTowerEnemyProgress" layoutX="159.0" layoutY="-43.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
+            <ProgressBar fx:id="leftPrincessTowerEnemyProgress" layoutX="47.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
+            <ProgressBar fx:id="rightPrincessTowerEnemyProgress" layoutX="274.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
             <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="135.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/battlefield/ui/badge/red-badge.png" />

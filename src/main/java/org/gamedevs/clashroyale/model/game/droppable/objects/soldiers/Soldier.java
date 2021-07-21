@@ -44,6 +44,7 @@ public abstract class Soldier extends GameObject {
     public void run() {
         checkTargetRange();
         mover();
+
     }
 
     /**

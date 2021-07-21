@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import org.gamedevs.clashroyale.controller.battle.effects.GameStarterController;
 import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
 import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
+import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
 import org.gamedevs.clashroyale.model.account.levelproperty.Arenas;
 import org.gamedevs.clashroyale.model.cards.Card;
@@ -104,10 +105,12 @@ public class OfflineBattleLauncher extends Runnable {
         gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), false);
         // Setting player to player container
         PlayerContainer.getPlayerContainer().setPlayer(gameManager.getDownPlayer());
+        PlayerContainer.getPlayerContainer().setBot(gameManager.getTopPlayer());
         // Binding game timer to view
         GameTimer.getGameTimer().bindTimerLabel(gameManager.getClock().clockStringProperty());
         // Initializing card deck of player
         new CardDeckGame().init();
+        MainBattleField.getMainBattleField().init();
         // Playing battle music
         MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
         // Adding battle field group to root pane!

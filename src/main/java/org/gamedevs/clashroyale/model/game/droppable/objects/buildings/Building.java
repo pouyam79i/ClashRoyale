@@ -5,6 +5,7 @@ import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
+import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Archer;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 /**
@@ -59,6 +60,7 @@ public abstract class Building extends GameObject {
     @Override
     public void run() {
         checkTargetRange();
+
     }
 
     /**
