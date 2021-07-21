@@ -81,9 +81,16 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                attackOrMove(findTargetsInRange());
+                Console.getConsole().printTracingMessage(nameOfDroppable + " start");
+            }
+        };
+        service.execute(runnable);
 
-        attackOrMove(findTargetsInRange());
-        Console.getConsole().printTracingMessage(nameOfDroppable + " start");
+
 
     }
 

@@ -113,5 +113,7 @@ public class InfernoTower extends Building {
         }
     }
 
-
+    public Line getLine() {
+        return line;
+    }
 }

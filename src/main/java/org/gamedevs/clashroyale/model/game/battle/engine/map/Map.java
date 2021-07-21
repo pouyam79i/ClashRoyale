@@ -169,7 +169,7 @@ public class Map {
 //            }
 //        });
 //        thread.start();
-        spell.start();
+        spell.run();
         Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
         return true;
     }

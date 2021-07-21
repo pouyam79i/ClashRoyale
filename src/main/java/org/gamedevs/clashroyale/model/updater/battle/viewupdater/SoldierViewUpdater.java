@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
  * @version 1.0
  */
 public class SoldierViewUpdater extends ViewUpdater {
-    ExecutorService service = Executors.newCachedThreadPool();
+    ExecutorService service = Executors.newSingleThreadExecutor();
 
 
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
@@ -43,11 +43,9 @@ public class SoldierViewUpdater extends ViewUpdater {
      * update game object image position in GUI
      */
     public void updatePosition() {
-//        Console.getConsole().printTracingMessage("=====" + previousTile.getX() + ", " +previousTile.getY() );
 
         if (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
-            Console.getConsole().printTracingMessage("=====" + gameObject.getHeadPixel().getX() + ", " +gameObject.getHeadPixel().getY() );
             Runnable move = new Runnable() {
                 @Override
                 public void run() {
@@ -56,6 +54,7 @@ public class SoldierViewUpdater extends ViewUpdater {
                     double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
                     double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
                     double sleepTime = (((Soldier) gameObject).getSpeed() * 100 - 1) / Math.max(destX - curX, destY - curY);
+                    sleepTime = 50;
                     double deltaX;
                     double deltaY;
                     do {
@@ -69,15 +68,17 @@ public class SoldierViewUpdater extends ViewUpdater {
                         }
                         double finalCurY = curY;
                         double finalCurX = curX;
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
-                                objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
-                            }
-                        });
+                        if(objectView != null) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
+                                    objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
+                                }
+                            });
+                        }
                         try {
-                            Thread.sleep((long) sleepTime);
+                            Thread.sleep(100);
                         } catch (InterruptedException e) {
                         }
                     } while (deltaX != 0 || deltaY != 0);

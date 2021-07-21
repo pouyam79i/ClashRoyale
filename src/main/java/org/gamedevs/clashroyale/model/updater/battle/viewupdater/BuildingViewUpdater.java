@@ -3,8 +3,10 @@ package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
+import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.Building;
+import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
@@ -42,6 +44,9 @@ public class BuildingViewUpdater extends ViewUpdater {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    if(gameObject.getNameOfDroppable() == CardName.INFERNO_TOWER)
+                        MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(((InfernoTower)gameObject).getLine());
+
                     Console.getConsole().printTracingMessage("delete building");
                     MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
                 }
