@@ -8,6 +8,7 @@ import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Model of map.
@@ -41,6 +42,12 @@ public class Map {
      * Alive objects of down side player.
      */
     private ArrayList<GameObject> downSideAliveObj;
+    private ArrayList<GameObject> allAlive;
+
+    /**
+     * currnet frame
+     */
+    protected long currentFrame;
     /**
      * View manager of map.
      */
@@ -58,10 +65,12 @@ public class Map {
         tiles = new Tile[width][height];
         topSideAliveObj = new ArrayList<GameObject>();
         downSideAliveObj = new ArrayList<GameObject>();
+        allAlive = new ArrayList<GameObject>();
         viewManager = null;
         buildMap();
         matchGraph();
         lock();
+        currentFrame = 0;
     }
 
     /**
@@ -82,12 +91,13 @@ public class Map {
             calledTile.setGameObject(gameObject);
             gameObject.setBattleField(this);
             gameObject.setHeadPixel(calledTile);
+            gameObject.setInitialFrame(currentFrame);
             Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
             if(viewManager != null){
                 gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
             }
             downSideAliveObj.add(gameObject);
-            gameObject.start();
+            allAlive.add(gameObject);
             return true;
         }
         int maxRadius = 1;      // TODO: define this in side configs
@@ -98,11 +108,12 @@ public class Map {
                     gameObject.setBattleField(this);
                     detectedTile.setGameObject(gameObject);
                     gameObject.setHeadPixel(detectedTile);
+                    gameObject.setInitialFrame(currentFrame);
                     if(viewManager != null){
                         gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
                     }
                     downSideAliveObj.add(gameObject);
-                    gameObject.start();
+                    allAlive.add(gameObject);
                     return true;
                 }
                 degree += Angle.STEP.getAngle();
@@ -128,7 +139,6 @@ public class Map {
         spell.setHeadPixel(calledTile);
         spell.setBattleField(this);
         Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
-        spell.start();
         return true;
     }
 
@@ -192,6 +202,7 @@ public class Map {
         // TODO: connect to view!
         getOneSideObjects(side).add(mainTower);
         mainTower.setBattleField(this);
+        mainTower.setInitialFrame(currentFrame);
     }
 
     /**
@@ -224,17 +235,6 @@ public class Map {
     }
 
     /**
-     * This method removes from alive object list
-     * @param gameObject will be removed
-     */
-    public void removeFromSide(GameObject gameObject){
-        if(gameObject.getTeamSide() == Side.TOP)
-            topSideAliveObj.remove(gameObject);
-        else
-            downSideAliveObj.remove(gameObject);
-    }
-
-    /**
      * returns list of one side objet
      * @param side of objects
      * @return array list of one side objet list
@@ -245,6 +245,36 @@ public class Map {
         else if(side == Side.DOWN)
             return downSideAliveObj;
         return null;
+    }
+
+    /**
+     * updates all objects in one frame!
+     */
+    public void updateObjects(long currentFrame){
+        this.currentFrame = currentFrame;
+        for (GameObject gameObject : allAlive){
+            gameObject.run();   // refresh one frame
+        }
+    }
+
+    /**
+     * removes dead objects
+     */
+    public void refreshAlive(){
+        Iterator<GameObject> allAliveIterator = allAlive.iterator();
+        while (allAliveIterator.hasNext()){
+            GameObject obj = allAliveIterator.next();
+            if(obj.getHp() <= 0){
+                allAliveIterator.remove();
+                obj.getHeadTile().removeObj(obj.getZ());
+                obj.setHeadPixel(null);
+                if(obj.getTeamSide() == Side.TOP){
+                    topSideAliveObj.remove(obj);
+                }else {
+                    downSideAliveObj.remove(obj);
+                }
+            }
+        }
     }
 
     /**

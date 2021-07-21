@@ -175,6 +175,19 @@ public class Tile {
     }
 
     /**
+     * removes game object from tile memory
+     */
+    public void removeObj(int z){
+        if(z == 0){
+            if(gameObject != null)
+                gameObject = null;
+        }else {
+            if(flyingGameObject != null)
+                flyingGameObject = null;
+        }
+    }
+
+    /**
      * Used to lock main information of pixel,
      * used for securing pixel!
      */

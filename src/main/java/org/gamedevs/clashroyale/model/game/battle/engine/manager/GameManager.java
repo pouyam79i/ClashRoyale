@@ -47,6 +47,11 @@ public class GameManager extends Runnable {
      * Top side player game result
      */
     private GameResult gameResult;
+    // Frame update:
+    /**
+     * current frame of game manager
+     */
+    private long currentFrame;
 
 
     /**
@@ -58,6 +63,7 @@ public class GameManager extends Runnable {
         map = new Map(MainConfig.STD_BATTLE_FIELD_X_TILE, MainConfig.STD_BATTLE_FIELD_Y_TILE);
         clock = new Clock();
         gameResult = null;
+        currentFrame =  0;
     }
 
     /**
@@ -107,6 +113,7 @@ public class GameManager extends Runnable {
      */
     @Override
     public void run() {
+        currentFrame = 0;
         clock.start();
         topPlayer.start();
         downPlayer.start();
@@ -116,6 +123,9 @@ public class GameManager extends Runnable {
             if(gameResult.checkWinner()){
                 break;
             }
+            map.updateObjects(currentFrame);
+            map.refreshAlive();
+            currentFrame++;
         }
         checkEndGame();
         this.shutdown();
