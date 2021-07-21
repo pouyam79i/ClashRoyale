@@ -25,9 +25,17 @@ public abstract class Soldier extends GameObject {
      */
     protected int speed = 1;
     /**
-     * Area splash ability (attack point or effect)
+     * Area splash ability (attackOrMove point or effect)
      */
     protected boolean areaSplash;
+    /**
+     * Path finder motor
+     */
+    protected PathFinder pathFinder;
+    /**
+     * founded path
+     */
+    protected Path path;
 
     /**
      * Setting default values for soldier object
@@ -38,11 +46,13 @@ public abstract class Soldier extends GameObject {
     }
 
     /**
-     * Thread of object (applies algorithm of game object)
+     * Updates soldier about one thread
      */
     @Override
     public void run() {
-
+        checkTargetRange();
+        mover();
+        currentFrame++;
     }
 
     /**
@@ -110,25 +120,19 @@ public abstract class Soldier extends GameObject {
      * Updates object to next place
      */
     protected void mover() {
-        Console.getConsole().printTracingMessage("Mover thread initialized");
-        Thread moverThread = (new Thread(() -> {
-            PathFinder pathFinder = new PathFinder(battleField);
-            Path path = pathFinder.getPath();
+        if(pathFinder == null){
+            pathFinder = new PathFinder(battleField);
+            path = pathFinder.getPath();
+        }
+        if (state == GameObjectState.MOVING) {
             Tile closestTargetTile = findClosestTargetTile();
-            while (hp.get() > 0) {
-                if (closestTargetTile != findClosestTargetTile()) {
-                    closestTargetTile = findClosestTargetTile();
-                    pathFinder.findPath(headTile, closestTargetTile, z);
-                }
-                if (state == GameObjectState.MOVING) {
-                    if (!move(path.forward())) {
-                        pathFinder.findPath(headTile, closestTargetTile, z);
-                    }
-                }
+            if (closestTargetTile != findClosestTargetTile()) {
+                closestTargetTile = findClosestTargetTile();
+                pathFinder.findPath(headTile, closestTargetTile, z);
+                move(path.forward());
             }
-        }));
-        moverThread.setDaemon(true);
-        moverThread.start();
+
+        }
     }
 
     /**
@@ -146,6 +150,9 @@ public abstract class Soldier extends GameObject {
         }
     }
 
+    /**
+     * removes boost of soldier property
+     */
     @Override
     public void unboost(){
         if(boost){

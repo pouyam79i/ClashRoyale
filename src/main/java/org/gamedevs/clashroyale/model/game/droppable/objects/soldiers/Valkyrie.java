@@ -53,7 +53,7 @@ public class Valkyrie extends Soldier {
      * Start attacking to the target (gives damage to target object)
      */
     @Override
-    protected void attack(GameObject target) {
+    protected void attackOrMove(GameObject target) {
         ArrayList<Building> hitTowers = new ArrayList<>();
 
         if (target != null) {
@@ -71,7 +71,7 @@ public class Valkyrie extends Soldier {
     /**
      * area splash for target which is hit by valkyrie
      *
-     * @param hitTowers array which store towers which one hit by valkyrie in this turn of attack
+     * @param hitTowers array which store towers which one hit by valkyrie in this turn of attackOrMove
      */
     protected void areaSplashDamage(ArrayList<Building> hitTowers) {
         float range = 1;
