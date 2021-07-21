@@ -45,10 +45,6 @@ public abstract class Building extends GameObject {
             new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
             target.reduceHP(damage);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
         } else {
             state = GameObjectState.IDLE;
         }

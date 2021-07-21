@@ -107,4 +107,7 @@ public abstract class Droppable {
         this.initialFrame = initialFrame;
     }
 
+    public void setAngle(Angle angle) {
+        this.angle = angle;
+    }
 }

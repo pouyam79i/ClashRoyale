@@ -22,7 +22,7 @@ public abstract class Soldier extends GameObject {
     /**
      * Speed of player (related to movement)
      */
-    protected int speed;
+    protected int speed = 1; // TODO: remove this and put in in constructor
     /**
      * Area splash ability (attackOrMove point or effect)
      */
@@ -150,6 +150,10 @@ public abstract class Soldier extends GameObject {
             super.unboost();
             speed *= (1/1.4);
         }
+    }
+
+    public double getSpeed() {
+        return speed;
     }
 
 }
