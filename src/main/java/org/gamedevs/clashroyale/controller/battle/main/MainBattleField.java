@@ -8,6 +8,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
@@ -84,6 +85,11 @@ public class MainBattleField implements Initializable {
     @FXML
     private ProgressBar rightPrincessTowerEnemyProgress;
 
+    @FXML
+    private Rectangle topLimit;
+
+    @FXML
+    private Rectangle downLimit;
     //updatable
     private static ImageView leftPrincessTowerEnemyImgUpdatable = new ImageView();
     private static ImageView kingTowerImgUpdatable = new ImageView();
@@ -337,5 +343,13 @@ public class MainBattleField implements Initializable {
 
     public void setRighttPrincessTowerEnemyProgressUpdatable(ProgressBar righttPrincessTowerEnemyProgressUpdatable) {
         this.rightPrincessTowerEnemyProgressUpdatable = righttPrincessTowerEnemyProgressUpdatable;
+    }
+
+    public Rectangle getTopLimit(){
+        return topLimit;
+    }
+
+    public Rectangle getDownLimit() {
+        return downLimit;
     }
 }

@@ -51,7 +51,9 @@ public class EasyBot extends Bot {
             public void start() {
                 Random random = new Random();
                 while (true) {
-
+                    Console.getConsole().printTracingMessage("---bot cards---");
+                    for(Card card:gameDeck.getDeck())
+                        Console.getConsole().printTracingMessage(card.getCardName().toString() + "->" + card.isLock());
                     DeckContainer deckContainer = new DeckContainer();
                     Card card;
                     do {

@@ -2,7 +2,10 @@ package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
+
+import java.util.ArrayList;
 
 /**
  * Main towers contains score for opponent player
@@ -26,6 +29,7 @@ public abstract class MainTowers extends Building{
 
     @Override
     public void run(){
+//        attack();
         checkTargetRange();
         while (hp.get() > 0) Thread.onSpinWait();
         if(nameOfDroppable == CardName.KING_TOWER){
@@ -36,4 +40,12 @@ public abstract class MainTowers extends Building{
         }
     }
 
+    public void attack(){
+        ArrayList<GameObject> targets = new ArrayList<>();
+        for(GameObject target: targets)
+            attackOrMove(target);
+    }
 }
+
+
+

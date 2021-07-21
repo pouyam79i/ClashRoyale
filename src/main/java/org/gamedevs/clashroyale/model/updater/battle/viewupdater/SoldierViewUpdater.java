@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
  * @version 1.0
  */
 public class SoldierViewUpdater extends ViewUpdater {
-    ExecutorService service = Executors.newSingleThreadExecutor();
+    ExecutorService service = Executors.newCachedThreadPool();
 
 
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
@@ -43,9 +43,11 @@ public class SoldierViewUpdater extends ViewUpdater {
      * update game object image position in GUI
      */
     public void updatePosition() {
+//        Console.getConsole().printTracingMessage("=====" + previousTile.getX() + ", " +previousTile.getY() );
 
         if (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
+            Console.getConsole().printTracingMessage("=====" + gameObject.getHeadPixel().getX() + ", " +gameObject.getHeadPixel().getY() );
             Runnable move = new Runnable() {
                 @Override
                 public void run() {

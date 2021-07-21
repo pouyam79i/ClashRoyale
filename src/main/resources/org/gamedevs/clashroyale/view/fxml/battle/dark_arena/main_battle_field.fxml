@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.main.MainBattleField">
    <children>
@@ -87,5 +88,7 @@
          </image>
       </ImageView>
       <ImageView fitHeight="504.0" fitWidth="374.0" layoutX="15.0" layoutY="86.0" onMouseClicked="#dropCard" onMouseMoved="#updatePosition" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle fx:id="topLimit" arcHeight="5.0" arcWidth="5.0" fill="#f8454566" height="251.0" layoutX="14.0" layoutY="86.0" stroke="#ab0000" strokeType="INSIDE" visible="false" width="374.0" />
+      <Rectangle fx:id="downLimit" arcHeight="5.0" arcWidth="5.0" fill="#f8454566" height="251.0" layoutX="14.0" layoutY="346.0" stroke="#ab0000" strokeType="INSIDE" visible="false" width="374.0" />
    </children>
 </AnchorPane>

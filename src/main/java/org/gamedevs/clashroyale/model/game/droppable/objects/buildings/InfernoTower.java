@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.awt.geom.Point2D;
 
@@ -67,9 +68,6 @@ public class InfernoTower extends Building {
         }
     }
 
-    /**
-     * Start attacking to the target (gives damage to target object)
-     */
     protected void attackOrMove(GameObject target) {
         if (target != null) {
             double plus = ((maxDamage - damage) / (lifeTime)) * hitSpeed;
@@ -96,10 +94,10 @@ public class InfernoTower extends Building {
      */
     private void infernoBullet(Tile sourceTile, Tile destinationTile) {
         if (sourceTile != null && destinationTile != null) {
-            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()) + 10,
-                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()) + 8);
-            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX() + 10),
-                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()) + 8);
+            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
+                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
+            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
+                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
             Platform.runLater(() -> {
                 MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
             });

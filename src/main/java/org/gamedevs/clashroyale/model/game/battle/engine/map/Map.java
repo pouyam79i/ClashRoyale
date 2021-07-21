@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.model.game.battle.engine.map;
 
+import javafx.application.Platform;
+import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.MainTowers;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
@@ -57,7 +59,8 @@ public class Map {
     /**
      * Constructor of map.
      * Build a map with giving length and width.
-     * @param width of map (max X)
+     *
+     * @param width  of map (max X)
      * @param height of map (max Y)
      */
     public Map(int width, int height) {
@@ -75,13 +78,33 @@ public class Map {
     }
 
     /**
-     *
-     * @param x recommended x to drop game object
-     * @param y recommended y to drop game object
+     * @param x          recommended x to drop game object
+     * @param y          recommended y to drop game object
      * @param gameObject is my solder or building
      * @return true if it could drop game object in map!
      */
     public boolean dropGameObject(int x, int y, GameObject gameObject) {
+//        if (gameObject.getTeamSide() == Side.DOWN && y > 15) {
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    MainBattleField.getMainBattleField().getTopLimit().setVisible(true);
+//                    try {
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    MainBattleField.getMainBattleField().getTopLimit().setVisible(false);
+//
+//                }
+//            });
+//            return false;
+//        }
+//
+//        if (gameObject.getTeamSide() == Side.TOP && y < 15)
+//            return false;
+
+
         ArrayList<Tile> visitedTile;
         Tile calledTile = getPixel(x, y);
         if (calledTile == null) {
@@ -110,7 +133,7 @@ public class Map {
                     detectedTile.setGameObject(gameObject);
                     gameObject.setHeadPixel(detectedTile);
                     gameObject.setInitialFrame(currentFrame);
-                    if(viewManager != null){
+                    if (viewManager != null) {
                         gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
                     }
                     getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
@@ -125,9 +148,8 @@ public class Map {
     }
 
     /**
-     *
-     * @param x recommended x to drop game object
-     * @param y recommended y to drop game object
+     * @param x     recommended x to drop game object
+     * @param y     recommended y to drop game object
      * @param spell is my card
      * @return true if it could drop game object in map!
      */
@@ -139,23 +161,25 @@ public class Map {
         }
         spell.setHeadPixel(calledTile);
         spell.setBattleField(this);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                spell.run();
-
-            }
-        });
-        thread.start();
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                spell.run();
+//
+//            }
+//        });
+//        thread.start();
+        spell.start();
         Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
         return true;
     }
 
     /**
      * drop main towers on its position!
+     *
      * @param mainTower side
-     * @param side side of tower
-     * @param kind of tower (left princess is -1, king is 0, right princess is 1)
+     * @param side      side of tower
+     * @param kind      of tower (left princess is -1, king is 0, right princess is 1)
      */
     public void setMainTower(MainTowers mainTower, Side side, int kind) {
         if (side == Side.DOWN) {
@@ -232,6 +256,7 @@ public class Map {
     /**
      * Getting a pixel with its tiles!
      * Use this to read tiles
+     *
      * @param x of pixel
      * @param y of pixel
      * @return pixel of found (else null)
@@ -244,6 +269,7 @@ public class Map {
 
     /**
      * returns list of one side objet
+     *
      * @param side of objects
      * @return array list of one side objet list
      */
@@ -258,12 +284,13 @@ public class Map {
     /**
      * updates all objects in one frame!
      */
-    public void updateObjects(long currentFrame){
+    public void updateObjects(long currentFrame) {
         this.currentFrame = currentFrame;
-        for (GameObject gameObject : allAlive){
+        for (GameObject gameObject : allAlive) {
             try {
                 gameObject.run();   // refresh one frame
-            }catch (Exception e){
+                gameObject.getViewUpdater().update();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -272,22 +299,22 @@ public class Map {
     /**
      * removes dead objects
      */
-    public void refreshAlive(){
+    public void refreshAlive() {
         Iterator<GameObject> allAliveIterator = allAlive.iterator();
-        while (allAliveIterator.hasNext()){
+        while (allAliveIterator.hasNext()) {
             try {
                 GameObject obj = allAliveIterator.next();
-                if(obj.getHp() <= 0){
+                if (obj.getHp() <= 0) {
                     allAliveIterator.remove();
                     obj.getHeadTile().removeObj(obj.getZ());
                     obj.setHeadPixel(null);
-                    if(obj.getTeamSide() == Side.TOP){
+                    if (obj.getTeamSide() == Side.TOP) {
                         topSideAliveObj.remove(obj);
-                    }else {
+                    } else {
                         downSideAliveObj.remove(obj);
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -77,6 +77,7 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
+
         checkTargetRange();
         mover();
         currentFrame++;
@@ -143,6 +144,8 @@ public abstract class Soldier extends GameObject {
         }
         return false;
     }
+
+
 
     /**
      * Updates object to next place

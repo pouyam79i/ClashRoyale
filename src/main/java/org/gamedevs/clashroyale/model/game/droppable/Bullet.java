@@ -49,10 +49,13 @@ public class Bullet {
                 Image image = GameImageContainer.getGameImageContainer().getThrowable(droppable.getNameOfDroppable());
 
                 if (image != null) {
+                    Console.getConsole().printTracingMessage(droppable.nameOfDroppable.toString() +" bullet throwing");
                     ImageView imageView = new ImageView(image);
                     if (droppable.nameOfDroppable == CardName.CANNON ||
                             droppable.nameOfDroppable == CardName.BABY_DRAGON ||
-                            droppable.nameOfDroppable == CardName.ARCHERS) {
+                            droppable.nameOfDroppable == CardName.ARCHERS ||
+                            droppable.nameOfDroppable == CardName.KING_TOWER ||
+                            droppable.nameOfDroppable == CardName.PRINCESS_TOWER) {
                         imageView.setFitWidth(10);
                         imageView.setFitHeight(10);
                     } else {

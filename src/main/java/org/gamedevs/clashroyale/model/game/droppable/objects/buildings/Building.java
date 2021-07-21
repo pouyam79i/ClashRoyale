@@ -81,54 +81,50 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-//        Thread runnable = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-                attackOrMove(findTargetsInRange());
-                Console.getConsole().printTracingMessage(nameOfDroppable + " start");
-//            }
-//        });
-//    runnable.start();
+
+        attackOrMove(findTargetsInRange());
+        Console.getConsole().printTracingMessage(nameOfDroppable + " start");
+
     }
 
     protected GameObject findTargetsInRange() {
         ArrayList<GameObject> targets = new ArrayList<>();
         Thread targetRangeCheckerThread = (new Thread(() -> {
-            if (lockedTarget == null ||
-                    distance(headTile, lockedTarget.getHeadTile()) > range) {
-                int x, y;       // beginning x,y of search area
-                x = headTile.getX() - (int) Math.round(range);
-                y = headTile.getY() - (int) Math.round(range);
-                for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
-                    for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
-                        Tile searchTile = battleField.getPixel(x + i, y + j);
-                        if (searchTile != null) {
-                            if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
-                                GameObject target = null;
-                                target = searchTile.getGameObject();
-                                if (target != null && target.getHp() > 0 && target.getMyType() == target.getAttackTargetType() && target.getTeamSide() != teamSide) {
-                                    targets.add(target);
-
-                                }
+            int x, y;       // beginning x,y of search area
+            x = headTile.getX() - (int) Math.round(range);
+            y = headTile.getY() - (int) Math.round(range);
+            for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
+                for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
+                    Tile searchTile = battleField.getPixel(x + i, y + j);
+                    if (searchTile != null) {
+                        if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
+                            GameObject target = null;
+                            target = searchTile.getGameObject();
+                            if (target != null && target.getHp() > 0 && target.getTeamSide() != getTeamSide()) {
+                                Console.getConsole().printTracingMessage("my:" + getTeamSide() + "you: " + target.getTeamSide());
+                                targets.add(target);
+                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
                             }
                         }
                     }
                 }
-                for (GameObject gameObject : targets)
-                    Console.getConsole().printTracingMessage("-" + gameObject.getNameOfDroppable().toString());
-                if (targets.size() > 0) {
-                    lockedTarget = targets.get(0);
-                    double minDis = distance(headTile, targets.get(0).getHeadTile());
-                    for (GameObject gameObject : targets)
-                        if (distance(headTile, gameObject.getHeadTile()) < minDis) {
-                            minDis = distance(headTile, gameObject.getHeadTile());
-                            lockedTarget = gameObject;
-                        }
-                }
-//                Console.getConsole().printTracingMessage("done");
             }
+            Console.getConsole().printTracingMessage("--- " + nameOfDroppable + " targets---");
+            for (GameObject gameObject : targets)
+                Console.getConsole().printTracingMessage("-" + gameObject.getNameOfDroppable().toString());
+            if (targets.size() > 0) {
+                lockedTarget = targets.get(0);
+                double minDis = distance(headTile, targets.get(0).getHeadTile());
+                for (GameObject gameObject : targets)
+                    if (distance(headTile, gameObject.getHeadTile()) < minDis) {
+                        minDis = distance(headTile, gameObject.getHeadTile());
+                        lockedTarget = gameObject;
+                    }
+            }
+//                Console.getConsole().printTracingMessage("locked target" + lockedTarget.getNameOfDroppable());
+
         }));
-        targetRangeCheckerThread.setDaemon(true);
+//        targetRangeCheckerThread.setDaemon(true);
         targetRangeCheckerThread.start();
         try {
             targetRangeCheckerThread.join();
@@ -140,7 +136,7 @@ public abstract class Building extends GameObject {
     }
 
     public double distance(Tile source, Tile dest) {
-        if(dest != null && source != null) {
+        if (dest != null && source != null) {
             Point2D src = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(source.getX()),
                     MouseTilePosition.TranslateTileToPixelY(source.getY()));
             Point2D dst = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(dest.getX()),
@@ -151,6 +147,42 @@ public abstract class Building extends GameObject {
         return 0;
     }
 
+
+    /**
+     * Finds in range targets
+     * @return Array list of target in range
+     */
+    protected ArrayList<GameObject> findAllTargetsInRange() {
+        ArrayList<GameObject> targets = new ArrayList<>();
+        Thread targetRangeCheckerThread = (new Thread(() -> {
+            int x, y;       // beginning x,y of search area
+            x = headTile.getX() - (int) Math.round(range);
+            y = headTile.getY() - (int) Math.round(range);
+            for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
+                for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
+                    Tile searchTile = battleField.getPixel(x + i, y + j);
+                    if (searchTile != null) {
+                        if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
+                            GameObject target = null;
+                            target = searchTile.getGameObject();
+                            if (target != null && target.getHp() > 0) {
+                                targets.add(target);
+                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
+                            }
+                        }
+                    }
+                }
+            }
+        }));
+        targetRangeCheckerThread.setDaemon(true);
+        targetRangeCheckerThread.start();
+        try {
+            targetRangeCheckerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return targets;
+    }
     /**
      * Updates hp with life time or vise versa
      */

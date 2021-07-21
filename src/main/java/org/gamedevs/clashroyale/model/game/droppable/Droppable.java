@@ -12,7 +12,7 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
  * @version 1.1
  */
-public abstract class Droppable {
+public abstract class Droppable extends Runnable{
 
     /**
      * Type of drop!
