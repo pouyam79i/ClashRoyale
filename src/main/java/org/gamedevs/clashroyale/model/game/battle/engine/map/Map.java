@@ -1,8 +1,10 @@
 package org.gamedevs.clashroyale.model.game.battle.engine.map;
 
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
+import org.gamedevs.clashroyale.model.game.droppable.objects.ImmortalObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.MainTowers;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -74,6 +76,8 @@ public class Map {
         buildMap();
         matchGraph();
         lock();
+        if(width == MainConfig.STD_BATTLE_FIELD_X_TILE && height == MainConfig.STD_BATTLE_FIELD_Y_TILE)
+            blockWithImmortals();
         currentFrame = 0;
     }
 
@@ -356,6 +360,21 @@ public class Map {
         }
     }
 
+    /**
+     * put immortal object in block sites
+     */
+    private void blockWithImmortals(){
+        // TODO: this is set for 18x30 map size
+        for (int j = 14; j <= 15; j++) {
+            for (int i = 0; i <= width; i++) {
+                if(i == 3 || i == 14)
+                    continue;
+                tiles[i][j].setGameObject(new ImmortalObject());
+            }
+        }
+    }
+
+    // Setters
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }

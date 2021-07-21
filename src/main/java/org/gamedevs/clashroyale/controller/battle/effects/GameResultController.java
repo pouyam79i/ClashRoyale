@@ -86,6 +86,9 @@ public class GameResultController implements Initializable {
         getResultController().setCrownRed3Updatable(crownRed3);
         getResultController().setRedNameUpdatable(redName);
         getResultController().setBlueNameUpdatable(blueName);
+        checked = new SimpleBooleanProperty();
+        checked.set(false);
+        getResultController().setChecked(checked);
     }
 
     /**
@@ -252,8 +255,8 @@ public class GameResultController implements Initializable {
     private void setBlueNameUpdatable(Label blueNameUpdatable) {
         this.blueNameUpdatable = blueNameUpdatable;
     }
-    public void setChecked(boolean checked) {
-        this.checked.set(checked);
+    private void setChecked(SimpleBooleanProperty checked) {
+        this.checked = checked;
     }
 
     /**
