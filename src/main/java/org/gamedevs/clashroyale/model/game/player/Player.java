@@ -92,11 +92,11 @@ public abstract class Player extends Runnable {
      * @param card of drop
      */
     public boolean drop(double x, double y, Card card) {
-        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
+//        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
         int tileX = MouseTilePosition.TranslatePixelToTileX(x);
         int tileY = MouseTilePosition.TranslatePixelToTileY(y);
 
-        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
+//        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
 
         if (card.getCardName() != CardName.RAGE &&
                 card.getCardName() != CardName.FIREBALL &&
@@ -111,7 +111,7 @@ public abstract class Player extends Runnable {
             }
 
         } else
-            return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN).get(0));
+            return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, playerSide).get(0));
     }
 
     /**

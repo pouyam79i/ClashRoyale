@@ -137,7 +137,6 @@ public class CardDeckGame {
         source.getCardImage().setFitHeight(88);
         source.getCardImage().setFitWidth(75);
         SelectedCardContainer.getSelectedCardContainer().put(source.getCard());
-        Console.getConsole().printTracingMessage("select " + source.getCard().getCardName());
 
     }
 
@@ -151,7 +150,6 @@ public class CardDeckGame {
         source.getCardImage().setFitHeight(80);
         source.getCardImage().setFitWidth(68);
         SelectedCardContainer.getSelectedCardContainer().takeOut();
-        Console.getConsole().printTracingMessage("deselect " + source.getCard().getCardName());
         return true;
     }
 

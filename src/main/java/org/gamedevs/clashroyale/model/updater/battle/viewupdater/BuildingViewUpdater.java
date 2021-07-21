@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.Building;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
@@ -37,10 +38,11 @@ public class BuildingViewUpdater extends ViewUpdater {
     }
 
     public void updateExist() {
-        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building)gameObject).getLifeTime() * 1000)
+        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building) gameObject).getLifeTime() * 1000L)
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    Console.getConsole().printTracingMessage("delete building");
                     MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
                 }
             });

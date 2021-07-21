@@ -130,7 +130,12 @@ public abstract class GameObject extends Droppable {
      * @param takenDamage is the damage given to game object by enemy!
      */
     public synchronized void reduceHP(int takenDamage) {
-        hp.setValue(hp.subtract(takenDamage).getValue());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                hp.setValue(hp.subtract(takenDamage).getValue());
+            }
+        });
     }
 
     /**
@@ -270,6 +275,10 @@ public abstract class GameObject extends Droppable {
         return errorInGUIY;
     }
 
+    public ViewUpdater getViewUpdater() {
+        return viewUpdater;
+    }
+
     // Setters
     public void setState(GameObjectState state) {
         this.state = state;
@@ -278,4 +287,7 @@ public abstract class GameObject extends Droppable {
         return boost;
     }
 
+    public void setViewUpdater(ViewUpdater viewUpdater) {
+        this.viewUpdater = viewUpdater;
+    }
 }

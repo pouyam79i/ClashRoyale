@@ -38,7 +38,7 @@ public class EasyBot extends Bot {
      */
     @Override
     protected void algorithm() {
-//        pickCard();
+        pickCard();
     }
 
     /**
