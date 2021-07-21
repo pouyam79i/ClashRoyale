@@ -115,7 +115,6 @@ public class Map {
                     }
                     getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
                     allAlive.add(gameObject);
->>>>>>>>> Temporary merge branch 2
                     return true;
                 }
                 degree += Angle.STEP.getAngle();

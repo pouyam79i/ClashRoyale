@@ -42,7 +42,7 @@ public abstract class Building extends GameObject {
      */
     protected GameObject lockedTarget;
 
-    protected ExecutorService service = Executors.newSingleThreadExecutor();
+    protected ExecutorService service = Executors.newCachedThreadPool();
 
     /**
      * Setting default values for building object
@@ -81,13 +81,14 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
+//        Thread runnable = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
                 attackOrMove(findTargetsInRange());
-            }
-        };
-        service.execute(runnable);
+                Console.getConsole().printTracingMessage(nameOfDroppable + " start");
+//            }
+//        });
+//    runnable.start();
     }
 
     protected GameObject findTargetsInRange() {

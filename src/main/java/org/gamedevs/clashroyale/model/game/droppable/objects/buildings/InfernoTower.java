@@ -15,6 +15,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
 import java.awt.geom.Point2D;
+
 /**
  * a class which handle inferno tower
  *
@@ -35,7 +36,7 @@ public class InfernoTower extends Building {
         lifeTime = 40;
         effectiveLifeTime = true;
         nameOfDroppable = CardName.INFERNO_TOWER;
-        errorInGUIX =  0.15 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIX = 0.15 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
         errorInGUIY = 2.75 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
@@ -71,9 +72,10 @@ public class InfernoTower extends Building {
      */
     protected void attackOrMove(GameObject target) {
         if (target != null) {
+            double plus = ((maxDamage - damage) / (lifeTime)) * hitSpeed;
             infernoBullet(headTile, target.getHeadTile());
-            if(damage < maxDamage - 5)
-                damage += 5;
+            if (damage <= maxDamage - plus)
+                damage += plus;
             new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
             target.reduceHP(damage);
@@ -88,27 +90,29 @@ public class InfernoTower extends Building {
 
     /**
      * draw line of inferno bullet on gui
-     * @param sourceTile sourceTile
+     *
+     * @param sourceTile      sourceTile
      * @param destinationTile destinationTile
      */
     private void infernoBullet(Tile sourceTile, Tile destinationTile) {
-        Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
-                MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
-        Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
-                MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
-        Platform.runLater(() -> {
-            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
-        });
-        line.setStartX(source.getX());
-        line.setStartY(source.getY());
-        line.setEndX(destination.getX());
-        line.setEndY(destination.getY());
-        line.setStrokeWidth(4);
-        line.setStroke(Color.YELLOW);
-        Platform.runLater(() -> {
-            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
-        });
-
+        if (sourceTile != null && destinationTile != null) {
+            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()) + 10,
+                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()) + 8);
+            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX() + 10),
+                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()) + 8);
+            Platform.runLater(() -> {
+                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
+            });
+            line.setStartX(source.getX());
+            line.setStartY(source.getY());
+            line.setEndX(destination.getX());
+            line.setEndY(destination.getY());
+            line.setStrokeWidth(4);
+            line.setStroke(Color.YELLOW);
+            Platform.runLater(() -> {
+                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
+            });
+        }
     }
 
 

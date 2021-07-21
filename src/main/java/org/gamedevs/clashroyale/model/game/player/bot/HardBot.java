@@ -4,6 +4,7 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
@@ -67,7 +68,8 @@ public class HardBot extends Bot {
                     } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();
                     int[] coordinate = findBestXY(card);
-                    if (drop(coordinate[0], coordinate[1], card))
+                    if (drop(MouseTilePosition.TranslateTileToPixelX(coordinate[0]),
+                            MouseTilePosition.TranslateTileToPixelY(coordinate[1]), card))
                         removeCard(card);
 
                     try {
@@ -186,21 +188,25 @@ public class HardBot extends Bot {
         PathSide towerHp = findSideWithLessTowerHp();
         PathSide enemy = findSideWithMoreEnemy();
         PathSide enemyTower = findSideWithLessTowerHpEnemy();
+        Random random = new Random();
+
+        coordinate[1] = random.nextInt(6) + 16;
+
         if (enemy == towerHp && towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else if (towerHp == enemy) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else if (enemy == enemyTower) {
             coordinate[0] = enemy.getX();
-            coordinate[1] = 16;
+//            coordinate[1] = 16;
         } else if (towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else {
             coordinate[0] = enemyTower.getX();
-            coordinate[1] = 16;
+//            coordinate[1] = 16;
         }
 
 
