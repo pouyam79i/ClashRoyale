@@ -147,9 +147,9 @@ public class MainBattleField implements Initializable {
         kingTowerEnemyProgressUpdatable.progressProperty().bind(PlayerContainer.getPlayerContainer().getBot().getKingTower().hpProperty().divide(PlayerContainer.getPlayerContainer().getBot().getKingTower().getHp()));
         leftPrincessTowerEnemyProgressUpdatable.progressProperty().bind(PlayerContainer.getPlayerContainer().getBot().getLeftPrincessTower().hpProperty().divide(PlayerContainer.getPlayerContainer().getBot().getLeftPrincessTower().getHp()));
         rightPrincessTowerEnemyProgressUpdatable.progressProperty().bind(PlayerContainer.getPlayerContainer().getBot().getRightPrincessTower().hpProperty().divide(PlayerContainer.getPlayerContainer().getBot().getRightPrincessTower().getHp()));
-        kingTowerEnemyProgressUpdatable.setStyle("-fx-accent: blue;");
-        rightPrincessTowerEnemyProgressUpdatable.setStyle("-fx-accent: blue;");
-        leftPrincessTowerEnemyProgressUpdatable.setStyle("-fx-accent: blue;");
+        kingTowerProgressUpdatable.setStyle("-fx-accent: blue;");
+        rightPrincessTowerProgressUpdatable.setStyle("-fx-accent: blue;");
+        leftPrincessTowerProgressUpdatable.setStyle("-fx-accent: blue;");
     }
 
     /**

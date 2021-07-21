@@ -58,8 +58,11 @@ public class FireBall extends Spell{
     private void attack() {
         ArrayList<GameObject> targets = findTargetsInRange();
         for(GameObject gameObject : targets)
-            if(gameObject.getTeamSide() != teamSide)
+            if(gameObject.getTeamSide() != teamSide) {
                 gameObject.reduceHP(damage);
+                Console.getConsole().printTracingMessage("fire ball " + teamSide +" reduce hp " + gameObject.getNameOfDroppable());
+
+            }
     }
 
 }

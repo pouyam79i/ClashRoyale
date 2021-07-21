@@ -1,6 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -9,10 +10,13 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Archer;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * a class which handle buildings
@@ -38,10 +42,12 @@ public abstract class Building extends GameObject {
      */
     protected GameObject lockedTarget;
 
+    protected ExecutorService service = Executors.newSingleThreadExecutor();
+
     /**
      * Setting default values for building object
      */
-    protected Building(Side side){
+    protected Building(Side side) {
         super(side);
         myType = TargetType.BUILDING;
     }
@@ -54,7 +60,11 @@ public abstract class Building extends GameObject {
         if (target != null) {
             new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
+            Angle angle = headTile.calculateAngle(target.getHeadTile());
+            if (angle != null)
+                setAngle(angle);
             target.reduceHP(damage);
+            Console.getConsole().printTracingMessage(nameOfDroppable + " " + teamSide + " reduce hp " + target.getNameOfDroppable());
             try {
                 Thread.sleep((int) (hitSpeed * 1000));
             } catch (InterruptedException ignored) {
@@ -69,14 +79,19 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-        attackOrMove(findTargetsInRange());
-        Console.getConsole().printTracingMessage("doing building job" + getState());
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                attackOrMove(findTargetsInRange());
+            }
+        };
+        service.execute(runnable);
     }
 
     protected GameObject findTargetsInRange() {
         ArrayList<GameObject> targets = new ArrayList<>();
         Thread targetRangeCheckerThread = (new Thread(() -> {
-            if(lockedTarget == null ||
+            if (lockedTarget == null ||
                     distance(headTile, lockedTarget.getHeadTile()) > range) {
                 int x, y;       // beginning x,y of search area
                 x = headTile.getX() - (int) Math.round(range);
@@ -90,16 +105,15 @@ public abstract class Building extends GameObject {
                                 target = searchTile.getGameObject();
                                 if (target != null && target.getHp() > 0 && target.getMyType() == target.getAttackTargetType() && target.getTeamSide() != teamSide) {
                                     targets.add(target);
-                                    Console.getConsole().printTracingMessage(target.getNameOfDroppable().toString());
 
                                 }
                             }
                         }
                     }
                 }
-                for (GameObject gameObject:targets)
-                    Console.getConsole().printTracingMessage("-"+gameObject.getNameOfDroppable().toString());
-                if(targets.size() > 0) {
+                for (GameObject gameObject : targets)
+                    Console.getConsole().printTracingMessage("-" + gameObject.getNameOfDroppable().toString());
+                if (targets.size() > 0) {
                     lockedTarget = targets.get(0);
                     double minDis = distance(headTile, targets.get(0).getHeadTile());
                     for (GameObject gameObject : targets)
@@ -108,15 +122,13 @@ public abstract class Building extends GameObject {
                             lockedTarget = gameObject;
                         }
                 }
-                Console.getConsole().printTracingMessage("done");
+//                Console.getConsole().printTracingMessage("done");
             }
         }));
         targetRangeCheckerThread.setDaemon(true);
         targetRangeCheckerThread.start();
         try {
             targetRangeCheckerThread.join();
-            if(lockedTarget != null)
-            Console.getConsole().printTracingMessage(lockedTarget.getNameOfDroppable().toString());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -124,18 +136,22 @@ public abstract class Building extends GameObject {
 
     }
 
-    public double distance(Tile source, Tile dest){
-        Point2D src = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(source.getX()),
-                MouseTilePosition.TranslateTileToPixelY(source.getY()));
-        Point2D dst = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(dest.getX()),
-                MouseTilePosition.TranslateTileToPixelY(dest.getY()));
+    public double distance(Tile source, Tile dest) {
+        if(dest != null && source != null) {
+            Point2D src = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(source.getX()),
+                    MouseTilePosition.TranslateTileToPixelY(source.getY()));
+            Point2D dst = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(dest.getX()),
+                    MouseTilePosition.TranslateTileToPixelY(dest.getY()));
 
-        return Math.abs(src.distance(dst));
+            return Math.abs(src.distance(dst));
+        }
+        return 0;
     }
+
     /**
      * Updates hp with life time or vise versa
      */
-    protected void updateLifeTime(){
+    protected void updateLifeTime() {
 
     }
 

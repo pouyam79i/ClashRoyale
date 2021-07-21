@@ -85,9 +85,9 @@ public class Valkyrie extends Soldier {
                     Tile searchTile = battleField.getPixel(x + i, y + j);
                     if (searchTile != null) {
                         if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
-                            GameObject subTarget = null;
+                            GameObject subTarget = searchTile.getGameObject();
                             // Ground soldiers
-                            if (subTarget.getTeamSide() != teamSide) {
+                            if (subTarget!= null && subTarget.getTeamSide() != teamSide) {
                                 if (subTarget.getMyType() == TargetType.GROUND || subTarget.getMyType() == TargetType.BUILDING) {
                                     if (subTarget.getHp() > 0 &&
                                             (subTarget.getMyType() != TargetType.BUILDING || !hitTowers.contains(subTarget))) {

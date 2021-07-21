@@ -138,6 +138,14 @@ public class Map {
         }
         spell.setHeadPixel(calledTile);
         spell.setBattleField(this);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                spell.run();
+
+            }
+        });
+        thread.start();
         Console.getConsole().printTracingMessage("set obj x,y to " + spell.getHeadPixel().getX() + ", " + spell.getHeadPixel().getY());
         return true;
     }
@@ -255,6 +263,8 @@ public class Map {
         this.currentFrame = currentFrame;
         for (GameObject gameObject : allAlive){
             gameObject.run();   // refresh one frame
+            gameObject.getViewUpdater().update();
+
         }
     }
 

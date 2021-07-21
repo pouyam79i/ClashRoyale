@@ -49,7 +49,7 @@ public class Arrows extends Spell {
     @Override
     protected void effect() {
         throwArrowsEffect();
-//        attackOrMove();
+      attack();
     }
 
     /**
@@ -58,8 +58,10 @@ public class Arrows extends Spell {
     private void attack() {
         ArrayList<GameObject> targets = findTargetsInRange();
         for(GameObject gameObject : targets)
-            if(gameObject.getTeamSide() != teamSide)
-            gameObject.reduceHP(damage);
+            if(gameObject.getTeamSide() != teamSide) {
+                Console.getConsole().printTracingMessage("arrows " + teamSide + " reduce hp " + gameObject.getNameOfDroppable());
+                gameObject.reduceHP(damage);
+            }
     }
 
     /**

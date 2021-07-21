@@ -5,8 +5,12 @@ import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * a class which handle spells
@@ -22,6 +26,7 @@ public abstract class Spell extends Droppable {
      */
     protected double radius;
 
+    protected ExecutorService service = Executors.newSingleThreadExecutor();
     /**
      * Constructor of Spell!
      * @param side of spell
@@ -33,8 +38,15 @@ public abstract class Spell extends Droppable {
     /**
      * Runs the effect in one frame
      */
+    @Override
     public void run() {
-        effect();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                effect();
+            }
+        };
+        service.execute(runnable);
     }
 
     /**
@@ -61,6 +73,7 @@ public abstract class Spell extends Droppable {
                             target = searchTile.getGameObject();
                             if (target != null && target.getHp() > 0) {
                                 targets.add(target);
+                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
                             }
                         }
                     }

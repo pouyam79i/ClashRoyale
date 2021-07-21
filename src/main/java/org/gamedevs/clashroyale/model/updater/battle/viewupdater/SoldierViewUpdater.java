@@ -6,6 +6,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Soldier;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.concurrent.ExecutorService;
@@ -97,7 +98,7 @@ public class SoldierViewUpdater extends ViewUpdater {
                 @Override
                 public void run() {
                     battleFieldPane.getChildren().remove(objectView);
-
+                    Console.getConsole().printTracingMessage("remove " + gameObject.getNameOfDroppable());
                 }
             });
         }
