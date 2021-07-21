@@ -37,7 +37,7 @@ public class BuildingViewUpdater extends ViewUpdater {
     }
 
     public void updateExist() {
-        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime <= 0)
+        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building)gameObject).getLifeTime() * 1000)
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {

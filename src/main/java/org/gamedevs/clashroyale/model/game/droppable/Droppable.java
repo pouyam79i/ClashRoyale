@@ -91,4 +91,7 @@ public abstract class Droppable extends Runnable {
         return hitSpeed;
     }
 
+    public void setAngle(Angle angle) {
+        this.angle = angle;
+    }
 }

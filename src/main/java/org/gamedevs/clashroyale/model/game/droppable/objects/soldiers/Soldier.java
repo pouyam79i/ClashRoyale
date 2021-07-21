@@ -23,7 +23,7 @@ public abstract class Soldier extends GameObject {
     /**
      * Speed of player (related to movement)
      */
-    protected int speed;
+    protected int speed = 1;
     /**
      * Area splash ability (attack point or effect)
      */
@@ -42,8 +42,6 @@ public abstract class Soldier extends GameObject {
      */
     @Override
     public void run() {
-//        checkTargetRange();
-//        mover();
 
     }
 
@@ -156,5 +154,7 @@ public abstract class Soldier extends GameObject {
         }
     }
 
-
+    public double getSpeed() {
+        return speed;
+    }
 }

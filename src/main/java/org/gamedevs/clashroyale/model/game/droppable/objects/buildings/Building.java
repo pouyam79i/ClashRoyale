@@ -59,8 +59,7 @@ public abstract class Building extends GameObject {
      */
     @Override
     public void run() {
-        checkTargetRange();
-
+//        checkTargetRange();
     }
 
     /**

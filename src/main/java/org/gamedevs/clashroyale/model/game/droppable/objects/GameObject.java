@@ -288,4 +288,5 @@ public abstract class GameObject extends Droppable {
     public void setViewUpdater(ViewUpdater viewUpdater) {
         this.viewUpdater = viewUpdater;
     }
+
 }
