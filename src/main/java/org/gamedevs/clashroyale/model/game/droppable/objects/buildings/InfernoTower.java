@@ -68,52 +68,53 @@ public class InfernoTower extends Building {
         }
     }
 
-    protected void attackOrMove(GameObject target) {
-        if (target != null) {
-            double plus = ((maxDamage - damage) / (lifeTime)) * hitSpeed;
-            infernoBullet(headTile, target.getHeadTile());
-            if (damage <= maxDamage - plus)
-                damage += plus;
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
-            state = GameObjectState.ATTACK;
-            target.reduceHP(damage);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
-        } else {
-            state = GameObjectState.MOVING;
-        }
-    }
-
-    /**
-     * draw line of inferno bullet on gui
-     *
-     * @param sourceTile      sourceTile
-     * @param destinationTile destinationTile
-     */
-    private void infernoBullet(Tile sourceTile, Tile destinationTile) {
-        if (sourceTile != null && destinationTile != null) {
-            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
-                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
-            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
-                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
-            Platform.runLater(() -> {
-                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
-            });
-            line.setStartX(source.getX());
-            line.setStartY(source.getY());
-            line.setEndX(destination.getX());
-            line.setEndY(destination.getY());
-            line.setStrokeWidth(4);
-            line.setStroke(Color.YELLOW);
-            Platform.runLater(() -> {
-                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
-            });
-        }
-    }
+//    protected void attackOrMove(GameObject target) {
+//        if (target != null) {
+//            double plus = ((maxDamage - damage) / (lifeTime)) * hitSpeed;
+//            infernoBullet(headTile, target.getHeadTile());
+//            if (damage <= maxDamage - plus)
+//                damage += plus;
+//            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+//            state = GameObjectState.ATTACK;
+//            target.reduceHP(damage);
+//            try {
+//                Thread.sleep((int) (hitSpeed * 1000));
+//            } catch (InterruptedException ignored) {
+//            }
+//        } else {
+//            state = GameObjectState.MOVING;
+//        }
+//    }
+//
+//    /**
+//     * draw line of inferno bullet on gui
+//     *
+//     * @param sourceTile      sourceTile
+//     * @param destinationTile destinationTile
+//     */
+//    private void infernoBullet(Tile sourceTile, Tile destinationTile) {
+//        if (sourceTile != null && destinationTile != null) {
+//            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
+//                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
+//            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
+//                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
+//            Platform.runLater(() -> {
+//                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
+//            });
+//            line.setStartX(source.getX());
+//            line.setStartY(source.getY());
+//            line.setEndX(destination.getX());
+//            line.setEndY(destination.getY());
+//            line.setStrokeWidth(4);
+//            line.setStroke(Color.YELLOW);
+//            Platform.runLater(() -> {
+//                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
+//            });
+//        }
+//    }
 
     public Line getLine() {
         return line;
     }
+
 }

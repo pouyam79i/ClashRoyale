@@ -46,11 +46,14 @@ public class EasyBot extends Bot {
      */
     @Override
     protected void pickCard() {
+        // TODO: it is not efficient because of endless thread!
+        // TODO: you can get and check game result or game state!
+        // TODO: property of finished is used to end a thread in class Runnable!
         Thread pickThread = new Thread() {
             @Override
             public void start() {
                 Random random = new Random();
-                while (true) {
+                while (!finished) {
                     Console.getConsole().printTracingMessage("---bot cards---");
                     for(Card card:gameDeck.getDeck())
                         Console.getConsole().printTracingMessage(card.getCardName().toString() + "->" + card.isLock());
@@ -77,6 +80,7 @@ public class EasyBot extends Bot {
                 }
             }
         };
+        pickThread.setDaemon(true);
         pickThread.start();
     }
 

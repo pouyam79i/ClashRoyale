@@ -31,6 +31,10 @@ public abstract class Soldier extends GameObject {
      */
     protected boolean areaSplash;
     /**
+     * closest target tile
+     */
+    protected Tile closestTargetTile;
+    /**
      * Path finder motor
      */
     protected PathFinder pathFinder;
@@ -47,6 +51,7 @@ public abstract class Soldier extends GameObject {
         myType = TargetType.GROUND; // except for baby dragon!
         state = GameObjectState.MOVING;
         previousState = GameObjectState.IDLE;
+        closestTargetTile = null;
     }
 
     @Override
@@ -151,24 +156,26 @@ public abstract class Soldier extends GameObject {
      * Updates object to next place
      */
     protected void mover() {
-        Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "1- mover called");
+        Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "1- mover called");
         if(pathFinder == null){
             pathFinder = new PathFinder(battleField);
             path = pathFinder.getPath();
         }
         if (state == GameObjectState.MOVING) {
-            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "In moving state");
-            Tile closestTargetTile = findClosestTargetTile();
+            if((currentFrame - initialFrame) % ((int)(speed * 10)) != 0)
+                return;
+            Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "In moving state");
             if(closestTargetTile == null){
-                Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "findClosestTargetTile is null");
+                closestTargetTile = findClosestTargetTile();
+                Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "findClosestTargetTile is null");
             }
             if (closestTargetTile != null) {
                 closestTargetTile = findClosestTargetTile();
                 pathFinder.findPath(headTile, closestTargetTile, z);
-                move(path.forward());
-                Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Moving soldier");
+                if(!move(path.forward()))
+                Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "Moving soldier " +
+                        ConsoleColor.RED_BOLD + "Failed!!!!");
             }
-
         }
     }
 

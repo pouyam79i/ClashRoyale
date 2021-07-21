@@ -15,6 +15,7 @@ import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.game.player.bot.EasyBot;
 import org.gamedevs.clashroyale.model.game.player.bot.HardBot;
 import org.gamedevs.clashroyale.model.launcher.EndOfGameLauncher;
+import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -80,6 +81,7 @@ public class GameManager extends Runnable {
         CardGenerator cardGeneratorDownPlayer = new CardGenerator(account.getDeckContainer(), elixirDownPlayer);
         // Setting human player requirements
         downPlayer = new Human(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
+        map.setViewManager(new ViewManager(Side.DOWN));
         // Setting bot player requirements
         if(hardBot)
             topPlayer = new HardBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
@@ -98,7 +100,7 @@ public class GameManager extends Runnable {
     /**
      * End of game logic
      */
-    public void checkEndGame(){
+    public void endGame(){
         gameResult.lock();
         topPlayer.shutdown();
         downPlayer.shutdown();
@@ -115,7 +117,9 @@ public class GameManager extends Runnable {
     public void run() {
         currentFrame = 0;
         clock.start();
-        topPlayer.start();
+        topPlayer.dropMainTowers();
+        downPlayer.dropMainTowers();
+//        topPlayer.start();        // TODO: uncomment this
         downPlayer.start();
         // When we have still tile
         while (!clock.isEndOfTime()){
@@ -126,12 +130,12 @@ public class GameManager extends Runnable {
             map.updateObjects(currentFrame);
             map.refreshAlive();
             currentFrame++;
-            // TODO: optimze frame updater sleep
+            // TODO: optimize frame updater sleep
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
             } catch (InterruptedException ignored) {}
         }
-        checkEndGame();
+        endGame();
         this.shutdown();
     }
 

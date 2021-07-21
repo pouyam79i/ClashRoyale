@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.KingTower
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
@@ -48,8 +49,17 @@ public abstract class Player extends Runnable {
     protected final int level;
 
     // Player main towers:
+    /**
+     * tower of king!
+     */
     protected KingTower kingTower;
+    /**
+     * tower of left princess
+     */
     protected PrincessTower leftPrincessTower;
+    /**
+     * tower of right princess
+     */
     protected PrincessTower rightPrincessTower;
 
     /**
@@ -62,6 +72,7 @@ public abstract class Player extends Runnable {
      * @param level         level of player
      */
     protected Player(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level) {
+        threadName = "Player";
         this.playerSide = playerSide;
         this.map = map;
         this.elixir = elixir;
@@ -92,10 +103,18 @@ public abstract class Player extends Runnable {
      * @param card of drop
      */
     public boolean drop(double x, double y, Card card) {
+        if(card == null){
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Null card input");
+            return false;
+        }
 //        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
         int tileX = MouseTilePosition.TranslatePixelToTileX(x);
         int tileY = MouseTilePosition.TranslatePixelToTileY(y);
-
+        if(tileX < 0 || tileX > 17 || tileY < 0 || tileY > 29){
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "wrong tile position at player drop: " +
+                    tileX + "," + tileY);
+            return false;
+        }
 //        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
 
         if (card.getCardName() != CardName.RAGE &&

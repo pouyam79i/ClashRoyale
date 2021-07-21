@@ -52,10 +52,13 @@ public class HardBot extends Bot {
      */
     @Override
     protected void pickCard() {
+        // TODO: it is not efficient because of endless thread!
+        // TODO: you can get and check game result or game state!
+        // TODO: property of finished is used to end a thread in class Runnable!
         Thread pickCard = new Thread() {
             @Override
             public void start() {
-                while (true) {
+                while (!finished) {
                     DeckContainer deckContainer = new DeckContainer();
                     Card card;
                     do {
@@ -80,6 +83,7 @@ public class HardBot extends Bot {
                 }
             }
         };
+        pickCard.setDaemon(true);
         pickCard.start();
     }
 

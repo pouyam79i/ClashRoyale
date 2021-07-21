@@ -84,26 +84,6 @@ public class Map {
      * @return true if it could drop game object in map!
      */
     public boolean dropGameObject(int x, int y, GameObject gameObject) {
-//        if (gameObject.getTeamSide() == Side.DOWN && y > 15) {
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    MainBattleField.getMainBattleField().getTopLimit().setVisible(true);
-//                    try {
-//                        Thread.sleep(200);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    MainBattleField.getMainBattleField().getTopLimit().setVisible(false);
-//
-//                }
-//            });
-//            return false;
-//        }
-//
-//        if (gameObject.getTeamSide() == Side.TOP && y < 15)
-//            return false;
-
 
         ArrayList<Tile> visitedTile;
         Tile calledTile = getPixel(x, y);
@@ -286,13 +266,20 @@ public class Map {
      */
     public void updateObjects(long currentFrame) {
         this.currentFrame = currentFrame;
-        for (GameObject gameObject : allAlive) {
-            try {
-                gameObject.run();   // refresh one frame
-                gameObject.getViewUpdater().update();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            Iterator<GameObject> gameObjectIterator = allAlive.iterator();
+            while (gameObjectIterator.hasNext()) {
+                GameObject gameObject = gameObjectIterator.next();
+                try {
+                    gameObject.run();   // refresh one frame
+                    if(gameObject.getViewUpdater() != null)
+                        gameObject.getViewUpdater().update();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

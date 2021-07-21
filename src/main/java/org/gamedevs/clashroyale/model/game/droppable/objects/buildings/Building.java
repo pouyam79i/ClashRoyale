@@ -40,9 +40,6 @@ public abstract class Building extends GameObject {
     /**
      * locked target to hit
      */
-    protected GameObject lockedTarget;
-
-    protected ExecutorService service = Executors.newCachedThreadPool();
 
     /**
      * Setting default values for building object
@@ -55,142 +52,6 @@ public abstract class Building extends GameObject {
     }
 
     /**
-     * Start attacking to the target (gives damage to target object)
-     */
-    @Override
-    protected void attackOrMove(GameObject target) {
-        if (target != null) {
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
-            state = GameObjectState.ATTACK;
-            Angle angle = headTile.calculateAngle(target.getHeadTile());
-            if (angle != null)
-                setAngle(angle);
-            target.reduceHP(damage);
-            Console.getConsole().printTracingMessage(nameOfDroppable + " " + teamSide + " reduce hp " + target.getNameOfDroppable());
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
-        } else {
-            state = GameObjectState.IDLE;
-        }
-    }
-
-    /**
-     * Thread of object (applies algorithm of game object)
-     */
-    @Override
-    public void run() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                attackOrMove(findTargetsInRange());
-                Console.getConsole().printTracingMessage(nameOfDroppable + " start");
-            }
-        };
-        service.execute(runnable);
-
-
-
-    }
-
-    protected GameObject findTargetsInRange() {
-        ArrayList<GameObject> targets = new ArrayList<>();
-        Thread targetRangeCheckerThread = (new Thread(() -> {
-            int x, y;       // beginning x,y of search area
-            x = headTile.getX() - (int) Math.round(range);
-            y = headTile.getY() - (int) Math.round(range);
-            for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
-                for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
-                    Tile searchTile = battleField.getPixel(x + i, y + j);
-                    if (searchTile != null) {
-                        if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
-                            GameObject target = null;
-                            target = searchTile.getGameObject();
-                            if (target != null && target.getHp() > 0 && target.getTeamSide() != getTeamSide()) {
-                                Console.getConsole().printTracingMessage("my:" + getTeamSide() + "you: " + target.getTeamSide());
-                                targets.add(target);
-                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
-                            }
-                        }
-                    }
-                }
-            }
-            Console.getConsole().printTracingMessage("--- " + nameOfDroppable + " targets---");
-            for (GameObject gameObject : targets)
-                Console.getConsole().printTracingMessage("-" + gameObject.getNameOfDroppable().toString());
-            if (targets.size() > 0) {
-                lockedTarget = targets.get(0);
-                double minDis = distance(headTile, targets.get(0).getHeadTile());
-                for (GameObject gameObject : targets)
-                    if (distance(headTile, gameObject.getHeadTile()) < minDis) {
-                        minDis = distance(headTile, gameObject.getHeadTile());
-                        lockedTarget = gameObject;
-                    }
-            }
-//                Console.getConsole().printTracingMessage("locked target" + lockedTarget.getNameOfDroppable());
-
-        }));
-//        targetRangeCheckerThread.setDaemon(true);
-        targetRangeCheckerThread.start();
-        try {
-            targetRangeCheckerThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return lockedTarget;
-
-    }
-
-    public double distance(Tile source, Tile dest) {
-        if (dest != null && source != null) {
-            Point2D src = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(source.getX()),
-                    MouseTilePosition.TranslateTileToPixelY(source.getY()));
-            Point2D dst = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(dest.getX()),
-                    MouseTilePosition.TranslateTileToPixelY(dest.getY()));
-
-            return Math.abs(src.distance(dst));
-        }
-        return 0;
-    }
-
-
-    /**
-     * Finds in range targets
-     * @return Array list of target in range
-     */
-    protected ArrayList<GameObject> findAllTargetsInRange() {
-        ArrayList<GameObject> targets = new ArrayList<>();
-        Thread targetRangeCheckerThread = (new Thread(() -> {
-            int x, y;       // beginning x,y of search area
-            x = headTile.getX() - (int) Math.round(range);
-            y = headTile.getY() - (int) Math.round(range);
-            for (int j = 0; j <= (Math.round(range) * 2 + 1); j++) {
-                for (int i = 0; i <= (Math.round(range) * 2 + 1); i++) {
-                    Tile searchTile = battleField.getPixel(x + i, y + j);
-                    if (searchTile != null) {
-                        if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
-                            GameObject target = null;
-                            target = searchTile.getGameObject();
-                            if (target != null && target.getHp() > 0) {
-                                targets.add(target);
-                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
-                            }
-                        }
-                    }
-                }
-            }
-        }));
-        targetRangeCheckerThread.setDaemon(true);
-        targetRangeCheckerThread.start();
-        try {
-            targetRangeCheckerThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return targets;
-    }
-    /**
      * Updates hp with life time or vise versa
      */
     protected void updateLifeTime() {
@@ -200,4 +61,5 @@ public abstract class Building extends GameObject {
     public int getLifeTime() {
         return lifeTime;
     }
+
 }
