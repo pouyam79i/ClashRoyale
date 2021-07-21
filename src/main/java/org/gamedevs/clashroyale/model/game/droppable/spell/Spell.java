@@ -1,20 +1,13 @@
 package org.gamedevs.clashroyale.model.game.droppable.spell;
 
-import javafx.application.Platform;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import org.gamedevs.clashroyale.MainConfig;
-import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
-import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
-import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
+
 /**
  * a class which handle spells
  *
@@ -24,21 +17,35 @@ import java.util.ArrayList;
  */
 public abstract class Spell extends Droppable {
 
+    /**
+     * radius of effecting area
+     */
     protected double radius;
 
+    /**
+     * Constructor of Spell!
+     * @param side of spell
+     */
     protected Spell(Side side) {
         super(DropType.SPELL, side);
-        threadName = "Spell";
     }
 
-    @Override
+    /**
+     * Runs the effect in one frame
+     */
     public void run() {
         effect();
-        this.shutdown();
     }
 
+    /**
+     * Kind of effecting
+     */
     protected abstract void effect();
 
+    /**
+     * Finds in range targets
+     * @return Array list of target in range
+     */
     protected ArrayList<GameObject> findTargetsInRange() {
         ArrayList<GameObject> targets = new ArrayList<>();
         Thread targetRangeCheckerThread = (new Thread(() -> {
@@ -69,6 +76,5 @@ public abstract class Spell extends Droppable {
         }
         return targets;
     }
-
 
 }

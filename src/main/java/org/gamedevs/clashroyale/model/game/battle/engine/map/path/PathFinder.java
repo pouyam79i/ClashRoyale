@@ -41,8 +41,13 @@ public class PathFinder {
         Tile headingTile = src;
         Angle bestAngle = findBestAngel(headingTile.getX(), headingTile.getY(), des.getX(), des.getY());
         while (bestAngle != null){
-            while (!headingTile.getSurroundingPixel(bestAngle).isEmpty(z)){
-                bestAngle = Angle.getAngle(bestAngle.getAngle() + 45); // TODO: improve its performance
+            for(int i = 0; i <= 360; i = i + 45){
+                if (!headingTile.getSurroundingPixel(bestAngle).isEmpty(z)){
+                    bestAngle = Angle.getAngle(bestAngle.getAngle() + 45);
+                    // TODO: optimize
+                }else {
+                    break;
+                }
             }
             newPathList.add(headingTile.getSurroundingPixel(bestAngle));
             bestAngle = findBestAngel(headingTile.getX(), headingTile.getY(), des.getX(), des.getY());

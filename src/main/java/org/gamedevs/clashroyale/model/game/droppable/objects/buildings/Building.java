@@ -40,7 +40,7 @@ public abstract class Building extends GameObject {
      * Start attacking to the target (gives damage to target object)
      */
     @Override
-    protected void attack(GameObject target) {
+    protected void attackOrMove(GameObject target) {
         if (target != null) {
             new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
@@ -52,15 +52,6 @@ public abstract class Building extends GameObject {
         } else {
             state = GameObjectState.IDLE;
         }
-    }
-
-    /**
-     * Thread of object (applies algorithm of game object)
-     */
-    @Override
-    public void run() {
-        checkTargetRange();
-
     }
 
     /**

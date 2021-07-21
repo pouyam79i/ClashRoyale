@@ -69,7 +69,7 @@ public class InfernoTower extends Building {
     /**
      * Start attacking to the target (gives damage to target object)
      */
-    protected void attack(GameObject target) {
+    protected void attackOrMove(GameObject target) {
         if (target != null) {
             infernoBullet(headTile, target.getHeadTile());
             if(damage < maxDamage - 5)

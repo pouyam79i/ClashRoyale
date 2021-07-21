@@ -49,7 +49,7 @@ public class Arrows extends Spell {
     @Override
     protected void effect() {
         throwArrowsEffect();
-//        attack();
+//        attackOrMove();
     }
 
     /**
