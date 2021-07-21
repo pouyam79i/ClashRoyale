@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
@@ -8,12 +9,10 @@ import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
-<<<<<<<<< Temporary merge branch 1
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
-=========
->>>>>>>>> Temporary merge branch 2
+
 
 /**
  * Main structure game object class!
