@@ -84,8 +84,9 @@ public class Map {
             gameObject.setHeadPixel(calledTile);
             Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
             if(viewManager != null){
-                viewManager.addObjectToView(gameObject);
+                gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
             }
+            downSideAliveObj.add(gameObject);
             gameObject.start();
             return true;
         }
@@ -98,8 +99,9 @@ public class Map {
                     detectedTile.setGameObject(gameObject);
                     gameObject.setHeadPixel(detectedTile);
                     if(viewManager != null){
-                        viewManager.addObjectToView(gameObject);
+                        gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
                     }
+                    downSideAliveObj.add(gameObject);
                     gameObject.start();
                     return true;
                 }

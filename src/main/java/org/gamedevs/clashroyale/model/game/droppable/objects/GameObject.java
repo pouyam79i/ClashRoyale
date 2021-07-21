@@ -9,6 +9,7 @@ import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
@@ -63,6 +64,11 @@ public abstract class GameObject extends Droppable {
      * if this G.O. is currently boosted -> true
      */
     protected boolean boost = false;
+
+    /**
+     * view updater
+     */
+    private ViewUpdater viewUpdater;
     /**
      * Constructor of game object
      *
@@ -275,4 +281,11 @@ public abstract class GameObject extends Droppable {
         return boost;
     }
 
+    public ViewUpdater getViewUpdater() {
+        return viewUpdater;
+    }
+
+    public void setViewUpdater(ViewUpdater viewUpdater) {
+        this.viewUpdater = viewUpdater;
+    }
 }

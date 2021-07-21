@@ -68,9 +68,6 @@ public abstract class ViewUpdater extends Runnable {
             objectView.setLayoutY(y - gameObject.getErrorInGUIY() );
         });
 
-        update();
-        shutdown();
-
     }
 
 
