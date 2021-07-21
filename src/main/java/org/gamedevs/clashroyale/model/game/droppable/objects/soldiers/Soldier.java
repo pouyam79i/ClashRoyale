@@ -4,10 +4,13 @@ import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.Path;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.path.PathFinder;
+import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,31 @@ public abstract class Soldier extends GameObject {
     protected Soldier(Side side) {
         super(side);
         myType = TargetType.GROUND; // except for baby dragon!
+        state = GameObjectState.MOVING;
+        previousState = GameObjectState.IDLE;
+    }
+
+    @Override
+    protected void attackOrMove(GameObject target) {
+        if (target != null) {
+            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+            state = GameObjectState.ATTACK;
+            if(previousState != state){
+                initialFrame = currentFrame;
+                previousState = state;
+            }
+            // checking frame rate updateif in attack
+            if((currentFrame - initialFrame) % (hitSpeed * 10) == 0){
+                target.reduceHP(damage);
+            }
+        } else {
+            // TODO: this is set for buildings -> for soldier it must be moving
+            state = GameObjectState.MOVING;
+            if(previousState != state){
+                initialFrame = currentFrame;
+                previousState = state;
+            }
+        }
     }
 
     /**
@@ -64,6 +92,7 @@ public abstract class Soldier extends GameObject {
         aliveEnemies = new ArrayList<GameObject>(aliveEnemies);
         Tile nextTile = null;
         if (aliveEnemies != null) {
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "In findClosestTargetTile");
             double distance = 1000; // TODO: max distance - unreachable
             for (GameObject enemy : aliveEnemies) {
                 // Giant
@@ -89,7 +118,7 @@ public abstract class Soldier extends GameObject {
                 }
             }
         }
-        return null;
+        return nextTile;
     }
 
     /**
@@ -99,10 +128,14 @@ public abstract class Soldier extends GameObject {
      * @return true if i have moved successfully
      */
     protected boolean move(Tile nextTile) {
+        if(nextTile == null)
+            Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "In Move - nextTile is null");
         if (nextTile != null) {
             Angle nextTileAngel = headTile.getSurroundingTileAngel(nextTile);
+            Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "In Move - next tile not empty");
             if (nextTileAngel != null) {
                 if (headTile.carry(angle, z)) {
+                    Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "Moved");
                     headTile = nextTile;
                     return true;
                 }
@@ -115,16 +148,22 @@ public abstract class Soldier extends GameObject {
      * Updates object to next place
      */
     protected void mover() {
+        Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "1- mover called");
         if(pathFinder == null){
             pathFinder = new PathFinder(battleField);
             path = pathFinder.getPath();
         }
         if (state == GameObjectState.MOVING) {
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "In moving state");
             Tile closestTargetTile = findClosestTargetTile();
-            if (closestTargetTile != findClosestTargetTile()) {
+            if(closestTargetTile == null){
+                Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "findClosestTargetTile is null");
+            }
+            if (closestTargetTile != null) {
                 closestTargetTile = findClosestTargetTile();
                 pathFinder.findPath(headTile, closestTargetTile, z);
                 move(path.forward());
+                Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Moving soldier");
             }
 
         }

@@ -55,14 +55,9 @@ public class Valkyrie extends Soldier {
     @Override
     protected void attackOrMove(GameObject target) {
         ArrayList<Building> hitTowers = new ArrayList<>();
-
         if (target != null) {
             state = GameObjectState.ATTACK;
             areaSplashDamage(hitTowers);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
         } else {
             state = GameObjectState.MOVING;
         }
@@ -94,7 +89,6 @@ public class Valkyrie extends Soldier {
                                         subTarget.reduceHP(damage);
                                         if (subTarget.getMyType() == TargetType.BUILDING)
                                             hitTowers.add((Building) subTarget);
-
                                     }
                                 }
                             }
