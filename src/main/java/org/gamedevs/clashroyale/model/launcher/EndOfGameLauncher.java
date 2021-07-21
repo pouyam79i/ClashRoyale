@@ -3,12 +3,16 @@ package org.gamedevs.clashroyale.model.launcher;
 import javafx.application.Platform;
 import org.gamedevs.clashroyale.controller.battle.effects.GameResultController;
 import org.gamedevs.clashroyale.controller.menu.main.MainBattle;
+import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.BattleFieldContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.loader.view.OnWaitLoader;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
+import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -54,10 +58,17 @@ public class EndOfGameLauncher extends Runnable {
         // Getting back to main menu
         boolean winner = PlayerContainer.getPlayerContainer().getPlayer().getPlayerSide() == gameResult.getWinnerSide();
         // Adding player xp
-        if(winner)
-            UserAccountContainer.getUserAccountContainer().getAccount().increaseXP(300);
-        else
-            UserAccountContainer.getUserAccountContainer().getAccount().increaseXP(70);
+        Account account = UserAccountContainer.getUserAccountContainer().getAccount();
+        if(account != null){
+            if(winner)
+                account.increaseXP(300);
+            else
+                account.increaseXP(70);
+            AccountIO.getAccountIO().removeFileInfo(account.getUsername() + ".bin");
+            AccountIO.getAccountIO().singleObjectFileWriter(account.getUsername() + ".bin", account);
+        }else {
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Failed to save XP to account!");
+        }
         // removing battle field
         Platform.runLater(() -> {
             OnWaitLoader.getOnWaitLoader().display(

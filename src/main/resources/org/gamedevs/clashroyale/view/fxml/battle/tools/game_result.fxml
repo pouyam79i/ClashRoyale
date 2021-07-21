@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="gameResultRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/battlefield/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameResultController">
+<AnchorPane fx:id="gameResultRootPane" layoutX="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" stylesheets="@../../../css/battlefield/game_result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.effects.GameResultController">
    <children>
       <ImageView fitHeight="726.0" fitWidth="495.0" layoutX="-45.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,10 +23,9 @@
             <Image url="@../../../img/gameresult/blue-end.png" />
          </image>
       </ImageView>
-      <Label layoutX="189.0" layoutY="324.0" text="VS" />
-      <Button fx:id="goToMain" alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="599.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="96.0" text="OK" textAlignment="CENTER" />
-      <Label fx:id="blueWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="366.0" text="Winner" textAlignment="CENTER" textFill="#4b4beb" />
-      <Label fx:id="redWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="273.0" text="Winner" textAlignment="CENTER" textFill="#d33c58" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="322.0" prefHeight="26.0" prefWidth="46.0" text="VS" textAlignment="CENTER" />
+      <Label fx:id="blueWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="361.0" text="Winner" textAlignment="CENTER" textFill="#4b4beb" />
+      <Label fx:id="redWinnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="280.0" text="Winner" textAlignment="CENTER" textFill="#d33c58" />
       <ImageView fx:id="crownRed1" fitHeight="84.0" fitWidth="78.0" layoutX="67.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/ui/icon/crown-red.png" />
@@ -57,27 +56,28 @@
             <Image url="@../../../img/ui/icon/crown-blue.png" />
          </image>
       </ImageView>
-      <Label fx:id="redName" layoutX="160.0" layoutY="230.0" text="Label" textFill="WHITE" />
-      <Label fx:id="blueName" layoutX="161.0" layoutY="509.0" text="Label" textFill="WHITE" />
-      <ImageView fx:id="blueSprinkle" fitHeight="200.0" fitWidth="265.0" layoutX="-59.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="redName" alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="226.0" prefHeight="26.0" prefWidth="160.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="blueName" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="505.0" prefHeight="26.0" prefWidth="160.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+      <ImageView fx:id="blueSprinle" fitHeight="200.0" fitWidth="265.0" layoutX="-11.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/gameresult/sprinkle.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="blueSprinkle1" fitHeight="243.0" fitWidth="265.0" layoutX="206.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="243.0" fitWidth="265.0" layoutX="203.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/gameresult/sprinkle.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="blueSprinkle2" fitHeight="200.0" fitWidth="265.0" layoutX="-59.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueSprinkle2" fitHeight="200.0" fitWidth="265.0" layoutX="-58.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/gameresult/sprinkle.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="blueSprinkle11" fitHeight="243.0" fitWidth="265.0" layoutX="206.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="243.0" fitWidth="265.0" layoutX="145.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/gameresult/sprinkle.gif" />
          </image>
       </ImageView>
+      <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="616.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="56.0" prefWidth="96.0" styleClass="back_btn" text="OK" textAlignment="CENTER" />
    </children>
 </AnchorPane>

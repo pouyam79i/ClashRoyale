@@ -24,16 +24,16 @@
     -fx-text-overrun: clip;
     -fx-font-family: 'Clash';
     -fx-font-scale: Bold;
-    -fx-font-size: 21px;
-    -fx-background-image: url("../../img/ui/button/btn_blue.png");
+}
 
+.back_btn{
+    -fx-font-size: 25px;
+    -fx-background-image: url("../../img/ui/button/btn_blue_e.png");
 }
 
 .label {
     -fx-font-family: 'Clash';
     -fx-color: yellow;
-    -fx-font-size: 21px;
+    -fx-font-size: 27px;
     -fx-font-scale: Bold;
-
-
 }

@@ -5,10 +5,15 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.launcher.OfflineBattleLauncher;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,9 +53,7 @@ public class GameResultController implements Initializable {
     @FXML
     private Label blueName;
     @FXML
-    private ImageView blueSprinkle;
-    @FXML
-    private ImageView redSprinkle;
+    private Button backBtn;
 
     // Updatable properties:
     private Label blueWinnerLabelUpdatable;
@@ -96,7 +99,16 @@ public class GameResultController implements Initializable {
      */
     @FXML
     public void goToMain(){
-        checked.setValue(true);
+        Thread thread = (new Thread(() -> {
+            // TODO: add btn
+            new BounceIn(backBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            checked.setValue(true);
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**

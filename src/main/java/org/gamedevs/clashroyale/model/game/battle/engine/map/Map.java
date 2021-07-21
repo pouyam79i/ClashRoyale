@@ -366,7 +366,7 @@ public class Map {
     private void blockWithImmortals(){
         // TODO: this is set for 18x30 map size
         for (int j = 14; j <= 15; j++) {
-            for (int i = 0; i <= width; i++) {
+            for (int i = 0; i <= 17; i++) {
                 if(i == 3 || i == 14)
                     continue;
                 tiles[i][j].setGameObject(new ImmortalObject());
