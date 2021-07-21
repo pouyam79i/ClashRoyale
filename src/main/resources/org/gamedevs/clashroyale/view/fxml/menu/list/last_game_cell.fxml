@@ -70,7 +70,7 @@
             <Image url="@../../../img/ui/icon/crown-red.png" />
          </image>
       </ImageView>
-      <Label layoutX="110.0" layoutY="24.0" text="VS">
+      <Label layoutX="113.0" layoutY="24.0" text="VS">
          <font>
             <Font size="21.0" />
          </font>

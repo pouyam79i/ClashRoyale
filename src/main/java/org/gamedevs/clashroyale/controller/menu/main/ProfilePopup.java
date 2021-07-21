@@ -98,8 +98,16 @@ public class ProfilePopup implements Initializable {
      */
     @FXML
     public void logoutFromAccount(){
+        new BounceIn(logoutBtn).play();
         Thread thread = (new Thread(() -> {
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
             new LogoutLauncher().start();
+            Platform.runLater(() -> {
+                AnchorPane battleMainRoot = (AnchorPane) logoutBtn.getScene().getRoot();
+                battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getProfilePopupMenu());
+            });
         }));
         thread.setDaemon(true);
         thread.start();

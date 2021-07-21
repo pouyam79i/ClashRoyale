@@ -46,13 +46,24 @@
 }
 
 .back_btn{
+    -fx-font-size: 18px;
     -fx-background-image: url("../../img/ui/button/btn_blue_e.png");
 }
 
 .logout_btn{
+    -fx-font-size: 16px;
     -fx-background-image: url("../../img/ui/button/btn_red_e.png");
 }
 
 .progress-bar > .bar, .progress-bar > .track {
     -fx-background-insets: 0;
+}
+
+.progress-bar{
+    -fx-accent: #00b8c9;
+}
+
+.progress-bar > .track {
+    -fx-text-box-border: rgba(9, 9, 9, 0.0);
+    -fx-control-inner-background: rgba(80, 79, 79, 0.5);
 }
