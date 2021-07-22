@@ -1,6 +1,8 @@
 package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
@@ -76,13 +78,13 @@ public abstract class ViewUpdater {
                 @Override
                 public void run() {
                     objectView.getImageView().setImage(img);
-                    if (gameObject.isBoost()) {
-                        Effect boost = new ColorAdjust(50, 0, 0, 0);
-                        objectView.getImageView().setEffect(boost);
-                    } else {
-                        Effect unboost = new ColorAdjust(0, 0, 0, 0);
-                        objectView.getImageView().setEffect(unboost);
-                    }
+//                    if (gameObject.isBoost()) {
+//                        Effect boost = new ColorAdjust(50, 0, 0, 0);
+//                        objectView.getImageView().setEffect(boost);
+//                    } else {
+//                        Effect unboost = new ColorAdjust(0, 0, 0, 0);
+//                        objectView.getImageView().setEffect(unboost);
+//                    }
                 }
             });
             previousState = gameObject.getState();
@@ -113,6 +115,8 @@ public abstract class ViewUpdater {
             @Override
             public void run() {
                 if (MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().contains(objectView))
+                    objectView.getChildren().remove(objectView.getImageView());
+                    objectView.getChildren().remove(objectView.getProgressBar());
                     MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
             }
         });

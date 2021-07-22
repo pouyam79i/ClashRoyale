@@ -302,6 +302,7 @@ public class Map {
                 GameObject obj = allAliveIterator.next();
                 if (obj.getHp() <= 0) {
                     allAliveIterator.remove();
+                    obj.getViewUpdater().remove();
                     obj.getHeadTile().removeObj(obj.getZ());
                     obj.setHeadPixel(null);
                     if(obj.getViewUpdater() != null)
