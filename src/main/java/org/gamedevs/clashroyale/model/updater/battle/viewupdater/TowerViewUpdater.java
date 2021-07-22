@@ -71,7 +71,7 @@ public class TowerViewUpdater extends ViewUpdater {
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             } else if (kind == 0) {
-                currentImage = gameImageContainer.getTower("KING_ENEMY");
+                currentImage = gameImageContainer.getTower("KING");
                 x = 128;
                 y = 388;
                 objectView.getImageView().setFitWidth(125);
@@ -103,7 +103,7 @@ public class TowerViewUpdater extends ViewUpdater {
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             } else if (kind == 0) {
-                currentImage = gameImageContainer.getTower("KING");
+                currentImage = gameImageContainer.getTower("KING_ENEMY");
                 x = 128;
                 y = -43;
                 objectView.getImageView().setFitWidth(125);
