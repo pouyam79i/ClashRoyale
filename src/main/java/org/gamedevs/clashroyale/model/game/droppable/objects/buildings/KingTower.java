@@ -17,7 +17,6 @@ public class KingTower extends MainTowers{
         attackTargetType = TargetType.AIR_GROUND;
         lifeTime = 1000;
         effectiveLifeTime = false;
-
         switch (level){
             case 1 :
                 hp.setValue(2400);
@@ -49,6 +48,7 @@ public class KingTower extends MainTowers{
         if(hp.getValue() <= 0){
             if(!resultSet){
                 gameResult.setFullScore(Side.getOppositeSide(teamSide));
+                resultSet = true;
             }
         }
     }

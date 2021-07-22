@@ -303,6 +303,8 @@ public class Map {
                     allAliveIterator.remove();
                     obj.getHeadTile().removeObj(obj.getZ());
                     obj.setHeadPixel(null);
+                    if(obj.getViewUpdater() != null)
+                        obj.getViewUpdater().remove();
                     if (obj.getTeamSide() == Side.TOP) {
                         topSideAliveObj.remove(obj);
                     } else {
@@ -310,7 +312,7 @@ public class Map {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Console.getConsole().printTracingMessage("Failed to refresh alive: " + e.getMessage());
             }
         }
     }

@@ -149,19 +149,19 @@ public class GameResultController implements Initializable {
                     if(i == 1){
                         Platform.runLater(() -> {
                             crownRed1Updatable.setVisible(true);
-                            new BounceIn(crownRed1Updatable);
+                            new BounceIn(crownRed1Updatable).play();
                         });
                     }
                     else if(i == 2){
                         Platform.runLater(() -> {
                             crownRed2Updatable.setVisible(true);
-                            new BounceIn(crownRed2Updatable);
+                            new BounceIn(crownRed2Updatable).play();
                         });
                     }
                     else if(i == 3){
                         Platform.runLater(() -> {
                             crownRed3Updatable.setVisible(true);
-                            new BounceIn(crownRed3Updatable);
+                            new BounceIn(crownRed3Updatable).play();
                         });
                     }
                 }
@@ -169,19 +169,19 @@ public class GameResultController implements Initializable {
                     if(i == 1){
                         Platform.runLater(() -> {
                             crownBlue1Updatable.setVisible(true);
-                            new BounceIn(crownBlue1Updatable);
+                            new BounceIn(crownBlue1Updatable).play();
                         });
                     }
                     else if(i == 2){
                         Platform.runLater(() -> {
                             crownBlue2Updatable.setVisible(true);
-                            new BounceIn(crownBlue2Updatable);
+                            new BounceIn(crownBlue2Updatable).play();
                         });
                     }
                     else if(i == 3){
                         Platform.runLater(() -> {
                             crownBlue3Updatable.setVisible(true);
-                            new BounceIn(crownBlue3Updatable);
+                            new BounceIn(crownBlue3Updatable).play();
                         });
                     }
                 }
@@ -189,21 +189,21 @@ public class GameResultController implements Initializable {
             if(finalRedScore > finalBlueScore){
                 Platform.runLater(() -> {
                     redWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(redWinnerLabelUpdatable);
+                    new BounceIn(redWinnerLabelUpdatable).play();
                 });
             }
             else if(finalRedScore < finalBlueScore){
                 Platform.runLater(() -> {
                     blueWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(blueWinnerLabelUpdatable);
+                    new BounceIn(blueWinnerLabelUpdatable).play();
                 });
             }
             else {
                 Platform.runLater(() -> {
                     redWinnerLabelUpdatable.setVisible(true);
                     blueWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(redWinnerLabelUpdatable);
-                    new BounceIn(blueWinnerLabelUpdatable);
+                    new BounceIn(redWinnerLabelUpdatable).play();
+                    new BounceIn(blueWinnerLabelUpdatable).play();
                 });
             }
         }));

@@ -57,6 +57,7 @@ public class PrincessTower extends MainTowers{
         if(hp.getValue() <= 0){
             if(!resultSet){
                 gameResult.addScore(Side.getOppositeSide(teamSide));
+                resultSet = true;
             }
         }
     }
