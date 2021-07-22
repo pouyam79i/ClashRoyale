@@ -14,6 +14,7 @@ import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.Random;
 
@@ -65,8 +66,7 @@ public class HardBot extends Bot {
                         deckContainer.setDeck(gameDeck.getUnlockCards().getDeck());
                         try {
                             Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        } catch (InterruptedException ignored) {
                         }
                     } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();
@@ -78,7 +78,7 @@ public class HardBot extends Bot {
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Console.getConsole().printTracingMessage("bot ended");
                     }
                 }
             }
@@ -96,7 +96,7 @@ public class HardBot extends Bot {
         int rightCnt = 0;
         int leftCnt = 0;
         for (GameObject gameObject : map.getDownSideAliveObj())
-            if (gameObject.getHeadPixel().getX() < MainConfig.STD_BATTLE_FIELD_X_TILE)
+            if (gameObject.getHeadPixel().getX() < MainConfig.STD_BATTLE_FIELD_X_TILE / 2)
                 rightCnt++;
             else
                 leftCnt++;
@@ -171,7 +171,7 @@ public class HardBot extends Bot {
                 card.getCardName() == CardName.FIREBALL) {
             int[] coordinate = new int[2];
             coordinate[0] = findSideWithLessTowerHpEnemy().getX();
-            coordinate[0] = 26;
+            coordinate[1] = 26;
             return coordinate;
         } else {
             return bestXYForSoldier();

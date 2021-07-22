@@ -86,7 +86,7 @@ public abstract class Spell extends Droppable {
         try {
             targetRangeCheckerThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Console.getConsole().printTracingMessage("spell thread cant join");
         }
         return targets;
     }
