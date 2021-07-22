@@ -26,24 +26,24 @@ public class ViewManager extends Runnable {
         if (gameObject.getTeamSide() == mySide) {
             if (gameObject instanceof Soldier) {
                 ViewUpdater vu= new SoldierViewUpdater(gameObject, false);
-                vu.start();
+//                vu.start();
                 return vu;
             }
             else {
                 ViewUpdater vu= new BuildingViewUpdater(gameObject, false);
-                vu.start();
+//                vu.start();
                 return vu;
             }
 
         } else {
             if (gameObject instanceof Soldier){
                 ViewUpdater vu= new SoldierViewUpdater(gameObject, true);
-                vu.start();
+//                vu.start();
                 return vu;
             }
             else {
                 ViewUpdater vu= new BuildingViewUpdater(gameObject, true);
-                vu.start();
+//                vu.start();
                 return vu;
             }
 

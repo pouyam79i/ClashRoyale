@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable;
 
+import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

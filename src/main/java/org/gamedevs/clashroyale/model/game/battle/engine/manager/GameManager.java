@@ -16,6 +16,7 @@ import org.gamedevs.clashroyale.model.game.player.bot.EasyBot;
 import org.gamedevs.clashroyale.model.game.player.bot.HardBot;
 import org.gamedevs.clashroyale.model.launcher.EndOfGameLauncher;
 import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -135,6 +136,7 @@ public class GameManager extends Runnable {
                 Thread.sleep(100);
             } catch (InterruptedException ignored) {}
         }
+        Console.getConsole().printTracingMessage("break");
         endGame();
         this.shutdown();
     }

@@ -270,8 +270,7 @@ public class Map {
      */
     public void updateObjects(long currentFrame) {
         ArrayList<GameObject> gameObjectsToShow = new ArrayList<>();
-        for(GameObject gameObject : allAlive)
-            gameObjectsToShow.add(gameObject);
+        gameObjectsToShow.addAll(allAlive);
         this.currentFrame = currentFrame;
         try {
             Iterator<GameObject> gameObjectIterator = gameObjectsToShow.iterator();
@@ -279,8 +278,10 @@ public class Map {
                 GameObject gameObject = gameObjectIterator.next();
                 try {
                     gameObject.run();   // refresh one frame
-                    if(gameObject.getViewUpdater() != null)
+
+                    if(gameObject.getViewUpdater() != null) {
                         gameObject.getViewUpdater().update();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

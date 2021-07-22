@@ -27,7 +27,7 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
  * @author Hosna Hoseini 9823010 -CE@AUT
  * @version 1.0
  */
-public abstract class ViewUpdater extends Runnable {
+public abstract class ViewUpdater {
 
     protected GameDroppableImageContainer imageContainer;
     protected final AnchorPane battleFieldPane;
@@ -41,7 +41,6 @@ public abstract class ViewUpdater extends Runnable {
     protected boolean previousBoost;
 
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
-        threadName = "ViewUpdater";
         imageContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
         this.battleFieldPane = MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable();
         this.gameObject = gameObject;
@@ -50,11 +49,6 @@ public abstract class ViewUpdater extends Runnable {
         previousTile = gameObject.getHeadPixel();
         previousState = gameObject.getState();
         previousAngle = gameObject.getAngle();
-    }
-
-    @Override
-    public void run() {
-        // Initializing thread needs
         Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
         objectView = new ObjectView(gameObject, currentImage);
         objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
