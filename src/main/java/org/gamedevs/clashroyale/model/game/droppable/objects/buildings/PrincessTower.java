@@ -20,6 +20,7 @@ public class PrincessTower extends MainTowers{
      */
     public PrincessTower(int level, Side side){
         super(side);
+
         nameOfDroppable = CardName.PRINCESS_TOWER;
         hitSpeed = 0.8;
         range = 7.5;

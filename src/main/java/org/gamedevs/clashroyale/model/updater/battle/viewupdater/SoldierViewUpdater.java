@@ -32,7 +32,24 @@ public class SoldierViewUpdater extends ViewUpdater {
 
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
+        placeInitImg();
 
+
+    }
+
+    @Override
+    public void placeInitImg() {
+        Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+        objectView = new ObjectView(gameObject, currentImage);
+        objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
+        objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
+        int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+        int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+        Platform.runLater(() -> {
+            battleFieldPane.getChildren().add(objectView);
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
+        });
     }
 
     /**
@@ -65,8 +82,8 @@ public class SoldierViewUpdater extends ViewUpdater {
 
 //            Path path = new Path();
 //
-//            MoveTo moveTo = new MoveTo(curX, curY);
-//            LineTo lineTo = new LineTo(destX, destY);
+//            MoveTo moveTo = new MoveTo(curX  - gameObject.getErrorInGUIX(), curY- gameObject.getErrorInGUIY());
+//            LineTo lineTo = new LineTo(destX - gameObject.getErrorInGUIX(), destY - gameObject.getErrorInGUIY());
 //
 //            path.getElements().add(moveTo);
 //            path.getElements().add(lineTo);
@@ -77,8 +94,13 @@ public class SoldierViewUpdater extends ViewUpdater {
 //            pathTransition.setNode(objectView);
 //            pathTransition.setPath(path);
 //            pathTransition.setCycleCount(1);
-//            pathTransition.play();
-
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    pathTransition.play();
+//                }
+//            });
+//
             if (objectView != null) {
                 Platform.runLater(new Runnable() {
                     @Override
@@ -89,23 +111,22 @@ public class SoldierViewUpdater extends ViewUpdater {
                 });
                 previousTile = gameObject.getHeadTile();
             }
-
         }
     }
 
 
-        /**
-         * check if this G.O. hp is zero or less remove it
-         */
-        public void updateExist () {
-            if (gameObject.getHp() <= 0) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        battleFieldPane.getChildren().remove(objectView);
-                    }
-                });
-            }
-
+    /**
+     * check if this G.O. hp is zero or less remove it
+     */
+    public void updateExist() {
+        if (gameObject.getHp() <= 0) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    battleFieldPane.getChildren().remove(objectView);
+                }
+            });
         }
+
     }
+}

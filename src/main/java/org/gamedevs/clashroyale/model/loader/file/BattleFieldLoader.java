@@ -130,6 +130,14 @@ public class BattleFieldLoader {
         GameImageContainer.getGameImageContainer().setThrowable(CardName.WIZARD, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/fireball.png")));
         GameImageContainer.getGameImageContainer().setThrowable(CardName.ARCHERS, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
         GameImageContainer.getGameImageContainer().setThrowable(CardName.ARROWS, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/arrows.png")));
+        GameImageContainer.getGameImageContainer().setThrowable(CardName.INFERNO_TOWER, new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/img/throwable/yellow_ball.png")));
+
+        GameImageContainer.getGameImageContainer().setTower("KING_ENEMY", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER_ENEMY.png")));
+        GameImageContainer.getGameImageContainer().setTower("PRINCESS_LEFT_ENEMY", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png")));
+        GameImageContainer.getGameImageContainer().setTower("PRINCESS_RIGHT_ENEMY", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png")));
+        GameImageContainer.getGameImageContainer().setTower("KING", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/KING_TOWER/KING_TOWER.png")));
+        GameImageContainer.getGameImageContainer().setTower("PRINCESS_LEFT", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER.png")));
+        GameImageContainer.getGameImageContainer().setTower("PRINCESS_RIGHT", new Image(BattleFieldLoader.class.getResourceAsStream("../../../view/gif/PRINCESS_TOWER/PRINCESS_TOWER.png")));
 
         // loading battle field
         reloadBattleField();

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,55 +26,7 @@
             <Image url="@../../../img/battlefield/dark_arena/objects.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="battleFieldPane" layoutX="15.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#dropCard" prefHeight="504.0" prefWidth="374.0" stylesheets="@../../../css/battlefield/battleField.css">
-         <children>
-            <ImageView fx:id="leftPrincessTowerEnemyImg" fitHeight="118.0" fitWidth="111.0" layoutX="22.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="kingTowerImg" fitHeight="136.0" fitWidth="125.0" layoutX="128.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/KING_TOWER/KING_TOWER.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="rightPrincessTowerEnemyImg" fitHeight="118.0" fitWidth="111.0" layoutX="248.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/PRINCESS_TOWER/PRINCESS_TOWER_ENEMY.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="lefttPrincessTowerImg" fitHeight="118.0" fitWidth="111.0" layoutX="19.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/PRINCESS_TOWER/PRINCESS_TOWER.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="rightPrincessTowerImg" fitHeight="118.0" fitWidth="111.0" layoutX="247.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/PRINCESS_TOWER/PRINCESS_TOWER.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="kingTowerEnemyImg" fitHeight="136.0" fitWidth="125.0" layoutX="125.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../gif/KING_TOWER/KING_TOWER_ENEMY.png" />
-               </image>
-            </ImageView>
-            <ProgressBar fx:id="kingTowerProgress" layoutX="159.0" layoutY="470.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
-            <ProgressBar fx:id="leftPrincessTowerProgress" layoutX="47.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar fx:id="rightPrincessTowerProgress" layoutX="276.0" layoutY="413.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar fx:id="kingTowerEnemyProgress" layoutX="159.0" layoutY="-43.0" prefHeight="10.0" prefWidth="80.0" progress="1.0" />
-            <ProgressBar fx:id="leftPrincessTowerEnemyProgress" layoutX="47.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ProgressBar fx:id="rightPrincessTowerEnemyProgress" layoutX="274.0" layoutY="38.0" prefHeight="8.0" prefWidth="50.0" progress="1.0" />
-            <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="135.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/battlefield/ui/badge/red-badge.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="135.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/battlefield/ui/badge/green-badge.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <AnchorPane fx:id="battleFieldPane" layoutX="15.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#dropCard" prefHeight="504.0" prefWidth="374.0" stylesheets="@../../../css/battlefield/battleField.css" />
       <ImageView fx:id="backLimitArea" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../img/battlefield/dark_arena/red_area_back.png" />

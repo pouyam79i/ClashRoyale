@@ -31,7 +31,7 @@ public class InfernoTower extends Building {
 
     public InfernoTower(int level, Side side) {
         super(side);
-        hitSpeed = 0.4;
+        hitSpeed = 0.1;
         attackTargetType = TargetType.AIR_GROUND;
         range = 6;
         lifeTime = 40;

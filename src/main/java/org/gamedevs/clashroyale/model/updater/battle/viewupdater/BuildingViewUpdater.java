@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.Building;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.InfernoTower;
@@ -26,6 +27,23 @@ public class BuildingViewUpdater extends ViewUpdater {
 
     public BuildingViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
+        placeInitImg();
+
+    }
+
+    @Override
+    public void placeInitImg() {
+        Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+        objectView = new ObjectView(gameObject, currentImage);
+        objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
+        objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
+        int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+        int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+        Platform.runLater(() -> {
+            battleFieldPane.getChildren().add(objectView);
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
+        });
     }
 
     /**
