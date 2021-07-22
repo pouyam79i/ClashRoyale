@@ -34,16 +34,16 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 public class OfflineBattleLauncher extends Runnable {
 
     /**
-     * if true launches the game in double mode
-     * else it launches the game in single mode!
+     * if true launches the game in single mode with easy bot
+     * else it launches the game in single mode with hard bot!
      */
-    private final boolean isDoubleBattle;
+    private final boolean isHard;
     /**
      * Constructor of OfflineBattleLauncher
      * Sets requirements!
      */
-    public OfflineBattleLauncher(boolean isDoubleBattle){
-        this.isDoubleBattle = isDoubleBattle;
+    public OfflineBattleLauncher(boolean isHard){
+        this.isHard = isHard;
         threadName = "OfflineBattleLauncher";
     }
 
@@ -95,7 +95,7 @@ public class OfflineBattleLauncher extends Runnable {
                 counter ++;
             }
             Console.getConsole().printTracingMessage("After seq of battle launcher");
-            // reloading battle field
+            // TODO: reloading battle field
             BattleFieldLoader.reloadBattleField();
             // Removing background panes which are used in main menu
             Platform.runLater(() -> {
@@ -106,7 +106,7 @@ public class OfflineBattleLauncher extends Runnable {
             // Initializing game engines
             GameManager gameManager = new GameManager();
             gameManager.getMap().setViewManager(new ViewManager(Side.DOWN));
-            gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), false);
+            gameManager.buildOfflineSingleGame(UserAccountContainer.getUserAccountContainer().getAccount(), isHard);
             // Setting player to player container
             PlayerContainer.getPlayerContainer().setPlayer(gameManager.getDownPlayer());
             PlayerContainer.getPlayerContainer().setBot(gameManager.getTopPlayer());
@@ -153,6 +153,7 @@ public class OfflineBattleLauncher extends Runnable {
             gameManager.start();
         }catch (Exception e){
             Console.getConsole().printTracingMessage("Failed to launch battle field! -> " + e.getMessage());
+            e.printStackTrace();
         }
         // Killing launcher
         this.shutdown();
