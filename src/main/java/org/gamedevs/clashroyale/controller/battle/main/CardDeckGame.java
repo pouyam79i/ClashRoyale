@@ -17,7 +17,6 @@ import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
 import org.gamedevs.clashroyale.model.game.player.Player;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
 /**

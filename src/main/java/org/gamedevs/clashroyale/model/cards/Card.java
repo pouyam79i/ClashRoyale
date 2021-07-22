@@ -1,8 +1,5 @@
 package org.gamedevs.clashroyale.model.cards;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
 import java.io.Serializable;
 
 /**
@@ -21,8 +18,10 @@ public class Card implements Serializable {
      * Cost of card (elixir)
      */
     private final int cost;
-
-    private boolean lock = false;
+    /**
+     * locks th card information
+     */
+    private boolean lock;
 
     /**
      * Constructor of Card
@@ -33,6 +32,7 @@ public class Card implements Serializable {
     public Card(CardName cardName, int cost) {
         this.cardName = cardName;
         this.cost = cost;
+        lock = false;
     }
 
     // Getters
@@ -43,12 +43,12 @@ public class Card implements Serializable {
         return cost;
     }
 
+    // Setters
     public boolean isLock() {
         return lock;
     }
-
-
     public void setLock(boolean lock) {
         this.lock  = lock;
     }
+
 }

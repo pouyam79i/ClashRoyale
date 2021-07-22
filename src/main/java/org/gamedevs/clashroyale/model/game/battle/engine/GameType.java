@@ -7,8 +7,8 @@ package org.gamedevs.clashroyale.model.game.battle.engine;
  */
 public enum GameType {
 
-    SINGLE_OFFLINE("Single training"),
-    DOUBLE_OFFLINE("Double training"),
+    SINGLE_OFFLINE_EASY("Single training with easy bot"),
+    SINGLE_OFFLINE_HARD("Double training with hard bot"),
     SINGLE_ONLINE("Official math"),
     DOUBLE_ONLINE("Double Online match");
 

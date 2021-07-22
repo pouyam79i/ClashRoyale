@@ -36,7 +36,9 @@ public class GameResult {
      * If result is locked
      */
     private boolean lock;
-
+    /**
+     * result container
+     */
     private GameResultContainer resultContainer;
 
     /**
@@ -72,8 +74,9 @@ public class GameResult {
             }catch (Exception e){
                 topPlayerScore.setValue(topPlayerScore.getValue() + 1);
             }
-            if(topPlayerScore.getValue() == 3)
+            if(topPlayerScore.getValue() == 3){
                 lock();
+            }
         }
         else if(side == Side.DOWN){
             try{
@@ -83,8 +86,9 @@ public class GameResult {
             }catch (Exception e){
                 downPlayerScore.setValue(downPlayerScore.getValue() + 1);
             }
-            if(downPlayerScore.getValue() == 3)
+            if(downPlayerScore.getValue() == 3){
                 lock();
+            }
         }
     }
 
@@ -94,6 +98,8 @@ public class GameResult {
      */
     public void setFullScore(Side side){
         if(lock)
+            return;
+        if(side == null)
             return;
         if(side == Side.TOP){
             try{

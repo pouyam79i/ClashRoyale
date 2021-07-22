@@ -87,9 +87,7 @@ public class SignUpController implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ignored) {}
-            Platform.runLater(() -> {
-                onWaitLoader.disappear();
-            });
+            Platform.runLater(onWaitLoader::disappear);
             if(!AccountLoader.getAccountLoader().isAccountLoaded()){
                 Platform.runLater(() -> {
                     errorLabelSignup.setVisible(false);
@@ -121,9 +119,7 @@ public class SignUpController implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ignored) {}
-            Platform.runLater(() -> {
-                onWaitLoader.disappear();
-            });
+            Platform.runLater(onWaitLoader::disappear);
             if(!AccountBuilder.getAccountBuilder().isAccountLoaded()){
                 Platform.runLater(() -> {
                     errorLabelSignup.setVisible(true);

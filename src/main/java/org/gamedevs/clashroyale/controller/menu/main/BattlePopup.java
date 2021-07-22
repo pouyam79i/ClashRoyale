@@ -23,9 +23,9 @@ public class BattlePopup {
     @FXML
     private Button doubleOnlineBtn;
     @FXML
-    private Button singleOfflineBtn;
+    private Button easyOfflineBtn;
     @FXML
-    private Button doubleOfflineBtn;
+    private Button hardOfflineBtn;
     @FXML
     private Button cancelBtn;
 
@@ -46,17 +46,17 @@ public class BattlePopup {
     }
 
     /**
-     * Bringing battle in single offline mode (training mode)
+     * Bringing battle in single offline mode (training with easy mode)
      */
     @FXML
-    private void bringSingleOfflineBattle(){
+    private void bringEasyOfflineBtn(){
         Thread thread = (new Thread(() -> {
-            new BounceIn(singleOfflineBtn).play();
+            new BounceIn(easyOfflineBtn).play();
             try {
                 Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
             } catch (InterruptedException ignored) {}
             Platform.runLater(() -> {
-                AnchorPane battleMainRoot = (AnchorPane) singleOfflineBtn.getScene().getRoot();
+                AnchorPane battleMainRoot = (AnchorPane) easyOfflineBtn.getScene().getRoot();
                 battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
             });
             new OfflineBattleLauncher(false).start();
@@ -69,8 +69,20 @@ public class BattlePopup {
      * Bringing battle in double offline mode
      */
     @FXML
-    private void bringDoubleOfflineBattle(){
-        new BounceIn(doubleOfflineBtn).play();
+    private void bringHardOfflineBtn(){
+        Thread thread = (new Thread(() -> {
+            new BounceIn(hardOfflineBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            Platform.runLater(() -> {
+                AnchorPane battleMainRoot = (AnchorPane) hardOfflineBtn.getScene().getRoot();
+                battleMainRoot.getChildren().remove(MenuDataContainer.getMenuDataContainer().getBattlePopupMenu());
+            });
+            new OfflineBattleLauncher(true).start();
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**

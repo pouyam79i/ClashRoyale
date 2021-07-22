@@ -20,6 +20,9 @@ public class PlayerContainer {
      * allows to interact with game engines!
      */
     private Player player;
+    /**
+     * bot of game
+     */
     private Player bot;
 
     /**
@@ -38,11 +41,9 @@ public class PlayerContainer {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
     public Player getBot() {
         return bot;
     }
-
     public void setBot(Player bot) {
         this.bot = bot;
     }

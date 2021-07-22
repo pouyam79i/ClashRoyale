@@ -1,23 +1,16 @@
 package org.gamedevs.clashroyale.controller.battle.main;
 
-import javafx.animation.PathTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import org.gamedevs.clashroyale.model.container.gamedata.*;
-import org.gamedevs.clashroyale.model.game.droppable.Droppable;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
 import org.gamedevs.clashroyale.model.game.player.Player;
 
-import java.awt.geom.Point2D;
 import java.net.URL;
 import java.util.ResourceBundle;
 

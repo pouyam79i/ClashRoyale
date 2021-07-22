@@ -1,6 +1,5 @@
 package org.gamedevs.clashroyale.model.account;
 
-import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
@@ -9,7 +8,6 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 import org.gamedevs.clashroyale.model.utils.io.FileConfig;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -100,17 +98,11 @@ public class AccountBuilder {
     }
 
     /**
-     * @return only instance of this class!
-     * if null it will build a instance of it!
+     * @return a random deck
      */
-    public static AccountBuilder getAccountBuilder() {
-        if(accountBuilder == null)
-            accountBuilder = new AccountBuilder();
-        return accountBuilder;
-    }
-
     public static DeckContainer getRandomDeck(){
         DeckContainer availableContainer = new DeckContainer();
+        // adding cards
         availableContainer.addCard(new Card(CardName.BARBARIANS, 5));
         availableContainer.addCard(new Card(CardName.ARCHERS, 3));
         availableContainer.addCard(new Card(CardName.BABY_DRAGON, 4));
@@ -128,8 +120,18 @@ public class AccountBuilder {
         availableContainer.getDeck().remove(10);
         availableContainer.getDeck().remove(9);
         availableContainer.getDeck().remove(8);
-
-
+        // returning deck
         return availableContainer;
     }
+
+    /**
+     * @return only instance of this class!
+     * if null it will build a instance of it!
+     */
+    public static AccountBuilder getAccountBuilder() {
+        if(accountBuilder == null)
+            accountBuilder = new AccountBuilder();
+        return accountBuilder;
+    }
+
 }
