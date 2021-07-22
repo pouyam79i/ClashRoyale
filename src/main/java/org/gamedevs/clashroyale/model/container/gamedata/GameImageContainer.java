@@ -12,6 +12,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class GameImageContainer {
+
     /**
      * Only instance of this class
      */
@@ -54,6 +55,5 @@ public class GameImageContainer {
             gameImageContainer = new GameImageContainer();
         return gameImageContainer;
     }
-
 
 }

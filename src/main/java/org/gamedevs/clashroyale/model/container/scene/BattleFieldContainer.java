@@ -60,28 +60,22 @@ public class BattleFieldContainer {
 
     // Setters
     public void setBattleField(AnchorPane battleField) {
-        if(this.battleField == null)
-            this.battleField = battleField;
+        this.battleField = battleField;
     }
     public void setCardDeck(AnchorPane cardDeck) {
-        if(this.cardDeck == null)
-            this.cardDeck = cardDeck;
+        this.cardDeck = cardDeck;
     }
     public void setGameStarter(AnchorPane gameStarter) {
-        if(this.gameStarter == null)
-            this.gameStarter = gameStarter;
+        this.gameStarter = gameStarter;
     }
     public void setGameResult(AnchorPane result) {
-        if(this.gameResult == null)
-            this.gameResult = result;
+        this.gameResult = result;
     }
     public void setMainBattleGroup(Group mainBattleGroup) {
-        if(this.mainBattleGroup == null)
-            this.mainBattleGroup = mainBattleGroup;
+        this.mainBattleGroup = mainBattleGroup;
     }
     public void setGameTimer(AnchorPane gameTimer) {
-        if(this.gameTimer == null)
-            this.gameTimer = gameTimer;
+        this.gameTimer = gameTimer;
     }
 
     /**

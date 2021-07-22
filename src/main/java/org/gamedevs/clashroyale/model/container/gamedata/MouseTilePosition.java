@@ -59,12 +59,20 @@ public class MouseTilePosition {
         return yOfPixel;
     }
 
-
+    /**
+     * Translate x of pixel to x of tile (battle field anchor pane)
+     * @param x of pixel
+     * @return x of tile
+     */
     public static int TranslatePixelToTileX(double x){
         return (int) Math.floor(x /20.7);
     }
 
-
+    /**
+     * Translate y of pixel to y of tile (battle field anchor pane)
+     * @param y of pixel
+     * @return y of tile
+     */
     public static int TranslatePixelToTileY(double y){
         return (int) Math.floor((MainConfig.STD_BATTLE_FIELD_HEIGHT - y)/16.8);
     }

@@ -16,6 +16,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.GameIconContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.launcher.LogoutLauncher;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -117,7 +118,11 @@ public class ProfilePopup implements Initializable {
      * Initializing values
      */
     public void init(){
-        updateView();
+        try {
+            updateView();
+        }catch (Exception e){
+            Console.getConsole().printTracingMessage("Failed to update profile view! -> " + e.getMessage());
+        }
     }
 
 

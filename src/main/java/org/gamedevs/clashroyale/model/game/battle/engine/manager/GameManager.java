@@ -89,7 +89,7 @@ public class GameManager extends Runnable {
             topPlayer = new HardBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
         else
             topPlayer = new EasyBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
-        gameResult = new GameResult(GameType.SINGLE_OFFLINE, "Bot", account.getUsername());
+        gameResult = new GameResult(GameType.SINGLE_OFFLINE_EASY, "Bot", account.getUsername());
     }
 
     /**

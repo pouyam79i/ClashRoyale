@@ -1,9 +1,7 @@
 package org.gamedevs.clashroyale.model.container.gamedata;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import org.gamedevs.clashroyale.model.cards.Card;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 /**
  * Selected card container.
@@ -54,14 +52,12 @@ public class SelectedCardContainer {
      * put a card in selected card field!
      *
      * @param newCard new card will be set
-     * @return
+     * @return replace card if exists else it will be null (or empty card)
      */
     public Card put(Card newCard) {
-
         selectedCardExist.setValue(true);
         selectedCardIsDropped.setValue(false);
         selectedCardFailedToDrop.setValue(false);
-
         Card temp = selectedCard;   // If there is any selected card from before
         selectedCard = newCard;
         return temp;
@@ -71,13 +67,9 @@ public class SelectedCardContainer {
      * @return removes the selected card field
      */
     public Card takeOut() {
-
         selectedCardExist.setValue(false);
         selectedCardIsDropped.setValue(false);
         selectedCardFailedToDrop.setValue(false);
-//            Console.getConsole().printTracingMessage("take out " + selectedCard.getCardName() + " " + selectedCardExist.get());
-
-
         Card temp = selectedCard;
         selectedCard = null;
         return temp;
@@ -94,45 +86,36 @@ public class SelectedCardContainer {
      * drops the card in battle field
      */
     public void dropped() {
-
         selectedCardIsDropped.setValue(true);
         selectedCardExist.setValue(false);
         selectedCardFailedToDrop.setValue(false);
-
     }
 
     /**
      * if dropping process failed
      */
     public void droppingFailed() {
-
         selectedCardExist.setValue(false);
         selectedCardIsDropped.setValue(false);
         selectedCardFailedToDrop.setValue(true);
-
     }
 
     // Getters
     public boolean isSelectedCardIsDropped() {
         return selectedCardIsDropped.get();
     }
-
     public SimpleBooleanProperty selectedCardIsDroppedProperty() {
         return selectedCardIsDropped;
     }
-
     public boolean isSelectedCardExist() {
         return selectedCardExist.get();
     }
-
     public SimpleBooleanProperty selectedCardExistProperty() {
         return selectedCardExist;
     }
-
     public boolean isSelectedCardFailedToDrop() {
         return selectedCardFailedToDrop.get();
     }
-
     public SimpleBooleanProperty selectedCardFailedToDropProperty() {
         return selectedCardFailedToDrop;
     }

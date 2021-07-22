@@ -1,24 +1,17 @@
 package org.gamedevs.clashroyale.controller.menu.main;
 
-import com.sun.scenario.effect.Effect;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-//import javafx.scene.control.Cost;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
-import org.gamedevs.clashroyale.model.loader.file.MenuFileLoader;
 import org.gamedevs.clashroyale.model.utils.io.AccountIO;
 
 import java.net.URL;

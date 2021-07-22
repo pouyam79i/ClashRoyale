@@ -8,8 +8,6 @@ import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
-import java.util.ArrayList;
-
 /**
  * This class contains main structure of bot!
  *
