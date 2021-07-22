@@ -4,7 +4,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamedevs.clashroyale.controller.battle.main.MainBattleField">
    <children>
@@ -26,11 +25,6 @@
       <ImageView fx:id="objects" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/battlefield/dark_arena/objects.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../../../img/battlefield/dark_arena/red_area_back.png" />
          </image>
       </ImageView>
       <AnchorPane fx:id="battleFieldPane" layoutX="15.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#dropCard" prefHeight="504.0" prefWidth="374.0" stylesheets="@../../../css/battlefield/battleField.css">
@@ -82,13 +76,31 @@
                </image>
             </ImageView>
          </children></AnchorPane>
+      <ImageView fx:id="backLimitArea" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../img/battlefield/dark_arena/red_area_back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rightLimitArea" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../img/battlefield/dark_arena/red_area_right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="leftLimitArea" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../img/battlefield/dark_arena/red_area_left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fullLimitArea" fitHeight="720.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../img/battlefield/dark_arena/red_area_full.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="selectedTile" fitHeight="19.0" fitWidth="17.0" layoutX="18.0" layoutY="87.0" onMouseClicked="#dropCard" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/battlefield/dark_arena/selected_tile.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="504.0" fitWidth="374.0" layoutX="15.0" layoutY="86.0" onMouseClicked="#dropCard" onMouseMoved="#updatePosition" pickOnBounds="true" preserveRatio="true" />
-      <Rectangle fx:id="topLimit" arcHeight="5.0" arcWidth="5.0" fill="#f8454566" height="251.0" layoutX="14.0" layoutY="86.0" stroke="#ab0000" strokeType="INSIDE" visible="false" width="374.0" />
-      <Rectangle fx:id="downLimit" arcHeight="5.0" arcWidth="5.0" fill="#f8454566" height="251.0" layoutX="14.0" layoutY="346.0" stroke="#ab0000" strokeType="INSIDE" visible="false" width="374.0" />
    </children>
 </AnchorPane>

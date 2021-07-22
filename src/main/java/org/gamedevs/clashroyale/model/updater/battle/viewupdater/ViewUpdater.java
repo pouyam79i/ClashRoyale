@@ -80,7 +80,6 @@ public abstract class ViewUpdater extends Runnable {
      * update image of game object regarding to its state and angle
      */
     public void updateImg() {
-
         if (previousAngle != gameObject.getAngle() ||
                 previousState != gameObject.getState() ||
                 previousBoost != gameObject.isBoost()) {

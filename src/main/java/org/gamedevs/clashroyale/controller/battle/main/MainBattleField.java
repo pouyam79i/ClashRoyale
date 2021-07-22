@@ -33,63 +33,50 @@ public class MainBattleField implements Initializable {
     // fx:id
     @FXML
     private ImageView background;
-
     @FXML
     private ImageView lava;
-
     @FXML
     private ImageView battleField;
-
     @FXML
     private ImageView objects;
-
     @FXML
     private AnchorPane battleFieldPane;
-
     @FXML
     private ImageView leftPrincessTowerEnemyImg;
-
     @FXML
     private ImageView kingTowerImg;
-
     @FXML
     private ImageView rightPrincessTowerEnemyImg;
-
     @FXML
     private ImageView lefttPrincessTowerImg;
-
     @FXML
     private ImageView rightPrincessTowerImg;
-
     @FXML
     private ImageView kingTowerEnemyImg;
-
     @FXML
     private ImageView selectedTile;
-
     @FXML
     private ProgressBar kingTowerProgress;
-
     @FXML
     private ProgressBar leftPrincessTowerProgress;
-
     @FXML
     private ProgressBar rightPrincessTowerProgress;
-
     @FXML
     private ProgressBar kingTowerEnemyProgress;
-
     @FXML
     private ProgressBar leftPrincessTowerEnemyProgress;
-
     @FXML
     private ProgressBar rightPrincessTowerEnemyProgress;
-
     @FXML
-    private Rectangle topLimit;
-
+    private ImageView fullLimitArea;
     @FXML
-    private Rectangle downLimit;
+    private ImageView leftLimitArea;
+    @FXML
+    private ImageView rightLimitArea;
+    @FXML
+    private ImageView backLimitArea;
+
+
     //updatable
     private static ImageView leftPrincessTowerEnemyImgUpdatable = new ImageView();
     private static ImageView kingTowerImgUpdatable = new ImageView();
@@ -115,7 +102,9 @@ public class MainBattleField implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: uncomment line bellow when out of test!
-//        selectedTile.setVisible(false);
+        selectedTile.visibleProperty().bindBidirectional(
+                SelectedCardContainer.getSelectedCardContainer().selectedCardExistProperty()
+        );
         MouseTilePosition.getMouseTilePosition().setCaliberX(selectedTile.getLayoutX());
         MouseTilePosition.getMouseTilePosition().setCaliberY(selectedTile.getLayoutY());
         selectedTile.layoutXProperty().bindBidirectional(MouseTilePosition.getMouseTilePosition().xSelectedTileProperty());
@@ -345,11 +334,4 @@ public class MainBattleField implements Initializable {
         this.rightPrincessTowerEnemyProgressUpdatable = righttPrincessTowerEnemyProgressUpdatable;
     }
 
-    public Rectangle getTopLimit(){
-        return topLimit;
-    }
-
-    public Rectangle getDownLimit() {
-        return downLimit;
-    }
 }
