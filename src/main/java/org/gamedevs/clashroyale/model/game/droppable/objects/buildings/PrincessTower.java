@@ -50,5 +50,15 @@ public class PrincessTower extends MainTowers{
         }
     }
 
+    @Override
+    public void run(){
+        checkTargetRange();
+        currentFrame++;
+        if(hp.getValue() <= 0){
+            if(!resultSet){
+                gameResult.addScore(Side.getOppositeSide(teamSide));
+            }
+        }
+    }
 
 }

@@ -120,7 +120,9 @@ public class GameManager extends Runnable {
         clock.start();
         topPlayer.dropMainTowers();
         downPlayer.dropMainTowers();
-//        topPlayer.start();        // TODO: uncomment this
+        topPlayer.bindGameResult(gameResult);
+        downPlayer.bindGameResult(gameResult);
+        topPlayer.start();        // TODO: uncomment this
         downPlayer.start();
         // When we have still tile
         while (!clock.isEndOfTime()){

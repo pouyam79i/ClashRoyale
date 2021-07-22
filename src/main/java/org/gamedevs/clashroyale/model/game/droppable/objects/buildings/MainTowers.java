@@ -17,7 +17,11 @@ public abstract class MainTowers extends Building{
     /**
      * when main tower dies one score must be added to another player
      */
-    private GameResult gameResult;
+    protected GameResult gameResult;
+    /**
+     * If result if tower death is added to the tower
+     */
+    protected boolean resultSet;
 
     /**
      * Setting default values for building object.
@@ -25,6 +29,12 @@ public abstract class MainTowers extends Building{
      */
     protected MainTowers(Side side) {
         super(side);
+        resultSet = false;
+    }
+
+    // Setters
+    public void setGameResult(GameResult gameResult) {
+        this.gameResult = gameResult;
     }
 
 }

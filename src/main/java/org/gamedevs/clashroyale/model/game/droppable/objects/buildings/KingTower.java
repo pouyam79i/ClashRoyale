@@ -42,6 +42,15 @@ public class KingTower extends MainTowers{
         }
     }
 
-
+    @Override
+    public void run(){
+        checkTargetRange();
+        currentFrame++;
+        if(hp.getValue() <= 0){
+            if(!resultSet){
+                gameResult.setFullScore(Side.getOppositeSide(teamSide));
+            }
+        }
+    }
 
 }

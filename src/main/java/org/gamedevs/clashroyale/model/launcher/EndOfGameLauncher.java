@@ -64,6 +64,8 @@ public class EndOfGameLauncher extends Runnable {
                 account.increaseXP(300);
             else
                 account.increaseXP(70);
+            // Saving game account
+            account.addGameResult(gameResult.getResultContainer());
             AccountIO.getAccountIO().removeFileInfo(account.getUsername() + ".bin");
             AccountIO.getAccountIO().singleObjectFileWriter(account.getUsername() + ".bin", account);
         }else {
