@@ -133,6 +133,13 @@ public abstract class ViewUpdater {
             getChildren().add(progressBar);
         }
 
+        /**
+         * Check if it is still alive
+         */
+        public void check(){
+
+        }
+
         //Getters and Setters
         public ProgressBar getProgressBar() {
             return progressBar;
