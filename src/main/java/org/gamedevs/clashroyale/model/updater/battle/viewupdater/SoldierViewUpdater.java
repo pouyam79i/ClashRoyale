@@ -46,48 +46,48 @@ public class SoldierViewUpdater extends ViewUpdater {
 
         if (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
-            Runnable move = new Runnable() {
-                @Override
-                public void run() {
-                    double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
-                    double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
+//            Runnable move = new Runnable() {
+//                @Override
+//                public void run() {
+//                    double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
+//                    double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
                     double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
                     double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-                    double sleepTime = (((Soldier) gameObject).getSpeed() * 100 - 1) / Math.max(destX - curX, destY - curY);
-                    sleepTime = 50;
-                    double deltaX;
-                    double deltaY;
-                    do {
-                        deltaX = destX - curX;
-                        deltaY = destY - curY;
-                        if (deltaX != 0) {
-                            curX = curX + (deltaX > 0 ? 1 : -1);
-                        }
-                        if (deltaY != 0) {
-                            curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
-                        }
-                        double finalCurY = curY;
-                        double finalCurX = curX;
+//                    double sleepTime = (((Soldier) gameObject).getSpeed() * 100 - 1) / Math.max(destX - curX, destY - curY);
+//                    sleepTime = 50;
+//                    double deltaX;
+//                    double deltaY;
+//                    do {
+//                        deltaX = destX - curX;
+//                        deltaY = destY - curY;
+//                        if (deltaX != 0) {
+//                            curX = curX + (deltaX > 0 ? 1 : -1);
+//                        }
+//                        if (deltaY != 0) {
+//                            curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
+//                        }
+//                        double finalCurY = curY;
+//                        double finalCurX = curX;
                         if(objectView != null) {
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    objectView.setLayoutX(finalCurX - gameObject.getErrorInGUIX());
-                                    objectView.setLayoutY(finalCurY - gameObject.getErrorInGUIY());
+                                    objectView.setLayoutX(destX - gameObject.getErrorInGUIX());
+                                    objectView.setLayoutY(destY - gameObject.getErrorInGUIY());
                                 }
                             });
                         }
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                        }
-                    } while (deltaX != 0 || deltaY != 0);
+//                        try {
+//                            Thread.sleep(100);
+//                        } catch (InterruptedException e) {
+//                        }
+//                    } while (deltaX != 0 || deltaY != 0);
                     previousTile = gameObject.getHeadTile();
-                    Thread.interrupted();
-                }
+//                    Thread.interrupted();
+//                }
 
-            };
-            service.execute(move);
+//            };
+//            service.execute(move);
         }
     }
 
