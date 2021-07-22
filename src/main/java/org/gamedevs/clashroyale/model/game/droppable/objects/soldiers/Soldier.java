@@ -57,7 +57,7 @@ public abstract class Soldier extends GameObject {
     @Override
     protected void attackOrMove(GameObject target) {
         if (target != null) {
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+//            new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
             if(previousState != state){
                 initialFrame = currentFrame;

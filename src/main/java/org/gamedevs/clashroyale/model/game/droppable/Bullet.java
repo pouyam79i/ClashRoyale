@@ -2,10 +2,13 @@ package org.gamedevs.clashroyale.model.game.droppable;
 
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.*;
+import javafx.util.Duration;
 import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
@@ -39,82 +42,55 @@ public class Bullet {
      * @param destination destination point
      */
     public void throwBullet(Point2D source, Point2D destination) {
-        source = new Point2D.Float((float) source.getX() + 10, (float) source.getY() + 8);
-        destination = new Point2D.Float((float) destination.getX() + 10, (float) destination.getY() + 8);
-        Point2D finalSource = source;
-        Point2D finalDestination = destination;
-        Thread thread = new Thread() {
-            @Override
-            public void start() {
 
-                Image image = GameImageContainer.getGameImageContainer().getThrowable(droppable.getNameOfDroppable());
+        Image img = GameImageContainer.getGameImageContainer().getThrowable(droppable.getNameOfDroppable());
+        if(img != null) {
+            ImageView imageView = new ImageView(img);
+            if (droppable.nameOfDroppable == CardName.CANNON ||
+                    droppable.nameOfDroppable == CardName.BABY_DRAGON ||
+                    droppable.nameOfDroppable == CardName.ARCHERS ||
+                    droppable.nameOfDroppable == CardName.KING_TOWER ||
+                    droppable.nameOfDroppable == CardName.PRINCESS_TOWER ||
+                    droppable.nameOfDroppable == CardName.WIZARD) {
+                imageView.setFitWidth(10);
+                imageView.setFitHeight(10);
+            } else {
 
-                if (image != null) {
-                    Console.getConsole().printTracingMessage(droppable.nameOfDroppable.toString() +" bullet throwing");
-                    ImageView imageView = new ImageView(image);
-                    if (droppable.nameOfDroppable == CardName.CANNON ||
-                            droppable.nameOfDroppable == CardName.BABY_DRAGON ||
-                            droppable.nameOfDroppable == CardName.ARCHERS ||
-                            droppable.nameOfDroppable == CardName.KING_TOWER ||
-                            droppable.nameOfDroppable == CardName.PRINCESS_TOWER) {
-                        imageView.setFitWidth(10);
-                        imageView.setFitHeight(10);
-                    } else {
-
-                        imageView.setFitWidth(25);
-                        imageView.setFitHeight(25);
-                    }
-                    imageView.setRotate(imageView.getRotate() + droppable.getAngle().getAngle() + 180);
-                    double curX = finalSource.getX();
-                    double curY = finalSource.getY();
-                    double sleepTime = droppable.getHitSpeed() / Math.abs(finalSource.distance(finalDestination)) * 1000 * 2;
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(imageView);
-                            imageView.setLayoutX(finalSource.getX());
-                            imageView.setLayoutY(finalSource.getY());
-                        }
-                    });
-
-                    while (curX != finalDestination.getX() ||
-                            curY != finalDestination.getY()) {
-
-                        double deltaX = finalDestination.getX() - curX;
-                        double deltaY = finalDestination.getY() - curY;
-                        if (deltaX != 0) {
-                            curX = curX + (deltaX > 0 ? 1 : -1);
-                        }
-                        if (deltaY != 0) {
-                            curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
-                        }
-                        double finalCurY = curY;
-                        double finalCurX = curX;
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                imageView.setLayoutX(finalCurX);
-                                imageView.setLayoutY(finalCurY);
-                            }
-                        });
-                        try {
-                            Thread.sleep((long) sleepTime);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(imageView);
-                        }
-                    });
-                }
+                imageView.setFitWidth(25);
+                imageView.setFitHeight(25);
             }
+            Path path = new Path();
 
-        };
-        thread.start();
+            MoveTo moveTo = new MoveTo(source.getX(), source.getY());
+            LineTo lineTo = new LineTo(destination.getX(), destination.getY());
 
+            path.getElements().add(moveTo);
+            path.getElements().add(lineTo);
+
+            //Creating a path transition
+            PathTransition pathTransition = new PathTransition();
+            pathTransition.setDuration(Duration.millis(droppable.getHitSpeed() * 1000));
+            pathTransition.setNode(imageView);
+            pathTransition.setPath(path);
+            pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTransition.setCycleCount(1);
+            pathTransition.setAutoReverse(true);
+            pathTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(imageView);
+                }
+            });
+            //Playing the animation
+            pathTransition.play();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(imageView);
+                }
+            });
+
+        }
     }
 
     /**
@@ -124,7 +100,7 @@ public class Bullet {
      * @param destinationTile destinationTile
      */
     public void throwBullet(Tile sourceTile, Tile destinationTile) {
-        if(sourceTile!= null && destinationTile != null) {
+        if (sourceTile != null && destinationTile != null) {
             Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
                     MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
             Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
@@ -140,8 +116,7 @@ public class Bullet {
      * @param destinationTile destinationTile
      */
     public void throwBullet(Point2D start, Tile destinationTile) {
-        if(destinationTile != null) {
-
+        if (destinationTile != null) {
             Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
                     MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
             throwBullet(start, destination);

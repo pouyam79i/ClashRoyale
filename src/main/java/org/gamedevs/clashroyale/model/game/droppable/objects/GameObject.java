@@ -60,6 +60,11 @@ public abstract class GameObject extends Droppable {
     protected double errorInGUIX;
     protected double errorInGUIY;
 
+    /**
+     * lockedTarget to hit
+     */
+    GameObject lockedTarget = null;
+
     // Action property:
     /**
      * to detect state changing!
@@ -104,7 +109,7 @@ public abstract class GameObject extends Droppable {
      */
     protected void attackOrMove(GameObject target) {
         if (target != null) {
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+//            new Bullet(this).throwBullet(headTile, target.getHeadTile());
             state = GameObjectState.ATTACK;
             if(previousState != state){
                 initialFrame = currentFrame;
@@ -143,7 +148,6 @@ public abstract class GameObject extends Droppable {
      * calls attackOrMove() on that target!
      */
     protected void checkTargetRange() {
-        GameObject lockedTarget = null;
         int x, y;       // beginning x,y of search area
         x = headTile.getX() - (int) Math.round(range);
         y = headTile.getY() - (int) Math.round(range);
@@ -276,6 +280,10 @@ public abstract class GameObject extends Droppable {
 
     public ViewUpdater getViewUpdater() {
         return viewUpdater;
+    }
+
+    public GameObject getLockedTarget() {
+        return lockedTarget;
     }
 
     // Setters

@@ -15,6 +15,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
+import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -39,6 +40,7 @@ public abstract class ViewUpdater {
     protected Angle previousAngle;
     protected Tile previousTile;
     protected boolean previousBoost;
+    private int cntToShoot;
 
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
         imageContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
@@ -49,21 +51,23 @@ public abstract class ViewUpdater {
         previousTile = gameObject.getHeadPixel();
         previousState = gameObject.getState();
         previousAngle = gameObject.getAngle();
+        placeInitImg();
+
+    }
+
+    public void placeInitImg() {
         Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
         objectView = new ObjectView(gameObject, currentImage);
         objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
         objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
         int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
         int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-//        Console.getConsole().printTracingMessage("x, y final: " + x + ", " + y);
         Platform.runLater(() -> {
             battleFieldPane.getChildren().add(objectView);
-            objectView.setLayoutX(x - gameObject.getErrorInGUIX() );
-            objectView.setLayoutY(y - gameObject.getErrorInGUIY() );
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
         });
-
     }
-
 
     /**
      * update GUI
@@ -82,10 +86,10 @@ public abstract class ViewUpdater {
                 @Override
                 public void run() {
                     objectView.getImageView().setImage(img);
-                    if(gameObject.isBoost()){
+                    if (gameObject.isBoost()) {
                         Effect boost = new ColorAdjust(50, 0, 0, 0);
                         objectView.getImageView().setEffect(boost);
-                    }else {
+                    } else {
                         Effect unboost = new ColorAdjust(0, 0, 0, 0);
                         objectView.getImageView().setEffect(unboost);
                     }
@@ -93,6 +97,21 @@ public abstract class ViewUpdater {
             });
             previousState = gameObject.getState();
             previousAngle = gameObject.getAngle();
+        }
+    }
+
+    /**
+     * check if G.O. is in the attack state throw bullet
+     */
+    public void throwBulletIfAttack() {
+        if (gameObject.getState() == GameObjectState.ATTACK && gameObject.getLockedTarget() != null) {
+            if (previousState != GameObjectState.ATTACK)
+                cntToShoot = 0;
+            else
+                cntToShoot++;
+            Console.getConsole().printTracingMessage(String.valueOf(cntToShoot));
+            if (cntToShoot % (gameObject.getHitSpeed() * 10) == 0)
+                new Bullet(gameObject).throwBullet(gameObject.getHeadTile(), gameObject.getLockedTarget().getHeadTile());
         }
     }
 
@@ -133,12 +152,6 @@ public abstract class ViewUpdater {
             getChildren().add(progressBar);
         }
 
-        /**
-         * Check if it is still alive
-         */
-        public void check(){
-
-        }
 
         //Getters and Setters
         public ProgressBar getProgressBar() {

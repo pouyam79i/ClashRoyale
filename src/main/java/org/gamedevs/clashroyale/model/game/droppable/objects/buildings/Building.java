@@ -37,9 +37,6 @@ public abstract class Building extends GameObject {
      * If life time matchers for building,
      */
     protected boolean effectiveLifeTime;
-    /**
-     * locked target to hit
-     */
 
     /**
      * Setting default values for building object

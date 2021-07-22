@@ -35,6 +35,7 @@ public class SoldierViewUpdater extends ViewUpdater {
 
         updateExist();
         updateImg();
+        throwBulletIfAttack();
         updatePosition();
 
     }
@@ -101,7 +102,6 @@ public class SoldierViewUpdater extends ViewUpdater {
                 @Override
                 public void run() {
                     battleFieldPane.getChildren().remove(objectView);
-                    Console.getConsole().printTracingMessage("remove " + gameObject.getNameOfDroppable());
                 }
             });
         }

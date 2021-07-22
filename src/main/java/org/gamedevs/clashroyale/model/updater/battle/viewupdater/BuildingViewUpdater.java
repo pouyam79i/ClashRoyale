@@ -33,8 +33,8 @@ public class BuildingViewUpdater extends ViewUpdater {
      */
     @Override
     public void update() {
-
         updateImg();
+        throwBulletIfAttack();
         updateExist();
 
     }
@@ -47,7 +47,6 @@ public class BuildingViewUpdater extends ViewUpdater {
                     if(gameObject.getNameOfDroppable() == CardName.INFERNO_TOWER)
                         MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(((InfernoTower)gameObject).getLine());
 
-                    Console.getConsole().printTracingMessage("delete building");
                     MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
                 }
             });
