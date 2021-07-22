@@ -9,6 +9,7 @@ import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Clock;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Human;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -105,6 +106,9 @@ public class GameManager extends Runnable {
         gameResult.lock();
         topPlayer.shutdown();
         downPlayer.shutdown();
+        for(GameObject gameObject:map.getAllAlive())
+            if(gameObject.getViewUpdater() != null)
+                gameObject.getViewUpdater().remove();
         // TODO: override player shutdown function and remove below code
         topPlayer.getElixir().shutdown();
         downPlayer.getElixir().shutdown();

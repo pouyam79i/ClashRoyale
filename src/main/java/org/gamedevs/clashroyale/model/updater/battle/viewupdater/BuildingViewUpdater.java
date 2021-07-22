@@ -33,6 +33,7 @@ public class BuildingViewUpdater extends ViewUpdater {
      */
     @Override
     public void update() {
+        updateExist();
         updateImg();
         throwBulletIfAttack();
         updateExist();

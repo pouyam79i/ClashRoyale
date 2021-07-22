@@ -400,4 +400,7 @@ public class Map {
         return downSideAliveObj;
     }
 
+    public ArrayList<GameObject> getAllAlive() {
+        return allAlive;
+    }
 }

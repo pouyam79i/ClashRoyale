@@ -45,6 +45,8 @@ public class SoldierViewUpdater extends ViewUpdater {
         updateImg();
         throwBulletIfAttack();
         updatePosition();
+        updateExist();
+
 
     }
 

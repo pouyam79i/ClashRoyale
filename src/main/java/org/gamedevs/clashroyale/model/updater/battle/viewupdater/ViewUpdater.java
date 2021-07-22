@@ -55,6 +55,9 @@ public abstract class ViewUpdater {
 
     }
 
+    /**
+     * put initial image in GUI
+     */
     public void placeInitImg() {
         Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
         objectView = new ObjectView(gameObject, currentImage);
@@ -116,6 +119,19 @@ public abstract class ViewUpdater {
     }
 
     /**
+     * remove G.O. from battle field
+     */
+    public void remove() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().contains(objectView))
+                    MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
+            }
+        });
+    }
+
+    /**
      * Anchor pane which contains game object image and progress bar
      * in order to show in GUI
      */
@@ -151,7 +167,6 @@ public abstract class ViewUpdater {
             getChildren().add(imageView);
             getChildren().add(progressBar);
         }
-
 
         //Getters and Setters
         public ProgressBar getProgressBar() {
