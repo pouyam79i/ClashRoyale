@@ -82,8 +82,8 @@ public class SoldierViewUpdater extends ViewUpdater {
 
 //            Path path = new Path();
 //
-//            MoveTo moveTo = new MoveTo(curX, curY);
-//            LineTo lineTo = new LineTo(destX, destY);
+//            MoveTo moveTo = new MoveTo(curX  - gameObject.getErrorInGUIX(), curY- gameObject.getErrorInGUIY());
+//            LineTo lineTo = new LineTo(destX - gameObject.getErrorInGUIX(), destY - gameObject.getErrorInGUIY());
 //
 //            path.getElements().add(moveTo);
 //            path.getElements().add(lineTo);
@@ -94,8 +94,13 @@ public class SoldierViewUpdater extends ViewUpdater {
 //            pathTransition.setNode(objectView);
 //            pathTransition.setPath(path);
 //            pathTransition.setCycleCount(1);
-//            pathTransition.play();
-
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    pathTransition.play();
+//                }
+//            });
+//
             if (objectView != null) {
                 Platform.runLater(new Runnable() {
                     @Override
@@ -106,23 +111,22 @@ public class SoldierViewUpdater extends ViewUpdater {
                 });
                 previousTile = gameObject.getHeadTile();
             }
-
         }
     }
 
 
-        /**
-         * check if this G.O. hp is zero or less remove it
-         */
-        public void updateExist () {
-            if (gameObject.getHp() <= 0) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        battleFieldPane.getChildren().remove(objectView);
-                    }
-                });
-            }
-
+    /**
+     * check if this G.O. hp is zero or less remove it
+     */
+    public void updateExist() {
+        if (gameObject.getHp() <= 0) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    battleFieldPane.getChildren().remove(objectView);
+                }
+            });
         }
+
     }
+}

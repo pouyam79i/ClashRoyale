@@ -110,7 +110,6 @@ public class OfflineBattleLauncher extends Runnable {
         GameTimer.getGameTimer().bindTimerLabel(gameManager.getClock().clockStringProperty());
         // Initializing card deck of player
         new CardDeckGame().init();
-        MainBattleField.getMainBattleField().init();
         // Playing battle music
         MusicPlayer.getMusicPlayer().play(Musics.BATTLE_SECOND_PHASE);
         // Adding battle field group to root pane!

@@ -51,6 +51,9 @@ public class Bullet {
                     new Tile(MouseTilePosition.TranslatePixelToTileX(destination.getX()), MouseTilePosition.TranslatePixelToTileY(destination.getY())));
             if(angle != null) {
                 Console.getConsole().printTracingMessage("angle " + angle);
+                if(angle == Angle.SOUTH && droppable.getTeamSide() == Side.TOP)
+                    imageView.setRotate(180);
+                else
                 imageView.setRotate(angle.getAngle());
             }
             if (droppable.nameOfDroppable == CardName.CANNON ||
@@ -58,7 +61,8 @@ public class Bullet {
                     droppable.nameOfDroppable == CardName.ARCHERS ||
                     droppable.nameOfDroppable == CardName.KING_TOWER ||
                     droppable.nameOfDroppable == CardName.PRINCESS_TOWER ||
-                    droppable.nameOfDroppable == CardName.WIZARD) {
+                    droppable.nameOfDroppable == CardName.WIZARD ||
+                    droppable.nameOfDroppable == CardName.INFERNO_TOWER ) {
                 imageView.setFitWidth(10);
                 imageView.setFitHeight(10);
             } else {
