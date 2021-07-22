@@ -6,6 +6,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
+import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.game.droppable.CardFactory;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -90,6 +91,15 @@ public abstract class Player extends Runnable {
         map.setMainTower(kingTower, playerSide, 0);
         map.setMainTower(leftPrincessTower, playerSide, -1);
         map.setMainTower(rightPrincessTower, playerSide, 1);
+    }
+
+    /**
+     * bind game result to life of main tower!
+     */
+    public void bindGameResult(GameResult gameResult){
+        kingTower.setGameResult(gameResult);
+        leftPrincessTower.setGameResult(gameResult);
+        rightPrincessTower.setGameResult(gameResult);
     }
 
     /**
