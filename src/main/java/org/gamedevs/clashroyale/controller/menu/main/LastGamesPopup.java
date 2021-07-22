@@ -4,7 +4,6 @@ import animatefx.animation.BounceIn;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +16,6 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.UserAccountContainer;
 import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.net.URL;
 import java.util.ResourceBundle;

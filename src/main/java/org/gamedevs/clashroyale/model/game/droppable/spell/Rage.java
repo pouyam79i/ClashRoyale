@@ -10,8 +10,10 @@ import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -65,16 +67,17 @@ public class Rage extends Spell {
         Platform.runLater(() -> {
             MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(circle);
         });
+        Console.getConsole().printTracingMessage("circle done");
     }
 
     /**
      * boost targets in range for specific duration
      */
     private void poison() {
-        ArrayList<GameObject> targets = findTargetsInRange();
+        HashSet<GameObject> targets = findTargetsInRange();
         final boolean[] running = {true};
         Timer timer = new Timer();
-        ArrayList<GameObject> finalTargets = targets;
+        HashSet<GameObject> finalTargets = targets;
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -89,19 +92,28 @@ public class Rage extends Spell {
         while (running[0]) {
             targets = findTargetsInRange();
             for (GameObject target : targets)
-                if (target.getTeamSide() == teamSide)
+                if (target.getTeamSide() == teamSide) {
                     target.boost();
+//                    Console.getConsole().printTracingMessage("rage boost " + target.getNameOfDroppable());
+
+                }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
             for (GameObject target : targets)
-                if (target.getTeamSide() == teamSide)
+                if (target.getTeamSide() == teamSide) {
                     target.unboost();
+//                    Console.getConsole().printTracingMessage("rage unboost " + target.getNameOfDroppable());
+
+                }
         }
     }
 
+
 }
+
+
 
 
 

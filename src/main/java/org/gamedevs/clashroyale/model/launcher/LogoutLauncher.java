@@ -28,7 +28,7 @@ public class LogoutLauncher extends Runnable {
      */
     @Override
     public void run() {
-        printTraceMessage("In log out.");
+        printTraceMessage("In log out...");
         Platform.runLater(() -> {
             OnWaitLoader.getOnWaitLoader().display(MenuDataContainer.getMenuDataContainer().getRootScene());
         });

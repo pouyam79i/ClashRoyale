@@ -1,20 +1,19 @@
 package org.gamedevs.clashroyale.model.game.droppable.spell;
 
-import javafx.application.Platform;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import org.gamedevs.clashroyale.MainConfig;
-import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
-import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.DropType;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
-import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * a class which handle spells
  *
@@ -24,23 +23,45 @@ import java.util.ArrayList;
  */
 public abstract class Spell extends Droppable {
 
+    /**
+     * radius of effecting area
+     */
     protected double radius;
 
+    protected ExecutorService service = Executors.newSingleThreadExecutor();
+    /**
+     * Constructor of Spell!
+     * @param side of spell
+     */
     protected Spell(Side side) {
         super(DropType.SPELL, side);
-        threadName = "Spell";
     }
 
+    /**
+     * Runs the effect in one frame
+     */
     @Override
     public void run() {
-        effect();
-        this.shutdown();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                effect();
+            }
+        };
+        service.execute(runnable);
     }
 
+    /**
+     * Kind of effecting
+     */
     protected abstract void effect();
 
-    protected ArrayList<GameObject> findTargetsInRange() {
-        ArrayList<GameObject> targets = new ArrayList<>();
+    /**
+     * Finds in range targets
+     * @return Array list of target in range
+     */
+    protected HashSet<GameObject> findTargetsInRange() {
+        HashSet<GameObject> targets = new HashSet<>();
         Thread targetRangeCheckerThread = (new Thread(() -> {
             int x, y;       // beginning x,y of search area
             x = headTile.getX() - (int) Math.round(radius);
@@ -65,10 +86,9 @@ public abstract class Spell extends Droppable {
         try {
             targetRangeCheckerThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Console.getConsole().printTracingMessage("spell thread cant join");
         }
         return targets;
     }
-
 
 }

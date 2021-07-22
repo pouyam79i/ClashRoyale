@@ -15,7 +15,7 @@ public class Clock extends Runnable {
     /**
      * timer has values of time!
      */
-    private Timer timer;
+    private final Timer timer;
     /**
      * When time is up
      */
@@ -23,7 +23,7 @@ public class Clock extends Runnable {
     /**
      * instance
      */
-    private SimpleStringProperty clockString;
+    private final SimpleStringProperty clockString;
 
     /**
      * Constructor of clock
@@ -35,7 +35,6 @@ public class Clock extends Runnable {
         clockString = new SimpleStringProperty();
         updateStringOfTimer();
         threadName = "Clock";
-
     }
 
     /**

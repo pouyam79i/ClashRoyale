@@ -10,9 +10,9 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 /**
  * This class contains the structure of all droppable types!
  * @author Pouya Mohammadi - CE@AUT - Uni ID:9829039
- * @version 1.0
+ * @version 1.1
  */
-public abstract class Droppable extends Runnable {
+public abstract class Droppable{
 
     /**
      * Type of drop!
@@ -45,6 +45,15 @@ public abstract class Droppable extends Runnable {
      * Head tile of object!
      */
     protected Tile headTile;
+    // Action property:
+    /**
+     * first frame
+     */
+    protected long initialFrame;
+    /**
+     * currnet frame
+     */
+    protected long currentFrame;
 
     /**
      * Constructor of Droppable.
@@ -62,6 +71,11 @@ public abstract class Droppable extends Runnable {
             angle = Angle.SOUTH;
         }
     }
+
+    /**
+     * advances one frame
+     */
+    public abstract void run();
 
     // Getters
     public Side getTeamSide() {
@@ -90,5 +104,11 @@ public abstract class Droppable extends Runnable {
     public double getHitSpeed() {
         return hitSpeed;
     }
+    public void setInitialFrame(long initialFrame) {
+        this.initialFrame = initialFrame;
+    }
 
+    public void setAngle(Angle angle) {
+        this.angle = angle;
+    }
 }

@@ -20,15 +20,15 @@ public class CardGenerator {
     /**
      * players all cards which he can use them in this game
      */
-    DeckContainer completeDeck;
+    private DeckContainer completeDeck = new DeckContainer();
     /**
      * elixir of current player
      */
-    Elixir elixir;
+    private Elixir elixir;
     /**
      * next card in the game deck
      */
-    Card nextCard;
+    private Card nextCard;
 
     /**
      * constructor
@@ -37,14 +37,14 @@ public class CardGenerator {
      * @param elixir        elixir
      */
     public CardGenerator(DeckContainer deckContainer, Elixir elixir) {
-        this.completeDeck = deckContainer;
+        completeDeck.getDeck().addAll(deckContainer.getDeck());
         this.elixir = elixir;
     }
 
     /**
      * get 4 cards as firsts card in deck
      *
-     * @return
+     * @return cards
      */
     public ArrayList<Card> getInitialCards() {
         ArrayList<Card> cards = new ArrayList<>();
@@ -53,7 +53,7 @@ public class CardGenerator {
             putCardAsElixirListener(card);
             cards.add(card);
             completeDeck.removeCard(card);
-            Console.getConsole().printTracingMessage(card.getCardName().toString());
+//            Console.getConsole().printTracingMessage(card.getCardName().toString());
         }
 
         setNextCard();
@@ -113,12 +113,9 @@ public class CardGenerator {
     public Card getNextCard() {
         return nextCard;
     }
-
     public DeckContainer getCompleteDeck() {
         return completeDeck;
     }
-
-
     public Elixir getElixir() {
         return elixir;
     }

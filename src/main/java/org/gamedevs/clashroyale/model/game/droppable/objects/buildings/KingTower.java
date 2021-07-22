@@ -1,8 +1,11 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+
+import java.util.ArrayList;
 
 public class KingTower extends MainTowers{
 
@@ -14,7 +17,6 @@ public class KingTower extends MainTowers{
         attackTargetType = TargetType.AIR_GROUND;
         lifeTime = 1000;
         effectiveLifeTime = false;
-
         switch (level){
             case 1 :
                 hp.setValue(2400);
@@ -36,6 +38,18 @@ public class KingTower extends MainTowers{
                 hp.setValue(3096);
                 damage = 64;
                 break;
+        }
+    }
+
+    @Override
+    public void run(){
+        checkTargetRange();
+        currentFrame++;
+        if(hp.getValue() <= 0){
+            if(!resultSet){
+                gameResult.setFullScore(Side.getOppositeSide(teamSide));
+                resultSet = true;
+            }
         }
     }
 

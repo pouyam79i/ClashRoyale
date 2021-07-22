@@ -1,10 +1,7 @@
 package org.gamedevs.clashroyale.model.account;
 
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
-import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;

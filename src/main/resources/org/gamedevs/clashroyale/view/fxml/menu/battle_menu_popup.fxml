@@ -23,7 +23,7 @@
          <font>
             <Font size="19.0" />
          </font></Button>
-      <Button fx:id="singleOfflineBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="34.0" layoutY="156.0" mnemonicParsing="false" onAction="#bringSingleOfflineBattle" prefHeight="54.0" prefWidth="98.0" styleClass="offline_btn" text="Single" textOverrun="CLIP">
+      <Button fx:id="easyOfflineBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="34.0" layoutY="156.0" mnemonicParsing="false" onAction="#bringEasyOfflineBtn" prefHeight="54.0" prefWidth="98.0" styleClass="offline_btn" text="EASY" textOverrun="CLIP">
          <font>
             <Font size="19.0" />
          </font></Button>
@@ -37,7 +37,7 @@
          </font></Button>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="116.0" prefHeight="24.0" prefWidth="232.0" text="Training with bot" textAlignment="CENTER" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="12.0" prefHeight="28.0" prefWidth="220.0" text="Online battles" textAlignment="CENTER" />
-      <Button fx:id="doubleOfflineBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="167.0" layoutY="156.0" mnemonicParsing="false" onAction="#bringDoubleOfflineBattle" prefHeight="54.0" prefWidth="98.0" styleClass="offline_btn" text="Double" textOverrun="CLIP">
+      <Button fx:id="hardOfflineBtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="167.0" layoutY="156.0" mnemonicParsing="false" onAction="#bringHardOfflineBtn" prefHeight="54.0" prefWidth="98.0" styleClass="offline_btn" text="HARD" textOverrun="CLIP">
          <font>
             <Font size="17.0" />
          </font></Button>

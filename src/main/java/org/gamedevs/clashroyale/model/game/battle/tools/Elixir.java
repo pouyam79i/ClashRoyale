@@ -15,10 +15,6 @@ import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 public class Elixir extends Runnable {
 
     /**
-     * elixir value
-     */
-    private DoubleProperty elixirValue = new SimpleDoubleProperty(4);
-    /**
      * time (in seconds) that elixir has to produce slowly
      */
     private static final int SLOW_PRODUCTION_DURATION = 60 * 1;
@@ -28,17 +24,21 @@ public class Elixir extends Runnable {
     private static final int MAXIMUM_ELIXIR = 10;
 
     /**
+     * elixir value
+     */
+    private final DoubleProperty elixirValue;
+    /**
      * game clock
      */
-    private Clock clock;
+    private final Clock clock;
 
     /**
      * constructor
      */
     public Elixir(Clock clock) {
         this.clock = clock;
+        elixirValue = new SimpleDoubleProperty(4);
         threadName = "Elixir";
-
     }
 
     /**
@@ -54,7 +54,6 @@ public class Elixir extends Runnable {
                     Platform.runLater(() -> elixirValue.setValue(elixirValue.add(0.1).getValue()));
 
             }
-
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -71,7 +70,6 @@ public class Elixir extends Runnable {
     public void stopProducing() {
         super.shutdown();
     }
-
 
     /**
      * start elixir

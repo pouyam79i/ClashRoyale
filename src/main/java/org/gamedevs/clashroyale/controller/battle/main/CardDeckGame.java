@@ -17,7 +17,6 @@ import org.gamedevs.clashroyale.model.container.gamedata.CardImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
 import org.gamedevs.clashroyale.model.game.player.Player;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.ArrayList;
 /**
@@ -137,7 +136,6 @@ public class CardDeckGame {
         source.getCardImage().setFitHeight(88);
         source.getCardImage().setFitWidth(75);
         SelectedCardContainer.getSelectedCardContainer().put(source.getCard());
-        Console.getConsole().printTracingMessage("select " + source.getCard().getCardName());
 
     }
 
@@ -151,7 +149,6 @@ public class CardDeckGame {
         source.getCardImage().setFitHeight(80);
         source.getCardImage().setFitWidth(68);
         SelectedCardContainer.getSelectedCardContainer().takeOut();
-        Console.getConsole().printTracingMessage("deselect " + source.getCard().getCardName());
         return true;
     }
 

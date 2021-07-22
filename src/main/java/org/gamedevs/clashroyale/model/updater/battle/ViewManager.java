@@ -7,12 +7,13 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Soldier;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.BuildingViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.SoldierViewUpdater;
+import org.gamedevs.clashroyale.model.updater.battle.viewupdater.TowerViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
 
-public class ViewManager extends Runnable {
+public class ViewManager {
 
     private final Side mySide;
     private ArrayList<ViewUpdater> viewUpdaters = new ArrayList<>();
@@ -20,22 +21,36 @@ public class ViewManager extends Runnable {
         this.mySide = mySide;
     }
 
-    public void addObjectToView(GameObject gameObject) {
+    public ViewUpdater addObjectToView(GameObject gameObject, int kind) {
         if (gameObject == null)
-            return;
+            return null;
         if (gameObject.getTeamSide() == mySide) {
-            if (gameObject instanceof Soldier) {
-                new SoldierViewUpdater(gameObject, false).start();
+            if(gameObject instanceof MainTowers){
+                ViewUpdater vu= new TowerViewUpdater(gameObject, false, kind);
+                return vu;
+            }
+            else if (gameObject instanceof Soldier) {
+                ViewUpdater vu= new SoldierViewUpdater(gameObject, false);
+                return vu;
             }
             else {
-                new BuildingViewUpdater(gameObject, false).start();
+                ViewUpdater vu= new BuildingViewUpdater(gameObject, false);
+                return vu;
             }
 
         } else {
-            if (gameObject instanceof Soldier)
-                new SoldierViewUpdater(gameObject, true).start();
-            else
-                new BuildingViewUpdater(gameObject, false).start();
+            if(gameObject instanceof MainTowers){
+                ViewUpdater vu= new TowerViewUpdater(gameObject, true, kind);
+                return vu;
+            }
+            else if (gameObject instanceof Soldier){
+                ViewUpdater vu= new SoldierViewUpdater(gameObject, true);
+                return vu;
+            }
+            else {
+                ViewUpdater vu= new BuildingViewUpdater(gameObject, true);
+                return vu;
+            }
 
         }
     }
@@ -44,9 +59,5 @@ public class ViewManager extends Runnable {
         // TODO: add related tower to related view!
     }
 
-    @Override
-    public void run() {
-
-    }
 }
 

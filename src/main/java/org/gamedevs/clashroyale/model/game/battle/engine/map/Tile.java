@@ -175,6 +175,19 @@ public class Tile {
     }
 
     /**
+     * removes game object from tile memory
+     */
+    public void removeObj(int z){
+        if(z == 0){
+            if(gameObject != null)
+                gameObject = null;
+        }else {
+            if(flyingGameObject != null)
+                flyingGameObject = null;
+        }
+    }
+
+    /**
      * Used to lock main information of pixel,
      * used for securing pixel!
      */
@@ -213,4 +226,24 @@ public class Tile {
     }
 
 
+    public Angle calculateAngle(Tile headTile) {
+        int deltaX = headTile.getX() - getX();
+        int deltaY = headTile.getY() - getY();
+        if(deltaX == 0 && deltaY > 0)
+            return Angle.NORTH;
+        if(deltaX == 0 && deltaY < 0)
+            return Angle.SOUTH;
+        if(deltaX > 0 && deltaY == 0)
+            return Angle.EAST;
+        if(deltaX < 0 && deltaY == 0)
+            return Angle.WEST;
+        if(deltaX < 0 && deltaY > 0)
+            return Angle.NORTH_WEST;
+        if(deltaX < 0 && deltaY < 0)
+            return Angle.SOUTH_WEST;
+        if(deltaX > 0 && deltaY > 0)
+            return Angle.NORTH_EAST;
+
+        return null;
+    }
 }

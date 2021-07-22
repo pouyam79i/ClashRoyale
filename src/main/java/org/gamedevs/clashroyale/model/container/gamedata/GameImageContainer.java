@@ -12,6 +12,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class GameImageContainer {
+
     /**
      * Only instance of this class
      */
@@ -20,6 +21,7 @@ public class GameImageContainer {
      * throwable image container map
      */
     private HashMap<CardName, Image> throwable = new HashMap<>();
+    private HashMap<String, Image> tower = new HashMap<>();
 
     /**
      * Adds an image to container
@@ -45,6 +47,30 @@ public class GameImageContainer {
         return null;
 
     }
+    /**
+     * Adds an image to container
+     *
+     * @param name  name of card
+     * @param image image of card
+     */
+    public void setTower(String name, Image image) {
+        if (image == null || name == null)
+            return;
+        tower.put(name, image);
+    }
+
+    /**
+     * Get image of card by name of card
+     *
+     * @param name name of card
+     * @return image of card (if not found returns null)
+     */
+    public Image getTower(String name) {
+        if (tower.containsKey(name))
+            return tower.get(name);
+        return null;
+
+    }
 
     /**
      * @return only instance of this class
@@ -54,6 +80,5 @@ public class GameImageContainer {
             gameImageContainer = new GameImageContainer();
         return gameImageContainer;
     }
-
 
 }

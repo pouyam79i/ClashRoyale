@@ -2,7 +2,10 @@ package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
+
+import java.util.ArrayList;
 
 /**
  * Main towers contains score for opponent player
@@ -14,7 +17,11 @@ public abstract class MainTowers extends Building{
     /**
      * when main tower dies one score must be added to another player
      */
-    private GameResult gameResult;
+    protected GameResult gameResult;
+    /**
+     * If result if tower death is added to the tower
+     */
+    protected boolean resultSet;
 
     /**
      * Setting default values for building object.
@@ -22,19 +29,15 @@ public abstract class MainTowers extends Building{
      */
     protected MainTowers(Side side) {
         super(side);
+        resultSet = false;
     }
 
-    @Override
-    public void run(){
-        checkTargetRange();
-        while (hp.get() > 0) Thread.onSpinWait();
-        if(nameOfDroppable == CardName.KING_TOWER){
-            gameResult.setFullScore(Side.getOppositeSide(teamSide));
-        }
-        else {
-            gameResult.addScore(Side.getOppositeSide(teamSide));
-        }
-        this.shutdown();
+    // Setters
+    public void setGameResult(GameResult gameResult) {
+        this.gameResult = gameResult;
     }
 
 }
+
+
+

@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
-import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.HashMap;
 

@@ -53,16 +53,11 @@ public class Valkyrie extends Soldier {
      * Start attacking to the target (gives damage to target object)
      */
     @Override
-    protected void attack(GameObject target) {
+    protected void attackOrMove(GameObject target) {
         ArrayList<Building> hitTowers = new ArrayList<>();
-
         if (target != null) {
             state = GameObjectState.ATTACK;
             areaSplashDamage(hitTowers);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
         } else {
             state = GameObjectState.MOVING;
         }
@@ -71,7 +66,7 @@ public class Valkyrie extends Soldier {
     /**
      * area splash for target which is hit by valkyrie
      *
-     * @param hitTowers array which store towers which one hit by valkyrie in this turn of attack
+     * @param hitTowers array which store towers which one hit by valkyrie in this turn of attackOrMove
      */
     protected void areaSplashDamage(ArrayList<Building> hitTowers) {
         float range = 1;
@@ -85,16 +80,15 @@ public class Valkyrie extends Soldier {
                     Tile searchTile = battleField.getPixel(x + i, y + j);
                     if (searchTile != null) {
                         if (battleField.calculateDistance(headTile, searchTile) <= Math.round(range)) {
-                            GameObject subTarget = null;
+                            GameObject subTarget = searchTile.getGameObject();
                             // Ground soldiers
-                            if (subTarget.getTeamSide() != teamSide) {
+                            if (subTarget!= null && subTarget.getTeamSide() != teamSide) {
                                 if (subTarget.getMyType() == TargetType.GROUND || subTarget.getMyType() == TargetType.BUILDING) {
                                     if (subTarget.getHp() > 0 &&
                                             (subTarget.getMyType() != TargetType.BUILDING || !hitTowers.contains(subTarget))) {
                                         subTarget.reduceHP(damage);
                                         if (subTarget.getMyType() == TargetType.BUILDING)
                                             hitTowers.add((Building) subTarget);
-
                                     }
                                 }
                             }

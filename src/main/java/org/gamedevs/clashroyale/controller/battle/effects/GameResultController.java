@@ -5,10 +5,15 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import org.gamedevs.clashroyale.MainConfig;
+import org.gamedevs.clashroyale.model.container.scene.MenuDataContainer;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.launcher.OfflineBattleLauncher;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,9 +53,7 @@ public class GameResultController implements Initializable {
     @FXML
     private Label blueName;
     @FXML
-    private ImageView blueSprinkle;
-    @FXML
-    private ImageView redSprinkle;
+    private Button backBtn;
 
     // Updatable properties:
     private Label blueWinnerLabelUpdatable;
@@ -86,6 +89,9 @@ public class GameResultController implements Initializable {
         getResultController().setCrownRed3Updatable(crownRed3);
         getResultController().setRedNameUpdatable(redName);
         getResultController().setBlueNameUpdatable(blueName);
+        checked = new SimpleBooleanProperty();
+        checked.set(false);
+        getResultController().setChecked(checked);
     }
 
     /**
@@ -93,7 +99,16 @@ public class GameResultController implements Initializable {
      */
     @FXML
     public void goToMain(){
-        checked.setValue(true);
+        Thread thread = (new Thread(() -> {
+            // TODO: add btn
+            new BounceIn(backBtn).play();
+            try {
+                Thread.sleep(MainConfig.STD_BUTTON_ANIMATION_LATENCY);
+            } catch (InterruptedException ignored) {}
+            checked.setValue(true);
+        }));
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -134,19 +149,19 @@ public class GameResultController implements Initializable {
                     if(i == 1){
                         Platform.runLater(() -> {
                             crownRed1Updatable.setVisible(true);
-                            new BounceIn(crownRed1Updatable);
+                            new BounceIn(crownRed1Updatable).play();
                         });
                     }
                     else if(i == 2){
                         Platform.runLater(() -> {
                             crownRed2Updatable.setVisible(true);
-                            new BounceIn(crownRed2Updatable);
+                            new BounceIn(crownRed2Updatable).play();
                         });
                     }
                     else if(i == 3){
                         Platform.runLater(() -> {
                             crownRed3Updatable.setVisible(true);
-                            new BounceIn(crownRed3Updatable);
+                            new BounceIn(crownRed3Updatable).play();
                         });
                     }
                 }
@@ -154,19 +169,19 @@ public class GameResultController implements Initializable {
                     if(i == 1){
                         Platform.runLater(() -> {
                             crownBlue1Updatable.setVisible(true);
-                            new BounceIn(crownBlue1Updatable);
+                            new BounceIn(crownBlue1Updatable).play();
                         });
                     }
                     else if(i == 2){
                         Platform.runLater(() -> {
                             crownBlue2Updatable.setVisible(true);
-                            new BounceIn(crownBlue2Updatable);
+                            new BounceIn(crownBlue2Updatable).play();
                         });
                     }
                     else if(i == 3){
                         Platform.runLater(() -> {
                             crownBlue3Updatable.setVisible(true);
-                            new BounceIn(crownBlue3Updatable);
+                            new BounceIn(crownBlue3Updatable).play();
                         });
                     }
                 }
@@ -174,21 +189,21 @@ public class GameResultController implements Initializable {
             if(finalRedScore > finalBlueScore){
                 Platform.runLater(() -> {
                     redWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(redWinnerLabelUpdatable);
+                    new BounceIn(redWinnerLabelUpdatable).play();
                 });
             }
             else if(finalRedScore < finalBlueScore){
                 Platform.runLater(() -> {
                     blueWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(blueWinnerLabelUpdatable);
+                    new BounceIn(blueWinnerLabelUpdatable).play();
                 });
             }
             else {
                 Platform.runLater(() -> {
                     redWinnerLabelUpdatable.setVisible(true);
                     blueWinnerLabelUpdatable.setVisible(true);
-                    new BounceIn(redWinnerLabelUpdatable);
-                    new BounceIn(blueWinnerLabelUpdatable);
+                    new BounceIn(redWinnerLabelUpdatable).play();
+                    new BounceIn(blueWinnerLabelUpdatable).play();
                 });
             }
         }));
@@ -252,8 +267,8 @@ public class GameResultController implements Initializable {
     private void setBlueNameUpdatable(Label blueNameUpdatable) {
         this.blueNameUpdatable = blueNameUpdatable;
     }
-    public void setChecked(boolean checked) {
-        this.checked.set(checked);
+    private void setChecked(SimpleBooleanProperty checked) {
+        this.checked = checked;
     }
 
     /**

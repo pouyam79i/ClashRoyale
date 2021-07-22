@@ -121,3 +121,6 @@ config
 
 # Ignoring saved accounts
 save
+
+#Ignoring java doc
+doc

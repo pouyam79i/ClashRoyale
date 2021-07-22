@@ -34,7 +34,6 @@ public class DeckContainer implements Serializable {
      *
      * @param index of card
      * @param card  card of player will be added (or replaced with another card in deck)
-     * @return a card if it is replaced by another card in the deck, else will be null!
      */
     public void addCard(int index, Card card) {
 
@@ -46,7 +45,6 @@ public class DeckContainer implements Serializable {
      * adds a new card
      *
      * @param card card of player will be added (or replaced with another card in deck)
-     * @return a card if it is replaced by another card in the deck, else will be null!
      */
     public void addCard(Card card) {
 

@@ -4,6 +4,7 @@ import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.deck.DeckContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
@@ -13,6 +14,7 @@ import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.util.Random;
 
@@ -51,33 +53,37 @@ public class HardBot extends Bot {
      */
     @Override
     protected void pickCard() {
+        // TODO: it is not efficient because of endless thread!
+        // TODO: you can get and check game result or game state!
+        // TODO: property of finished is used to end a thread in class Runnable!
         Thread pickCard = new Thread() {
             @Override
             public void start() {
-                while (true) {
+                while (!finished) {
                     DeckContainer deckContainer = new DeckContainer();
                     Card card;
                     do {
                         deckContainer.setDeck(gameDeck.getUnlockCards().getDeck());
                         try {
                             Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        } catch (InterruptedException ignored) {
                         }
                     } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();
                     int[] coordinate = findBestXY(card);
-                    if (drop(coordinate[0], coordinate[1], card))
+                    if (drop(MouseTilePosition.TranslateTileToPixelX(coordinate[0]),
+                            MouseTilePosition.TranslateTileToPixelY(coordinate[1]), card))
                         removeCard(card);
 
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Console.getConsole().printTracingMessage("bot ended");
                     }
                 }
             }
         };
+        pickCard.setDaemon(true);
         pickCard.start();
     }
 
@@ -90,7 +96,7 @@ public class HardBot extends Bot {
         int rightCnt = 0;
         int leftCnt = 0;
         for (GameObject gameObject : map.getDownSideAliveObj())
-            if (gameObject.getHeadPixel().getX() < MainConfig.STD_BATTLE_FIELD_X_TILE)
+            if (gameObject.getHeadPixel().getX() < MainConfig.STD_BATTLE_FIELD_X_TILE / 2)
                 rightCnt++;
             else
                 leftCnt++;
@@ -165,7 +171,7 @@ public class HardBot extends Bot {
                 card.getCardName() == CardName.FIREBALL) {
             int[] coordinate = new int[2];
             coordinate[0] = findSideWithLessTowerHpEnemy().getX();
-            coordinate[0] = 26;
+            coordinate[1] = 26;
             return coordinate;
         } else {
             return bestXYForSoldier();
@@ -186,21 +192,25 @@ public class HardBot extends Bot {
         PathSide towerHp = findSideWithLessTowerHp();
         PathSide enemy = findSideWithMoreEnemy();
         PathSide enemyTower = findSideWithLessTowerHpEnemy();
+        Random random = new Random();
+
+        coordinate[1] = random.nextInt(6) + 16;
+
         if (enemy == towerHp && towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else if (towerHp == enemy) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else if (enemy == enemyTower) {
             coordinate[0] = enemy.getX();
-            coordinate[1] = 16;
+//            coordinate[1] = 16;
         } else if (towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-            coordinate[1] = 19;
+//            coordinate[1] = 19;
         } else {
             coordinate[0] = enemyTower.getX();
-            coordinate[1] = 16;
+//            coordinate[1] = 16;
         }
 
 

@@ -1,8 +1,11 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
 import org.gamedevs.clashroyale.model.cards.CardName;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +20,7 @@ public class PrincessTower extends MainTowers{
      */
     public PrincessTower(int level, Side side){
         super(side);
+
         nameOfDroppable = CardName.PRINCESS_TOWER;
         hitSpeed = 0.8;
         range = 7.5;
@@ -44,6 +48,18 @@ public class PrincessTower extends MainTowers{
                 hp.setValue(1890);
                 damage = 69;
                 break;
+        }
+    }
+
+    @Override
+    public void run(){
+        checkTargetRange();
+        currentFrame++;
+        if(hp.getValue() <= 0){
+            if(!resultSet){
+                gameResult.addScore(Side.getOppositeSide(teamSide));
+                resultSet = true;
+            }
         }
     }
 

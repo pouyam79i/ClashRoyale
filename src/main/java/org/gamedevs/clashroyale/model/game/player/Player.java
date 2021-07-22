@@ -6,6 +6,7 @@ import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Map;
 import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
+import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
 import org.gamedevs.clashroyale.model.game.droppable.CardFactory;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -13,6 +14,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.KingTower
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.PrincessTower;
 import org.gamedevs.clashroyale.model.game.droppable.spell.Spell;
 import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
@@ -48,8 +50,17 @@ public abstract class Player extends Runnable {
     protected final int level;
 
     // Player main towers:
+    /**
+     * tower of king!
+     */
     protected KingTower kingTower;
+    /**
+     * tower of left princess
+     */
     protected PrincessTower leftPrincessTower;
+    /**
+     * tower of right princess
+     */
     protected PrincessTower rightPrincessTower;
 
     /**
@@ -62,6 +73,7 @@ public abstract class Player extends Runnable {
      * @param level         level of player
      */
     protected Player(Map map, Side playerSide, Elixir elixir, CardGenerator cardGenerator, int level) {
+        threadName = "Player";
         this.playerSide = playerSide;
         this.map = map;
         this.elixir = elixir;
@@ -70,6 +82,7 @@ public abstract class Player extends Runnable {
         kingTower = new KingTower(level, playerSide);
         leftPrincessTower = new PrincessTower(level, playerSide);
         rightPrincessTower = new PrincessTower(level, playerSide);
+
     }
 
     /**
@@ -79,6 +92,15 @@ public abstract class Player extends Runnable {
         map.setMainTower(kingTower, playerSide, 0);
         map.setMainTower(leftPrincessTower, playerSide, -1);
         map.setMainTower(rightPrincessTower, playerSide, 1);
+    }
+
+    /**
+     * bind game result to life of main tower!
+     */
+    public void bindGameResult(GameResult gameResult){
+        kingTower.setGameResult(gameResult);
+        leftPrincessTower.setGameResult(gameResult);
+        rightPrincessTower.setGameResult(gameResult);
     }
 
     /**
@@ -92,11 +114,19 @@ public abstract class Player extends Runnable {
      * @param card of drop
      */
     public boolean drop(double x, double y, Card card) {
-        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
+        if(card == null){
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Null card input");
+            return false;
+        }
+//        Console.getConsole().printTracingMessage("x, y init : " + x + " ," + y);
         int tileX = MouseTilePosition.TranslatePixelToTileX(x);
         int tileY = MouseTilePosition.TranslatePixelToTileY(y);
-
-        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
+        if(tileX < 0 || tileX > 17 || tileY < 0 || tileY > 29){
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "wrong tile position at player drop: " +
+                    tileX + "," + tileY);
+            return false;
+        }
+//        Console.getConsole().printTracingMessage("x,y: " + tileX + ", " + tileY);
 
         if (card.getCardName() != CardName.RAGE &&
                 card.getCardName() != CardName.FIREBALL &&
@@ -111,7 +141,7 @@ public abstract class Player extends Runnable {
             }
 
         } else
-            return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, Side.DOWN).get(0));
+            return map.dropSpell(tileX, tileY, (Spell) CardFactory.buildDroppableItems(card.getCardName(), level, playerSide).get(0));
     }
 
     /**

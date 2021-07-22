@@ -1,5 +1,7 @@
 package org.gamedevs.clashroyale.model.game.droppable.objects.buildings;
 
+import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.Bullet;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -7,6 +9,14 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Archer;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
+
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * a class which handle buildings
@@ -31,46 +41,22 @@ public abstract class Building extends GameObject {
     /**
      * Setting default values for building object
      */
-    protected Building(Side side){
+    protected Building(Side side) {
         super(side);
         myType = TargetType.BUILDING;
-    }
-
-    /**
-     * Start attacking to the target (gives damage to target object)
-     */
-    @Override
-    protected void attack(GameObject target) {
-        if (target != null) {
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
-            state = GameObjectState.ATTACK;
-            target.reduceHP(damage);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
-        } else {
-            state = GameObjectState.IDLE;
-        }
-    }
-
-    /**
-     * Thread of object (applies algorithm of game object)
-     */
-    @Override
-    public void run() {
-        checkTargetRange();
-
+        state = GameObjectState.IDLE;
+        previousState = GameObjectState.IDLE;
     }
 
     /**
      * Updates hp with life time or vise versa
      */
-    protected void updateLifeTime(){
+    protected void updateLifeTime() {
 
     }
 
     public int getLifeTime() {
         return lifeTime;
     }
+
 }

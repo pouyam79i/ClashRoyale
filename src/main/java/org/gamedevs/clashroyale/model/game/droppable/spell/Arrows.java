@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Arrows extends Spell {
@@ -48,18 +49,20 @@ public class Arrows extends Spell {
 
     @Override
     protected void effect() {
+        attack();
         throwArrowsEffect();
-//        attack();
     }
 
     /**
      * reduce hp of enemies who are in range of this spell
      */
     private void attack() {
-        ArrayList<GameObject> targets = findTargetsInRange();
+        HashSet<GameObject> targets = findTargetsInRange();
         for(GameObject gameObject : targets)
-            if(gameObject.getTeamSide() != teamSide)
-            gameObject.reduceHP(damage);
+            if(gameObject.getTeamSide() != teamSide) {
+                Console.getConsole().printTracingMessage("arrows " + teamSide + " reduce hp " + gameObject.getNameOfDroppable());
+                gameObject.reduceHP(damage);
+            }
     }
 
     /**
@@ -69,10 +72,14 @@ public class Arrows extends Spell {
         ArrayList<Tile> tilesInRange = new ArrayList<>();
         Random random = new Random();
         Point2D start;
-        if (teamSide == Side.TOP)
-            start = new Point2D.Double(187, 85);
-        else
+        if (teamSide == Side.TOP) {
+            start = new Point2D.Double(187, 10);
+            Console.getConsole().printTracingMessage("up " + start.getY());
+        }
+        else {
             start = new Point2D.Double(187, 504);
+            Console.getConsole().printTracingMessage("down"  + start.getY());
+        }
 
         for (int i = (int) (headTile.getX() - 2); i <= headTile.getX() + 2; i++)
             for (int j = (int) (headTile.getY() - 2); j <= headTile.getY() + 2; j++)
@@ -82,13 +89,14 @@ public class Arrows extends Spell {
 
         for (int i = 0; i < 20; i++) {
             Tile target = tilesInRange.get(random.nextInt(tilesInRange.size() - 1));
-            Console.getConsole().printTracingMessage("target: " + target.getX() + ", " + target.getY());
+//            Console.getConsole().printTracingMessage("target: " + target.getX() + ", " + target.getY());
             Thread thread = new Thread(){
                 @Override
                 public void start() {
                     new Bullet(new Arrows(level,side)).throwBullet(start, target);
                 }
             };
+            thread.setDaemon(true);
             thread.start();
         }
     }

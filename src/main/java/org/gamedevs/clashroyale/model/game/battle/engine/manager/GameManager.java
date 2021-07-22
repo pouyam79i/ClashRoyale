@@ -9,12 +9,15 @@ import org.gamedevs.clashroyale.model.game.battle.tools.CardGenerator;
 import org.gamedevs.clashroyale.model.game.battle.tools.Clock;
 import org.gamedevs.clashroyale.model.game.battle.tools.Elixir;
 import org.gamedevs.clashroyale.model.game.battle.tools.GameResult;
+import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Human;
 import org.gamedevs.clashroyale.model.game.player.Player;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.game.player.bot.EasyBot;
 import org.gamedevs.clashroyale.model.game.player.bot.HardBot;
 import org.gamedevs.clashroyale.model.launcher.EndOfGameLauncher;
+import org.gamedevs.clashroyale.model.updater.battle.ViewManager;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 /**
@@ -47,6 +50,11 @@ public class GameManager extends Runnable {
      * Top side player game result
      */
     private GameResult gameResult;
+    // Frame update:
+    /**
+     * current frame of game manager
+     */
+    private long currentFrame;
 
 
     /**
@@ -58,6 +66,7 @@ public class GameManager extends Runnable {
         map = new Map(MainConfig.STD_BATTLE_FIELD_X_TILE, MainConfig.STD_BATTLE_FIELD_Y_TILE);
         clock = new Clock();
         gameResult = null;
+        currentFrame =  0;
     }
 
     /**
@@ -74,12 +83,13 @@ public class GameManager extends Runnable {
         CardGenerator cardGeneratorDownPlayer = new CardGenerator(account.getDeckContainer(), elixirDownPlayer);
         // Setting human player requirements
         downPlayer = new Human(map, Side.DOWN, elixirDownPlayer, cardGeneratorDownPlayer, account.getLevel());
+        map.setViewManager(new ViewManager(Side.DOWN));
         // Setting bot player requirements
         if(hardBot)
             topPlayer = new HardBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
         else
             topPlayer = new EasyBot(map, Side.TOP, elixirTopPlayer, cardGeneratorTopPlayer, account.getLevel());
-        gameResult = new GameResult(GameType.SINGLE_OFFLINE, "Bot", account.getUsername());
+        gameResult = new GameResult(GameType.SINGLE_OFFLINE_EASY, "Bot", account.getUsername());
     }
 
     /**
@@ -92,10 +102,12 @@ public class GameManager extends Runnable {
     /**
      * End of game logic
      */
-    public void checkEndGame(){
-        gameResult.lock();
+    public void endGame(){
         topPlayer.shutdown();
         downPlayer.shutdown();
+        for(GameObject gameObject:map.getAllAlive())
+            if(gameObject.getViewUpdater() != null)
+                gameObject.getViewUpdater().remove();
         // TODO: override player shutdown function and remove below code
         topPlayer.getElixir().shutdown();
         downPlayer.getElixir().shutdown();
@@ -107,8 +119,13 @@ public class GameManager extends Runnable {
      */
     @Override
     public void run() {
+        currentFrame = 0;
         clock.start();
-        topPlayer.start();
+        topPlayer.dropMainTowers();
+        downPlayer.dropMainTowers();
+        topPlayer.bindGameResult(gameResult);
+        downPlayer.bindGameResult(gameResult);
+        topPlayer.start();        // TODO: uncomment this
         downPlayer.start();
         // When we have still tile
         while (!clock.isEndOfTime()){
@@ -116,8 +133,26 @@ public class GameManager extends Runnable {
             if(gameResult.checkWinner()){
                 break;
             }
+            try {
+                map.updateObjects(currentFrame);
+            }catch (Exception e){
+                Console.getConsole().printTracingMessage("Failed to updated frames -> " + e.getMessage());
+                e.printStackTrace();
+            }
+            try {
+                map.refreshAlive();
+            }catch (Exception e){
+                Console.getConsole().printTracingMessage("Failed to refresh alives -> " + e.getMessage());
+                e.printStackTrace();
+            }
+            currentFrame++;
+            // TODO: optimize frame updater sleep
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {}
         }
-        checkEndGame();
+        Console.getConsole().printTracingMessage("break");
+        endGame();
         this.shutdown();
     }
 

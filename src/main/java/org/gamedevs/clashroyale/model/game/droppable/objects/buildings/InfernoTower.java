@@ -13,8 +13,10 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObjectState;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.awt.geom.Point2D;
+
 /**
  * a class which handle inferno tower
  *
@@ -29,13 +31,13 @@ public class InfernoTower extends Building {
 
     public InfernoTower(int level, Side side) {
         super(side);
-        hitSpeed = 0.4;
+        hitSpeed = 0.1;
         attackTargetType = TargetType.AIR_GROUND;
         range = 6;
         lifeTime = 40;
         effectiveLifeTime = true;
         nameOfDroppable = CardName.INFERNO_TOWER;
-        errorInGUIX =  0.15 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
+        errorInGUIX = 0.15 * MainConfig.STD_BATTLE_FIELD_X_TILE_RATIO;
         errorInGUIY = 2.75 * MainConfig.STD_BATTLE_FIELD_Y_TILE_RATIO;
         switch (level) {
             case 1:
@@ -66,50 +68,53 @@ public class InfernoTower extends Building {
         }
     }
 
-    /**
-     * Start attacking to the target (gives damage to target object)
-     */
-    protected void attack(GameObject target) {
-        if (target != null) {
-            infernoBullet(headTile, target.getHeadTile());
-            if(damage < maxDamage - 5)
-                damage += 5;
-            new Bullet(this).throwBullet(headTile, target.getHeadTile());
-            state = GameObjectState.ATTACK;
-            target.reduceHP(damage);
-            try {
-                Thread.sleep((int) (hitSpeed * 1000));
-            } catch (InterruptedException ignored) {
-            }
-        } else {
-            state = GameObjectState.MOVING;
-        }
+//    protected void attackOrMove(GameObject target) {
+//        if (target != null) {
+//            double plus = ((maxDamage - damage) / (lifeTime)) * hitSpeed;
+//            infernoBullet(headTile, target.getHeadTile());
+//            if (damage <= maxDamage - plus)
+//                damage += plus;
+//            new Bullet(this).throwBullet(headTile, target.getHeadTile());
+//            state = GameObjectState.ATTACK;
+//            target.reduceHP(damage);
+//            try {
+//                Thread.sleep((int) (hitSpeed * 1000));
+//            } catch (InterruptedException ignored) {
+//            }
+//        } else {
+//            state = GameObjectState.MOVING;
+//        }
+//    }
+//
+//    /**
+//     * draw line of inferno bullet on gui
+//     *
+//     * @param sourceTile      sourceTile
+//     * @param destinationTile destinationTile
+//     */
+//    private void infernoBullet(Tile sourceTile, Tile destinationTile) {
+//        if (sourceTile != null && destinationTile != null) {
+//            Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
+//                    MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
+//            Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
+//                    MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
+//            Platform.runLater(() -> {
+//                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
+//            });
+//            line.setStartX(source.getX());
+//            line.setStartY(source.getY());
+//            line.setEndX(destination.getX());
+//            line.setEndY(destination.getY());
+//            line.setStrokeWidth(4);
+//            line.setStroke(Color.YELLOW);
+//            Platform.runLater(() -> {
+//                MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
+//            });
+//        }
+//    }
+
+    public Line getLine() {
+        return line;
     }
-
-    /**
-     * draw line of inferno bullet on gui
-     * @param sourceTile sourceTile
-     * @param destinationTile destinationTile
-     */
-    private void infernoBullet(Tile sourceTile, Tile destinationTile) {
-        Point2D source = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(sourceTile.getX()),
-                MouseTilePosition.TranslateTileToPixelY(sourceTile.getY()));
-        Point2D destination = new Point2D.Double(MouseTilePosition.TranslateTileToPixelX(destinationTile.getX()),
-                MouseTilePosition.TranslateTileToPixelY(destinationTile.getY()));
-        Platform.runLater(() -> {
-            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(line);
-        });
-        line.setStartX(source.getX());
-        line.setStartY(source.getY());
-        line.setEndX(destination.getX());
-        line.setEndY(destination.getY());
-        line.setStrokeWidth(4);
-        line.setStroke(Color.YELLOW);
-        Platform.runLater(() -> {
-            MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(line);
-        });
-
-    }
-
 
 }
