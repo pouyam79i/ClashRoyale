@@ -20,7 +20,7 @@ public class CardGenerator {
     /**
      * players all cards which he can use them in this game
      */
-    private DeckContainer completeDeck;
+    private DeckContainer completeDeck = new DeckContainer();
     /**
      * elixir of current player
      */
@@ -38,7 +38,6 @@ public class CardGenerator {
      */
     public CardGenerator(DeckContainer deckContainer, Elixir elixir) {
         completeDeck.getDeck().addAll(deckContainer.getDeck());
-        completeDeck = new DeckContainer();
         this.elixir = elixir;
     }
 
@@ -54,7 +53,7 @@ public class CardGenerator {
             putCardAsElixirListener(card);
             cards.add(card);
             completeDeck.removeCard(card);
-            Console.getConsole().printTracingMessage(card.getCardName().toString());
+//            Console.getConsole().printTracingMessage(card.getCardName().toString());
         }
 
         setNextCard();
