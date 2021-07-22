@@ -95,7 +95,7 @@ public class OfflineBattleLauncher extends Runnable {
             }
             Console.getConsole().printTracingMessage("After seq of battle launcher");
             // TODO: reloading battle field
-            BattleFieldLoader.reloadBattleField();
+//            BattleFieldLoader.reloadBattleField();
             // Removing background panes which are used in main menu
             Platform.runLater(() -> {
                 MenuDataContainer.getMenuDataContainer().getRootPane().getChildren().remove(

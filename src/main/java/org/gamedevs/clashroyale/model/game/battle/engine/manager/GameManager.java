@@ -134,8 +134,18 @@ public class GameManager extends Runnable {
             if(gameResult.checkWinner()){
                 break;
             }
-            map.updateObjects(currentFrame);
-            map.refreshAlive();
+            try {
+                map.updateObjects(currentFrame);
+            }catch (Exception e){
+                Console.getConsole().printTracingMessage("Failed to updated frames -> " + e.getMessage());
+                e.printStackTrace();
+            }
+            try {
+                map.refreshAlive();
+            }catch (Exception e){
+                Console.getConsole().printTracingMessage("Failed to refresh alives -> " + e.getMessage());
+                e.printStackTrace();
+            }
             currentFrame++;
             // TODO: optimize frame updater sleep
             try {

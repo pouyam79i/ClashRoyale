@@ -161,7 +161,7 @@ public abstract class Soldier extends GameObject {
             path = pathFinder.getPath();
         }
         if (state == GameObjectState.MOVING) {
-            if((currentFrame - initialFrame) % ((speed * 10)) != 0)
+            if((currentFrame - initialFrame) % ((speed * 10L)) != 0)
                 return;
             Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "In moving state");
             if(closestTargetTile == null){
