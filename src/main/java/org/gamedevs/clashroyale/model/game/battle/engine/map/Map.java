@@ -269,15 +269,19 @@ public class Map {
      * updates all objects in one frame!
      */
     public void updateObjects(long currentFrame) {
+        ArrayList<GameObject> gameObjectsToShow = new ArrayList<>();
+        gameObjectsToShow.addAll(allAlive);
         this.currentFrame = currentFrame;
         try {
-            Iterator<GameObject> gameObjectIterator = allAlive.iterator();
+            Iterator<GameObject> gameObjectIterator = gameObjectsToShow.iterator();
             while (gameObjectIterator.hasNext()) {
                 GameObject gameObject = gameObjectIterator.next();
                 try {
                     gameObject.run();   // refresh one frame
-                    if(gameObject.getViewUpdater() != null)
+
+                    if(gameObject.getViewUpdater() != null) {
                         gameObject.getViewUpdater().update();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

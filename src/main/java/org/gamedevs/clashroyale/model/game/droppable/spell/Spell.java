@@ -73,7 +73,6 @@ public abstract class Spell extends Droppable {
                             target = searchTile.getGameObject();
                             if (target != null && target.getHp() > 0) {
                                 targets.add(target);
-                                Console.getConsole().printTracingMessage("*" + target.getNameOfDroppable().toString());
                             }
                         }
                     }
