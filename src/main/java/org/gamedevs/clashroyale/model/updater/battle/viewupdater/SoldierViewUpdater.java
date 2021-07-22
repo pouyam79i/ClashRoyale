@@ -1,7 +1,15 @@
 package org.gamedevs.clashroyale.model.updater.battle.viewupdater;
 
+import javafx.animation.PathTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
+import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
@@ -47,64 +55,55 @@ public class SoldierViewUpdater extends ViewUpdater {
 
         if (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
-//            Runnable move = new Runnable() {
-//                @Override
-//                public void run() {
-//                    double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
-//                    double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
-                    double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
-                    double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-//                    double sleepTime = (((Soldier) gameObject).getSpeed() * 100 - 1) / Math.max(destX - curX, destY - curY);
-//                    sleepTime = 50;
-//                    double deltaX;
-//                    double deltaY;
-//                    do {
-//                        deltaX = destX - curX;
-//                        deltaY = destY - curY;
-//                        if (deltaX != 0) {
-//                            curX = curX + (deltaX > 0 ? 1 : -1);
-//                        }
-//                        if (deltaY != 0) {
-//                            curY = curY + Math.abs(deltaY / deltaX) * (deltaY > 0 ? 1 : -1);
-//                        }
-//                        double finalCurY = curY;
-//                        double finalCurX = curX;
-                        if(objectView != null) {
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    objectView.setLayoutX(destX - gameObject.getErrorInGUIX());
-                                    objectView.setLayoutY(destY - gameObject.getErrorInGUIY());
-                                }
-                            });
-                        }
-//                        try {
-//                            Thread.sleep(100);
-//                        } catch (InterruptedException e) {
-//                        }
-//                    } while (deltaX != 0 || deltaY != 0);
-                    previousTile = gameObject.getHeadTile();
-//                    Thread.interrupted();
-//                }
 
-//            };
-//            service.execute(move);
+            double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+            double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+            double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
+            double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
+
+//            Path path = new Path();
+//
+//            MoveTo moveTo = new MoveTo(curX, curY);
+//            LineTo lineTo = new LineTo(destX, destY);
+//
+//            path.getElements().add(moveTo);
+//            path.getElements().add(lineTo);
+//
+//            //Creating a path transition
+//            PathTransition pathTransition = new PathTransition();
+//            pathTransition.setDuration(Duration.millis(100));
+//            pathTransition.setNode(objectView);
+//            pathTransition.setPath(path);
+//            pathTransition.setCycleCount(1);
+//            pathTransition.play();
+
+            if (objectView != null) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        objectView.setLayoutX(destX - gameObject.getErrorInGUIX());
+                        objectView.setLayoutY(destY - gameObject.getErrorInGUIY());
+                    }
+                });
+                previousTile = gameObject.getHeadTile();
+            }
+
         }
     }
 
 
-    /**
-     * check if this G.O. hp is zero or less remove it
-     */
-    public void updateExist() {
-        if (gameObject.getHp() <= 0) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    battleFieldPane.getChildren().remove(objectView);
-                }
-            });
-        }
+        /**
+         * check if this G.O. hp is zero or less remove it
+         */
+        public void updateExist () {
+            if (gameObject.getHp() <= 0) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        battleFieldPane.getChildren().remove(objectView);
+                    }
+                });
+            }
 
+        }
     }
-}

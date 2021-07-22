@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Arrows extends Spell {
@@ -56,7 +57,7 @@ public class Arrows extends Spell {
      * reduce hp of enemies who are in range of this spell
      */
     private void attack() {
-        ArrayList<GameObject> targets = findTargetsInRange();
+        HashSet<GameObject> targets = findTargetsInRange();
         for(GameObject gameObject : targets)
             if(gameObject.getTeamSide() != teamSide) {
                 Console.getConsole().printTracingMessage("arrows " + teamSide + " reduce hp " + gameObject.getNameOfDroppable());

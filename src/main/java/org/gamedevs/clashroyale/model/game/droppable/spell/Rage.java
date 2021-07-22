@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,10 +74,10 @@ public class Rage extends Spell {
      * boost targets in range for specific duration
      */
     private void poison() {
-        ArrayList<GameObject> targets = findTargetsInRange();
+        HashSet<GameObject> targets = findTargetsInRange();
         final boolean[] running = {true};
         Timer timer = new Timer();
-        ArrayList<GameObject> finalTargets = targets;
+        HashSet<GameObject> finalTargets = targets;
         TimerTask task = new TimerTask() {
             @Override
             public void run() {

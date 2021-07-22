@@ -20,7 +20,7 @@ public class CardGenerator {
     /**
      * players all cards which he can use them in this game
      */
-    DeckContainer completeDeck;
+    DeckContainer completeDeck = new DeckContainer();
     /**
      * elixir of current player
      */
@@ -37,7 +37,7 @@ public class CardGenerator {
      * @param elixir        elixir
      */
     public CardGenerator(DeckContainer deckContainer, Elixir elixir) {
-        this.completeDeck = deckContainer;
+        completeDeck.getDeck().addAll(deckContainer.getDeck());
         this.elixir = elixir;
     }
 

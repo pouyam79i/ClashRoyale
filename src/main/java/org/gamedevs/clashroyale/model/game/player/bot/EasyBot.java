@@ -64,7 +64,6 @@ public class EasyBot extends Bot {
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
                     } while (deckContainer.getDeck().size() == 0);
                     card = deckContainer.getRandomCard();

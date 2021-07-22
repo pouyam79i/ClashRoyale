@@ -9,6 +9,8 @@ import org.gamedevs.clashroyale.model.utils.console.Console;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -58,8 +60,8 @@ public abstract class Spell extends Droppable {
      * Finds in range targets
      * @return Array list of target in range
      */
-    protected ArrayList<GameObject> findTargetsInRange() {
-        ArrayList<GameObject> targets = new ArrayList<>();
+    protected HashSet<GameObject> findTargetsInRange() {
+        HashSet<GameObject> targets = new HashSet<>();
         Thread targetRangeCheckerThread = (new Thread(() -> {
             int x, y;       // beginning x,y of search area
             x = headTile.getX() - (int) Math.round(radius);

@@ -13,6 +13,7 @@ import org.gamedevs.clashroyale.controller.battle.main.MainBattleField;
 import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
 import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
+import org.gamedevs.clashroyale.model.game.battle.engine.map.Angle;
 import org.gamedevs.clashroyale.model.game.battle.engine.map.Tile;
 import org.gamedevs.clashroyale.model.game.droppable.objects.GameObject;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -46,6 +47,12 @@ public class Bullet {
         Image img = GameImageContainer.getGameImageContainer().getThrowable(droppable.getNameOfDroppable());
         if(img != null) {
             ImageView imageView = new ImageView(img);
+            Angle angle = new Tile(MouseTilePosition.TranslatePixelToTileX(source.getX()), MouseTilePosition.TranslatePixelToTileY(source.getY())).calculateAngle(
+                    new Tile(MouseTilePosition.TranslatePixelToTileX(destination.getX()), MouseTilePosition.TranslatePixelToTileY(destination.getY())));
+            if(angle != null) {
+                Console.getConsole().printTracingMessage("angle " + angle);
+                imageView.setRotate(angle.getAngle());
+            }
             if (droppable.nameOfDroppable == CardName.CANNON ||
                     droppable.nameOfDroppable == CardName.BABY_DRAGON ||
                     droppable.nameOfDroppable == CardName.ARCHERS ||
@@ -72,7 +79,6 @@ public class Bullet {
             pathTransition.setDuration(Duration.millis(droppable.getHitSpeed() * 1000));
             pathTransition.setNode(imageView);
             pathTransition.setPath(path);
-            pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
             pathTransition.setCycleCount(1);
             pathTransition.setAutoReverse(true);
             pathTransition.setOnFinished(new EventHandler<ActionEvent>() {
