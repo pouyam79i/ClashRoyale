@@ -7,6 +7,7 @@ import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.Soldier;
 import org.gamedevs.clashroyale.model.game.player.Side;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.BuildingViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.SoldierViewUpdater;
+import org.gamedevs.clashroyale.model.updater.battle.viewupdater.TowerViewUpdater;
 import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
@@ -20,11 +21,15 @@ public class ViewManager {
         this.mySide = mySide;
     }
 
-    public ViewUpdater addObjectToView(GameObject gameObject) {
+    public ViewUpdater addObjectToView(GameObject gameObject, int kind) {
         if (gameObject == null)
             return null;
         if (gameObject.getTeamSide() == mySide) {
-            if (gameObject instanceof Soldier) {
+            if(gameObject instanceof MainTowers){
+                ViewUpdater vu= new TowerViewUpdater(gameObject, false, kind);
+                return vu;
+            }
+            else if (gameObject instanceof Soldier) {
                 ViewUpdater vu= new SoldierViewUpdater(gameObject, false);
                 return vu;
             }
@@ -34,7 +39,11 @@ public class ViewManager {
             }
 
         } else {
-            if (gameObject instanceof Soldier){
+            if(gameObject instanceof MainTowers){
+                ViewUpdater vu= new TowerViewUpdater(gameObject, true, kind);
+                return vu;
+            }
+            else if (gameObject instanceof Soldier){
                 ViewUpdater vu= new SoldierViewUpdater(gameObject, true);
                 return vu;
             }

@@ -32,7 +32,24 @@ public class SoldierViewUpdater extends ViewUpdater {
 
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
+        placeInitImg();
 
+
+    }
+
+    @Override
+    public void placeInitImg() {
+        Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
+        objectView = new ObjectView(gameObject, currentImage);
+        objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
+        objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
+        int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
+        int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
+        Platform.runLater(() -> {
+            battleFieldPane.getChildren().add(objectView);
+            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
+            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
+        });
     }
 
     /**

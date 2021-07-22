@@ -102,7 +102,7 @@ public class Map {
             gameObject.setInitialFrame(currentFrame);
             Console.getConsole().printTracingMessage("set obj x,y to " + gameObject.getHeadPixel().getX() + ", " + gameObject.getHeadPixel().getY());
             if (viewManager != null) {
-                gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
+                gameObject.setViewUpdater(viewManager.addObjectToView(gameObject, 0));
             }
             getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
             allAlive.add(gameObject);
@@ -118,7 +118,7 @@ public class Map {
                     gameObject.setHeadPixel(detectedTile);
                     gameObject.setInitialFrame(currentFrame);
                     if (viewManager != null) {
-                        gameObject.setViewUpdater(viewManager.addObjectToView(gameObject));
+                        gameObject.setViewUpdater(viewManager.addObjectToView(gameObject, 0));
                     }
                     getOneSideObjects(gameObject.getTeamSide()).add(gameObject);
                     allAlive.add(gameObject);
@@ -214,6 +214,7 @@ public class Map {
             }
         }
         // TODO: connect to view!
+        mainTower.setViewUpdater(viewManager.addObjectToView(mainTower, kind));
         getOneSideObjects(mainTower.getTeamSide()).add(mainTower);
         allAlive.add(mainTower);
         mainTower.setBattleField(this);

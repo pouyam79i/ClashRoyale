@@ -13,10 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import org.gamedevs.clashroyale.model.container.gamedata.GameImageContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.MouseTilePosition;
-import org.gamedevs.clashroyale.model.container.gamedata.PlayerContainer;
-import org.gamedevs.clashroyale.model.container.gamedata.SelectedCardContainer;
+import org.gamedevs.clashroyale.model.container.gamedata.*;
 import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.player.Player;
 
@@ -135,8 +132,9 @@ public class MainBattleField implements Initializable {
     }
 
     public void init() {
-        bindProgressBars();
-        addListenerForRemovingTower();
+//        getMainBattleField().getBattleFieldPaneUpdatable().getChildren().add(GameDroppableImageContainer.getGameDroppableImageContainer().)
+//        bindProgressBars();
+//        addListenerForRemovingTower();
     }
 
     /**

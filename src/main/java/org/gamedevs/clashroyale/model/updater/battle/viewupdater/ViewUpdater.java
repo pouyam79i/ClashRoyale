@@ -51,26 +51,13 @@ public abstract class ViewUpdater {
         previousTile = gameObject.getHeadPixel();
         previousState = gameObject.getState();
         previousAngle = gameObject.getAngle();
-        placeInitImg();
 
     }
 
     /**
      * put initial image in GUI
      */
-    public void placeInitImg() {
-        Image currentImage = imageContainer.get(cardName, gameObject.getAngle(), gameObject.getState());
-        objectView = new ObjectView(gameObject, currentImage);
-        objectView.getImageView().setFitWidth(currentImage.getWidth() / 2.5);
-        objectView.getImageView().setFitHeight(currentImage.getHeight() / 2.5);
-        int x = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
-        int y = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-        Platform.runLater(() -> {
-            battleFieldPane.getChildren().add(objectView);
-            objectView.setLayoutX(x - gameObject.getErrorInGUIX());
-            objectView.setLayoutY(y - gameObject.getErrorInGUIY());
-        });
-    }
+    public abstract void placeInitImg() ;
 
     /**
      * update GUI
@@ -168,6 +155,11 @@ public abstract class ViewUpdater {
             getChildren().add(progressBar);
         }
 
+        public ObjectView() {
+            progressBar = new ProgressBar();
+            imageView = new ImageView();
+        }
+
         //Getters and Setters
         public ProgressBar getProgressBar() {
             return progressBar;
@@ -185,5 +177,12 @@ public abstract class ViewUpdater {
             this.imageView = imageView;
         }
 
+        public double getMaxHp() {
+            return maxHp;
+        }
+
+        public void setMaxHp(double maxHp) {
+            this.maxHp = maxHp;
+        }
     }
 }
