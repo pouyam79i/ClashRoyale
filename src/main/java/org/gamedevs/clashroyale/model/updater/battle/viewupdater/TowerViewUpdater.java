@@ -77,8 +77,6 @@ public class TowerViewUpdater extends ViewUpdater {
                 objectView.getImageView().setFitWidth(125);
                 objectView.getImageView().setFitHeight(136);
                 objectView.getProgressBar().setPrefWidth(80);
-//                objectView.getProgressBar().setLayoutX(159);
-//                objectView.getProgressBar().setLayoutY(470);
                 objectView.getProgressBar().setPrefHeight(10);
             } else if (kind == 1) {
                 currentImage = gameImageContainer.getTower("PRINCESS_RIGHT");
@@ -86,8 +84,6 @@ public class TowerViewUpdater extends ViewUpdater {
                 y = 348;
                 objectView.getImageView().setFitWidth(111);
                 objectView.getImageView().setFitHeight(118);
-//                objectView.getProgressBar().setLayoutX(276);
-//                objectView.getProgressBar().setLayoutY(413);
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             }
@@ -98,8 +94,6 @@ public class TowerViewUpdater extends ViewUpdater {
                 y = 30;
                 objectView.getImageView().setFitWidth(111);
                 objectView.getImageView().setFitHeight(118);
-//                objectView.getProgressBar().setLayoutX(47);
-//                objectView.getProgressBar().setLayoutY(38);
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             } else if (kind == 0) {
