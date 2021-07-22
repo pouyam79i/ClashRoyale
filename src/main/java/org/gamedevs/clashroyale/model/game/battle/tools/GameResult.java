@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
 import org.gamedevs.clashroyale.model.game.player.Side;
+import org.gamedevs.clashroyale.model.utils.console.Console;
+import org.gamedevs.clashroyale.model.utils.console.ConsoleColor;
 
 /**
  * This class contains game result!
@@ -33,10 +35,6 @@ public class GameResult {
      */
     private Side winnerSide;
     /**
-     * If result is locked
-     */
-    private boolean lock;
-    /**
      * result container
      */
     private GameResultContainer resultContainer;
@@ -55,7 +53,6 @@ public class GameResult {
         topPlayerScore.setValue(0);
         downPlayerScore = new SimpleIntegerProperty();
         downPlayerScore.setValue(0);
-        lock = false;
         winnerSide = null;
     }
 
@@ -64,15 +61,12 @@ public class GameResult {
      * @param side of player
      */
     public void addScore(Side side){
-        if(lock)
-            return;
         if(side == Side.TOP){
             try{
-                Platform.runLater(() -> {
-                    topPlayerScore.setValue(topPlayerScore.getValue() + 1);
-                });
+                Platform.runLater(() -> topPlayerScore.setValue(topPlayerScore.add(1).getValue()));
             }catch (Exception e){
-                topPlayerScore.setValue(topPlayerScore.getValue() + 1);
+                topPlayerScore.setValue(topPlayerScore.add(1).getValue());
+                e.printStackTrace();
             }
             if(topPlayerScore.getValue() == 3){
                 lock();
@@ -80,15 +74,17 @@ public class GameResult {
         }
         else if(side == Side.DOWN){
             try{
-                Platform.runLater(() -> {
-                    downPlayerScore.setValue(downPlayerScore.getValue() + 1);
-                });
+                Platform.runLater(() -> downPlayerScore.setValue(downPlayerScore.add(1).getValue()));
             }catch (Exception e){
-                downPlayerScore.setValue(downPlayerScore.getValue() + 1);
+                downPlayerScore.setValue(downPlayerScore.add(1).getValue());
+                e.printStackTrace();
             }
             if(downPlayerScore.getValue() == 3){
                 lock();
             }
+        }
+        else {
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Failed to detect side");
         }
     }
 
@@ -97,8 +93,6 @@ public class GameResult {
      * @param side of player
      */
     public void setFullScore(Side side){
-        if(lock)
-            return;
         if(side == null)
             return;
         if(side == Side.TOP){
@@ -108,7 +102,9 @@ public class GameResult {
                 });
             }catch (Exception e){
                 topPlayerScore.setValue(3);
+                e.printStackTrace();
             }
+            lock();
         }
         else{
             try{
@@ -117,9 +113,10 @@ public class GameResult {
                 });
             }catch (Exception e){
                 downPlayerScore.setValue(3);
+                e.printStackTrace();
             }
+            lock();
         }
-        lock();
     }
 
     /**
@@ -127,6 +124,7 @@ public class GameResult {
      */
     public boolean checkWinner(){
         if(topPlayerScore.getValue() == 3 || downPlayerScore.getValue() == 3){
+            Console.getConsole().printTracingMessage(ConsoleColor.RED_BOLD + "Winner detected!");
             lock();
             return true;
         }
@@ -136,9 +134,7 @@ public class GameResult {
     /**
      * Locks the result and sets winner
      */
-    public void lock(){
-        if (lock)
-            return;
+    private void lock(){
         if(topPlayerScore.getValue() > downPlayerScore.getValue())
             winnerSide = Side.TOP;
         else
@@ -147,7 +143,9 @@ public class GameResult {
                 topPlayerName, topPlayerScore.getValue(),
                 downPlayerName, downPlayerScore.getValue()
         );
-        lock = true;
+        Console.getConsole().printTracingMessage(
+                "result container top: " + topPlayerScore.getValue() + " down: " + downPlayerScore.getValue()
+        );
     }
 
     // Getters

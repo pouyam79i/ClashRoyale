@@ -35,7 +35,6 @@ public class Clock extends Runnable {
         clockString = new SimpleStringProperty();
         updateStringOfTimer();
         threadName = "Clock";
-
     }
 
     /**

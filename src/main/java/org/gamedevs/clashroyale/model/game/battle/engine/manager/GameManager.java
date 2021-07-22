@@ -103,7 +103,6 @@ public class GameManager extends Runnable {
      * End of game logic
      */
     public void endGame(){
-        gameResult.lock();
         topPlayer.shutdown();
         downPlayer.shutdown();
         for(GameObject gameObject:map.getAllAlive())
