@@ -120,13 +120,18 @@ public class SoldierViewUpdater extends ViewUpdater {
      */
     public void updateExist() {
         if (gameObject.getHp() <= 0) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    battleFieldPane.getChildren().remove(objectView);
-                }
-            });
+
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    objectView.getChildren().remove(objectView.getProgressBar());
+//                    objectView.getChildren().remove(objectView.getImageView());
+//                    battleFieldPane.getChildren().remove(objectView);
+//                }
+//            });
+            remove();
         }
 
-    }
+
+        }
 }
