@@ -43,7 +43,7 @@ public class Bullet {
      * @param destination destination point
      */
     public void throwBullet(Point2D source, Point2D destination) {
-
+        //set image of bullet
         Image img = GameImageContainer.getGameImageContainer().getThrowable(droppable.getNameOfDroppable());
         if(img != null) {
             ImageView imageView = new ImageView(img);
@@ -70,6 +70,7 @@ public class Bullet {
                 imageView.setFitWidth(25);
                 imageView.setFitHeight(25);
             }
+            //set path
             Path path = new Path();
 
             MoveTo moveTo = new MoveTo(source.getX(), source.getY());

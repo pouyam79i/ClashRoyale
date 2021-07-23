@@ -16,7 +16,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * a class which handle rage
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public class Rage extends Spell {
 
     private double duration;

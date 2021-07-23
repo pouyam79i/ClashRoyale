@@ -8,7 +8,11 @@ import org.gamedevs.clashroyale.model.game.player.Side;
 import java.util.ArrayList;
 
 /**
+ * a class which handle princess tower
  *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
  */
 public class PrincessTower extends MainTowers{
 

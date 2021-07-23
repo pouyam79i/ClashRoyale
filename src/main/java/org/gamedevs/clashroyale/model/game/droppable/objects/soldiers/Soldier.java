@@ -161,8 +161,13 @@ public abstract class Soldier extends GameObject {
             path = pathFinder.getPath();
         }
         if (state == GameObjectState.MOVING) {
-            if((currentFrame - initialFrame) % ((speed * 10L)) != 0)
-                return;
+            try {
+                if((currentFrame - initialFrame) % ((speed * 10L)) != 0)
+                    return;
+            }catch (ArithmeticException e){
+                Console.getConsole().printTracingMessage("ArithmeticException(/0) in solider");
+            }
+
             Console.getConsole().printTracingMessage(ConsoleColor.GREEN_BOLD + "In moving state");
             if(closestTargetTile == null){
                 closestTargetTile = findClosestTargetTile();

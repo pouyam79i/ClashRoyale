@@ -48,13 +48,6 @@ public abstract class Building extends GameObject {
         previousState = GameObjectState.IDLE;
     }
 
-    /**
-     * Updates hp with life time or vise versa
-     */
-    protected void updateLifeTime() {
-
-    }
-
     public int getLifeTime() {
         return lifeTime;
     }

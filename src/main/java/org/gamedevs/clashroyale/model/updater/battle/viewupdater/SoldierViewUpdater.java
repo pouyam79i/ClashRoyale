@@ -27,9 +27,12 @@ import java.util.concurrent.Executors;
  * @version 1.0
  */
 public class SoldierViewUpdater extends ViewUpdater {
-    ExecutorService service = Executors.newSingleThreadExecutor();
 
-
+    /**
+     * constructor
+     * @param gameObject gameObject
+     * @param isEnemy isEnemy
+     */
     public SoldierViewUpdater(GameObject gameObject, boolean isEnemy) {
         super(gameObject, isEnemy);
         placeInitImg();
@@ -75,32 +78,10 @@ public class SoldierViewUpdater extends ViewUpdater {
         if (previousTile.getY() != gameObject.getHeadPixel().getY() ||
                 previousTile.getX() != gameObject.getHeadPixel().getX()) {
 
+            //calculate destination x,y
             double destX = MouseTilePosition.TranslateTileToPixelX(gameObject.getHeadPixel().getX());
             double destY = MouseTilePosition.TranslateTileToPixelY(gameObject.getHeadPixel().getY());
-            double curX = MouseTilePosition.TranslateTileToPixelX(previousTile.getX());
-            double curY = MouseTilePosition.TranslateTileToPixelY(previousTile.getY());
-
-//            Path path = new Path();
-//
-//            MoveTo moveTo = new MoveTo(curX  - gameObject.getErrorInGUIX(), curY- gameObject.getErrorInGUIY());
-//            LineTo lineTo = new LineTo(destX - gameObject.getErrorInGUIX(), destY - gameObject.getErrorInGUIY());
-//
-//            path.getElements().add(moveTo);
-//            path.getElements().add(lineTo);
-//
-//            //Creating a path transition
-//            PathTransition pathTransition = new PathTransition();
-//            pathTransition.setDuration(Duration.millis(100));
-//            pathTransition.setNode(objectView);
-//            pathTransition.setPath(path);
-//            pathTransition.setCycleCount(1);
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    pathTransition.play();
-//                }
-//            });
-//
+            //change place of img
             if (objectView != null) {
                 Platform.runLater(new Runnable() {
                     @Override
@@ -120,15 +101,6 @@ public class SoldierViewUpdater extends ViewUpdater {
      */
     public void updateExist() {
         if (gameObject.getHp() <= 0) {
-
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    objectView.getChildren().remove(objectView.getProgressBar());
-//                    objectView.getChildren().remove(objectView.getImageView());
-//                    battleFieldPane.getChildren().remove(objectView);
-//                }
-//            });
             remove();
         }
 

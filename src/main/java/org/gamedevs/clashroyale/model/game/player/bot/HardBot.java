@@ -198,19 +198,14 @@ public class HardBot extends Bot {
 
         if (enemy == towerHp && towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-//            coordinate[1] = 19;
         } else if (towerHp == enemy) {
             coordinate[0] = towerHp.getX();
-//            coordinate[1] = 19;
         } else if (enemy == enemyTower) {
             coordinate[0] = enemy.getX();
-//            coordinate[1] = 16;
         } else if (towerHp == enemyTower) {
             coordinate[0] = towerHp.getX();
-//            coordinate[1] = 19;
         } else {
             coordinate[0] = enemyTower.getX();
-//            coordinate[1] = 16;
         }
 
 

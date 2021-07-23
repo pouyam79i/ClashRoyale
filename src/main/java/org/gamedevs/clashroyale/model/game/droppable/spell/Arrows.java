@@ -15,7 +15,13 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-
+/**
+ * a class which handle arrow
+ *
+ * @author Pouya Mohammadi -Hosna Hoseini
+ * 9826039 -CE@AUT     9823010 -CE@AUT
+ * @version 1.0
+ */
 public class Arrows extends Spell {
 
     private int damage;
@@ -89,7 +95,6 @@ public class Arrows extends Spell {
 
         for (int i = 0; i < 20; i++) {
             Tile target = tilesInRange.get(random.nextInt(tilesInRange.size() - 1));
-//            Console.getConsole().printTracingMessage("target: " + target.getX() + ", " + target.getY());
             Thread thread = new Thread(){
                 @Override
                 public void start() {

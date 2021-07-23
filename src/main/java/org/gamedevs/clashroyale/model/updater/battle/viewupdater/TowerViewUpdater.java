@@ -29,6 +29,9 @@ public class TowerViewUpdater extends ViewUpdater {
         placeInitImg();
     }
 
+    /**
+     * place first img at init place of drop
+     */
     @Override
     public void placeInitImg() {
         setMainTower((MainTowers) gameObject, gameObject.getTeamSide(), kind);
@@ -66,8 +69,6 @@ public class TowerViewUpdater extends ViewUpdater {
                 y = 348;
                 objectView.getImageView().setFitWidth(111);
                 objectView.getImageView().setFitHeight(118);
-//                objectView.getProgressBar().setLayoutX(47);
-//                objectView.getProgressBar().setLayoutY(413);
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             } else if (kind == 0) {
@@ -102,8 +103,6 @@ public class TowerViewUpdater extends ViewUpdater {
                 y = -43;
                 objectView.getImageView().setFitWidth(125);
                 objectView.getImageView().setFitHeight(136);
-//                objectView.getProgressBar().setLayoutX(159);
-//                objectView.getProgressBar().setLayoutY(-43);
                 objectView.getProgressBar().setPrefWidth(80);
                 objectView.getProgressBar().setPrefHeight(10);
             } else if (kind == 1) {
@@ -112,12 +111,11 @@ public class TowerViewUpdater extends ViewUpdater {
                 y = 30;
                 objectView.getImageView().setFitWidth(111);
                 objectView.getImageView().setFitHeight(118);
-//                objectView.getProgressBar().setLayoutX(274);
-//                objectView.getProgressBar().setLayoutY(38);
                 objectView.getProgressBar().setPrefWidth(50);
                 objectView.getProgressBar().setPrefHeight(8);
             }
         }
+        //init object view
         objectView.setMaxHp(gameObject.getHp());
         objectView.getImageView().setImage(currentImage);
         Platform.runLater(new Runnable() {
@@ -134,6 +132,7 @@ public class TowerViewUpdater extends ViewUpdater {
 
         objectView.getChildren().add(objectView.getImageView());
         objectView.getChildren().add(objectView.getProgressBar());
+        //add obj view to battle field
         int finalX = x;
         int finalY = y;
         Platform.runLater(() -> {
@@ -144,17 +143,11 @@ public class TowerViewUpdater extends ViewUpdater {
     }
 
 
+    /**
+     * remove g.o. if its hp <= 0
+     */
     public void updateExist() {
         if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building) gameObject).getLifeTime() * 1000L)
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//                    objectView.getChildren().remove(objectView.getProgressBar());
-//                    objectView.getChildren().remove(objectView.getImageView());
-//                    MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
-//                }
-//            });
             remove();
     }
 

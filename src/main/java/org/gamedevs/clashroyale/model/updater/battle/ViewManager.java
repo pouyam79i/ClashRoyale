@@ -12,7 +12,11 @@ import org.gamedevs.clashroyale.model.updater.battle.viewupdater.ViewUpdater;
 import org.gamedevs.clashroyale.model.utils.multithreading.Runnable;
 
 import java.util.ArrayList;
-
+/**
+ * a class which handle view of game object in GUI
+ *
+ * @version 1.0
+ */
 public class ViewManager {
 
     private final Side mySide;
@@ -21,6 +25,12 @@ public class ViewManager {
         this.mySide = mySide;
     }
 
+    /**
+     * make a new view updater regarding to g.o.
+     * @param gameObject gameObject
+     * @param kind kind of tower
+     * @return view updater
+     */
     public ViewUpdater addObjectToView(GameObject gameObject, int kind) {
         if (gameObject == null)
             return null;
@@ -53,10 +63,6 @@ public class ViewManager {
             }
 
         }
-    }
-
-    public void matchMainTowers(MainTowers mainTower, Side side, int kind) {
-        // TODO: add related tower to related view!
     }
 
 }

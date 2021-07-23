@@ -58,20 +58,12 @@ public class BuildingViewUpdater extends ViewUpdater {
 
     }
 
+    /**
+     * remove game object from GUI if its hp <= 0
+     */
     public void updateExist() {
-        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building) gameObject).getLifeTime() * 1000L){
-
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if(gameObject.getNameOfDroppable() == CardName.INFERNO_TOWER)
-//                        MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(((InfernoTower)gameObject).getLine());
-//                    objectView.getChildren().remove(objectView.getProgressBar());
-//                    objectView.getChildren().remove(objectView.getImageView());
-//                    MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable().getChildren().remove(objectView);
-//                }
-//            });
+        if (gameObject.getHp() <= 0 || System.currentTimeMillis() - startTime >= ((Building) gameObject).getLifeTime() * 1000L) {
             remove();
-    }
+        }
     }
 }

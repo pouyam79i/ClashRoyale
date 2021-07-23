@@ -44,6 +44,11 @@ public abstract class ViewUpdater {
     protected boolean previousBoost;
     private int cntToShoot;
 
+    /**
+     * constructor
+     * @param gameObject gameObject
+     * @param isEnemy true if its enemies g.o.
+     */
     public ViewUpdater(GameObject gameObject, boolean isEnemy) {
         imageContainer = GameDroppableImageContainer.getGameDroppableImageContainer();
         this.battleFieldPane = MainBattleField.getMainBattleField().getBattleFieldPaneUpdatable();
