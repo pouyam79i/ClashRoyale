@@ -2,6 +2,7 @@ package org.gamedevs.clashroyale.model.game.battle.tools;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.container.gamedata.GameResultContainer;
 import org.gamedevs.clashroyale.model.game.battle.engine.GameType;
 import org.gamedevs.clashroyale.model.game.player.Side;
@@ -66,7 +67,9 @@ public class GameResult {
                 Platform.runLater(() -> topPlayerScore.setValue(topPlayerScore.add(1).getValue()));
             }catch (Exception e){
                 topPlayerScore.setValue(topPlayerScore.add(1).getValue());
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             if(topPlayerScore.getValue() == 3){
                 lock();
@@ -77,7 +80,9 @@ public class GameResult {
                 Platform.runLater(() -> downPlayerScore.setValue(downPlayerScore.add(1).getValue()));
             }catch (Exception e){
                 downPlayerScore.setValue(downPlayerScore.add(1).getValue());
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             if(downPlayerScore.getValue() == 3){
                 lock();
@@ -102,7 +107,9 @@ public class GameResult {
                 });
             }catch (Exception e){
                 topPlayerScore.setValue(3);
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             lock();
         }
@@ -113,7 +120,9 @@ public class GameResult {
                 });
             }catch (Exception e){
                 downPlayerScore.setValue(3);
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             lock();
         }

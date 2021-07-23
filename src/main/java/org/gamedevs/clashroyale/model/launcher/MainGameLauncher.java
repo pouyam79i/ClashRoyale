@@ -68,7 +68,9 @@ public class MainGameLauncher extends Runnable {
                 DeckScene.getInstance().init();
             }catch (Exception e){
                 Console.getConsole().printTracingMessage("Failed to initialize main menus: " + e.getMessage());
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             // Going to main menu
             MusicPlayer.getMusicPlayer().play(Musics.MAIN_MENU);

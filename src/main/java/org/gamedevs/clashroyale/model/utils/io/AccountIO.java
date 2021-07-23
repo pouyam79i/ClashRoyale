@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.utils.io;
 
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.account.Account;
 import org.gamedevs.clashroyale.model.utils.console.Console;
 
@@ -66,13 +67,19 @@ public class AccountIO {
             Console.getConsole().printTracingMessage("can't find " + fileName);
         } catch (IOException e) {
             Console.getConsole().printTracingMessage("some thing went wrong while writing in " + fileName);
-            e.printStackTrace();
+            if(MainConfig.DEBUG_MODE){
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
+            }
         } finally {
             try {
                 if (objectOutputStream != null)
                     objectOutputStream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -184,7 +191,9 @@ public class AccountIO {
             thread.start();
             thread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            if(MainConfig.DEBUG_MODE){
+                e.printStackTrace();
+            }
         }
         return result[0];
 
@@ -221,7 +230,9 @@ public class AccountIO {
             thread.start();
             thread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            if(MainConfig.DEBUG_MODE){
+                e.printStackTrace();
+            }
         }
         return finalAccount[0];
     }
