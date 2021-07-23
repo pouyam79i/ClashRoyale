@@ -149,8 +149,6 @@ public abstract class Soldier extends GameObject {
         return false;
     }
 
-
-
     /**
      * Updates object to next place
      */

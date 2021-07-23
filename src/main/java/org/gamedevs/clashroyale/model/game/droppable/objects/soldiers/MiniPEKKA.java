@@ -5,9 +5,20 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
-public class MiniPeka extends Soldier{
+/**
+ * MiniPEKKA soldier.
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
+public class MiniPEKKA extends Soldier{
 
-    public MiniPeka(int level, Side side) {
+    /**
+     * Constructor of MiniPEKKA
+     * Setting MiniPEKKA property
+     * @param level of MiniPEKKA
+     * @param side of team
+     */
+    public MiniPEKKA(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.MINI_PEKKA;
         hitSpeed = 1.8;
@@ -38,6 +49,5 @@ public class MiniPeka extends Soldier{
                 damage = 474;
                 break;
         }
-
     }
 }

@@ -5,7 +5,19 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+/**
+ * Giant soldier.
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
 public class Giant extends Soldier{
+
+    /**
+     * Constructor of Giant
+     * Setting Giant property
+     * @param level of Giant
+     * @param side of team
+     */
     public Giant(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.GIANT;
@@ -37,6 +49,5 @@ public class Giant extends Soldier{
                 damage = 183;
                 break;
         }
-
     }
 }

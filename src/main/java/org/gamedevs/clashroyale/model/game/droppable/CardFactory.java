@@ -1,7 +1,6 @@
 package org.gamedevs.clashroyale.model.game.droppable;
 
 import org.gamedevs.clashroyale.model.cards.CardName;
-import org.gamedevs.clashroyale.model.game.droppable.Droppable;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.Cannon;
 import org.gamedevs.clashroyale.model.game.droppable.objects.buildings.InfernoTower;
 import org.gamedevs.clashroyale.model.game.droppable.objects.soldiers.*;
@@ -42,7 +41,7 @@ public class CardFactory {
             }
             case BABY_DRAGON -> droppableItems.add(new BabyDragon(level, cardSide));
             case WIZARD -> droppableItems.add(new Wizard(level, cardSide));
-            case MINI_PEKKA -> droppableItems.add(new MiniPeka(level, cardSide));
+            case MINI_PEKKA -> droppableItems.add(new MiniPEKKA(level, cardSide));
             case VALKYRIE -> droppableItems.add(new Valkyrie(level, cardSide));
             case GIANT -> droppableItems.add(new Giant(level, cardSide));
             case CANNON -> droppableItems.add(new Cannon(level, cardSide));
