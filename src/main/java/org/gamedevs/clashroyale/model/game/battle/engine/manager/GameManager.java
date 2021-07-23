@@ -137,13 +137,17 @@ public class GameManager extends Runnable {
                 map.updateObjects(currentFrame);
             }catch (Exception e){
                 Console.getConsole().printTracingMessage("Failed to updated frames -> " + e.getMessage());
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             try {
                 map.refreshAlive();
             }catch (Exception e){
                 Console.getConsole().printTracingMessage("Failed to refresh alives -> " + e.getMessage());
-                e.printStackTrace();
+                if(MainConfig.DEBUG_MODE){
+                    e.printStackTrace();
+                }
             }
             currentFrame++;
             // TODO: optimize frame updater sleep

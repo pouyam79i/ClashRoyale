@@ -1,5 +1,6 @@
 package org.gamedevs.clashroyale.model.container.deck;
 
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.model.cards.Card;
 import org.gamedevs.clashroyale.model.cards.CardName;
 
@@ -91,7 +92,9 @@ public class DeckContainer implements Serializable {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    if(MainConfig.DEBUG_MODE){
+                        e.printStackTrace();
+                    }
                 }
             } while (card.getCardName() == CardName.EMPTY || card == null);
             return card;

@@ -5,7 +5,19 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+/**
+ * Barbarian soldier.
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
 public class Barbarian extends Soldier{
+
+    /**
+     * Constructor of Barbarian
+     * Setting Barbarian property
+     * @param level of Barbarian
+     * @param side of team
+     */
     public Barbarian(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.BARBARIANS;

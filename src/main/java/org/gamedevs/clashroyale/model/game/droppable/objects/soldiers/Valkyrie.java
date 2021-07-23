@@ -12,9 +12,19 @@ import org.gamedevs.clashroyale.model.game.player.Side;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Valkyrie soldier.
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
 public class Valkyrie extends Soldier {
 
-
+    /**
+     * Constructor of Valkyrie
+     * Setting Valkyrie property
+     * @param level of Valkyrie
+     * @param side of team
+     */
     public Valkyrie(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.VALKYRIE;

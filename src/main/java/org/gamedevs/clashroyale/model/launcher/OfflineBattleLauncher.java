@@ -3,6 +3,7 @@ package org.gamedevs.clashroyale.model.launcher;
 import animatefx.animation.FadeIn;
 import animatefx.animation.FadeOut;
 import javafx.application.Platform;
+import org.gamedevs.clashroyale.MainConfig;
 import org.gamedevs.clashroyale.controller.battle.effects.GameStarterController;
 import org.gamedevs.clashroyale.controller.battle.effects.GameTimer;
 import org.gamedevs.clashroyale.controller.battle.main.CardDeckGame;
@@ -153,7 +154,9 @@ public class OfflineBattleLauncher extends Runnable {
             gameManager.start();
         }catch (Exception e){
             Console.getConsole().printTracingMessage("Failed to launch battle field! -> " + e.getMessage());
-            e.printStackTrace();
+            if(MainConfig.DEBUG_MODE){
+                e.printStackTrace();
+            }
         }
         // Killing launcher
         this.shutdown();

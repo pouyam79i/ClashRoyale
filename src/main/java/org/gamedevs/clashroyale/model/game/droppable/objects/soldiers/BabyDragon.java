@@ -5,8 +5,20 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+/**
+ * Baby dragon soldier
+ * Can throw fire
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
 public class BabyDragon extends Soldier{
 
+    /**
+     * Constructor of BabyDragon
+     * Setting baby dragon property
+     * @param level of baby dragon
+     * @param side of team
+     */
     public BabyDragon(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.BABY_DRAGON;

@@ -284,11 +284,15 @@ public class Map {
                         gameObject.getViewUpdater().update();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    if(MainConfig.DEBUG_MODE){
+                        e.printStackTrace();
+                    }
                 }
             }
         }catch (Exception e){
-            e.printStackTrace();
+            if(MainConfig.DEBUG_MODE){
+                e.printStackTrace();
+            }
         }
     }
 

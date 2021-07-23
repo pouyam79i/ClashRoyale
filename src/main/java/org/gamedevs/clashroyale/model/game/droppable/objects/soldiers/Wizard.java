@@ -5,7 +5,19 @@ import org.gamedevs.clashroyale.model.cards.CardName;
 import org.gamedevs.clashroyale.model.game.droppable.objects.TargetType;
 import org.gamedevs.clashroyale.model.game.player.Side;
 
+/**
+ * Wizard soldier.
+ * @author Pouya Mohammadi - CE@AUT - Uni ID: 9829039
+ * @version 1.0
+ */
 public class Wizard extends Soldier{
+
+    /**
+     * Constructor of Wizard
+     * Setting Wizard property
+     * @param level of Wizard
+     * @param side of team
+     */
     public Wizard(int level, Side side) {
         super(side);
         nameOfDroppable = CardName.WIZARD;
